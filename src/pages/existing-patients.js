@@ -1,23 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import ExistingPatients from "@/components/Frame44/Frame44";
 import Loading from "@/components/Loading";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/router";
 
 function Frame44() {
-  const { user, loading } = useAuth();
+  const { userSWR, isValidating, mutate } = useAuth();
   const router = useRouter();
 
-  console.log({ user, loading });
-
-  useEffect(() => {
-    if (loading == false && !user) {
-      router.push("/");
-    }
-  }, [user]);
-
-  if (loading || !user) {
+  if (isValidating) {
     return <Loading />;
+  }
+
+  if (!isValidating && typeof userSWR !== "undefined" && !userSWR.isLoggedIn) {
+    mutate();
+    router.push("/");
   }
 
   return (

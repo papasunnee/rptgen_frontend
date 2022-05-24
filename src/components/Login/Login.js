@@ -28,11 +28,9 @@ function Login() {
       setErrors,
       setStatus,
     });
-    console.log({ errors });
+
     if (data?.error) {
       setErrors([...errors, data.error]);
-    } else {
-      console.log({ data });
     }
     if (data.accessToken) {
       return router.replace("/option-select");

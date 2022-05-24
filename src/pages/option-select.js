@@ -5,19 +5,16 @@ import Loading from "@/components/Loading";
 import { useAuth } from "@/context/AuthContext";
 
 function OptionSelect() {
-  const { user, loading } = useAuth();
+  const { userSWR, isValidating, mutate } = useAuth();
   const router = useRouter();
 
-  console.log({ user, loading });
-
-  useEffect(() => {
-    if (loading == false && !user) {
-      router.push("/");
-    }
-  }, [user]);
-
-  if (loading || !user) {
+  if (isValidating) {
     return <Loading />;
+  }
+
+  if (!isValidating && typeof userSWR !== "undefined" && !userSWR.isLoggedIn) {
+    mutate();
+    router.push("/");
   }
 
   return (

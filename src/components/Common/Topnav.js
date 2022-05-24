@@ -35,7 +35,7 @@ function Topnav() {
                 Hi {user?.name}
               </button>
             </form> */}
-            <div className={`${frame34Styles.Btn}`}>Hi {user?.name}</div>
+            <div className={`${frame34Styles.Btn}`}>Hi {user?.lastname}</div>
           </div>
         </div>
       </span>

@@ -3,23 +3,19 @@ import { useRouter } from "next/router";
 import Login from "@/components/Login/Login";
 import Loading from "@/components/Loading";
 import { useAuth } from "@/context/AuthContext";
+import { mutate } from "swr";
 
 function Index(props) {
-  const { loading, user } = useAuth();
+  const { userSWR, isValidating, mutate } = useAuth();
   const router = useRouter();
-  console.log({ loading, user });
-  useEffect(() => {
-    if (loading == false && user && user != null) {
-      router.push("/option-select");
-    }
-  }, [user, loading]);
 
-  if (
-    loading == true &&
-    typeof loading != undefined &&
-    (!user || user == null)
-  ) {
+  if (isValidating) {
     return <Loading />;
+  }
+
+  if (!isValidating && typeof userSWR !== "undefined" && userSWR.isLoggedIn) {
+    mutate();
+    router.push("/option-select");
   }
   return (
     <Fragment>

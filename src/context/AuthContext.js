@@ -1,13 +1,14 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import Loading from "@/components/Loading";
 
 export const AuthContext = createContext();
 
 export const fetcher = (url) => fetch(url).then((r) => r.json());
+
 const AuthProvider = (props) => {
   const router = useRouter();
+
   const {
     data: userSWR,
     error: errorSWR,
@@ -18,7 +19,7 @@ const AuthProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
-  // const router = useRouter();
+
   const login = async (form) => {
     setLoading(true);
     try {
@@ -64,12 +65,13 @@ const AuthProvider = (props) => {
     setLoading(false);
     return data?.isLoggedIn || false;
   };
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  // useEffect(() => {
+  //   checkAuth();
+  // }, []);
   const value = {
     user,
     userSWR,
+    mutate,
     error,
     login,
     logout,

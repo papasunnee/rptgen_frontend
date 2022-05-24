@@ -19,6 +19,7 @@ import editicon from "@/images/edit-icon.png";
 import deleteicon from "@/images/delete.png";
 
 import frame44Styles from "./Frame44.module.scss";
+import { useAuth } from "@/context/AuthContext";
 
 const state = {
   labels: ["January", "February", "March", "April", "May"],
@@ -36,6 +37,7 @@ const state = {
 };
 
 function Frame44() {
+  const { user } = useAuth();
   return (
     <Fragment>
       <div
