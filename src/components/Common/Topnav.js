@@ -1,9 +1,9 @@
-import { useAuth } from "@/hooks__/auth";
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import frame34Styles from "./Topnav.module.scss";
 
 function Topnav() {
-  const { user } = useAuth({ middleware: "auth" });
+  const { user } = useAuth();
   return (
     <>
       <span className={`${frame34Styles.Navbar} navbar-expand-lg`}>

@@ -11,10 +11,6 @@ import AuthValidationErrors from "../utils/AuthValidationErrors";
 function Login() {
   const router = useRouter();
   const { login } = useAuth();
-  // const { login } = useAuth({
-  //   middleware: "guest",
-  //   redirectIfAuthenticated: "/option-select",
-  // });
 
   const [email, setEmail] = useState("admin@gmail.com");
   const [loading, setLoading] = useState(false);
@@ -37,6 +33,9 @@ function Login() {
       setErrors([...errors, data.error]);
     } else {
       console.log({ data });
+    }
+    if (data.accessToken) {
+      return router.replace("/option-select");
     }
 
     setPassword("***********************************");

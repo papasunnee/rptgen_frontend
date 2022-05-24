@@ -1,12 +1,30 @@
 import React, { Fragment } from "react";
-import Frame44 from "@/components/Frame44/Frame44";
+import ExistingPatients from "@/components/Frame44/Frame44";
+import Loading from "@/components/Loading";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 
-function frame44() {
+function Frame44() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  console.log({ user, loading });
+
+  useEffect(() => {
+    if (loading == false && !user) {
+      router.push("/");
+    }
+  }, [user]);
+
+  if (loading || !user) {
+    return <Loading />;
+  }
+
   return (
     <Fragment>
-      <Frame44 />
+      <ExistingPatients />
     </Fragment>
   );
 }
 
-export default frame44;
+export default Frame44;

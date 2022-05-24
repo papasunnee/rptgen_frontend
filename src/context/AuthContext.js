@@ -65,7 +65,6 @@ const AuthProvider = (props) => {
     return data?.isLoggedIn || false;
   };
   useEffect(() => {
-    console.log("got here");
     checkAuth();
   }, []);
   const value = {

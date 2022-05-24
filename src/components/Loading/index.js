@@ -1,6 +1,6 @@
 import styles from "./index.module.css";
 
-const index = () => {
+const Index = () => {
   return (
     <div
       style={{
@@ -28,4 +28,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

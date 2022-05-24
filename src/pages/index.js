@@ -4,7 +4,7 @@ import Login from "@/components/Login/Login";
 import Loading from "@/components/Loading";
 import { useAuth } from "@/context/AuthContext";
 
-function Index() {
+function Index(props) {
   const { loading, user } = useAuth();
   const router = useRouter();
   console.log({ loading, user });
@@ -19,7 +19,6 @@ function Index() {
     typeof loading != undefined &&
     (!user || user == null)
   ) {
-    console.log("hehehe");
     return <Loading />;
   }
   return (

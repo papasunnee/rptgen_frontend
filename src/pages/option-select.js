@@ -19,9 +19,7 @@ function OptionSelect() {
   if (loading || !user) {
     return <Loading />;
   }
-  // if (!loading && !user) {
-  //   return (window.location.href = "/");
-  // }
+
   return (
     <Fragment>
       <OptionselectComponent />
