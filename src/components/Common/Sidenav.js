@@ -9,15 +9,17 @@ import doctorsicon from "@/images/doctors-icon.png";
 import formsicon from "@/images/forms-icon.png";
 import historianicon from "@/images/historian-icon.png";
 import logouticon from "@/images/logout-icon.png";
-
 import frame34Styles from "./Sidenav.module.scss";
-import { useAuth } from "@/hooks__/auth";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 
 function Sidenav() {
   const { logout } = useAuth();
-  const handleLogout = (event) => {
+  const router = useRouter();
+  const handleLogout = async (event) => {
     event.preventDefault();
-    logout();
+    const data = await logout();
+    return router.push("/");
   };
   return (
     <Fragment>
