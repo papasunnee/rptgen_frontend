@@ -4,7 +4,7 @@ import Login from "@/components/Login/Login";
 import Loading from "@/components/Loading";
 import { useAuth } from "@/context/AuthContext";
 
-function index() {
+function Index() {
   const { loading, user } = useAuth();
   const router = useRouter();
   console.log({ loading, user });
@@ -29,4 +29,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;
