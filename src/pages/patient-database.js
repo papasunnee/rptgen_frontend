@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import Index from "@/components/Patients-Database/Index";
 import Loading from "@/components/Loading";
+import { useAuth } from "@/context/AuthContext";
 
-function index() {
+function PatientDatabase() {
   const { userSWR, isValidating, mutate } = useAuth();
   const router = useRouter();
 
@@ -21,4 +22,4 @@ function index() {
   );
 }
 
-export default index;
+export default PatientDatabase;
