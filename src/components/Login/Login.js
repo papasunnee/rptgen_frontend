@@ -12,9 +12,9 @@ function Login() {
   const router = useRouter();
   const { login } = useAuth();
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("admin@gmail.com");
   const [loading, setLoading] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("sunday");
   const [errors, setErrors] = useState([]);
   const [status, setStatus] = useState(null);
 

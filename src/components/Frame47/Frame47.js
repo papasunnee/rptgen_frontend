@@ -52,7 +52,7 @@ const initialValues = {
 };
 
 function MyVerticallyCenteredModal(props) {
-  const { newPatient } = useAuth();
+  // const { newPatient } = useAuth();
   const [patientData, setPatientData] = useState(initialValues);
   const handleChange = (e) => {
     const name = e.target.name;
@@ -64,12 +64,20 @@ function MyVerticallyCenteredModal(props) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const fileInput = Array.from(e.currentTarget.elements).find(
-    //   ({ name }) => name === "image_url"
-    // );
-    // console.log({ fileInput: fileInput.files });
-    const data = await newPatient({ ...patientData });
-    console.log({ data });
+    try {
+      const response = await fetch("/api/patient", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(patientData),
+      });
+      const data = await response.json();
+
+      console.log(data);
+    } catch (error) {
+      console.log({ error: error.message });
+    }
+    // const data = await newPatient({ ...patientData });
   };
   return (
     <Modal
@@ -352,12 +360,12 @@ function Frame47() {
                         <div
                           className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
                         >
-                          <span
+                          <div
                             className={`${frame47Styles.Inputgroup_text} input-group-text`}
                             id="addon-wrapping"
                           >
                             <BsSearch />
-                          </span>
+                          </div>
                           <input
                             type="text"
                             className={`form-control`}
@@ -410,7 +418,7 @@ function Frame47() {
                       onHide={() => setModalShow(false)}
                     /> */}
 
-                      <span
+                      <div
                         className={`${frame44Styles.Tab} col-md-3`}
                         style={{ width: "300px" }}
                       >
@@ -421,9 +429,9 @@ function Frame47() {
                         <div className={`${frame44Styles.Content}`}>
                           <h4>Schedule Appointment</h4>
                         </div>
-                      </span>
+                      </div>
 
-                      <span className={`${frame44Styles.Tab} col-md-3`}>
+                      <div className={`${frame44Styles.Tab} col-md-3`}>
                         <div className={`${frame44Styles.Image}`}>
                           <Image src={newpatientsicon} alt="icon-img" />
                         </div>
@@ -431,9 +439,9 @@ function Frame47() {
                         <div className={`${frame44Styles.Content}`}>
                           <h4>Add Complaint</h4>
                         </div>
-                      </span>
+                      </div>
 
-                      <span className={`${frame44Styles.Tab} col-md-3`}>
+                      <div className={`${frame44Styles.Tab} col-md-3`}>
                         <div className={`${frame44Styles.Image}`}>
                           <Image src={appointmenticon} alt="icon-img" />
                         </div>
@@ -441,10 +449,10 @@ function Frame47() {
                         <div className={`${frame44Styles.Content}`}>
                           <h4>Operations</h4>
                         </div>
-                      </span>
+                      </div>
                     </div>
 
-                    <span className={`${frame44Styles.Appointment_activity}`}>
+                    <div className={`${frame44Styles.Appointment_activity}`}>
                       <div className={`${frame44Styles.Title}`}>
                         <h3>Appointment Activity</h3>
                       </div>
@@ -659,7 +667,7 @@ function Frame47() {
                           </div>
                         </div>
                       </div>
-                    </span>
+                    </div>
                   </div>
                 </div>
               </main>

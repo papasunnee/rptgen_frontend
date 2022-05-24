@@ -2,7 +2,6 @@ import { verify } from "jsonwebtoken";
 import cookie from "cookie";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
-import Payment from "@/models/Payment";
 
 export default async function isLoggedIn(req, res) {
   dbConnect();
@@ -27,10 +26,13 @@ export default async function isLoggedIn(req, res) {
       {
         password: false,
       }
-    ).populate({ path: "payments", model: Payment });
+    );
 
     if (!user) {
-      return res.json({ isLoggedIn: false, error: "Invalid user" });
+      // return res.json({ isLoggedIn: false, error: "Invalid user" });
+      const error = new Error("Unauthorized");
+      error.status = 403;
+      throw error;
     }
 
     return res.json({ isLoggedIn: true, user, error: null });

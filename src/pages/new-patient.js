@@ -1,21 +1,30 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/router";
 import Frame47 from "@/components/Frame47/Frame47";
 import Loading from "@/components/Loading";
 
 function NewPatient() {
-  const { userSWR, isValidating, mutate } = useAuth();
+  const { userSWR, errorSWR, mutate, isValidating } = useAuth();
+  const isLoading = !userSWR && !errorSWR;
+
   const router = useRouter();
 
-  if (isValidating) {
+  useEffect(() => {
+    if (!isValidating && typeof userSWR != "undefined" && !userSWR.isLoggedIn) {
+      mutate();
+      router.replace("/");
+    }
+  }, [isLoading]);
+
+  if (isLoading) {
     return <Loading />;
   }
 
-  if (!isValidating && typeof userSWR !== "undefined" && !userSWR.isLoggedIn) {
-    mutate();
-    router.push("/");
-  }
+  // if (typeof userSWR !== "undefined" && !userSWR.isLoggedIn) {
+  //   mutate();
+  //   return router.push("/");
+  // }
   return (
     <Fragment>
       <Frame47 />

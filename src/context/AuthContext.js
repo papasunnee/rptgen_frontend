@@ -45,9 +45,9 @@ const AuthProvider = (props) => {
     setLoading(true);
     const response = await fetch("/api/logout", { method: "POST" });
     const data = await response.json();
-    if (data.success) {
-      setUser(null);
-    }
+    // if (data.success) {
+    //   setUser(null);
+    // }
     setLoading(false);
     return data;
   };
@@ -84,9 +84,11 @@ const AuthProvider = (props) => {
       return { error: error.message };
     }
   };
+
   // useEffect(() => {
   //   checkAuth();
   // }, []);
+
   const value = {
     user,
     userSWR,

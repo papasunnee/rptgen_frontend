@@ -302,11 +302,13 @@ function Index() {
                                   <Image src={profilepic} alt="profile-pic" />
                                 </div>
 
-                                <h4>Lesile Alexander</h4>
+                                <h4>
+                                  {patient.firstname + " " + patient.lastname}
+                                </h4>
                               </div>
 
                               <div className={`${frame44Styles.Name}`}>
-                                <h4>lesie.alexander@example.com</h4>
+                                <h4>{patient.email}</h4>
                               </div>
 
                               <div className={`${frame44Styles.Name}`}>
