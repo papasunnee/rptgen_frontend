@@ -65,6 +65,22 @@ const AuthProvider = (props) => {
     setLoading(false);
     return data?.isLoggedIn || false;
   };
+
+  const allPatients = async () => {
+    const {
+      data: patientSWR,
+      error: patientErrorSWR,
+      isValidating: patientValidating,
+      mutate,
+    } = useSWR("/api/patient", () =>
+      fetch("/api/patient", { method: "GET" }).then((res) => res.json())
+    );
+    return {
+      patientSWR,
+      patientErrorSWR,
+      patientValidating,
+    };
+  };
   // useEffect(() => {
   //   checkAuth();
   // }, []);
@@ -78,6 +94,7 @@ const AuthProvider = (props) => {
     loading,
     isValidating,
     errorSWR,
+    allPatients,
     setUser,
     checkAuth,
     setLoading,

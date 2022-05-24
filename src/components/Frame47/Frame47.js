@@ -50,7 +50,7 @@ const initialValues = {
   marital_status: "",
 };
 function MyVerticallyCenteredModal(props) {
-  // const { newPatient } = useAuth({ middleware: "auth" });
+  
   const [patientData, setPatientData] = useState(initialValues);
   const handleChange = (e) => {
     const name = e.target.name;

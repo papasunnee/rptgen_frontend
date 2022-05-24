@@ -3,7 +3,8 @@ import Link from "next/link";
 import frame34Styles from "./Topnav.module.scss";
 
 function Topnav() {
-  const { user } = useAuth();
+  const { userSWR } = useAuth();
+  const user = userSWR?.user;
   return (
     <>
       <span className={`${frame34Styles.Navbar} navbar-expand-lg`}>
