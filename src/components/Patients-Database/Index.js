@@ -292,8 +292,11 @@ function Index() {
                               <h4>&nbsp;</h4>
                             </div>
                           </div>
-                          {data?.data.map(() => (
-                            <div className={`${frame44Styles.Appointment}`}>
+                          {data?.data.map((patient, i) => (
+                            <div
+                              key={i}
+                              className={`${frame44Styles.Appointment}`}
+                            >
                               <div className={`${frame44Styles.Name}`}>
                                 <div className={`${frame44Styles.Profilepic}`}>
                                   <Image src={profilepic} alt="profile-pic" />
