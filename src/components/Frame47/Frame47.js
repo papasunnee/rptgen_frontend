@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import { useRouter } from "next/link";
 import Image from "next/image";
 
 import Modal from "react-bootstrap/Modal";
@@ -31,7 +32,7 @@ import functionalStyles from "../Functionalimprovement/Functionalimprovement.mod
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./theme";
 import { GlobalStyles } from "./global";
-import { useAuth } from "@/hooks__/auth";
+import { useAuth } from "@/context/AuthContext";
 
 const initialValues = {
   firstname: "",
@@ -49,8 +50,9 @@ const initialValues = {
   gender: "",
   marital_status: "",
 };
+
 function MyVerticallyCenteredModal(props) {
-  
+  const { newPatient } = useAuth();
   const [patientData, setPatientData] = useState(initialValues);
   const handleChange = (e) => {
     const name = e.target.name;
@@ -60,13 +62,14 @@ function MyVerticallyCenteredModal(props) {
       [name]: value,
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const fileInput = Array.from(e.currentTarget.elements).find(
-      ({ name }) => name === "image_url"
-    );
-    console.log({ fileInput: fileInput.files });
-    // newPatient({ ...patientData });
+    // const fileInput = Array.from(e.currentTarget.elements).find(
+    //   ({ name }) => name === "image_url"
+    // );
+    // console.log({ fileInput: fileInput.files });
+    const data = await newPatient({ ...patientData });
+    console.log({ data });
   };
   return (
     <Modal

@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 import Frame47 from "@/components/Frame47/Frame47";
 import Loading from "@/components/Loading";
 

@@ -66,20 +66,23 @@ const AuthProvider = (props) => {
     return data?.isLoggedIn || false;
   };
 
-  const allPatients = async () => {
-    const {
-      data: patientSWR,
-      error: patientErrorSWR,
-      isValidating: patientValidating,
-      mutate,
-    } = useSWR("/api/patient", () =>
-      fetch("/api/patient", { method: "GET" }).then((res) => res.json())
-    );
-    return {
-      patientSWR,
-      patientErrorSWR,
-      patientValidating,
-    };
+  const newPatient = async (patient) => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/patient", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(patient),
+      });
+      const data = await response.json();
+      setLoading(false);
+      return { data };
+    } catch (error) {
+      // setLoading(false);
+      console.log(error);
+      return { error: error.message };
+    }
   };
   // useEffect(() => {
   //   checkAuth();
@@ -94,7 +97,7 @@ const AuthProvider = (props) => {
     loading,
     isValidating,
     errorSWR,
-    allPatients,
+    newPatient,
     setUser,
     checkAuth,
     setLoading,
