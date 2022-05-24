@@ -1,0 +1,237 @@
+.Form {
+  padding: 45px;
+
+  .Header_section {
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #25282b;
+
+      padding: 20px 0;
+    }
+
+    .Inputflex {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .Input_cont {
+        width: 32%;
+
+        label {
+          font-size: 14px;
+          font-weight: 500;
+          color: #5f6377;
+
+          padding-bottom: 10px;
+        }
+
+        .Inputgroup {
+          span {
+            border: none;
+            outline: none;
+            background: none;
+
+            font-weight: bold;
+            border: 1px solid #cfd0d7;
+            border-right: none;
+          }
+
+          input {
+            border: none;
+            outline: none;
+
+            border: 1px solid #cfd0d7;
+            border-left: none;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.Form {
+  .Toprow {
+    // margin-top: 3%;
+
+    .Title {
+      padding-bottom: 20px;
+
+      h3 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        color: #25282b;
+      }
+    }
+
+    .Cardcon {
+      display: flex;
+      flex-wrap: wrap;
+      // align-items: center;
+      justify-content: space-between;
+
+      .Card {
+        background: #fff;
+        box-shadow: 0px 12px 26px rgba(16, 30, 115, 0.06);
+        border-radius: 8px;
+
+        padding: 20px;
+        width: 240px;
+        margin-bottom: 3%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h4 {
+          font-weight: 500;
+          font-size: 14px;
+          color: #25282b;
+        }
+      }
+    }
+  }
+
+  .Button {
+    padding: 20px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+
+      padding: 4px 30px;
+      margin-top: 5%;
+
+      color: #fff;
+      background: #336cfb;
+      border-radius: 6px;
+    }
+  }
+}
+
+.Appointment_activity {
+  margin-top: 5%;
+
+  background: #fff;
+  box-shadow: 0px 12px 26px rgba(16, 30, 115, 0.06);
+  border-radius: 8px;
+
+  .Title {
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #25282b;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+
+      padding: 4px 30px;
+
+      color: #fff;
+      background: #336cfb;
+      border-radius: 6px;
+    }
+  }
+
+  .Appointmentlist_section {
+    .Appointmentlist_title {
+      padding: 10px 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: #e8e8e8af;
+      //   opacity: 0.2;
+
+      .Name {
+        h4 {
+          font-size: 14px;
+          color: #25282b;
+        }
+      }
+    }
+
+    .Appointment {
+      border-top: 2px solid #e8e8e8;
+
+      padding-bottom: 10px;
+
+      // padding-left: -12px;
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+
+      .Name {
+        padding: 20px 0 20px 5px;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        .Profilepic {
+          height: 20px;
+          width: 20px;
+
+          img {
+            border-radius: 50px;
+          }
+        }
+
+        h4 {
+          font-size: 14px;
+          font-weight: 400;
+          color: #52575c;
+
+          margin: 0;
+          // padding-left: 10px;
+        }
+      }
+
+      .Action_buttons {
+        width: 50px;
+
+        // border: 3px solid green;
+
+        // padding: 0 10px;
+
+        // margin-left: 30px;
+        margin-right: 30px;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.Modal {
+  display: block !important;
+
+  .Modal_title {
+    font-size: 23px;
+    font-weight: 500;
+    color: #252733;
+  }
+}

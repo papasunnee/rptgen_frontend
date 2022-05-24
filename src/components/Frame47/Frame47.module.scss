@@ -1,0 +1,109 @@
+.Patientsdetails {
+  .Top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    h3 {
+      font-size: 40px;
+      font-weight: 500;
+      color: #252733;
+      color: var(--text-primary);
+    }
+
+    .Inputgroup {
+      width: 260px;
+
+      filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.082));
+
+      .Inputgroup_text {
+        border: none;
+        background: #fff;
+
+        border-radius: 100px;
+      }
+
+      input {
+        border: none;
+
+        padding: 10px;
+        font-size: 13px;
+        border-radius: 100px;
+      }
+    }
+  }
+
+  .Details {
+    margin-bottom: 3%;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    .Namecont {
+      padding: 20px;
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+
+      .Profilepic {
+        padding-right: 10px;
+        img {
+          border-radius: 50px;
+        }
+      }
+
+      .Bigname {
+        font-size: 18px;
+        font-weight: 700;
+        color: #6d6b80;
+        color: var(--text-primary);
+      }
+
+      h4 {
+        font-size: 13px;
+        font-weight: 600;
+        color: #656262;
+        color: var(--text-primary);
+      }
+
+      h5 {
+        font-size: 14px;
+        font-weight: 500;
+        color: #336cfb;
+      }
+    }
+  }
+}
+
+.Toptabs_title {
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #25282b;
+    color: var(--text-primary);
+  }
+}
+
+.Togglebutton {
+  box-shadow: 3px 6px 5px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  font-size: 15px;
+  justify-content: space-between;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0.5rem;
+  position: relative;
+  width: 8rem;
+
+  h1 {
+    font-size: 15px;
+    margin: 0;
+  }
+}

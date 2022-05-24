@@ -1,0 +1,113 @@
+// * {
+//   margin: 0;
+//   overflow: hidden;
+// }
+
+.Optionselect {
+  overflow: hidden;
+
+  .Image {
+    padding: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+
+    width: 100%;
+  }
+
+  .Formsection {
+    background: #f4f5f9;
+
+    padding: 0rem 30px;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+
+    .Title {
+      padding: 25px 0 0 0;
+
+      h3 {
+        color: #252733;
+        font-weight: 400;
+        font-size: 25px;
+
+        padding-bottom: 5px;
+      }
+    }
+
+    .Existingpatientstab {
+      background: #fff;
+      box-shadow: 10px 3px 15px rgba(0, 0, 0, 0.05);
+      border-radius: 20px;
+
+      margin-top: 4%;
+
+      padding: 20px;
+
+      .Tabtitle {
+        padding: 5px 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h4 {
+          color: #4a4a4a;
+          font-weight: 400;
+          font-size: 23px;
+        }
+      }
+
+      .Content {
+        padding: 1px 0;
+
+        color: #a2a4b9;
+        font-size: 13px;
+      }
+
+      .Button {
+        // padding: 10px 0;
+
+        display: flex;
+        justify-content: flex-end;
+        text-align: center;
+
+        button,
+        a {
+          border: none;
+          outline: none;
+          background: transparent;
+
+          background: #4a7aa1;
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+          border-radius: 30px;
+
+          width: 150px;
+          padding: 5px 10px;
+
+          color: #fff;
+          text-decoration: none;
+          // a {
+          //   color: #fff;
+          //   text-decoration: none;
+          // }
+        }
+      }
+    }
+
+    .Copyright {
+      bottom: 0px;
+      position: absolute;
+
+      font-size: 13px;
+      text-align: center;
+
+      width: 500px;
+      margin: auto;
+      margin-top: 5%;
+    }
+  }
+}

@@ -1,0 +1,179 @@
+.Formtab_titles {
+  padding: 20px 45px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #f6f8fb;
+
+  .Tab {
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #52575c;
+    }
+  }
+}
+
+.Form {
+  padding: 45px;
+
+  .Header_section {
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #25282b;
+
+      padding: 20px 0;
+    }
+
+    .Inputflex {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .Input_cont {
+        width: 32%;
+
+        label {
+          font-size: 14px;
+          font-weight: 500;
+          color: #5f6377;
+
+          padding-bottom: 10px;
+        }
+
+        .Inputgroup {
+          span {
+            border: none;
+            outline: none;
+            background: none;
+
+            font-weight: bold;
+            border: 1px solid #cfd0d7;
+            border-right: none;
+          }
+
+          input {
+            border: none;
+            outline: none;
+
+            border: 1px solid #cfd0d7;
+            border-left: none;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.Form {
+  .Toprow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .Paincard {
+      background: #fff;
+      box-shadow: 0px 12px 26px rgba(0, 0, 0, 0.418);
+      border-radius: 8px;
+
+      padding: 15px;
+      margin-bottom: 3%;
+
+      .Title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h4 {
+          font-family: "Lato";
+          font-weight: 700;
+          font-size: 20px;
+          color: #25282b;
+        }
+      }
+
+      .Checkbox {
+        display: flex;
+        align-items: center;
+
+        h4 {
+          font-family: "Roboto";
+
+          margin: 0;
+          padding-left: 10px;
+
+          font-weight: 400;
+          font-size: 16px;
+          color: #6d6b80;
+        }
+      }
+
+      .Inputgroup {
+        margin: 20px 0;
+
+        label {
+          font-weight: 400;
+          font-size: 15px;
+          color: #6d6b80;
+        }
+
+        input {
+          width: 100%;
+
+          margin-top: 1%;
+
+          padding: 4px 10px;
+
+          background: #fcfcfd;
+          border: 1px solid #cfd0d7;
+          border-radius: 2px;
+        }
+
+        textarea {
+          width: 100%;
+
+          margin-top: 1%;
+
+          padding: 4px 10px;
+
+          background: #fcfcfd;
+          border: 1px solid #cfd0d7;
+          border-radius: 2px;
+        }
+      }
+
+      .Checkboxcont {
+        width: 58%;
+        padding: 15px 0;
+
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .Button {
+    padding: 20px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+
+      padding: 4px 30px;
+
+      color: #fff;
+      background: #336cfb;
+      border-radius: 6px;
+    }
+  }
+}

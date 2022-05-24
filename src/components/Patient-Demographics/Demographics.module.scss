@@ -1,0 +1,91 @@
+.Formtab_titles {
+  padding: 20px 45px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #f6f8fb;
+
+  .Tab {
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #52575c;
+    }
+  }
+}
+
+.Form {
+  padding: 45px;
+
+  .Header_section {
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #25282b;
+
+      padding: 20px 0;
+    }
+
+    .Inputflex {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .Input_cont {
+        width: 32%;
+
+        label {
+          font-size: 14px;
+          font-weight: 500;
+          color: #5f6377;
+
+          padding-bottom: 10px;
+        }
+
+        .Inputgroup {
+          span {
+            border: none;
+            outline: none;
+            background: none;
+
+            font-weight: bold;
+            border: 1px solid #cfd0d7;
+            border-right: none;
+          }
+
+          input {
+            border: none;
+            outline: none;
+
+            border: 1px solid #cfd0d7;
+            border-left: none;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+  }
+
+  .Button {
+    padding: 20px 0;
+
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+
+      padding: 4px 30px;
+
+      color: #fff;
+      background: #336cfb;
+      border-radius: 6px;
+    }
+  }
+}

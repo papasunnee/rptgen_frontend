@@ -1,0 +1,45 @@
+.Navbar {
+  border-radius: 0px 20px 0px 0px;
+
+  border-top-right-radius: 0;
+
+  .Containerfluid {
+    padding: 15px 28px;
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .Navbarbrand {
+      font-size: 16px;
+      font-weight: 400;
+
+      text-decoration: none;
+    }
+
+    .Navcollapse {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    form {
+      display: flex;
+      justify-content: flex-end;
+
+      .Btn {
+        border: none;
+        outline: none;
+        background: transparent;
+
+        padding: 8px 22px;
+
+        color: var(--text-primary);
+
+        border: 1px solid #00457c;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+      }
+    }
+  }
+}

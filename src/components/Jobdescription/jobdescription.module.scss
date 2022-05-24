@@ -1,0 +1,150 @@
+.Modal {
+  display: block !important;
+
+  .Modal_title {
+    font-size: 23px;
+    font-weight: 500;
+    color: #252733;
+  }
+
+  .Modal_body {
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+
+    .Functionalimprovment_col {
+      width: 320px;
+
+      //   padding: 0 15px;
+      h5 {
+        font-weight: 700;
+        font-size: 20px;
+        color: #25282b;
+
+        padding: 10px 0;
+      }
+
+      .Inputlist {
+        .Inputlist_con {
+          display: flex;
+          align-items: center;
+          padding-bottom: 10px;
+
+          label {
+            font-weight: 400;
+            font-size: 16px;
+            color: #6d6b80;
+
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+
+    .Adl_col {
+      width: 300px;
+      padding: 0 15px;
+      h5 {
+        font-weight: 700;
+        font-size: 18px;
+        color: #25282b;
+
+        padding: 10px 0;
+      }
+
+      .Inputlist {
+        .Inputlist_con {
+          padding-bottom: 15px;
+
+          label {
+            font-weight: 400;
+            font-size: 16px;
+            color: #6d6b80;
+
+            padding-bottom: 5px;
+          }
+
+          input {
+            border: none;
+
+            width: 100%;
+            background: #fcfcfd;
+            border: 1px solid #cfd0d7;
+            border-radius: 2px;
+
+            padding: 8px;
+          }
+
+          textarea {
+            border: none;
+
+            width: 100%;
+            background: #fcfcfd;
+            border: 1px solid #cfd0d7;
+            border-radius: 2px;
+
+            padding: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .Modal_footer {
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+
+      padding: 4px 30px;
+      margin-top: 5%;
+
+      color: #fff;
+      background: #336cfb;
+      border-radius: 6px;
+    }
+  }
+}
+
+.modal-dialog {
+  margin: 0 !important;
+}
+
+@media (min-width: 992px) {
+  .modal-lg,
+  .modal-xl {
+    max-width: 1000px !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+}
+// .modal-lg,
+// .modal-xl {
+//   max-width: 1150px !important;
+// }
+
+.Formtab_titles {
+  padding: 20px 45px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #f6f8fb;
+
+  .Tab {
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #52575c;
+
+      padding-right: 20px;
+    }
+  }
+}

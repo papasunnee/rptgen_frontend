@@ -1,0 +1,161 @@
+// * {
+//   margin: 0 !important;
+//   overflow: visible;
+// }
+
+.Frame34 {
+  // border: 3px solid red;
+  padding: 0 !important;
+
+  .Contentcon {
+    padding: 0 !important;
+  }
+
+  .Body {
+    background: #f4f5f9;
+    position: relative;
+    z-index: -1;
+
+    padding: 20px;
+    // height: 100vh;
+
+    .Toprow {
+      justify-content: space-between;
+
+      .Systemtraffic {
+        padding: 0;
+
+        margin-bottom: 5%;
+
+        background: #fff;
+        box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.06);
+
+        .Title {
+          border-bottom: 1.5px solid #e0e0e0;
+
+          padding: 15px;
+
+          h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #42474a;
+          }
+        }
+      }
+
+      .Patientsentries {
+        padding: 25px;
+
+        margin-bottom: 5%;
+
+        background: #fff;
+        box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.06);
+
+        .Title {
+          margin-bottom: 10%;
+
+          h1 {
+            font-size: 55px;
+            font-weight: 500;
+            color: #42474a;
+          }
+
+          h4 {
+            font-size: 17px;
+            font-weight: 400;
+            color: #42474a;
+          }
+        }
+
+        .Progressbars {
+          padding-top: 20px;
+
+          .Inprogress {
+            margin-bottom: 15%;
+
+            .Progressstatus {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              h5 {
+                font-size: 17px;
+                font-weight: 400;
+                color: #42474a;
+              }
+
+              h4 {
+                font-size: 20px;
+                font-weight: 400;
+                color: #42474a;
+              }
+            }
+
+            .Progress {
+              height: 8px;
+              margin-bottom: 5%;
+            }
+          }
+        }
+      }
+    }
+
+    .Bottomrow {
+      margin-top: 7%;
+
+      .Monthlyreport {
+        padding: 0;
+
+        background: #fff;
+        box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.06);
+
+        .Title {
+          border-bottom: 1.5px solid #e0e0e0;
+
+          padding: 15px;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #42474a;
+          }
+
+          .Graphcolor {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .Policy {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              .Color {
+                width: 35px;
+                height: 16px;
+
+                background: #00457c;
+                border-radius: 2px;
+              }
+              h4 {
+                font-size: 14px;
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// @media (min-width: 992px)
+// .navbar-expand-lg .navbar-collapse {
+//     display: flex!important;
+//     flex-basis: auto;
+//     justify-content: flex-end;
+// }

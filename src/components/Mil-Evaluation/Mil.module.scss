@@ -1,0 +1,82 @@
+.Modal {
+  display: block !important;
+
+  .Modal_title {
+    font-size: 23px;
+    font-weight: 500;
+    color: #252733;
+  }
+
+  .Modal_body {
+    // display: flex;
+    // // align-items: center;
+    // justify-content: space-between;
+
+    .Cardcon {
+      width: 100%;
+
+      display: flex;
+      flex-wrap: wrap;
+      // align-items: center;
+      justify-content: space-between;
+
+      .Card {
+        background: #fff;
+        box-shadow: 0px 12px 26px rgba(16, 29, 115, 0.096);
+        border-radius: 8px;
+
+        padding: 20px;
+        width: 202px;
+        height: 150px;
+        margin-bottom: 5%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h4 {
+          font-weight: 500;
+          font-size: 15px;
+          color: #25282b;
+        }
+      }
+    }
+  }
+
+  .Modal_footer {
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+
+      padding: 4px 30px;
+      margin-top: 5%;
+
+      color: #fff;
+      background: #336cfb;
+      border-radius: 6px;
+    }
+  }
+}
+
+// .modal-dialog {
+//   margin: 0 !important;
+// }
+
+// @media (min-width: 992px) {
+//   .modal-lg,
+//   .modal-xl {
+//     max-width: 1000px !important;
+//   }
+// }
+
+// @media (min-width: 576px) {
+//   .modal-dialog {
+//     max-width: 500px;
+//     margin: 1.75rem auto;
+//   }
+// }
+// .modal-lg,
+// .modal-xl {
+//   max-width: 1150px !important;
+// }

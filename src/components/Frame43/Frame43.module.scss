@@ -1,0 +1,202 @@
+.Contentcon {
+  padding: 0 !important;
+
+  .Body {
+    background: #f4f5f9;
+    position: relative;
+    z-index: -1;
+
+    padding: 20px;
+    // height: 100vh;
+
+    .Patientsdatabase_top {
+      border-bottom: 2px solid #dfe0eb;
+
+      background: #fff;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+
+      .Patientsdatabase_titlesection {
+        margin: 0;
+        padding: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h3 {
+          font-size: 19px;
+          font-weight: 700;
+
+          color: #252733;
+        }
+
+        .Titlesection_cont {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .Btn {
+            button {
+              border: none;
+              outline: none;
+              background: transparent;
+
+              padding: 8px 18px;
+              color: #fff;
+
+              background: #00447b;
+              box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+              border-radius: 10px;
+            }
+          }
+
+          .Filter {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+
+            .Con {
+              h5 {
+                font-size: 14px;
+                font-weight: 600;
+                color: #4b506d;
+              }
+            }
+          }
+        }
+      }
+
+      .Patientsdatabase_tablehead {
+        padding: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .Name {
+          h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #9fa2b4;
+          }
+        }
+
+        .Namecon {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+
+    .Patientslist {
+      // border-bottom: 2px solid #dfe0eb;
+
+      padding: 20px;
+      background-color: #fff;
+
+      .Patient {
+        // margin-bottom: 5%;
+        padding: 20px 0;
+
+        border-bottom: 2px solid #dfe0eb;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        .Cont {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .Profilepic {
+            img {
+              border-radius: 50px;
+            }
+          }
+
+          .Patientname {
+            padding-left: 20px;
+
+            h4 {
+              font-size: 17px;
+              font-weight: 600;
+              color: #252733;
+            }
+
+            h5 {
+              font-size: 14px;
+              font-weight: 400;
+              color: #c5c7cd;
+            }
+          }
+        }
+        .Datecont {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+
+          .Dateonline {
+            h4 {
+              font-size: 17px;
+              font-weight: 600;
+              color: #252733;
+            }
+
+            h5 {
+              font-size: 14px;
+              font-weight: 400;
+              color: #c5c7cd;
+            }
+          }
+
+          .Duedate {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+
+            .Button {
+              button {
+                border: none;
+                outline: none;
+                background: transparent;
+
+                background: #f12b2c;
+                border-radius: 100px;
+                padding: 4px 8px;
+
+                width: 70px;
+
+                color: #fff;
+                font-size: 13px;
+              }
+            }
+
+            .Icon {
+              width: 20px;
+            }
+          }
+        }
+
+        // &:hover {
+        //   background: red !important;
+        //   cursor: pointer;
+        // }
+      }
+    }
+  }
+}
+
+@media (max-width: 672px) {
+  .Datecont {
+    width: 100%;
+  }
+
+  .Icon {
+    padding-left: 11px;
+  }
+}
