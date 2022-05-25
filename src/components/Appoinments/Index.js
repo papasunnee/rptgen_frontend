@@ -156,7 +156,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 function Index() {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <Fragment>

@@ -21,7 +21,7 @@ const AppointmentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Doctor",
     },
-    doctor: {
+    patient: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Patient",
     },

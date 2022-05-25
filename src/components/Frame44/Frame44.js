@@ -19,7 +19,8 @@ import editicon from "@/images/edit-icon.png";
 import deleteicon from "@/images/delete.png";
 
 import frame44Styles from "./Frame44.module.scss";
-import { useAuth } from "@/context/AuthContext";
+import { fetcher, useAuth } from "@/context/AuthContext";
+import useSWR from "swr";
 
 const state = {
   labels: ["January", "February", "March", "April", "May"],
@@ -37,7 +38,7 @@ const state = {
 };
 
 function Frame44() {
-  const { user } = useAuth();
+  const { data, error, isValidating, mutate } = useSWR("/api/patient", fetcher);
   return (
     <Fragment>
       <div
@@ -78,7 +79,7 @@ function Frame44() {
 
                       <div className={`${frame44Styles.Content}`}>
                         <h4>New Patients</h4>
-                        <h3>{0}</h3>
+                        <h3>{data?.data?.recentPatients?.length || 0}</h3>
                       </div>
                     </div>
 
