@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from "react";
-import Index from "@/components/Patients-Database/Index";
+import PatientDatabase from "@/components/Patients-Database/Index";
 import Loading from "@/components/Loading";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/router";
 
-function index() {
+function Index() {
   const { userSWR, errorSWR, mutate, isValidating } = useAuth();
   const isLoading = !userSWR && !errorSWR;
 
@@ -22,9 +22,9 @@ function index() {
   }
   return (
     <Fragment>
-      <Index />
+      <PatientDatabase />
     </Fragment>
   );
 }
 
-export default index;
+export default Index;
