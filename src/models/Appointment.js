@@ -3,20 +3,23 @@ import mongoose from "mongoose";
 /* AppointmentSchema will correspond to a collection in your MongoDB database. */
 const AppointmentSchema = new mongoose.Schema(
   {
-    firstname: {
-      type: String,
-      required: [true, "Please provide your firstname."],
-      maxlength: [20, "Firstname cannot be more than 60 characters"],
+    appointment_date: {
+      type: Date,
+      required: [true, "Please provide appointment date."],
     },
-    lastname: {
-      type: String,
-      required: [true, "Please provide your lastname."],
-      maxlength: [20, "Lastname cannot be more than 60 characters"],
+    minTime: {
+      type: Number,
+      required: [true, "Please provide appointment start time."],
     },
-    middlename: {
-      type: String,
-      maxlength: [20, "Lastname cannot be more than 60 characters"],
+    duration: {
+      type: Number,
+      required: [true, "Please provide appointment duration in minutes"],
     },
+    condition: [
+      {
+        type: String,
+      },
+    ],
     doctor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Doctor",
