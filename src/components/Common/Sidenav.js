@@ -18,8 +18,9 @@ function Sidenav() {
   const router = useRouter();
   const handleLogout = async (event) => {
     event.preventDefault();
-    const data = await logout();
-    return router.push("/");
+    await logout();
+    router.push("/");
+    return;
   };
   return (
     <Fragment>

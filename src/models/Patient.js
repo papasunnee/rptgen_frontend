@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 /* PatientSchema will correspond to a collection in your MongoDB database. */
+
 const PatientSchema = new mongoose.Schema(
   {
     firstname: {

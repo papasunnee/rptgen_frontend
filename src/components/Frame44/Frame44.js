@@ -39,6 +39,7 @@ const state = {
 
 function Frame44() {
   const { data, error, isValidating, mutate } = useSWR("/api/patient", fetcher);
+  console.log({ data, error });
   return (
     <Fragment>
       <div

@@ -1,4 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
+import Appointment from "@/models/Appointment";
 import Patient from "@/models/Patient";
 
 export default async function handler(req, res) {

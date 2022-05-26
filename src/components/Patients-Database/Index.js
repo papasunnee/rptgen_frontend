@@ -265,7 +265,7 @@ const initialValues = {
 };
 function Index() {
   const { data, error, isValidating, mutate } = useSWR("/api/patient", fetcher);
-  console.log({ data });
+  console.log({ data, error });
 
   const [modalShow, setModalShow] = useState(false);
   const [modalData, setModalData] = useState(initialValues);

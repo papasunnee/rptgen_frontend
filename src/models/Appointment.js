@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 /* AppointmentSchema will correspond to a collection in your MongoDB database. */
+
 const AppointmentSchema = new mongoose.Schema(
   {
     appointment_date: {
