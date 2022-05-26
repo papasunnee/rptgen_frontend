@@ -52,7 +52,6 @@ const initialValues = {
 };
 
 function MyVerticallyCenteredModal(props) {
-  // const { newPatient } = useAuth();
   const [patientData, setPatientData] = useState(initialValues);
   const handleChange = (e) => {
     const name = e.target.name;
@@ -72,12 +71,10 @@ function MyVerticallyCenteredModal(props) {
         body: JSON.stringify(patientData),
       });
       const data = await response.json();
-
       console.log(data);
     } catch (error) {
       console.log({ error: error.message });
     }
-    // const data = await newPatient({ ...patientData });
   };
   return (
     <Modal

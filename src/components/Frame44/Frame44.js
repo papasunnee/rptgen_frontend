@@ -48,16 +48,11 @@ function Frame44() {
         <div
           className={`${frame44Styles.Heightadjust} row vh-100 overflow-auto`}
         >
-          {/* <div className={`container-fluid overflow-hidden`}>
-                        <div className={`row vh-100 overflow-auto`}> */}
-
           <Sidenav className={`${frame44Styles.Sidebar} container-fluid`} />
 
           <div className={`col d-flex flex-column h-sm-100`}>
             <main className={`row overflow-auto`}>
               <div className={`${frame44Styles.Contentcon} col pt-4`}>
-                {/* <div className={`${frame44Styles.Contentcon} col py-3`} style={{ padding: 0 }}> */}
-
                 <Topnav />
 
                 <div className={`${frame44Styles.Body}`}>
@@ -361,6 +356,8 @@ function Frame44() {
                         </div>
                       </div>
                     </div>
+
+                    
                   </div>
                 </div>
                 {/* </div> */}

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import moment from "moment";
 import Image from "next/image";
 
@@ -28,12 +28,15 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
-import { fetcher, useAuth } from "@/context/AuthContext";
+import { fetcher } from "@/context/AuthContext";
 import useSWR from "swr";
 
 function MyVerticallyCenteredModal(props) {
-  const { modalData = {} } = props;
-  const [mData, setMData] = useState(modalData);
+  const { modaldata = {} } = props;
+  const [mData, setMData] = useState(modaldata);
+  useEffect(() => {
+    setMData(modaldata);
+  });
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -238,9 +241,7 @@ function MyVerticallyCenteredModal(props) {
         </div>
       </Modal.Body>
       <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-        {/* <Button onClick={props.onHide}>Close</Button> */}
-
-        <button>Save</button>
+        <button>Update</button>
       </Modal.Footer>
     </Modal>
   );
@@ -263,16 +264,16 @@ const initialValues = {
   gender: "",
   marital_status: "",
 };
+
 function Index() {
-  const { data, error, isValidating, mutate } = useSWR("/api/patient", fetcher);
-  console.log({ data, error });
+  const { data } = useSWR("/api/patient", fetcher);
 
   const [modalShow, setModalShow] = useState(false);
   const [modalData, setModalData] = useState(initialValues);
 
-  const handleModal = (modalStatus, modalData) => {
-    setModalData(modalData);
+  const handleModal = (patient) => {
     setModalShow(true);
+    setModalData(patient);
   };
   return (
     <Fragment>
@@ -371,7 +372,7 @@ function Index() {
                     </div>
 
                     <div className={`${frame44Styles.Appointmentlist_section}`}>
-                      {data?.data?.patients?.length > 0 ? (
+                      {data?.data?.patients?.length > 0 && (
                         <>
                           <div
                             className={`${frame44Styles.Appointmentlist_title}`}
@@ -458,30 +459,22 @@ function Index() {
                               <div
                                 className={`${frame44Styles.Action_buttons}`}
                               >
-                                {/* <Button
-                                                        variant="primary"
-                                                        onClick={() => setModalShow(true)}
-                                                        className={`${frame44Styles.Editbutton} col-md-3`}
-                                                    > */}
                                 <Image
                                   variant="primary"
-                                  onClick={() => handleModal(true, patient)}
+                                  onClick={() => handleModal(patient)}
                                   src={editicon}
                                   alt="edit-icon"
                                 />
-                                {/* </Button> */}
 
                                 <Image src={deleteicon} alt="delete-icon" />
                               </div>
                             </div>
                           ))}
                         </>
-                      ) : (
-                        ""
                       )}
                       <MyVerticallyCenteredModal
                         show={modalShow}
-                        modalData={modalData}
+                        modaldata={modalData}
                         onHide={() => setModalShow(false)}
                       />
                     </div>
