@@ -1,5 +1,7 @@
 import dbConnect from "@/lib/dbConnect";
 import Appointment from "@/models/Appointment";
+import Doctor from "@/models/Doctor";
+import Patient from "@/models/Patient";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -14,7 +16,9 @@ export default async function handler(req, res) {
         if (id && (id != "undefined" || id != null || id != "null")) {
           appointments = await Appointment.findOne({
             _id: id,
-          }).populate("appointments"); /* find all the data in our database */
+          })
+            .populate("doctors")
+            .populate("patients"); /* find all the data in our database */
         } else {
           appointments = await Appointment.find({})
             .populate("doctors")

@@ -29,7 +29,7 @@ const PatientSchema = new mongoose.Schema(
       maxlength: [100, "Lastname cannot be more than 60 characters"],
     },
     home_phone: {
-      type: Number,
+      type: String,
       required: [true, "Please provide your home phone."],
     },
     providers_code: {

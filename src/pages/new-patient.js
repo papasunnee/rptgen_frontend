@@ -21,10 +21,6 @@ function NewPatient() {
     return <Loading />;
   }
 
-  // if (typeof userSWR !== "undefined" && !userSWR.isLoggedIn) {
-  //   mutate();
-  //   return router.push("/");
-  // }
   return (
     <Fragment>
       <Frame47 />

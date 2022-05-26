@@ -53,7 +53,10 @@ const initialValues = {
 
 function MyVerticallyCenteredModal(props) {
   const [patientData, setPatientData] = useState(initialValues);
+  const [success, setSuccess] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const handleChange = (e) => {
+    setSuccess(false);
     const name = e.target.name;
     const value = e.target.value;
     setPatientData((prevValues) => ({
@@ -62,6 +65,7 @@ function MyVerticallyCenteredModal(props) {
     }));
   };
   const handleSubmit = async (e) => {
+    setProcessing(true);
     e.preventDefault();
     try {
       const response = await fetch("/api/patient", {
@@ -71,10 +75,14 @@ function MyVerticallyCenteredModal(props) {
         body: JSON.stringify(patientData),
       });
       const data = await response.json();
-      console.log(data);
+      if (data.success) {
+        setSuccess(true);
+        setPatientData(initialValues);
+      }
     } catch (error) {
       console.log({ error: error.message });
     }
+    setProcessing(false);
   };
   return (
     <Modal
@@ -197,7 +205,8 @@ function MyVerticallyCenteredModal(props) {
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Home Phone</label>
                 <input
-                  type="text"
+                  type="tel"
+                  min="0"
                   placeholder="Enter Home Phone"
                   required
                   name="home_phone"
@@ -205,11 +214,6 @@ function MyVerticallyCenteredModal(props) {
                   onChange={handleChange}
                 />
               </div>
-
-              {/* <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Home Phone</label>
-                <input type="text" placeholder="Enter Home Phone" />
-              </div> */}
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Upload Patient Picture</label>
@@ -294,9 +298,10 @@ function MyVerticallyCenteredModal(props) {
           </div>
         </Modal.Body>
         <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-          {/* <Button onClick={props.onHide}>Close</Button> */}
-
-          <button type="submit">Save</button>
+          <p>{success && <span>Patient Successfully Added</span>}</p>
+          <button type="submit" disabled={processing}>
+            {processing ? "Please Wait..." : "Save"}
+          </button>
         </Modal.Footer>
       </form>
     </Modal>
@@ -409,11 +414,6 @@ function Frame47() {
                       <div className={`${frame47Styles.Toptabs_title}`}>
                         <h3>Quick Tasks</h3>
                       </div>
-
-                      {/* <MyVerticallyCenteredModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    /> */}
 
                       <div
                         className={`${frame44Styles.Tab} col-md-3`}

@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         ); /* create a new model in the database */
         return res.status(201).json({ success: true, data: patient });
       } catch (error) {
-        return res.status(400).json({ success: false });
+        return res.status(400).json({ success: false, error: error.message });
       }
     default:
       res.status(400).json({ success: false });
