@@ -1,10 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import moment from "moment";
 import Image from "next/image";
-
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-
 import useLocalStorage from "use-local-storage";
 
 import { BsSearch } from "react-icons/bs";
@@ -30,6 +27,7 @@ import frame47Styles from "../Frame47/Frame47.module.scss";
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 import { fetcher } from "@/context/AuthContext";
 import useSWR from "swr";
+import PatientList from "./patientList";
 
 function MyVerticallyCenteredModal(props) {
   const { modaldata = {} } = props;
@@ -359,8 +357,8 @@ function Index() {
                       </div>
                     </span>
                   </div>
-
-                  <span className={`${frame44Styles.Appointment_activity}`}>
+                  <PatientList />
+                  {/* <div className={`${frame44Styles.Appointment_activity}`}>
                     <div className={`${frame44Styles.Title}`}>
                       <h3>
                         Patients (
@@ -478,7 +476,7 @@ function Index() {
                         onHide={() => setModalShow(false)}
                       />
                     </div>
-                  </span>
+                  </div> */}
                 </div>
               </div>
             </main>

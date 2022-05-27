@@ -1,13 +1,15 @@
 import React, { useState, Fragment } from "react";
 import { useRouter } from "next/link";
 import Image from "next/image";
-
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 
 import useLocalStorage from "use-local-storage";
 
 import { BsSearch } from "react-icons/bs";
+
+import { fetcher, useAuth } from "@/context/AuthContext";
+import useSWR from "swr";
+import PatientList from "../Patients-Database/patientList";
 
 import Sidenav from "../Common/Sidenav";
 import Topnav from "../Common/Topnav";
@@ -32,7 +34,6 @@ import functionalStyles from "../Functionalimprovement/Functionalimprovement.mod
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./theme";
 import { GlobalStyles } from "./global";
-import { useAuth } from "@/context/AuthContext";
 
 const initialValues = {
   firstname: "",
@@ -309,7 +310,8 @@ function MyVerticallyCenteredModal(props) {
 }
 
 function Frame47() {
-  const [modalShow, setModalShow] = React.useState(true);
+  const { data } = useSWR("/api/patient", fetcher);
+  const [modalShow, setModalShow] = useState(true);
 
   const [theme, setTheme] = useLocalStorage("light");
   const toggleTheme = () => {
@@ -345,19 +347,6 @@ function Frame47() {
                     <div className={`${frame47Styles.Patientsdetails} row`}>
                       <div className={`${frame47Styles.Top}`}>
                         <h3>Patients Details</h3>
-
-                        {/* <button
-                          onClick={toggleTheme}
-                          className={`${frame47Styles.Togglebutton}`}
-                        >
-                          <h1>
-                            Switch to{" "}
-                            {theme === "light" ? "dark mode" : "light mode"}!
-                          </h1>
-                        </button> */}
-
-                        {/* <Toggle theme={theme} toggleTheme={toggleTheme} />
-                                                <h1>It's a {theme === 'light' ? 'light theme' : 'dark theme'}!</h1> */}
 
                         <div
                           className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
@@ -449,222 +438,7 @@ function Frame47() {
                       </div>
                     </div>
 
-                    <div className={`${frame44Styles.Appointment_activity}`}>
-                      <div className={`${frame44Styles.Title}`}>
-                        <h3>Appointment Activity</h3>
-                      </div>
-
-                      <div
-                        className={`${frame44Styles.Appointmentlist_section}`}
-                      >
-                        <div
-                          className={`${frame44Styles.Appointmentlist_title}`}
-                        >
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Name</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Email</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Date</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Visit Time</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Doctor</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Conditions</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>&nbsp;</h4>
-                          </div>
-                        </div>
-
-                        <div className={`${frame44Styles.Appointment}`}>
-                          <div className={`${frame44Styles.Name}`}>
-                            <div className={`${frame44Styles.Profilepic}`}>
-                              <Image src={profilepic} alt="profile-pic" />
-                            </div>
-
-                            <h4>Lesile Alexander</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>lesie.alexander@example.com</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>10/10/2020</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>09:15-09:45am</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Dr. Jacob Jones</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Mumps Stage II</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Action_buttons}`}>
-                            <Image src={editicon} alt="edit-icon" />
-                            <Image src={deleteicon} alt="delete-icon" />
-                          </div>
-                        </div>
-
-                        <div className={`${frame44Styles.Appointment}`}>
-                          <div className={`${frame44Styles.Name}`}>
-                            <div className={`${frame44Styles.Profilepic}`}>
-                              <Image src={profilepic} alt="profile-pic" />
-                            </div>
-
-                            <h4>Lesile Alexander</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>lesie.alexander@example.com</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>10/10/2020</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>09:15-09:45am</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Dr. Jacob Jones</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Mumps Stage II</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Action_buttons}`}>
-                            <Image src={editicon} alt="edit-icon" />
-                            <Image src={deleteicon} alt="delete-icon" />
-                          </div>
-                        </div>
-
-                        <div className={`${frame44Styles.Appointment}`}>
-                          <div className={`${frame44Styles.Name}`}>
-                            <div className={`${frame44Styles.Profilepic}`}>
-                              <Image src={profilepic} alt="profile-pic" />
-                            </div>
-
-                            <h4>Lesile Alexander</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>lesie.alexander@example.com</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>10/10/2020</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>09:15-09:45am</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Dr. Jacob Jones</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Mumps Stage II</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Action_buttons}`}>
-                            <Image src={editicon} alt="edit-icon" />
-                            <Image src={deleteicon} alt="delete-icon" />
-                          </div>
-                        </div>
-
-                        <div className={`${frame44Styles.Appointment}`}>
-                          <div className={`${frame44Styles.Name}`}>
-                            <div className={`${frame44Styles.Profilepic}`}>
-                              <Image src={profilepic} alt="profile-pic" />
-                            </div>
-
-                            <h4>Lesile Alexander</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>lesie.alexander@example.com</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>10/10/2020</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>09:15-09:45am</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Dr. Jacob Jones</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Mumps Stage II</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Action_buttons}`}>
-                            <Image src={editicon} alt="edit-icon" />
-                            <Image src={deleteicon} alt="delete-icon" />
-                          </div>
-                        </div>
-
-                        <div className={`${frame44Styles.Appointment}`}>
-                          <div className={`${frame44Styles.Name}`}>
-                            <div className={`${frame44Styles.Profilepic}`}>
-                              <Image src={profilepic} alt="profile-pic" />
-                            </div>
-
-                            <h4>Lesile Alexander</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>lesie.alexander@example.com</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>10/10/2020</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>09:15-09:45am</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Dr. Jacob Jones</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Name}`}>
-                            <h4>Mumps Stage II</h4>
-                          </div>
-
-                          <div className={`${frame44Styles.Action_buttons}`}>
-                            <Image src={editicon} alt="edit-icon" />
-                            <Image src={deleteicon} alt="delete-icon" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <PatientList />
                   </div>
                 </div>
               </main>

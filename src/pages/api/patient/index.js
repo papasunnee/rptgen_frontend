@@ -5,22 +5,28 @@ import Patient from "@/models/Patient";
 export default async function handler(req, res) {
   const { method } = req;
 
+  let patients;
+  let id = req?.query?.id;
+  let page = req?.query?.page;
+  let perPage = 10;
+  let paginationData = {};
+
   await dbConnect();
 
   switch (method) {
     case "GET":
       try {
-        let patients;
-        let id = req?.query?.id;
         if (id && (id != "undefined" || id != null || id != "null")) {
-          patients = await Patient.findOne(
-            {
-              _id: id,
-            },
-            {
-              password: false,
-            }
-          ).populate("appointments"); /* find all the data in our database */
+          patients = await Patient.findOne({
+            _id: id,
+          }).populate("appointments"); /* find all the data in our database */
+        } else if (
+          page &&
+          (typeof page !== undefined || typeof page != null || page != "null")
+        ) {
+          patients = await Patient.find({})
+            .limit(perPage)
+            .skip(perPage * page);
         } else {
           patients = await Patient.find({}).populate(
             "appointments"
