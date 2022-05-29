@@ -8,22 +8,29 @@ const AppointmentSchema = new mongoose.Schema(
       type: Date,
       required: [true, "Please provide appointment date."],
     },
-    minTime: {
+    appointment_hour: {
       type: Number,
-      required: [true, "Please provide appointment start time."],
+      required: [true, "Please provide appointment start hour."],
     },
-    duration: {
+    appointment_minute: {
       type: Number,
-      required: [true, "Please provide appointment duration in minutes"],
+      required: [true, "Please provide appointment start minute."],
+    },
+    appointment_mod: {
+      type: String,
+      required: [true, "Please provide appointment meridiem."],
     },
     condition: [
       {
         type: String,
       },
     ],
+    // doctor: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Doctor",
+    // },
     doctor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Doctor",
+      type: String,
     },
     patient: {
       type: mongoose.Schema.Types.ObjectId,

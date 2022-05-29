@@ -7,6 +7,7 @@ export default async function handler(req, res) {
 
   let patients;
   let id = req?.query?.id;
+  let put_id = req?.body?.id;
   let page = req?.query?.page;
   let perPage = 10;
   let paginationData = {};
@@ -60,8 +61,35 @@ export default async function handler(req, res) {
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
       }
+    case "PUT":
+      try {
+        if (
+          put_id &&
+          (put_id != "undefined" || put_id != null || put_id != "null")
+        ) {
+          const appointment = await Appointment.create({
+            patient: put_id,
+            doctor: req.body.doctor,
+            appointment_date: new Date(req.body.appointment_date),
+            appointment_hour: req.body.appointment_hour,
+            appointment_minute: req.body.appointment_minute,
+            appointment_mod: req.body.appointment_mod,
+          });
+          let patient = await Patient.findOne({ _id: put_id });
+          await patient.appointments.push(appointment._id);
+          await patient.save();
+          return appointment;
+        } else {
+          return res
+            .status(400)
+            .json({ success: false, error: "unprocessed put_id" });
+        }
+      } catch (error) {
+        return res.status(400).json({ success: false, error: error.message });
+      }
+      return res.status(400).json({ success: false, error: "unprocessed" });
     default:
-      res.status(400).json({ success: false });
+      return res.status(400).json({ success: false });
       break;
   }
 }
