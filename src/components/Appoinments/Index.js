@@ -322,8 +322,8 @@ function Index() {
                                   flexDirection: "column",
                                 }}
                               >
-                                {appointment.condition.map((con, _) => (
-                                  <p>{con}</p>
+                                {appointment.condition.map((con, index) => (
+                                  <p key={index}>{con}</p>
                                 ))}
                               </div>
                             </div>
