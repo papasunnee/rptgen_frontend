@@ -144,9 +144,9 @@ function Page({ currentItems = [], handleModal }) {
 
 function PaginatedPatient({ handleModal }) {
   const { data, error } = useSWR(`/api/patient`, fetcher);
-  if ((!data && !error) || error) {
-    return "loading";
-  }
+  // if ((!data && !error) || error) {
+  //   return "loading";
+  // }
   // ... handle loading and error states
 
   // return data?.data?.patients;
