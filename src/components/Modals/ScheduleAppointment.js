@@ -40,14 +40,17 @@ const initialFormValues = {
   appointment_mod: "AM",
 };
 function AppointmentModal(props) {
-  const { data, error, isValidating, mutate } = useSWR("/api/patient", fetcher);
-  const [patientSelect, setPatientSelect] = useState(initialFormValues);
-  const [form, setForm] = useState({});
+  const { data, mutate } = useSWR("/api/patient", fetcher);
+  const [patientSelect, setPatientSelect] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [form, setForm] = useState(initialFormValues);
+  const [loading, setLoading] = useState(false);
   const handlePatientSelect = (e) => {
     setPatientSelect(e.value);
   };
 
   const handleChange = (e) => {
+    setSuccessMessage(null);
     const { name, value } = e.target;
     setForm((prevValues) => ({
       ...prevValues,
@@ -56,19 +59,27 @@ function AppointmentModal(props) {
   };
 
   const handleSubmit = async (e) => {
+    setSuccessMessage(null);
+    setLoading(true);
     e.preventDefault();
     try {
       const response = await fetch("/api/patient", {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, id: patientSelect }),
+        body: JSON.stringify({ ...form, put_id: patientSelect }),
       });
 
       const data = await response.json();
-      if (data) {
+      if (data.success) {
+        mutate();
+        setSuccessMessage("Appointment Successfully Added");
+        setPatientSelect(null);
+        setForm(initialFormValues);
+      } else {
         console.log(data);
       }
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +98,7 @@ function AppointmentModal(props) {
           id="contained-modal-title-vcenter"
           className={`${functionalStyles.Modal_title}`}
         >
-          Add Patient
+          Schedule Appointment
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit}>
@@ -183,8 +194,10 @@ function AppointmentModal(props) {
         </Modal.Body>
         <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
           {/* <Button onClick={props.onHide}>Close</Button> */}
-
-          <button>Save</button>
+          <p>{successMessage}</p>
+          <button disabled={loading}>
+            {loading ? "...Please Wait" : "Save"}
+          </button>
         </Modal.Footer>
       </form>
     </Modal>

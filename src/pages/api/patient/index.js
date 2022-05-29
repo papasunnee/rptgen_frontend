@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   let patients;
   let id = req?.query?.id;
-  let put_id = req?.body?.id;
+  let put_id = req?.body?.put_id;
   let page = req?.query?.page;
   let perPage = 10;
   let paginationData = {};
@@ -67,6 +67,7 @@ export default async function handler(req, res) {
           put_id &&
           (put_id != "undefined" || put_id != null || put_id != "null")
         ) {
+          console.log(put_id);
           const appointment = await Appointment.create({
             patient: put_id,
             doctor: req.body.doctor,
@@ -78,7 +79,9 @@ export default async function handler(req, res) {
           let patient = await Patient.findOne({ _id: put_id });
           await patient.appointments.push(appointment._id);
           await patient.save();
-          return appointment;
+          return res
+            .status(400)
+            .json({ success: true, data: { appointment, patient } });
         } else {
           return res
             .status(400)
@@ -87,9 +90,7 @@ export default async function handler(req, res) {
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
       }
-      return res.status(400).json({ success: false, error: "unprocessed" });
     default:
       return res.status(400).json({ success: false });
-      break;
   }
 }

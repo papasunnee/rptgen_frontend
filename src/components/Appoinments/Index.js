@@ -29,6 +29,7 @@ import frame47Styles from "../Frame47/Frame47.module.scss";
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
+import ScheduleAppointment from "../Modals/ScheduleAppointment";
 
 function MyVerticallyCenteredModal(props) {
   return (
@@ -158,10 +159,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 function Index() {
-  const { data, error, isValidating, mutate } = useSWR(
-    "/api/appointment",
-    fetcher
-  );
+  const { data } = useSWR("/api/appointment", fetcher);
   console.log({ data });
   const [modalShow, setModalShow] = useState(false);
 
@@ -216,18 +214,7 @@ function Index() {
                       <h3>Quick Tasks</h3>
                     </div>
 
-                    <span
-                      className={`${frame44Styles.Tab} col-md-5`}
-                      style={{ width: "300px" }}
-                    >
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={appointmenticon} alt="icon-img" />
-                      </div>
-
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>Schedule Appointment</h4>
-                      </div>
-                    </span>
+                    <ScheduleAppointment />
 
                     <span className={`${frame44Styles.Tab} col-md-3`}>
                       <div className={`${frame44Styles.Image}`}>

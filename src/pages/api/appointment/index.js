@@ -17,12 +17,12 @@ export default async function handler(req, res) {
           appointments = await Appointment.findOne({
             _id: id,
           })
-            .populate("doctors")
-            .populate("patients"); /* find all the data in our database */
+            // .populate("doctors")
+            .populate("patient"); /* find all the data in our database */
         } else {
           appointments = await Appointment.find({})
-            .populate("doctors")
-            .populate("patients"); /* find all the data in our database */
+            // .populate("doctors")
+            .populate("patient"); /* find all the data in our database */
         }
         return res.status(200).json({
           success: true,
