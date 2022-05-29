@@ -85,54 +85,6 @@ export default function PatientList() {
               </div>
             </div>
             <PaginatedPatient handleModal={handleModal} />
-            {/* {data?.data?.patients?.map((patient, i) => (
-              <div key={i} className={`${frame44Styles.Appointment}`}>
-                <div className={`${frame44Styles.Name}`}>
-                  <div className={`${frame44Styles.Profilepic}`}>
-                    <Image src={profilepic} alt="profile-pic" />
-                  </div>
-
-                  <h4>{patient.firstname + " " + patient.lastname}</h4>
-                </div>
-
-                <div className={`${frame44Styles.Name}`}>
-                  <h4>{patient.email}</h4>
-                </div>
-
-                <div className={`${frame44Styles.Name}`}>
-                  <h4>{moment(patient.created_at).format("MMM Do YYYY")}</h4>
-                </div>
-
-                <div className={`${frame44Styles.Name}`}>
-                  <h4>
-                    {patient.appointments.length > 0 ? "Not Assigned" : "Null"}
-                  </h4>
-                </div>
-
-                <div className={`${frame44Styles.Name}`}>
-                  <h4>
-                    {patient.appointments.length > 0 ? "Not Assigned" : "Null"}
-                  </h4>
-                </div>
-
-                <div className={`${frame44Styles.Name}`}>
-                  <h4>
-                    {patient.appointments.length > 0 ? "Not Assigned" : "Null"}
-                  </h4>
-                </div>
-
-                <div className={`${frame44Styles.Action_buttons}`}>
-                  <Image
-                    variant="primary"
-                    onClick={() => handleModal(patient)}
-                    src={editicon}
-                    alt="edit-icon"
-                  />
-
-                  <Image src={deleteicon} alt="delete-icon" />
-                </div>
-              </div>
-            ))} */}
           </>
         )}
         <PatientModal

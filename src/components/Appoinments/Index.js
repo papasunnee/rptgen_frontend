@@ -28,6 +28,7 @@ import frame47Styles from "../Frame47/Frame47.module.scss";
 
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 import useSWR from "swr";
+import moment from "moment";
 import { fetcher } from "@/context/AuthContext";
 import ScheduleAppointment from "../Modals/ScheduleAppointment";
 
@@ -291,42 +292,49 @@ function Index() {
                                 <Image src={profilepic} alt="profile-pic" />
                               </div>
 
-                              <h4>Lesile Alexander</h4>
+                              <h4>{`${appointment.patient.firstname} ${appointment.patient.lastname}`}</h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>lesie.alexander@example.com</h4>
+                              <h4></h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>10/10/2020</h4>
+                              <h4>
+                                {moment(appointment.appointment_date).format(
+                                  "Do MMM YYYY"
+                                )}
+                              </h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>09:15-09:45am</h4>
+                              <h4>{`${appointment.appointment_hour}:${appointment.appointment_minute} ${appointment.appointment_mod}`}</h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>Dr. Jacob Jones</h4>
+                              <h4>{appointment.doctor}</h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>Mumps Stage II</h4>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                }}
+                              >
+                                {appointment.condition.map((con, _) => (
+                                  <p>{con}</p>
+                                ))}
+                              </div>
                             </div>
 
                             <div className={`${frame44Styles.Action_buttons}`}>
-                              {/* <Button
-                                                        variant="primary"
-                                                        onClick={() => setModalShow(true)}
-                                                        className={`${frame44Styles.Editbutton} col-md-3`}
-                                                    > */}
                               <Image
                                 variant="primary"
                                 onClick={() => setModalShow(true)}
                                 src={editicon}
                                 alt="edit-icon"
                               />
-                              {/* </Button> */}
 
                               <MyVerticallyCenteredModal
                                 show={modalShow}
