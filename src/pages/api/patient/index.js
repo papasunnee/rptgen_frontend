@@ -8,6 +8,7 @@ export default async function handler(req, res) {
   let patients;
   let id = req?.query?.id;
   let put_id = req?.body?.put_id;
+  let delete_id = req?.body?.delete_id;
   let page = req?.query?.page;
   let perPage = 10;
   let paginationData = {};
@@ -86,6 +87,40 @@ export default async function handler(req, res) {
           return res
             .status(400)
             .json({ success: false, error: "unprocessed put_id" });
+        }
+      } catch (error) {
+        return res.status(400).json({ success: false, error: error.message });
+      }
+    case "DELETE":
+      try {
+        if (
+          delete_id &&
+          (delete_id != "undefined" || delete_id != null || delete_id != "null")
+        ) {
+          console.log(delete_id);
+          const patient = await Patient.findOne({
+            _id: delete_id,
+          });
+          const deleteAppointmentResponse = await Appointment.deleteMany({
+            _id: { $in: patient.appointments },
+          });
+          if (deleteAppointmentResponse) {
+            const deletePatientResponse = await Patient.deleteOne({
+              _id: delete_id,
+            });
+            if (deletePatientResponse) {
+              return res
+                .status(400)
+                .json({ success: true, data: { deletePatientResponse } });
+            }
+          }
+
+          return res.status(400).json({ success: false });
+        } else {
+          console.log(delete_id);
+          return res
+            .status(400)
+            .json({ success: false, error: "Unprocessed delete_id" });
         }
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });

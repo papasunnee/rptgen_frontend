@@ -3,6 +3,7 @@ import Image from "next/image";
 import useSWR from "swr";
 import moment from "moment";
 import ReactPaginate from "react-paginate";
+import { confirmAlert } from "react-confirm-alert"; // Import
 import { fetcher } from "@/context/AuthContext";
 import PatientModal from "./patientModal";
 
@@ -10,6 +11,7 @@ import profilepic from "@/images/profile-1.png";
 import editicon from "@/images/edit-icon.png";
 import deleteicon from "@/images/delete.png";
 
+import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
 
 const initialValues = {
@@ -98,6 +100,46 @@ export default function PatientList() {
 }
 
 function Page({ currentItems = [], handleModal }) {
+  const { mutate } = useSWR("/api/patient", fetcher);
+  const [loading, setLoading] = useState(false);
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch("/api/patient", {
+        method: "DELETE",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ delete_id: id }),
+      });
+
+      return await response.json();
+    } catch (error) {
+      return error;
+    }
+  };
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: <span style={{ fontSize: "20px" }}>Confirm to Delete Record</span>,
+      message: `Are you sure to do delete this record ? ${id}`,
+      buttons: [
+        {
+          label: loading ? "Processing" : "Yes",
+          onClick: async () => {
+            try {
+              const response = await handleDelete(id);
+              console.log(response);
+              mutate();
+            } catch (error) {
+              console.log(error.message);
+            }
+          },
+        },
+        {
+          label: "No",
+          // onClick: () => alert("Click No"),
+        },
+      ],
+    });
+  };
   return currentItems.map((patient, i) => (
     <div key={i} className={`${frame44Styles.Appointment}`}>
       <div className={`${frame44Styles.Name}`}>
@@ -136,7 +178,11 @@ function Page({ currentItems = [], handleModal }) {
           alt="edit-icon"
         />
 
-        <Image src={deleteicon} alt="delete-icon" />
+        <Image
+          src={deleteicon}
+          alt="delete-icon"
+          onClick={() => confirmDelete(patient._id)}
+        />
       </div>
     </div>
   ));
@@ -166,7 +212,7 @@ function PaginatedPatient({ handleModal }) {
     // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+  }, [itemOffset, itemsPerPage, data]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {

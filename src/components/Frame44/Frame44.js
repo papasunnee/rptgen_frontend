@@ -12,15 +12,15 @@ import Topnav from "../Common/Topnav";
 import moreimg from "@/images/more-icon.png";
 import profilepic from "@/images/profile-1.png";
 import appointmenticon from "@/images/appointment-icon.png";
-import newpatientsicon from "@/images/newpatients-icon.png";
 import operationicon from "@/images/operation-icon.png";
 import hospitalearningicon from "@/images/hospitalearning-icon.png";
 import editicon from "@/images/edit-icon.png";
 import deleteicon from "@/images/delete.png";
 
 import frame44Styles from "./Frame44.module.scss";
-import { fetcher, useAuth } from "@/context/AuthContext";
-import useSWR from "swr";
+
+import PatientStat from "./PatientStat";
+import AppointmentStat from "./AppointmentStat";
 
 const state = {
   labels: ["January", "February", "March", "April", "May"],
@@ -38,8 +38,6 @@ const state = {
 };
 
 function Frame44() {
-  const { data, error, isValidating, mutate } = useSWR("/api/patient", fetcher);
-  
   return (
     <Fragment>
       <div
@@ -57,27 +55,9 @@ function Frame44() {
 
                 <div className={`${frame44Styles.Body}`}>
                   <div className={`${frame44Styles.Toptabs} row`}>
-                    <div className={`${frame44Styles.Tab} col-md-3`}>
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={appointmenticon} alt="icon-img" />
-                      </div>
+                    <AppointmentStat />
 
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>Appointment</h4>
-                        <h3>{0}</h3>
-                      </div>
-                    </div>
-
-                    <div className={`${frame44Styles.Tab} col-md-3`}>
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={newpatientsicon} alt="icon-img" />
-                      </div>
-
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>New Patients</h4>
-                        <h3>{data?.data?.recentPatients?.length || 0}</h3>
-                      </div>
-                    </div>
+                    <PatientStat />
 
                     <div className={`${frame44Styles.Tab} col-md-3`}>
                       <div className={`${frame44Styles.Image}`}>
@@ -356,8 +336,6 @@ function Frame44() {
                         </div>
                       </div>
                     </div>
-
-                    
                   </div>
                 </div>
                 {/* </div> */}
