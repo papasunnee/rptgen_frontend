@@ -41,6 +41,7 @@ const initialFormValues = {
 };
 function AppointmentModal(props) {
   const { data, mutate } = useSWR("/api/patient", fetcher);
+  const { mutate: mutateAppointment } = useSWR("/api/appointment", fetcher);
   const [patientSelect, setPatientSelect] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [form, setForm] = useState(initialFormValues);
@@ -73,6 +74,7 @@ function AppointmentModal(props) {
       const data = await response.json();
       if (data.success) {
         mutate();
+        mutateAppointment();
         setSuccessMessage("Appointment Successfully Added");
         setPatientSelect(null);
         setForm(initialFormValues);
