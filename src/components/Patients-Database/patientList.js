@@ -3,7 +3,7 @@ import Image from "next/image";
 import useSWR from "swr";
 import moment from "moment";
 import ReactPaginate from "react-paginate";
-import { confirmAlert } from "react-confirm-alert"; // Import
+import { confirmAlert } from "react-confirm-alert";
 import { fetcher } from "@/context/AuthContext";
 import PatientModal from "./patientModal";
 
@@ -119,7 +119,7 @@ function Page({ currentItems = [], handleModal }) {
   const confirmDelete = (id) => {
     confirmAlert({
       title: <span style={{ fontSize: "20px" }}>Confirm to Delete Record</span>,
-      message: `Are you sure to do delete this record ? ${id}`,
+      message: `Are you sure to do delete this record ?`,
       buttons: [
         {
           label: loading ? "Processing" : "Yes",

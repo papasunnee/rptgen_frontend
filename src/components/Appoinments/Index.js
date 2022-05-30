@@ -1,9 +1,10 @@
 import React, { useState, Fragment } from "react";
 import Image from "next/image";
-
+import useSWR from "swr";
+import moment from "moment";
+import { confirmAlert } from "react-confirm-alert";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-
 import useLocalStorage from "use-local-storage";
 
 import { BsSearch } from "react-icons/bs";
@@ -22,13 +23,11 @@ import deleteicon from "@/images/delete.png";
 import MoonIcon from "@/images/moon.png";
 import SunIcon from "@/images/sun.png";
 
+import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
-
 import frame47Styles from "../Frame47/Frame47.module.scss";
-
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
-import useSWR from "swr";
-import moment from "moment";
+
 import { fetcher } from "@/context/AuthContext";
 import ScheduleAppointment from "../Modals/ScheduleAppointment";
 
@@ -160,9 +159,50 @@ function MyVerticallyCenteredModal(props) {
 }
 
 function Index() {
-  const { data } = useSWR("/api/appointment", fetcher);
-  console.log({ data });
+  // const { mutate } = useSWR("/api/patient", fetcher);
+  const { data, mutate } = useSWR("/api/appointment", fetcher);
   const [modalShow, setModalShow] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: <span style={{ fontSize: "20px" }}>Confirm to Delete Record</span>,
+      message: `Are you sure to do delete this record ?`,
+      buttons: [
+        {
+          label: loading ? "Processing" : "Yes",
+          onClick: async () => {
+            try {
+              const response = await handleDelete(id);
+              console.log(response);
+              mutate();
+            } catch (error) {
+              console.log(error.message);
+            }
+          },
+        },
+        {
+          label: "No",
+          // onClick: () => alert("Click No"),
+        },
+      ],
+    });
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch("/api/appointment", {
+        method: "DELETE",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ delete_id: id }),
+      });
+
+      return await response.json();
+    } catch (error) {
+      return error;
+    }
+  };
 
   return (
     <Fragment>
@@ -329,19 +369,25 @@ function Index() {
                             </div>
 
                             <div className={`${frame44Styles.Action_buttons}`}>
-                              <Image
+                              {/* <Image
                                 variant="primary"
                                 onClick={() => setModalShow(true)}
                                 src={editicon}
                                 alt="edit-icon"
-                              />
+                              /> */}
 
                               <MyVerticallyCenteredModal
                                 show={modalShow}
                                 onHide={() => setModalShow(false)}
                               />
 
-                              <Image src={deleteicon} alt="delete-icon" />
+                              <Image
+                                src={deleteicon}
+                                alt="delete-icon"
+                                onClick={() => {
+                                  confirmDelete(appointment._id);
+                                }}
+                              />
                             </div>
                           </div>
                         ))}
@@ -403,49 +449,62 @@ function Index() {
                                 <Image src={profilepic} alt="profile-pic" />
                               </div>
 
-                              <h4>Lesile Alexander</h4>
+                              <h4>{`${appointment.patient.firstname} ${appointment.patient.lastname}`}</h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>lesie.alexander@example.com</h4>
+                              <h4></h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>10/10/2020</h4>
+                              <h4>
+                                {moment(appointment.appointment_date).format(
+                                  "Do MMM YYYY"
+                                )}
+                              </h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>09:15-09:45am</h4>
+                              <h4>{`${appointment.appointment_hour}:${appointment.appointment_minute} ${appointment.appointment_mod}`}</h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>Dr. Jacob Jones</h4>
+                              <h4>{appointment.doctor}</h4>
                             </div>
 
                             <div className={`${frame44Styles.Name}`}>
-                              <h4>Mumps Stage II</h4>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                }}
+                              >
+                                {appointment.condition.map((con, index) => (
+                                  <p key={index}>{con}</p>
+                                ))}
+                              </div>
                             </div>
 
                             <div className={`${frame44Styles.Action_buttons}`}>
-                              {/* <Button
-                                                        variant="primary"
-                                                        onClick={() => setModalShow(true)}
-                                                        className={`${frame44Styles.Editbutton} col-md-3`}
-                                                    > */}
-                              <Image
+                              {/* <Image
                                 variant="primary"
                                 onClick={() => setModalShow(true)}
                                 src={editicon}
                                 alt="edit-icon"
-                              />
-                              {/* </Button> */}
+                              /> */}
 
                               <MyVerticallyCenteredModal
                                 show={modalShow}
                                 onHide={() => setModalShow(false)}
                               />
 
-                              <Image src={deleteicon} alt="delete-icon" />
+                              <Image
+                                src={deleteicon}
+                                alt="delete-icon"
+                                onClick={() => {
+                                  confirmDelete(appointment._id);
+                                }}
+                              />
                             </div>
                           </div>
                         ))}
