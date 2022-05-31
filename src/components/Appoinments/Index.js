@@ -1,10 +1,5 @@
 import React, { useState, Fragment } from "react";
 import Image from "next/image";
-import useSWR from "swr";
-import moment from "moment";
-import { confirmAlert } from "react-confirm-alert";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import useLocalStorage from "use-local-storage";
 
 import { BsSearch } from "react-icons/bs";
@@ -23,188 +18,14 @@ import deleteicon from "@/images/delete.png";
 import MoonIcon from "@/images/moon.png";
 import SunIcon from "@/images/sun.png";
 
-import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 
-import { fetcher } from "@/context/AuthContext";
 import ScheduleAppointment from "../Modals/ScheduleAppointment";
 import AppointmentList from "./appointmentList";
 
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="xl"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      className={`${functionalStyles.Modal}`}
-    >
-      <Modal.Header closeButton>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          className={`${functionalStyles.Modal_title}`}
-        >
-          Add Patient
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body className={`${functionalStyles.Modal_body}`}>
-        <div className={`${functionalStyles.Adl_col}`}>
-          <div className={`${functionalStyles.Adl_col_title}`}>
-            <h3 style={{ fontSize: "23px", paddingBottom: "15px" }}>
-              Basic Information
-            </h3>
-          </div>
-          <div className={`${functionalStyles.Inputlist}`}>
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Patient Last Name</label>
-              <input type="text" placeholder="Last Name" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Patient Last Name</label>
-              <input type="text" placeholder="First Name" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Patient Middle Name</label>
-              <input type="text" placeholder="Middle Name" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Provider Code</label>
-              <input type="text" placeholder="Enter Provider Code" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Asst Provider Code</label>
-              <input type="text" placeholder="Enter Asst Provider Code" />
-            </div>
-          </div>
-        </div>
-
-        <div className={`${functionalStyles.Adl_col}`}>
-          <div className={`${functionalStyles.Adl_col_title}`}>
-            <h3 style={{ fontSize: "23px", paddingBottom: "15px" }}>&nbsp;</h3>
-          </div>
-          <div className={`${functionalStyles.Inputlist}`}>
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Street Address</label>
-              <input type="text" placeholder="Last Name" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>
-                City, State, and Zip (Place a comma “,” after the city)
-              </label>
-              <input type="text" placeholder="City, State, and Zip" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Home Phone</label>
-              <input type="text" placeholder="Enter Home Phone" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Home Phone</label>
-              <input type="text" placeholder="Enter Home Phone" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Upload Patient Picture</label>
-              <input type="file" placeholder="Browse File" />
-            </div>
-          </div>
-        </div>
-
-        <div className={`${functionalStyles.Adl_col}`}>
-          <div className={`${functionalStyles.Adl_col_title}`}>
-            <h3 style={{ fontSize: "23px", paddingBottom: "15px" }}>Status</h3>
-          </div>
-          <div className={`${functionalStyles.Inputlist}`}>
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Date of Birth</label>
-              <input type="text" placeholder="Select Birthdate" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Chart Number</label>
-              <input type="text" placeholder="Enter Chart Number" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>SSN</label>
-              <input type="text" placeholder="Enter SSN Number" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Select Gender</label>
-              <input type="text" placeholder="Select Gender" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Marital Status</label>
-              <input type="text" placeholder="Enter Marital Status" />
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-        {/* <Button onClick={props.onHide}>Close</Button> */}
-
-        <button>Save</button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
 function Index() {
-  // const { mutate } = useSWR("/api/patient", fetcher);
-  const { data, mutate } = useSWR("/api/appointment", fetcher);
-  const [modalShow, setModalShow] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const confirmDelete = (id) => {
-    confirmAlert({
-      title: <span style={{ fontSize: "20px" }}>Confirm to Delete Record</span>,
-      message: `Are you sure to do delete this record ?`,
-      buttons: [
-        {
-          label: loading ? "Processing" : "Yes",
-          onClick: async () => {
-            try {
-              const response = await handleDelete(id);
-              console.log(response);
-              mutate();
-            } catch (error) {
-              console.log(error.message);
-            }
-          },
-        },
-        {
-          label: "No",
-          // onClick: () => alert("Click No"),
-        },
-      ],
-    });
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      const response = await fetch("/api/appointment", {
-        method: "DELETE",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ delete_id: id }),
-      });
-
-      return await response.json();
-    } catch (error) {
-      return error;
-    }
-  };
-
   return (
     <Fragment>
       <div
@@ -280,6 +101,7 @@ function Index() {
                   </div>
 
                   <AppointmentList />
+
                   <AppointmentList title="Previous Appointments" />
                 </div>
               </div>
