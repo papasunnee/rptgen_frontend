@@ -12,7 +12,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
 import AppointmentModal from "./appointmentModal";
 
-function appointmentList({ title = "Upcoming Appointments" }) {
+function AppointmentList({ title = "Upcoming Appointments" }) {
   const { data, mutate } = useSWR("/api/appointment", fetcher);
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -166,4 +166,4 @@ function appointmentList({ title = "Upcoming Appointments" }) {
   );
 }
 
-export default appointmentList;
+export default AppointmentList;
