@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import PatientDemographic from "@/models/PatientDemographic";
+import PatientPreAuthorization from "@/models/PatientPreAuthorization";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -11,12 +11,12 @@ export default async function handler(req, res) {
       break;
     case "POST":
       try {
-        const patientDemographic = await PatientDemographic.create(
+        const patientPreAuthorization = await PatientPreAuthorization.create(
           req.body
         ); /* create a new model in the database */
         return res
           .status(201)
-          .json({ success: true, data: patientDemographic });
+          .json({ success: true, data: patientPreAuthorization });
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
       }

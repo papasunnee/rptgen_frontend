@@ -56,6 +56,7 @@ function DemographicForm() {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
+    setSuccessMessage(null);
     const { name, value } = e.target;
 
     setForm((prevValues) => ({
