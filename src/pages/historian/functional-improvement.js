@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
-import Functionalimprovement from "@/components/Functionalimprovement/Functionalimprovement";
+import FuncImprovement from "@/components/Functionalimprovement/Functionalimprovement";
 
-function functionalimprovement() {
+function FunctionalImprovement() {
   return (
     <Fragment>
-      <Functionalimprovement />
+      <FuncImprovement />
     </Fragment>
   );
 }
 
-export default functionalimprovement;
+export default FunctionalImprovement;

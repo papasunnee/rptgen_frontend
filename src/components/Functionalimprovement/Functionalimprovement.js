@@ -25,6 +25,7 @@ import frame47Styles from "../Frame47/Frame47.module.scss";
 import functionalStyles from "./Functionalimprovement.module.scss";
 
 function MyVerticallyCenteredModal(props) {
+  const handleSubmit = () => {};
   return (
     <Modal
       {...props}
@@ -41,112 +42,119 @@ function MyVerticallyCenteredModal(props) {
           Add Functional improvement
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className={`${functionalStyles.Modal_body}`}>
-        <div className={`${functionalStyles.Functionalimprovment_col}`}>
-          <h5>Functional Improvement</h5>
+      <form onSubmit={handleSubmit}>
+        <Modal.Body className={`${functionalStyles.Modal_body}`}>
+          <div className={`${functionalStyles.Functionalimprovment_col}`}>
+            <h5>Functional Improvement</h5>
 
-          <div className={`${functionalStyles.Inputlist}`}>
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <input type="checkbox" />
-              <label>
-                Are you using assisted ambulations or activity aids?
-              </label>
-            </div>
+            <div className={`${functionalStyles.Inputlist}`}>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <input type="checkbox" />
+                <label>
+                  Are you using assisted ambulations or activity aids?
+                </label>
+              </div>
 
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <input type="checkbox" />
-              <label>Do you require assistance at home or at work?</label>
-            </div>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <input type="checkbox" />
+                <label>Do you require assistance at home or at work?</label>
+              </div>
 
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <input type="checkbox" />
-              <label>Is your ongoing care stopped?</label>
-            </div>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <input type="checkbox" />
+                <label>Is your ongoing care stopped?</label>
+              </div>
 
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <input type="checkbox" />
-              <label>Is there a re-injury</label>
-            </div>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <input type="checkbox" />
+                <label>Is there a re-injury</label>
+              </div>
 
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <input type="checkbox" />
-              <label>Do you experience increase is symptoms?</label>
-            </div>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <input type="checkbox" />
+                <label>Do you experience increase is symptoms?</label>
+              </div>
 
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <input type="checkbox" />
-              <label>Sports</label>
-            </div>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <input type="checkbox" />
+                <label>Sports</label>
+              </div>
 
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <input type="checkbox" />
-              <label>Are you taking medication?</label>
-            </div>
-          </div>
-        </div>
-
-        <div className={`${functionalStyles.Adl_col}`}>
-          <h5>Activities of Daily Living (ADL)</h5>
-
-          <div className={`${functionalStyles.Inputlist}`}>
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Phyisical Activity</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Sensory Function</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Non-specialized hand activities</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Travel</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Sexual Function</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Sleep</label>
-              <input type="text" placeholder="Eg. your text here" />
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <input type="checkbox" />
+                <label>Are you taking medication?</label>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className={`${functionalStyles.Adl_col}`}>
-          <h5>Activities of Daily Living (ADL)</h5>
+          <div className={`${functionalStyles.Adl_col}`}>
+            <h5>Activities of Daily Living (ADL)</h5>
 
-          <div className={`${functionalStyles.Inputlist}`}>
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Self-care, personal hygiene</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
+            <div className={`${functionalStyles.Inputlist}`}>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Phyisical Activity</label>
+                <input type="text" placeholder="Eg. your text here" />
+              </div>
 
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Communication</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Sensory Function</label>
+                <input type="text" placeholder="Eg. your text here" />
+              </div>
 
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Description</label>
-              <textarea cols="20" rows="15" placeholder="Eg. your text here" />
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Non-specialized hand activities</label>
+                <input type="text" placeholder="Eg. your text here" />
+              </div>
+
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Travel</label>
+                <input type="text" placeholder="Eg. your text here" />
+              </div>
+
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Sexual Function</label>
+                <input type="text" placeholder="Eg. your text here" />
+              </div>
+
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Sleep</label>
+                <input type="text" placeholder="Eg. your text here" />
+              </div>
             </div>
           </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-        {/* <Button onClick={props.onHide}>Close</Button> */}
 
-        <button>Save</button>
-      </Modal.Footer>
+          <div className={`${functionalStyles.Adl_col}`}>
+            <h5>Activities of Daily Living (ADL)</h5>
+
+            <div className={`${functionalStyles.Inputlist}`}>
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Self-care, personal hygiene</label>
+                <input type="text" placeholder="Eg. your text here" />
+              </div>
+
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Communication</label>
+                <input type="text" placeholder="Eg. your text here" />
+              </div>
+
+              <div className={`${functionalStyles.Inputlist_con}`}>
+                <label>Description</label>
+                <textarea
+                  cols="20"
+                  rows="15"
+                  placeholder="Eg. your text here"
+                />
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
+          {/* <Button onClick={props.onHide}>Close</Button> */}
+
+          <button>Save</button>
+        </Modal.Footer>
+        '
+      </form>
     </Modal>
   );
 }
@@ -169,8 +177,7 @@ function Functionalimprovement(props) {
               <div className={`${frame44Styles.Contentcon} col pt-4`}>
                 <Topnav />
 
-                <div
-                  className={`${frame44Styles.Body}`}>
+                <div className={`${frame44Styles.Body}`}>
                   <div className={`${frame47Styles.Patientsdetails} row`}>
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Functional Improvement</h3>

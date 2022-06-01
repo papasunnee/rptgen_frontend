@@ -144,7 +144,13 @@ function Page({ currentItems = [], handleModal }) {
     <div key={i} className={`${frame44Styles.Appointment}`}>
       <div className={`${frame44Styles.Name}`}>
         <div className={`${frame44Styles.Profilepic}`}>
-          <Image src={profilepic} alt="profile-pic" />
+          <img
+            src={patient.image_url}
+            alt="profile-pic"
+            className="img-fluid"
+            // width="150"
+            // height="150"
+          />
         </div>
 
         <h4>{patient.firstname + " " + patient.lastname}</h4>

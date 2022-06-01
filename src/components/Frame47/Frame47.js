@@ -34,6 +34,7 @@ import functionalStyles from "../Functionalimprovement/Functionalimprovement.mod
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./theme";
 import { GlobalStyles } from "./global";
+import ScheduleAppointment from "../Modals/ScheduleAppointment";
 
 const initialValues = {
   firstname: "",
@@ -56,6 +57,9 @@ function MyVerticallyCenteredModal(props) {
   const [patientData, setPatientData] = useState(initialValues);
   const [success, setSuccess] = useState(false);
   const [processing, setProcessing] = useState(false);
+  const [imageSrc, setImageSrc] = useState();
+  const [uploadData, setUploadData] = useState();
+
   const handleChange = (e) => {
     setSuccess(false);
     const name = e.target.name;
@@ -65,15 +69,63 @@ function MyVerticallyCenteredModal(props) {
       [name]: value,
     }));
   };
+
+  const handleOnChange = (changeEvent) => {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      setImageSrc(onLoadEvent.target.result);
+      setUploadData(undefined);
+    };
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  };
   const handleSubmit = async (e) => {
     setProcessing(true);
     e.preventDefault();
+
+    const formElement = e.currentTarget;
+    const fileInput = Array.from(formElement.elements).find(
+      ({ name }) => name === "image_url"
+    );
+
+    const formData = new FormData();
+
+    for (const file of fileInput.files) {
+      formData.append("file", file);
+    }
+
+    let cloud_image;
+
+    formData.append("upload_preset", "rptgen");
+
+    console.log(fileInput.files.length > 1);
+
+    if (fileInput.files.length > 0) {
+      cloud_image = await fetch(
+        "https://api.cloudinary.com/v1_1/altitude-tech-com/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      ).then((r) => r.json());
+      setImageSrc(cloud_image?.secure_url);
+      setUploadData(cloud_image);
+    }
+
+    console.log({ cloud_image });
+
     try {
       const response = await fetch("/api/patient", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(patientData),
+        body: JSON.stringify({
+          ...patientData,
+          image_url:
+            cloud_image?.secure_url ??
+            "https://res.cloudinary.com/altitude-tech-com/image/upload/v1654090662/rptgen/default.png",
+        }),
       });
       const data = await response.json();
       if (data.success) {
@@ -224,7 +276,18 @@ function MyVerticallyCenteredModal(props) {
                   multiple={false}
                   accept="image/*"
                   name="image_url"
+                  onChange={handleOnChange}
                 />
+              </div>
+              <div
+                style={{
+                  maxWidth: "300px",
+                  border: "1px solid lightgray",
+                  borderRadius: "10px",
+                  overflow: "hidden",
+                }}
+              >
+                <img src={imageSrc} className="img-fluid" />
               </div>
             </div>
           </div>
@@ -239,7 +302,7 @@ function MyVerticallyCenteredModal(props) {
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Date of Birth</label>
                 <input
-                  type="text"
+                  type="date"
                   placeholder="Select Birthdate"
                   required
                   name="birth_date"
@@ -404,18 +467,7 @@ function Frame47() {
                         <h3>Quick Tasks</h3>
                       </div>
 
-                      <div
-                        className={`${frame44Styles.Tab} col-md-3`}
-                        style={{ width: "300px" }}
-                      >
-                        <div className={`${frame44Styles.Image}`}>
-                          <Image src={appointmenticon} alt="icon-img" />
-                        </div>
-
-                        <div className={`${frame44Styles.Content}`}>
-                          <h4>Schedule Appointment</h4>
-                        </div>
-                      </div>
+                      <ScheduleAppointment />
 
                       <div className={`${frame44Styles.Tab} col-md-3`}>
                         <div className={`${frame44Styles.Image}`}>

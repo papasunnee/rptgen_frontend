@@ -45,7 +45,9 @@ const PatientSchema = new mongoose.Schema(
     },
     image_url: {
       type: String,
-      maxlength: [100, "Image URL cannot be more than 20 characters"],
+      default:
+        "https://res.cloudinary.com/altitude-tech-com/image/upload/v1654090662/rptgen/default.png",
+      maxlength: [200, "Image URL cannot be more than 20 characters"],
     },
     birth_date: {
       type: Date,

@@ -28,7 +28,8 @@ export default async function handler(req, res) {
         ) {
           patients = await Patient.find({})
             .limit(perPage)
-            .skip(perPage * page);
+            .skip(perPage * page)
+            .populate("appointments");
         } else {
           patients = await Patient.find({}).populate(
             "appointments"
