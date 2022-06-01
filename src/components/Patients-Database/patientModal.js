@@ -158,9 +158,9 @@ export default function PatientModal(props) {
             <div className={`${functionalStyles.Inputlist_con}`}>
               <label>Date of Birth</label>
               <input
-                type="text"
+                type="date"
                 placeholder="Select Birthdate"
-                value={mData.birt_date}
+                value={mData.birth_date.split("T")[0]}
                 name="birt_date"
                 onChange={handleChange}
               />
