@@ -1835,11 +1835,6 @@ graceful-fs@^4.2.6:
   resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.10.tgz"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
-hamming-distance@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/hamming-distance/-/hamming-distance-1.0.0.tgz#39bfa46c61f39e87421e4035a1be4f725dd7b931"
-  integrity sha512-hYz2IIKtyuZGfOqCs7skNiFEATf+v9IUNSOaQSr6Ll4JOxxWhOvXvc3mIdCW82Z3xW+zUoto7N/ssD4bDxAWoA==
-
 har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/har-schema/-/har-schema-2.0.0.tgz"
@@ -1970,16 +1965,6 @@ ignore@^5.2.0:
   version "5.2.0"
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
   integrity sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
-
-imagekit@^3.2.5:
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/imagekit/-/imagekit-3.2.5.tgz#60c533598b5f3e2427d26f3b2ab0443877ab6960"
-  integrity sha512-uR01ig7Nv5J+uUqMSrnRm/Th6+wAXNJkkr9UU0dB6cH2S2orkhIm4eOXbA1T/wDWZ9FXgbxkbdDcBvCdvuat0w==
-  dependencies:
-    hamming-distance "^1.0.0"
-    lodash "^4.17.15"
-    request "^2.88.0"
-    uuid "^3.3.3"
 
 immutable@^4.0.0:
   version "4.0.0"
@@ -3862,7 +3847,7 @@ util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   resolved "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
-uuid@^3.3.2, uuid@^3.3.3:
+uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==

@@ -153,7 +153,6 @@ function MyVerticallyCenteredModal(props) {
 
           <button>Save</button>
         </Modal.Footer>
-        '
       </form>
     </Modal>
   );
