@@ -31,9 +31,9 @@ export default async function handler(req, res) {
             .skip(perPage * page)
             .populate("appointments");
         } else {
-          patients = await Patient.find({}).populate({
-            path: "appointments",
-          }); /* find all the data in our database */
+          patients = await Patient.find().populate(
+            "appointments"
+          ); /* find all the data in our database */
         }
         const recentPatient = await Patient.findOne(
           {},
