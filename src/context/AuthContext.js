@@ -45,9 +45,7 @@ const AuthProvider = (props) => {
     setLoading(true);
     const response = await fetch("/api/logout", { method: "POST" });
     const data = await response.json();
-    // if (data.success) {
-    //   setUser(null);
-    // }
+    console.log({ data });
     setLoading(false);
     return data;
   };

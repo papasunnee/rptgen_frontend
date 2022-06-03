@@ -9,6 +9,7 @@ import { fetcher } from "@/context/AuthContext";
 
 function PatientStat() {
   const { data, error, isValidating, mutate } = useSWR("/api/patient", fetcher);
+  console.log({ patientdata: data });
   return (
     <div className={`${frame44Styles.Tab} col-md-3`}>
       <div className={`${frame44Styles.Image}`}>
