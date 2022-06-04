@@ -86,7 +86,7 @@ function Index() {
                       </div>
                     </span>
                   </div>
-                  <PatientList />
+                  {/* <PatientList /> */}
                 </div>
               </div>
             </main>

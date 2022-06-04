@@ -6,9 +6,12 @@ import functionalStyles from "../Functionalimprovement/Functionalimprovement.mod
 export default function PatientModal(props) {
   const { modaldata = {} } = props;
   const [mData, setMData] = useState(modaldata);
-  useEffect(() => {
-    setMData(modaldata);
-  });
+  // useEffect(() => {
+  //   setMData(modaldata);
+  //   return () => {
+  //     setMData({});
+  //   };
+  // });
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -16,6 +19,7 @@ export default function PatientModal(props) {
       ...prevValues,
       [name]: value,
     }));
+    console.log(mData);
   };
   return (
     <Modal
@@ -46,14 +50,14 @@ export default function PatientModal(props) {
               <input
                 type="text"
                 placeholder="Last Name"
-                value={mData.lastname}
+                defaultValue={mData.lastname}
                 name="lastname"
                 onChange={handleChange}
               />
             </div>
 
             <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Patient Last Name</label>
+              <label>Patient First Name</label>
               <input
                 type="text"
                 placeholder="First Name"
