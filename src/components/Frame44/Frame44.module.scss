@@ -1,3 +1,9 @@
+.Heightadjust {
+  // border: 3px solid red !important;
+
+  // flex-wrap: nowrap;
+}
+
 .Contentcon {
   padding: 0 !important;
 
@@ -10,11 +16,11 @@
     // height: 100vh;
 
     .Toptabs {
-      justify-content: space-between;
+      justify-content: left;
 
       .Tab {
         padding: 20px;
-        width: 250px;
+        width: 240px;
 
         display: flex;
         align-items: center;
@@ -29,6 +35,7 @@
         border-radius: 8px;
 
         margin-bottom: 3%;
+        margin-right: 2%;
 
         // .Image {
         //   img {
@@ -102,6 +109,10 @@
           }
         }
       }
+    }
+
+    .Chartstyle {
+      border: 3px solid green;
     }
 
     .Appointment_activity {
@@ -229,11 +240,11 @@
   }
 }
 
-// @media (min-width: 575px) {
-//   .Heightadjust {
-//     border: 3px solid blue;
-//   }
-// }
+@media (min-width: 1544px) {
+  .Heightadjust {
+    flex-wrap: nowrap;
+  }
+}
 
 @media (max-width: 778px) {
   .Tab {

@@ -162,12 +162,6 @@ function Sidenav() {
                 </li>
 
                 <li className={`w-100`}>
-                  <a className={`${frame34Styles.Navlink} px-0`}>
-                    <div className={`d-sm-inline`}>Specific Accident</div>
-                  </a>
-                </li>
-
-                <li className={`w-100`}>
                   <Link href="/historian/cumulative-trauma">
                     <a className={`${frame34Styles.Navlink} px-0`}>
                       <div className={`d-sm-inline`}>Cummulative Trauma</div>
@@ -175,11 +169,6 @@ function Sidenav() {
                   </Link>
                 </li>
 
-                <li className={`w-100`}>
-                  <a className={`${frame34Styles.Navlink} px-0`}>
-                    <div className={`d-sm-inline`}>MPN</div>
-                  </a>
-                </li>
               </ul>
             </li>
 

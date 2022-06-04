@@ -337,26 +337,36 @@ function MyVerticallyCenteredModal(props) {
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Select Gender</label>
-                <input
+                <select>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                {/* <input
                   type="text"
                   placeholder="Select Gender"
                   required
                   name="gender"
                   value={patientData.gender}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Marital Status</label>
-                <input
+                <select>
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                  <option value="widowed">Widowed</option>
+                  <option value="divorced">Divorced</option>
+                </select>
+                {/* <input
                   type="text"
                   placeholder="Enter Marital Status"
                   required
                   name="marital_status"
                   value={patientData.marital_status}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -386,119 +396,116 @@ function Frame47() {
   };
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <Fragment>
-        <GlobalStyles />
+    <Fragment>
+      <div
+        className={`${frame44Styles.Frame34} container-fluid overflow-hidden`}
+      >
+        <MyVerticallyCenteredModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
         <div
-          className={`${frame44Styles.Frame34} container-fluid overflow-hidden`}
+          className={`${frame44Styles.Heightadjust} row vh-100 overflow-auto`}
         >
-          <MyVerticallyCenteredModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-          <div
-            className={`${frame44Styles.Heightadjust} row vh-100 overflow-auto`}
-          >
-            <Sidenav className={`${frame44Styles.Sidebar} container-fluid`} />
+          <Sidenav className={`${frame44Styles.Sidebar} container-fluid`} />
 
-            <div className={`col d-flex flex-column h-sm-100`}>
-              <main className={`row overflow-auto`}>
-                <div className={`${frame44Styles.Contentcon} col pt-4`}>
-                  <Topnav />
+          <div className={`col d-flex flex-column h-sm-100`}>
+            <main className={`row overflow-auto`}>
+              <div className={`${frame44Styles.Contentcon} col pt-4`}>
+                <Topnav />
 
-                  <div className={`${frame44Styles.Body}`}>
-                    <div className={`${frame47Styles.Patientsdetails} row`}>
-                      <div className={`${frame47Styles.Top}`}>
-                        <h3>Patients Details</h3>
+                <div className={`${frame44Styles.Body}`}>
+                  <div className={`${frame47Styles.Patientsdetails} row`}>
+                    <div className={`${frame47Styles.Top}`}>
+                      <h3>Patients Details</h3>
 
+                      <div
+                        className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
+                      >
                         <div
-                          className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
+                          className={`${frame47Styles.Inputgroup_text} input-group-text`}
+                          id="addon-wrapping"
                         >
-                          <div
-                            className={`${frame47Styles.Inputgroup_text} input-group-text`}
-                            id="addon-wrapping"
-                          >
-                            <BsSearch />
-                          </div>
-                          <input
-                            type="text"
-                            className={`form-control`}
-                            placeholder="Search Category, Patient Info etc"
-                            aria-label="Username"
-                            aria-describedby="addon-wrapping"
-                          />
+                          <BsSearch />
                         </div>
-                      </div>
-
-                      <div className={`${frame47Styles.Details}`}>
-                        <div className={`${frame47Styles.Namecont}`}>
-                          <div className={`${frame47Styles.Profilepic}`}>
-                            <Image src={profilepic} alt="profile-pic" />
-                          </div>
-
-                          <div className={`${frame47Styles.Name}`}>
-                            <h4 className={`${frame47Styles.Bigname}`}>
-                              Gerson Basconcillo
-                            </h4>
-                            <h5>See Patient info</h5>
-                          </div>
-                        </div>
-
-                        <div className={`${frame47Styles.Namecont}`}>
-                          <h4>Address: 46 Amity Ext, Paranaque City</h4>
-                        </div>
-
-                        <div className={`${frame47Styles.Namecont}`}>
-                          <h4>Contact +7 (4812) 11-22-33</h4>
-                        </div>
-
-                        <div className={`${frame47Styles.Namecont}`}>
-                          <h4>Birthdate: 06/45/1990</h4>
-                        </div>
-
-                        <div className={`${frame47Styles.Namecont}`}>
-                          <h4>Age: 32</h4>
-                        </div>
+                        <input
+                          type="text"
+                          className={`form-control`}
+                          placeholder="Search Category, Patient Info etc"
+                          aria-label="Username"
+                          aria-describedby="addon-wrapping"
+                        />
                       </div>
                     </div>
 
-                    <div className={`${frame44Styles.Toptabs} row`}>
-                      <div className={`${frame47Styles.Toptabs_title}`}>
-                        <h3>Quick Tasks</h3>
-                      </div>
-
-                      <ScheduleAppointment />
-
-                      <div className={`${frame44Styles.Tab} col-md-3`}>
-                        <div className={`${frame44Styles.Image}`}>
-                          <Image src={newpatientsicon} alt="icon-img" />
+                    <div className={`${frame47Styles.Details}`}>
+                      <div className={`${frame47Styles.Namecont}`}>
+                        <div className={`${frame47Styles.Profilepic}`}>
+                          <Image src={profilepic} alt="profile-pic" />
                         </div>
 
-                        <div className={`${frame44Styles.Content}`}>
-                          <h4>Add Complaint</h4>
+                        <div className={`${frame47Styles.Name}`}>
+                          <h4 className={`${frame47Styles.Bigname}`}>
+                            Gerson Basconcillo
+                          </h4>
+                          <h5>See Patient info</h5>
                         </div>
                       </div>
 
-                      <div className={`${frame44Styles.Tab} col-md-3`}>
-                        <div className={`${frame44Styles.Image}`}>
-                          <Image src={appointmenticon} alt="icon-img" />
-                        </div>
+                      <div className={`${frame47Styles.Namecont}`}>
+                        <h4>Address: 46 Amity Ext, Paranaque City</h4>
+                      </div>
 
-                        <div className={`${frame44Styles.Content}`}>
-                          <h4>Operations</h4>
-                        </div>
+                      <div className={`${frame47Styles.Namecont}`}>
+                        <h4>Contact +7 (4812) 11-22-33</h4>
+                      </div>
+
+                      <div className={`${frame47Styles.Namecont}`}>
+                        <h4>Birthdate: 06/45/1990</h4>
+                      </div>
+
+                      <div className={`${frame47Styles.Namecont}`}>
+                        <h4>Age: 32</h4>
                       </div>
                     </div>
-
-                    <PatientList />
                   </div>
+
+                  <div className={`${frame44Styles.Toptabs} row`}>
+                    <div className={`${frame47Styles.Toptabs_title}`}>
+                      <h3>Quick Tasks</h3>
+                    </div>
+
+                    <ScheduleAppointment />
+
+                    <div className={`${frame44Styles.Tab} col-md-3`}>
+                      <div className={`${frame44Styles.Image}`}>
+                        <Image src={newpatientsicon} alt="icon-img" />
+                      </div>
+
+                      <div className={`${frame44Styles.Content}`}>
+                        <h4>Add Complaint</h4>
+                      </div>
+                    </div>
+
+                    <div className={`${frame44Styles.Tab} col-md-3`}>
+                      <div className={`${frame44Styles.Image}`}>
+                        <Image src={appointmenticon} alt="icon-img" />
+                      </div>
+
+                      <div className={`${frame44Styles.Content}`}>
+                        <h4>Operations</h4>
+                      </div>
+                    </div>
+                  </div>
+
+                  <PatientList />
                 </div>
-              </main>
-            </div>
+              </div>
+            </main>
           </div>
         </div>
-      </Fragment>
-    </ThemeProvider>
+      </div>
+    </Fragment>
   );
 }
 

@@ -109,6 +109,7 @@ function Frame44() {
                       </div>
 
                       <Line
+                        className={`Chartstyle`}
                         data={state}
                         options={{
                           title: {

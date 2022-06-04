@@ -40,6 +40,17 @@
     .Navitemdropdown {
       .Navitemcollapse {
         border: none;
+        min-width: 12.5rem;
+
+        li {
+          &:hover {
+            background-color: #558eff;
+
+            a {
+              color: #fff;
+            }
+          }
+        }
       }
       a {
         color: #a2a4b9;

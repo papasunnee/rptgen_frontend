@@ -4,11 +4,11 @@ const MONGO_USER = process.env.MONGO_USER;
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 const MONGO_DB = process.env.MONGO_DB;
 
-if (!MONGO_USER || !MONGO_PASSWORD || !MONGO_DB) {
-  throw new Error(
-    "Please ensure  you define MONGODB_USER, MONGO_PASSWORD and MONGO_DB environment variable inside .env.local"
-  );
-}
+// if (!MONGO_USER || !MONGO_PASSWORD || !MONGO_DB) {
+//   throw new Error(
+//     "Please ensure  you define MONGODB_USER, MONGO_PASSWORD and MONGO_DB environment variable inside .env.local"
+//   );
+// }
 
 // const MONGODB_URI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.zc4np.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`;
 const MONGODB_URI = `mongodb+srv://admin:ZmLNglOVPL5S321v@cluster0.sk7hl1g.mongodb.net/rptgen_app?retryWrites=true&w=majority`;
