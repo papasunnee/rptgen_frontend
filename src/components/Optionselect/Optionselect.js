@@ -42,19 +42,12 @@ function Optionselect() {
             </div>
 
             <div className={`${optionselectStyles.Content}`}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.{" "}
-              </p>
+              <p>Look up information on existing patients in the database</p>
             </div>
 
             <div className={`${optionselectStyles.Button}`}>
-              <Link href="existing-patients">
-                <a>Start</a>
+              <Link href="/existing-patients">
+                <a>Next</a>
               </Link>
             </div>
           </div>
@@ -69,14 +62,7 @@ function Optionselect() {
             </div>
 
             <div className={`${optionselectStyles.Content}`}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.{" "}
-              </p>
+              <p>Create a new patient record in the database.</p>
             </div>
 
             <div className={`${optionselectStyles.Button}`}>
