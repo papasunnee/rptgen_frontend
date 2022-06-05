@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { BsSearch } from "react-icons/bs";
 
@@ -37,10 +38,8 @@ function Index() {
               <div className={`${frame44Styles.Contentcon} col pt-4`}>
                 <Topnav />
 
-                <div
-                  className={`${frame44Styles.Body}`}>
-                  <div
-                    className={`${frame47Styles.Patientsdetails} row`}>
+                <div className={`${frame44Styles.Body}`}>
+                  <div className={`${frame47Styles.Patientsdetails} row`}>
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Treatment Plan</h3>
 
@@ -102,13 +101,15 @@ function Index() {
                       </div>
 
                       <div className={`${planStyles.Cardcon}`}>
-                        <a href="/doctor/treatment-plan/xray" className={`${planStyles.Card}`}>
-                          <h4>X-Ray</h4>
+                        <Link href="/doctor/treatment-plan/xray">
+                          <a className={`${planStyles.Card}`}>
+                            <h4>X-Ray</h4>
 
-                          {/* <p>2 Items</p> */}
+                            {/* <p>2 Items</p> */}
 
-                          <p>2 Items</p>
-                        </a>
+                            <p>2 Items</p>
+                          </a>
+                        </Link>
 
                         <a href="" className={`${planStyles.Card} col-md-4`}>
                           <h4>FUNCTIONAL RESTORATION</h4>
