@@ -52,7 +52,7 @@ function MyVerticallyCenteredModal(props) {
           </div>
 
           <div className={`${descriptionStyles.Tab}`}>
-            <h4>Activity (Hours per day)</h4>
+            <h4 style={{ color: "#336CFB" }}>Activity (Hours per day)</h4>
           </div>
 
           <div className={`${descriptionStyles.Tab}`}>
@@ -177,7 +177,7 @@ function Jobdescription() {
                   className={`${frame44Styles.Body}`}>
                   <div className={`${frame47Styles.Patientsdetails} row`}>
                     <div className={`${frame47Styles.Top}`}>
-                      <h3>Patients Details</h3>
+                      <h3>Job Description</h3>
 
                       <div
                         className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}

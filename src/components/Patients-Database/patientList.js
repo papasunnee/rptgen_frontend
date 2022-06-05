@@ -54,34 +54,30 @@ export default function PatientList() {
         </h3>
       </div>
 
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
+      <table className={`${frame44Styles.Appointmentlist_section} table`}>
+        {data?.data?.patients?.length > 0 && (
+          <thead>
+            <tr className={`${frame44Styles.Appointmentlist_title}`}>
+              <th scope="col">Name</th>
+              {/* <th className={`${frame44Styles.Name}`}>
+                <h4>Name</h4>
+              </th> */}
+              <th scope="col">Email</th>
+              <th scope="col">Date</th>
+              <th scope="col">Visit Time</th>
+              <th scope="col">Doctor</th>
+              <th scope="col">Conditions</th>
+              <th scope="col">&nbsp;</th>
+            </tr>
+            {/* <PaginatedPatient handleModal={handleModal} /> */}
+          </thead>
+        )}
+        <PatientModal
+          show={modalShow}
+          modaldata={modalData}
+          onHide={() => setModalShow(false)}
+        />
+
       </table>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>
@@ -174,8 +170,8 @@ function Page({ currentItems = [], handleModal }) {
     });
   };
   return currentItems.map((patient, i) => (
-    <div key={i} className={`${frame44Styles.Appointment}`}>
-      <div className={`${frame44Styles.Name}`}>
+    <tbody key={i} className={`${frame44Styles.Appointment}`}>
+      {/* <div className={`${frame44Styles.Name}`}>
         <div className={`${frame44Styles.Profilepic}`}>
           <img
             src={patient.image_url}
@@ -187,11 +183,25 @@ function Page({ currentItems = [], handleModal }) {
         </div>
 
         <h4>{patient.firstname + " " + patient.lastname}</h4>
-      </div>
+      </div> */}
 
-      <div className={`${frame44Styles.Name}`}>
-        <h4>{patient.email}</h4>
-      </div>
+      <tr className={`${frame44Styles.Name}`}>
+        <div className={`${frame44Styles.Profilepic}`}>
+          <img
+            src={patient.image_url}
+            alt="profile-pic"
+            className="img-fluid"
+          // width="150"
+          // height="150"
+          />
+        </div>
+
+        <td>{patient.firstname + " " + patient.lastname}</td>
+      </tr>
+
+      <tr className={`${frame44Styles.Name}`}>
+        <td>{patient.email}</td>
+      </tr>
 
       <div className={`${frame44Styles.Name}`}>
         <h4>{moment(patient.created_at).format("MMM Do YYYY")}</h4>
@@ -223,7 +233,7 @@ function Page({ currentItems = [], handleModal }) {
           onClick={() => confirmDelete(patient._id)}
         />
       </div>
-    </div>
+    </tbody>
   ));
 }
 

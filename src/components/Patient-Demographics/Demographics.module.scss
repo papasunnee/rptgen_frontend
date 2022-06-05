@@ -8,11 +8,19 @@
 
   background: #f6f8fb;
 
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+
+  z-index: 1;
+
   .Tab {
-    h4 {
+    a {
       font-size: 14px;
       font-weight: 700;
       color: #52575c;
+
+      text-decoration: none;
     }
   }
 }
@@ -54,7 +62,6 @@
 
             font-weight: bold;
             border: 1px solid #cfd0d7;
-            border-right: none;
           }
 
           input {
@@ -62,7 +69,6 @@
             outline: none;
 
             border: 1px solid #cfd0d7;
-            border-left: none;
             border-radius: 2px;
           }
         }

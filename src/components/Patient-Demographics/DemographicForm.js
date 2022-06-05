@@ -88,7 +88,7 @@ function DemographicForm() {
   };
   return (
     <form className={`${demographicsStyles.Form}`} onSubmit={handleSubmit}>
-      <div className={`${demographicsStyles.Header_section}`}>
+      <div id="headerinfo" className={`${demographicsStyles.Header_section}`}>
         <h3>Header Information</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -98,9 +98,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -121,9 +119,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                $
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -144,9 +140,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -163,7 +157,7 @@ function DemographicForm() {
         </div>
       </div>
 
-      <div className={`${demographicsStyles.Header_section}`}>
+      <div id="insuranceinfo" className={`${demographicsStyles.Header_section}`}>
         <h3>Insurance Information</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -173,9 +167,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -196,9 +188,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -219,9 +209,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -244,9 +232,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -267,9 +253,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -290,9 +274,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -315,9 +297,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -334,7 +314,7 @@ function DemographicForm() {
         </div>
       </div>
 
-      <div className={`${demographicsStyles.Header_section}`}>
+      <div id="accountRep" className={`${demographicsStyles.Header_section}`}>
         <h3>Account Representative</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -344,9 +324,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -367,9 +345,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                $
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -386,7 +362,7 @@ function DemographicForm() {
         </div>
       </div>
 
-      <div className={`${demographicsStyles.Header_section}`}>
+      <div id="applicantAttorney" className={`${demographicsStyles.Header_section}`}>
         <h3>Applicant Attorney</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -396,9 +372,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -419,9 +393,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -442,9 +414,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -467,9 +437,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -490,9 +458,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -509,7 +475,7 @@ function DemographicForm() {
         </div>
       </div>
 
-      <div className={`${demographicsStyles.Header_section}`}>
+      <div id="defenceAttorney" className={`${demographicsStyles.Header_section}`}>
         <h3>Defence Attorney</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -519,9 +485,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -542,9 +506,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -565,9 +527,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -590,9 +550,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -613,9 +571,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -632,7 +588,7 @@ function DemographicForm() {
         </div>
       </div>
 
-      <div className={`${demographicsStyles.Header_section}`}>
+      <div id="wcab" className={`${demographicsStyles.Header_section}`}>
         <h3>WCAB</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -642,9 +598,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -665,9 +619,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -688,9 +640,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -713,9 +663,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -736,9 +684,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -759,9 +705,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -777,7 +721,8 @@ function DemographicForm() {
           </div>
         </div>
       </div>
-      <div className={`${demographicsStyles.Header_section}`}>
+
+      <div id="referringPhysician" className={`${demographicsStyles.Header_section}`}>
         <h3>Referring Physician</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -787,9 +732,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -810,9 +753,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -833,9 +774,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -858,9 +797,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -881,9 +818,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -904,9 +839,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -923,7 +856,7 @@ function DemographicForm() {
         </div>
       </div>
 
-      <div className={`${demographicsStyles.Header_section}`}>
+      <div id="employer" className={`${demographicsStyles.Header_section}`}>
         <h3>Employer</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -933,9 +866,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -956,9 +887,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -979,9 +908,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1004,9 +931,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1027,9 +952,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1050,9 +973,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1068,7 +989,8 @@ function DemographicForm() {
           </div>
         </div>
       </div>
-      <div className={`${demographicsStyles.Header_section}`}>
+
+      <div id="interpreter" className={`${demographicsStyles.Header_section}`}>
         <h3>Interpreter</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -1078,9 +1000,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1101,9 +1021,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1124,9 +1042,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1149,9 +1065,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1172,9 +1086,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1195,9 +1107,7 @@ function DemographicForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -1213,6 +1123,7 @@ function DemographicForm() {
           </div>
         </div>
       </div>
+
       <p>{successMessage}</p>
       <div className={`${demographicsStyles.Button}`}>
         <button disabled={loading}>

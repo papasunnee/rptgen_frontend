@@ -26,19 +26,19 @@ function Index() {
   return (
     <Fragment>
       <div
-        className={`${frame44Styles.Frame34} container-fluid overflow-hidden`}
+        className={`${frame44Styles.Frame34} container-fluid`}
       >
         <div
-          className={`${frame44Styles.Heightadjust} row vh-100 overflow-auto`}
+          className={`${frame44Styles.Heightadjust} row vh-100`}
         >
           <Sidenav className={`${frame44Styles.Sidebar} container-fluid`} />
 
           <div className={`col d-flex flex-column h-sm-100`}>
-            <main className={`row overflow-auto`}>
+            <main className={`row`}>
               <div className={`${frame44Styles.Contentcon} col pt-4`}>
                 <Topnav />
 
-                <div className={`${frame44Styles.Body}`}>
+                <div className={`${frame44Styles.Body}`} style={{ position: "relative" }}>
                   <div className={`${frame47Styles.Patientsdetails} row`}>
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Patient Demographics</h3>
@@ -96,31 +96,31 @@ function Index() {
 
                   <div className={`${demographicsStyles.Formtab_titles}`}>
                     <div className={`${demographicsStyles.Tab}`}>
-                      <h4>Header Information</h4>
+                      <a href="#headerinfo">Header Information</a>
                     </div>
 
                     <div className={`${demographicsStyles.Tab}`}>
-                      <h4>Insurance Information</h4>
+                      <a href="#insuranceinfo">Insurance Information</a>
                     </div>
 
                     <div className={`${demographicsStyles.Tab}`}>
-                      <h4>Account Representative</h4>
+                      <a href="#accountRep"> Account Representative</a>
                     </div>
 
                     <div className={`${demographicsStyles.Tab}`}>
-                      <h4>Applicant Attorney</h4>
+                      <a href="#applicantAttorney"> Applicant Attorney</a>
                     </div>
 
                     <div className={`${demographicsStyles.Tab}`}>
-                      <h4>Defense Attorney</h4>
+                      <a href="#defenceAttorney"> Defense Attorney</a>
                     </div>
 
                     <div className={`${demographicsStyles.Tab}`}>
-                      <h4>WCAB</h4>
+                      <a href="#wcab"> WCAB</a>
                     </div>
 
                     <div className={`${demographicsStyles.Tab}`}>
-                      <h4>Referring Physician</h4>
+                      <a href="#referringPhysician"> Referring Physician</a>
                     </div>
                   </div>
 

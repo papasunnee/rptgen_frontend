@@ -90,7 +90,7 @@ function AppointmentModal(props) {
   return (
     <Modal
       {...props}
-      size="xl"
+      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className={`${functionalStyles.Modal}`}
@@ -104,7 +104,7 @@ function AppointmentModal(props) {
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit}>
-        <Modal.Body className={`${functionalStyles.Modal_body}`}>
+        <Modal.Body className={`${functionalStyles.Modal_body}`} style={{ display: "block", padding: "20px 60px" }}>
           <div className={`${functionalStyles.Adl_col}`}>
             <div className={`${functionalStyles.Adl_col_title}`}>
               <h3 style={{ fontSize: "23px", paddingBottom: "15px" }}>

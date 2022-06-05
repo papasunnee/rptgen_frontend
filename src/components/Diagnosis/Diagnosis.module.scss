@@ -8,13 +8,23 @@
 
   background: #f6f8fb;
 
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+
+  z-index: 1;
+
   .Tab {
-    h4 {
+    a {
       font-size: 14px;
       font-weight: 700;
       color: #52575c;
 
       padding-right: 20px;
+
+      text-decoration: none;
+
+      scroll-behavior: smooth;
     }
   }
 }
