@@ -54,7 +54,7 @@ export default function PatientList() {
         </h3>
       </div>
 
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -122,7 +122,10 @@ export default function PatientList() {
         <PatientModal
           show={modalShow}
           modaldata={modalData}
-          onHide={() => setModalShow(false)}
+          onHide={() => {
+            setModalShow(false);
+            
+          }}
         />
       </div>
     </div>
@@ -178,8 +181,8 @@ function Page({ currentItems = [], handleModal }) {
             src={patient.image_url}
             alt="profile-pic"
             className="img-fluid"
-          // width="150"
-          // height="150"
+            // width="150"
+            // height="150"
           />
         </div>
 
