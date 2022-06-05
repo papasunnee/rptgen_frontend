@@ -2,6 +2,9 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import 'bootstrap/dist/css/bootstrap.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 import logoimg from "@/images/logo.png";
 import overviewicon from "@/images/overview-icon.png";
 import acupunctureicon from "@/images/acupuncture-icon.png";
@@ -16,12 +19,25 @@ import { useRouter } from "next/router";
 function Sidenav() {
   const { logout } = useAuth();
   const router = useRouter();
+
   const handleLogout = async (event) => {
     event.preventDefault();
     await logout();
     router.push("/");
     return;
   };
+
+  function openNav() {
+    document.getElementById("link").style.backgroundColor = "red";
+
+    // If localStorage is supported by the browser
+    if (typeof (Storage) !== "undefined") {
+      // Save the state of the sidebar as "open"
+      localStorage.setItem("sidebar", "opened");
+    }
+  }
+
+
   return (
     <Fragment>
       <span
@@ -52,62 +68,39 @@ function Sidenav() {
               </Link>
             </li>
 
-            <li className={`${frame34Styles.Navitemdropdown} dropdown`}>
-              <a
-                href="#patientsmenu"
-                className={`${frame34Styles.Navlink} nav-link dropdown-toggle px-sm-0 px-1`}
-                id="dropdown"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <Image src={overviewicon} alt="overview-icon" />{" "}
-                <div className={`ms-1 d-none d-sm-inline`}>Patients</div>
-              </a>
+            <Dropdown className="d-inline" autoClose={false}>
+              <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
+                <Image src={overviewicon} alt="overview-icon" />
+                &nbsp; Patients
+              </Dropdown.Toggle>
 
-              <ul
-                className={`${frame34Styles.Navitemcollapse} dropdown-menu text-small`}
-                id="patientsmenu"
-                aria-labelledby="dropdown"
-              >
-                <li className={`w-100`}>
+              <Dropdown.Menu>
+                <Dropdown.Item href="#">
                   <Link href="/patient/database">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      {" "}
-                      <div className={`d-sm-inline`}>Patient Database</div>
+                    >Patient Database
                     </a>
                   </Link>
-                </li>
-
-                <li className={`w-100`}>
+                </Dropdown.Item>
+                <Dropdown.Item href="#">
                   <Link href="/patient/appoinments">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a className={`${frame34Styles.Navlink} dropdown-item px-0 px-0`}>
                       <div className={`d-sm-inline`}>Appoinments</div>
                     </a>
                   </Link>
-                </li>
-              </ul>
-            </li>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
 
-            <li className={`${frame34Styles.Navitemdropdown} dropdown`}>
-              <a
-                href="#historianmenu"
-                className={`${frame34Styles.Navlink} nav-link dropdown-toggle px-sm-0 px-1`}
-                id="dropdown"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <Image src={historianicon} alt="historian-icon" />{" "}
-                <div className={`ms-1 d-none d-sm-inline`}>Historian</div>
-              </a>
+            <Dropdown className="d-inline" autoClose={false}>
+              <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
+                <Image src={historianicon} alt="historian-icon" />
+                &nbsp; Historian
+              </Dropdown.Toggle>
 
-              <ul
-                className={`${frame34Styles.Navitemcollapse} dropdown-menu text-small`}
-                id="historianmenu"
-                aria-labelledby="dropdown"
-              >
-                <li className={`w-100`}>
+              <Dropdown.Menu>
+                <Dropdown.Item href="#">
                   <Link href="/historian/demographics">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -115,81 +108,81 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Patient Demographics</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/historian/pre-authorization">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Pre-authorization</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+
+                <Dropdown.Item href="#">
                   <Link href="/historian/functional-improvement">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
-                      <div className={`d-sm-inline`}>
-                        Functional Improvement
-                      </div>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
+                      <div className={`d-sm-inline`}>Functional Improvement</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/historian/job-description">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Job Description</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
-                  <a
-                    href="present-complaints"
-                    className={`${frame34Styles.Navlink} px-0`}
-                  >
-                    {" "}
-                    <div className={`d-sm-inline`}>Complaints</div>
-                  </a>
-                </li>
+                <Dropdown.Item href="#">
+                  <Link href="present-complaints">
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
+                      <div className={`d-sm-inline`}>Complaints</div>
+                    </a>
+                  </Link>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/historian/past-medical-history">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Medical History</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/historian/cumulative-trauma">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Cummulative Trauma</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-              </ul>
-            </li>
 
-            <li className={`${frame34Styles.Navitemdropdown} dropdown`}>
-              <a
-                href="#historianmenu"
-                className={`${frame34Styles.Navlink} nav-link dropdown-toggle px-sm-0 px-1`}
-                id="dropdown"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <Image src={doctorsicon} alt="doctors-icon" />{" "}
-                <div className={`ms-1 d-none d-sm-inline`}>Doctors</div>
-              </a>
+              </Dropdown.Menu>
+            </Dropdown>
 
-              <ul
-                className={`${frame34Styles.Navitemcollapse} dropdown-menu text-small`}
-                id="historianmenu"
-                aria-labelledby="dropdown"
-              >
-                <li className={`w-100`}>
+            <Dropdown className="d-inline" autoClose={false}>
+              <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
+                <Image src={doctorsicon} alt="doctors-icon" />
+                &nbsp; Doctors
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#">
                   <Link href="/doctor/diagnosis">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -197,65 +190,92 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Diagnosis</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/doctor/upload-records">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Upload Record</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+
+                <Dropdown.Item href="#">
                   <Link href="/doctor/physical-evaluation">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Physical Evaluation</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/doctor/mil-evaluation">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>MIL Evaluation</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
+                  <Link href="present-complaints">
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
+                      <div className={`d-sm-inline`}>Complaints</div>
+                    </a>
+                  </Link>
+                </Dropdown.Item>
+
+                <Dropdown.Item href="#">
                   <Link href="/doctor/superbills">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Superbills</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/doctor/workstatus">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Work Status</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/doctor/treatment-plan">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Treatment Plan</div>
                     </a>
                   </Link>
-                </li>
+                </Dropdown.Item>
 
-                <li className={`w-100`}>
+                <Dropdown.Item href="#">
                   <Link href="/doctor/bill-reduction">
-                    <a className={`${frame34Styles.Navlink} px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >
                       <div className={`d-sm-inline`}>Bill Reduction</div>
                     </a>
                   </Link>
-                </li>
-              </ul>
-            </li>
+                </Dropdown.Item>
+
+
+              </Dropdown.Menu>
+            </Dropdown>
 
             <li className={`${frame34Styles.Navitem}`}>
               <a className={`${frame34Styles.Navlink} align-middle px-0`}>
