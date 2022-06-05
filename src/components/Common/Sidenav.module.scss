@@ -132,6 +132,10 @@
   justify-content: space-between;
   text-decoration: none;
 
+  .Dropdownmenu {
+    min-width: 13rem;
+  }
+
   &:hover,
   &:focus,
   &:active {
@@ -146,6 +150,8 @@
     &:focus,
     &:hover {
       background: #558eff;
+
+      color: #fff;
     }
   }
 
