@@ -36,8 +36,7 @@ function Optionselect() {
             className={`${optionselectStyles.Existingpatientstab} col-md-11`}
           >
             <div className={`${optionselectStyles.Tabtitle}`}>
-              <h4>Look up information on
-                existing patients in the database</h4>
+              <h4>Look up information on existing patients in the database</h4>
 
               <Image src={useraccounticon} alt="useraccount-icon" />
             </div>
@@ -47,7 +46,7 @@ function Optionselect() {
             </div>
 
             <div className={`${optionselectStyles.Button}`}>
-              <Link href="existing-patients">
+              <Link href="/patient/database">
                 <a>Next</a>
               </Link>
             </div>
@@ -57,8 +56,7 @@ function Optionselect() {
             className={`${optionselectStyles.Existingpatientstab} col-md-11`}
           >
             <div className={`${optionselectStyles.Tabtitle}`}>
-              <h4>Create a new patient record in
-                the database.</h4>
+              <h4>Create a new patient record in the database.</h4>
 
               <Image src={useraccounticon} alt="useraccount-icon" />
             </div>

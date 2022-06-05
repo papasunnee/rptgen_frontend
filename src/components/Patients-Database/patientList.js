@@ -77,7 +77,6 @@ export default function PatientList() {
           modaldata={modalData}
           onHide={() => setModalShow(false)}
         />
-
       </table>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>
@@ -118,7 +117,9 @@ export default function PatientList() {
         <PatientModal
           show={modalShow}
           modaldata={modalData}
-          onHide={() => setModalShow(false)}
+          onHide={() => {
+            setModalShow(false);
+          }}
         />
       </div>
     </div>
@@ -174,8 +175,8 @@ function Page({ currentItems = [], handleModal }) {
             src={patient.image_url}
             alt="profile-pic"
             className="img-fluid"
-          // width="150"
-          // height="150"
+            // width="150"
+            // height="150"
           />
         </div>
 
@@ -188,8 +189,8 @@ function Page({ currentItems = [], handleModal }) {
             src={patient.image_url}
             alt="profile-pic"
             className="img-fluid"
-          // width="150"
-          // height="150"
+            // width="150"
+            // height="150"
           />
         </div>
 

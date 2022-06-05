@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Patient from "./Patient";
 
 /* AppointmentSchema will correspond to a collection in your MongoDB database. */
 
