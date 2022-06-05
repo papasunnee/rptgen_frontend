@@ -108,21 +108,27 @@ function Frame44() {
                         </div>
                       </div>
 
-                      <Line
-                        className={`Chartstyle`}
-                        data={state}
-                        options={{
-                          title: {
-                            display: true,
-                            text: "Average Rainfall per month",
-                            fontSize: 20,
-                          },
-                          legend: {
-                            display: true,
-                            position: "right",
-                          },
-                        }}
-                      />
+                      <div className={`${frame44Styles.Chartline} col-md-10`} style={{ margin: "auto" }}>
+
+                        <Line
+                          className={`${frame44Styles.Chartstyle}`}
+                          data={state}
+                          options={{
+                            title: {
+                              display: true,
+                              text: "Average Rainfall per month",
+                              fontSize: 20,
+                              maintainAspectRatio: false,
+                              responsive: true,
+                            },
+                            legend: {
+                              display: true,
+                              position: "right",
+                            },
+                          }}
+                        />
+
+                      </div>
                     </div>
                   </div>
 
