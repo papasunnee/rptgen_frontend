@@ -71,7 +71,8 @@ function Sidenav() {
             <Dropdown className="d-inline" autoClose={false}>
               <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
                 <Image src={overviewicon} alt="overview-icon" />
-                &nbsp; Patients
+                {/* &nbsp; Patients */}
+                <div className={`ms-1 d-none d-sm-inline`}>Patients</div>
               </Dropdown.Toggle>
 
               <Dropdown.Menu className={`${frame34Styles.Dropdownmenu}`}>
@@ -96,7 +97,8 @@ function Sidenav() {
             <Dropdown className="d-inline" autoClose={false}>
               <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
                 <Image src={historianicon} alt="historian-icon" />
-                &nbsp; Historian
+                {/* &nbsp; Historian */}
+                <div className={`ms-1 d-none d-sm-inline`}>Historian</div>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
@@ -178,7 +180,9 @@ function Sidenav() {
             <Dropdown className="d-inline" autoClose={false}>
               <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
                 <Image src={doctorsicon} alt="doctors-icon" />
-                &nbsp; Doctors
+                {/* &nbsp; Doctors */}
+
+                <div className={`ms-1 d-none d-sm-inline`}>Doctors</div>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
