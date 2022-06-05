@@ -79,9 +79,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -102,9 +100,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                $
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -125,9 +121,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -154,9 +148,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -177,9 +169,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -200,9 +190,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -225,9 +213,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -248,9 +234,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -271,9 +255,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -296,9 +278,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -325,9 +305,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -348,9 +326,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -371,9 +347,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -396,9 +370,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -419,9 +391,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -442,9 +412,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -471,9 +439,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -494,9 +460,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -517,9 +481,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -542,9 +504,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -565,9 +525,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -588,9 +546,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -617,9 +573,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -640,9 +594,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -663,9 +615,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -688,9 +638,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}
@@ -711,9 +659,7 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-              <span className={`input-group-text`} id="basic-addon1">
-                &nbsp;
-              </span>
+
               <input
                 type="text"
                 className={`form-control`}

@@ -88,16 +88,6 @@ function Index() {
                         <h4>Add Complaint</h4>
                       </div>
                     </span>
-
-                    <span className={`${frame44Styles.Tab} col-md-3`}>
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={appointmenticon} alt="icon-img" />
-                      </div>
-
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>Operations</h4>
-                      </div>
-                    </span>
                   </div>
 
                   <AppointmentList />

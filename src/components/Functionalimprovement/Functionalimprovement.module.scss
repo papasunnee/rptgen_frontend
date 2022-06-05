@@ -122,3 +122,22 @@
 .modal-dialog {
   margin: 0 !important;
 }
+
+.Formtab_titles {
+  padding: 20px 45px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #f6f8fb;
+
+  .Tab {
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #52575c;
+    }
+  }
+}

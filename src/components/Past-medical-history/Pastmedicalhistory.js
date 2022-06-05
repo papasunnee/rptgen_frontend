@@ -114,7 +114,7 @@ function Pastmedicalhistory() {
                   className={`${frame44Styles.Body}`}>
                   <div className={`${frame47Styles.Patientsdetails} row`}>
                     <div className={`${frame47Styles.Top}`}>
-                      <h3>Patients Details</h3>
+                      <h3>Medical History</h3>
 
                       <div
                         className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
@@ -198,6 +198,25 @@ function Pastmedicalhistory() {
 
                       <div className={`${frame44Styles.Content}`}>
                         <h4>Search</h4>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={`${functionalStyles.Formtab_titles}`} style={{ marginTop: "6%" }}>
+                    <div
+                      className={`${functionalStyles.Formtab_titles} col-md-10`}
+                      style={{ padding: 0 }}
+                    >
+                      <div className={`${functionalStyles.Tab}`}>
+                        <h4>Past Medical History</h4>
+                      </div>
+
+                      <div className={`${functionalStyles.Tab}`}>
+                        <h4 style={{ color: "#336CFB" }}>Past Related Medical History</h4>
+                      </div>
+
+                      <div className={`${functionalStyles.Tab}`}>
+                        <h4>Other Past Medical History</h4>
                       </div>
                     </div>
                   </div>

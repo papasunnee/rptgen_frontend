@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 import Image from "next/image";
 
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+
 import { BsSearch } from "react-icons/bs";
 
 import Sidenav from "../Common/Sidenav";
@@ -19,9 +22,172 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
+import descriptionStyles from "../Jobdescription/jobdescription.module.scss";
+
 import presentcomplainStyles from "./Complaints.module.scss";
 
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="xl"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      className={`${presentcomplainStyles.Modal}`}
+    >
+      <Modal.Header className={`${presentcomplainStyles.Modal_header}`} closeButton>
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className={`${presentcomplainStyles.Modal_title}`}
+        >
+          Body Parts
+        </Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body className={`${presentcomplainStyles.Modal_body}`}>
+        <div className={`${presentcomplainStyles.Body_parts_col}`}>
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={appointmenticon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Cervical Spine</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={newpatientsicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Thoracic Spine</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={operationicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Right Shoulder</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={operationicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Right Wrist</h4>
+            </div>
+          </div>
+
+        </div>
+
+        <div className={`${presentcomplainStyles.Body_parts_col}`}>
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={appointmenticon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Left Shoulder</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={newpatientsicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Right Elbow</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={operationicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Left Elbow</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={operationicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Left Wrist</h4>
+            </div>
+          </div>
+
+        </div>
+
+        <div className={`${presentcomplainStyles.Body_parts_col}`}>
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={appointmenticon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Right Hand</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={newpatientsicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Left Hand</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={operationicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Lumbar Spine</h4>
+            </div>
+          </div>
+
+          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
+            <div className={`${presentcomplainStyles.Image}`}>
+              <Image src={operationicon} alt="icon-img" />
+            </div>
+
+            <div className={`${presentcomplainStyles.Label}`}>
+              <h4>Right Hip</h4>
+            </div>
+          </div>
+
+        </div>
+
+      </Modal.Body>
+
+      <Modal.Footer className={`${presentcomplainStyles.Modal_footer}`}>
+        {/* <Button onClick={props.onHide}>Close</Button> */}
+
+        <button>Save</button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
 function Index() {
+  const [modalShow, setModalShow] = React.useState(false);
+
   return (
     <Fragment>
       <div
@@ -103,7 +269,11 @@ function Index() {
                       <h3>Quick Tasks</h3>
                     </div>
 
-                    <div className={`${frame44Styles.Tab} col-md-3`}>
+                    <Button
+                      variant="primary"
+                      onClick={() => setModalShow(true)}
+                      className={`${frame44Styles.Tab} col-md-3`}
+                    >
                       <div className={`${frame44Styles.Image}`}>
                         <Image src={appointmenticon} alt="icon-img" />
                       </div>
@@ -111,7 +281,12 @@ function Index() {
                       <div className={`${frame44Styles.Content}`}>
                         <h4>Show Body Parts</h4>
                       </div>
-                    </div>
+                    </Button>
+
+                    <MyVerticallyCenteredModal
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                    />
 
                     <div className={`${frame44Styles.Tab} col-md-3`}>
                       <div className={`${frame44Styles.Image}`}>
