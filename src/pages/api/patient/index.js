@@ -7,11 +7,10 @@ export default async function handler(req, res) {
 
   let patients;
   let id = req?.query?.id;
-  let put_id = req?.body?.put_id;
+  let _id = req?.body?._id;
   let delete_id = req?.body?.delete_id;
   let page = req?.query?.page;
   let perPage = 10;
-  let paginationData = {};
 
   await dbConnect();
 
@@ -68,25 +67,20 @@ export default async function handler(req, res) {
       }
     case "PUT":
       try {
-        if (
-          put_id &&
-          (put_id != "undefined" || put_id != null || put_id != "null")
-        ) {
-          console.log(put_id);
-          const appointment = await Appointment.create({
-            patient: put_id,
-            doctor: req.body.doctor,
-            appointment_date: new Date(req.body.appointment_date),
-            appointment_hour: req.body.appointment_hour,
-            appointment_minute: req.body.appointment_minute,
-            appointment_mod: req.body.appointment_mod,
-          });
-          let patient = await Patient.findOne({ _id: put_id });
-          await patient.appointments.push(appointment._id);
-          await patient.save();
+        if (_id && (_id != "undefined" || _id != null || _id != "null")) {
+          console.log(_id);
+
+          let updatePatient = await Patient.findOneAndUpdate(
+            { _id },
+            req.body,
+            {
+              new: true,
+            }
+          );
+
           return res
             .status(400)
-            .json({ success: true, data: { appointment, patient } });
+            .json({ success: true, data: { updatePatient } });
         } else {
           return res
             .status(400)

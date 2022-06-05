@@ -1,9 +1,12 @@
+import { fetcher } from "@/context/AuthContext";
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import useSWR from "swr";
 
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 
 export default function PatientModal(props) {
+  const { mutate } = useSWR("/api/patient", fetcher);
   const { modaldata = {} } = props;
   const [mData, setMData] = useState({});
   useEffect(() => {
@@ -13,9 +16,24 @@ export default function PatientModal(props) {
     };
   }, [modaldata]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(mData);
+    console.log({ mData });
+    const response = await fetch("/api/patient", {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...mData }),
+    });
+
+    const data = await response.json();
+    console.log({ data });
+    if (data.success) {
+      mutate();
+      setMData({});
+      props.setModalShow(false);
+    } else {
+    }
   };
   const handleChange = (e) => {
     const value = e.target.value;
@@ -149,13 +167,8 @@ export default function PatientModal(props) {
                 />
               </div>
 
-              {/* <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Home Phone</label>
-                <input type="text" placeholder="Enter Home Phone" />
-              </div> */}
-
               <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Upload Patient Picture</label>
+                <label>Change Patient Picture</label>
                 <input type="file" placeholder="Browse File" />
                 <div className="m-5 text-center">
                   <img src={mData.image_url} style={{ maxWidth: "150px" }} />
@@ -177,7 +190,7 @@ export default function PatientModal(props) {
                   type="date"
                   placeholder="Select Birthdate"
                   value={mData?.birth_date?.split("T")[0]}
-                  name="birt_date"
+                  name="birth_date"
                   onChange={handleChange}
                 />
               </div>
@@ -206,13 +219,14 @@ export default function PatientModal(props) {
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Select Gender</label>
-                <input
-                  type="text"
-                  placeholder="Select Gender"
-                  value={mData.gender}
+                <select
                   name="gender"
                   onChange={handleChange}
-                />
+                  value={mData.gender}
+                >
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
@@ -220,7 +234,7 @@ export default function PatientModal(props) {
                 <select
                   name="marital_status"
                   onChange={handleChange}
-                  defaultValue={mData.marital_status}
+                  value={mData.marital_status}
                 >
                   <option>Single</option>
                   <option>Married</option>

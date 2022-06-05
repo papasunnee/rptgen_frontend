@@ -148,6 +148,9 @@
           justify-content: space-between;
 
           background: #e8e8e8af;
+          th {
+            border-bottom-width: 0px !important;
+          }
           //   opacity: 0.2;
 
           .Name {
@@ -172,11 +175,11 @@
 
           .Name {
             padding: 20px 0 20px 5px;
-
+            border-bottom-width: 0px !important;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
 
             .Profilepic {
               height: 50px;
@@ -188,19 +191,13 @@
               display: flex;
               justify-content: center;
               align-items: center;
-
-              img {
-                width: 100%;
-              }
             }
 
             h4 {
               font-size: 14px;
               font-weight: 400;
-              // color: #52575c;
-
+              flex: 1;
               margin: 0;
-              // padding-left: 10px;
             }
           }
 

@@ -7,6 +7,7 @@ export default async function handler(req, res) {
   const { method } = req;
   let appointments;
   let id = req?.query?.id;
+  let put_id = req?.body?.put_id;
   let delete_id = req?.body?.delete_id;
 
   await dbConnect();
@@ -34,12 +35,31 @@ export default async function handler(req, res) {
       }
     case "POST":
       try {
-        const appointment = await Appointment.create(
-          req.body
-        ); /* create a new model in the database */
-        return res.status(201).json({ success: true, data: appointment });
+        if (
+          put_id &&
+          (put_id != "undefined" || put_id != null || put_id != "null")
+        ) {
+          const appointment = await Appointment.create({
+            patient: put_id,
+            doctor: req.body.doctor,
+            appointment_date: new Date(req.body.appointment_date),
+            appointment_hour: req.body.appointment_hour,
+            appointment_minute: req.body.appointment_minute,
+            appointment_mod: req.body.appointment_mod,
+          });
+          let patient = await Patient.findOne({ _id: put_id });
+          await patient.appointments.push(appointment._id);
+          await patient.save();
+          return res
+            .status(400)
+            .json({ success: true, data: { appointment, patient } });
+        } else {
+          return res
+            .status(400)
+            .json({ success: false, error: "unprocessed put_id" });
+        }
       } catch (error) {
-        return res.status(400).json({ success: false });
+        return res.status(400).json({ success: false, error: error.message });
       }
 
     case "DELETE":

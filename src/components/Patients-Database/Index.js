@@ -11,7 +11,6 @@ import newpatientsicon from "@/images/newpatients-icon.png";
 import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 import ScheduleAppointment from "../Modals/ScheduleAppointment";
-import AddPatient from "../Modals/AddPatients";
 
 function Index() {
   return (
