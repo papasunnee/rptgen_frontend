@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import Image from "next/image";
 
+import { useFilePicker } from 'use-file-picker';
+
 import { BsSearch } from "react-icons/bs";
 
 import Sidenav from "../Common/Sidenav";
@@ -20,6 +22,15 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
 function Index() {
+
+  const [openFileSelector, { filesContent, loading }] = useFilePicker({
+    accept: '.txt',
+  });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Fragment>
       <div
@@ -97,7 +108,7 @@ function Index() {
                       <h3>Quick Tasks</h3>
                     </div>
 
-                    <div className={`${frame44Styles.Tab} col-md-3`}>
+                    <div onClick={() => openFileSelector()} className={`${frame44Styles.Tab} col-md-3`} style={{ width: "270px", cursor: "pointer" }}>
                       <div className={`${frame44Styles.Image}`}>
                         <Image src={appointmenticon} alt="icon-img" />
                       </div>
@@ -157,8 +168,7 @@ function Index() {
                           <h4>10/10/2020</h4>
                         </div>
 
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
+                        <div className={`${frame44Styles.Action_buttons}`} style={{ justifyContent: "center" }}>
                           <Image src={deleteicon} alt="delete-icon" />
                         </div>
                       </div>

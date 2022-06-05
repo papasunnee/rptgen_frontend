@@ -191,15 +191,15 @@ function Index() {
   return (
     <Fragment>
       <div
-        className={`${frame44Styles.Frame34} container-fluid overflow-hidden`}
+        className={`${frame44Styles.Frame34} container-fluid`}
       >
         <div
-          className={`${frame44Styles.Heightadjust} row vh-100 overflow-auto`}
+          className={`${frame44Styles.Heightadjust} row vh-100`}
         >
           <Sidenav className={`${frame44Styles.Sidebar} container-fluid`} />
 
           <div className={`col d-flex flex-column h-sm-100`}>
-            <main className={`row overflow-auto`}>
+            <main className={`row`}>
               <div className={`${frame44Styles.Contentcon} col pt-4`}>
                 <Topnav />
 

@@ -102,7 +102,7 @@ function Index() {
                       </div>
 
                       <div className={`${planStyles.Cardcon}`}>
-                        <a href="x-ray" className={`${planStyles.Card}`}>
+                        <a href="/doctor/treatment-plan/xray" className={`${planStyles.Card}`}>
                           <h4>X-Ray</h4>
 
                           {/* <p>2 Items</p> */}
