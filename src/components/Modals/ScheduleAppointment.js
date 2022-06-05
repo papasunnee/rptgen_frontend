@@ -104,7 +104,10 @@ function AppointmentModal(props) {
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit}>
-        <Modal.Body className={`${functionalStyles.Modal_body}`} style={{ display: "block", padding: "20px 60px" }}>
+        <Modal.Body
+          className={`${functionalStyles.Modal_body}`}
+          style={{ display: "block", padding: "20px 60px" }}
+        >
           <div className={`${functionalStyles.Adl_col}`}>
             <div className={`${functionalStyles.Adl_col_title}`}>
               <h3 style={{ fontSize: "23px", paddingBottom: "15px" }}>
@@ -116,7 +119,7 @@ function AppointmentModal(props) {
                 <label>Select Patient</label>
                 <Select
                   onChange={handlePatientSelect}
-                  options={data?.data?.patients.map((patient) => ({
+                  options={data?.data?.patients?.map((patient) => ({
                     value: patient._id,
                     label: patient.firstname + " " + patient.lastname,
                   }))}
