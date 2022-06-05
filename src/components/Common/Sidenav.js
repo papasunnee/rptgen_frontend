@@ -74,7 +74,7 @@ function Sidenav() {
                 &nbsp; Patients
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+              <Dropdown.Menu className={`${frame34Styles.Dropdownmenu}`}>
                 <Dropdown.Item href="#">
                   <Link href="/patient/database">
                     <a
