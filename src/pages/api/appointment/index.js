@@ -7,6 +7,7 @@ export default async function handler(req, res) {
   const { method } = req;
   let appointments;
   let id = req?.query?.id;
+  let type = req?.query?.type;
   let put_id = req?.body?.put_id;
   let delete_id = req?.body?.delete_id;
 
@@ -18,6 +19,20 @@ export default async function handler(req, res) {
         if (id && (id != "undefined" || id != null || id != "null")) {
           appointments = await Appointment.findOne({
             _id: id,
+          })
+            // .populate("doctors")
+            .populate("patient"); /* find all the data in our database */
+        } else if (type && type == "previous") {
+          appointments = await Appointment.find({
+            appointment_date: { $lt: Date.now() },
+          })
+            // .populate("doctors")
+            .populate("patient"); /* find all the data in our database */
+        } else if (type && type == "next") {
+          appointments = await Appointment.find({
+            appointment_date: {
+              $gte: Date.now(),
+            },
           })
             // .populate("doctors")
             .populate("patient"); /* find all the data in our database */

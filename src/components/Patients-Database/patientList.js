@@ -142,7 +142,7 @@ function Page({ currentItems = [], handleModal }) {
       </td>
 
       <td className={`${frame44Styles.Name}`}>
-        <h4>{moment(patient.created_at).format("MMM Do YYYY")}</h4>
+        <h4>{moment(patient.birth_date).format("MMM Do YYYY")}</h4>
       </td>
 
       <td className={`${frame44Styles.Name} col text-center`}>

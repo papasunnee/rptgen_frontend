@@ -241,6 +241,7 @@ export default function EditPatientModal(props) {
                 >
                   <option>Single</option>
                   <option>Married</option>
+                  <option>Widowed</option>
                   <option>Divorced</option>
                 </select>
               </div>

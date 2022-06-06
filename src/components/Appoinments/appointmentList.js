@@ -12,8 +12,11 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
 import AppointmentModal from "./appointmentModal";
 
-function AppointmentList({ title = "Upcoming Appointments" }) {
-  const { data, mutate } = useSWR("/api/appointment", fetcher);
+function AppointmentList({
+  title = "Upcoming Appointments",
+  type = "previous",
+}) {
+  const { data, mutate } = useSWR(`/api/appointment?type=${type}`, fetcher);
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -70,31 +73,31 @@ function AppointmentList({ title = "Upcoming Appointments" }) {
             <table className="table">
               <thead>
                 <tr className={`${frame44Styles.Appointmentlist_title}`}>
-                  <td className={`${frame44Styles.Name}`}>
+                  <td className={`${frame44Styles.Name} col`}>
                     <h4>Name</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name}`}>
+                  <td className={`${frame44Styles.Name} col`}>
                     <h4>Email</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name}`}>
+                  <td className={`${frame44Styles.Name} col`}>
                     <h4>Date</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name}`}>
+                  <td className={`${frame44Styles.Name} col`}>
                     <h4>Visit Time</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name}`}>
+                  <td className={`${frame44Styles.Name} col`}>
                     <h4>Doctor</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name}`}>
+                  <td className={`${frame44Styles.Name} col`}>
                     <h4>Conditions</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name}`}>
+                  <td className={`${frame44Styles.Name} col`}>
                     <h4>&nbsp;</h4>
                   </td>
                 </tr>
@@ -102,19 +105,23 @@ function AppointmentList({ title = "Upcoming Appointments" }) {
               <tbody>
                 {data?.data?.appointments?.map((appointment, index) => (
                   <tr key={index} className={`${frame44Styles.Appointment}`}>
-                    <td className={`${frame44Styles.Name}`}>
+                    <td className={`${frame44Styles.Name} col`}>
                       <div className={`${frame44Styles.Profilepic}`}>
-                        <Image src={profilepic} alt="profile-pic" />
+                        <img
+                          src={appointment.patient.image_url}
+                          alt="profile-pic"
+                          className="img-fluid"
+                        />
                       </div>
 
                       <h4>{`${appointment.patient.firstname} ${appointment.patient.lastname}`}</h4>
                     </td>
 
-                    <td className={`${frame44Styles.Name}`}>
-                      <h4></h4>
+                    <td className={`${frame44Styles.Name} col`}>
+                      <h4>{appointment.patient.email || "No Email"}</h4>
                     </td>
 
-                    <td className={`${frame44Styles.Name}`}>
+                    <td className={`${frame44Styles.Name} col`}>
                       <h4>
                         {moment(appointment.appointment_date).format(
                           "Do MMM YYYY"
@@ -122,15 +129,15 @@ function AppointmentList({ title = "Upcoming Appointments" }) {
                       </h4>
                     </td>
 
-                    <td className={`${frame44Styles.Name}`}>
+                    <td className={`${frame44Styles.Name} col`}>
                       <h4>{`${appointment.appointment_hour}:${appointment.appointment_minute} ${appointment.appointment_mod}`}</h4>
                     </td>
 
-                    <td className={`${frame44Styles.Name}`}>
+                    <td className={`${frame44Styles.Name} col`}>
                       <h4>{appointment.doctor}</h4>
                     </td>
 
-                    <td className={`${frame44Styles.Name}`}>
+                    <td className={`${frame44Styles.Name} col`}>
                       <div
                         style={{
                           display: "flex",
