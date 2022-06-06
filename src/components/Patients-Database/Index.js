@@ -12,6 +12,7 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 import ScheduleAppointment from "../Modals/ScheduleAppointment";
 import AddPatient from "../Modals/AddPatients";
+import SearchPatient from "./searchPatient";
 
 function Index() {
   return (
@@ -36,8 +37,8 @@ function Index() {
                       style={{ marginBottom: "5%" }}
                     >
                       <h3>Patient Database</h3>
-
-                      <div
+                      <SearchPatient />
+                      {/* <div
                         className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
                       >
                         <span
@@ -46,6 +47,7 @@ function Index() {
                         >
                           <BsSearch />
                         </span>
+
                         <input
                           type="text"
                           className={`form-control`}
@@ -53,7 +55,7 @@ function Index() {
                           aria-label="Username"
                           aria-describedby="addon-wrapping"
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 

@@ -22,6 +22,7 @@ import frame47Styles from "../Frame47/Frame47.module.scss";
 import demographicsStyles from "./Demographics.module.scss";
 import DemographicForm from "./DemographicForm";
 import PatientInfo from "./PatientInfo";
+import SearchPatient from "../Patients-Database/searchPatient";
 
 function Index({ patient }) {
   return (
@@ -43,23 +44,7 @@ function Index({ patient }) {
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Patient Demographics</h3>
 
-                      <div
-                        className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
-                      >
-                        <span
-                          className={`${frame47Styles.Inputgroup_text} input-group-text`}
-                          id="addon-wrapping"
-                        >
-                          <BsSearch />
-                        </span>
-                        <input
-                          type="text"
-                          className={`form-control`}
-                          placeholder="Search Category, Patient Info etc"
-                          aria-label="Username"
-                          aria-describedby="addon-wrapping"
-                        />
-                      </div>
+                      <SearchPatient />
                     </div>
 
                     <PatientInfo patient={patient} />
