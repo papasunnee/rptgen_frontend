@@ -11,6 +11,7 @@ import newpatientsicon from "@/images/newpatients-icon.png";
 import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 import ScheduleAppointment from "../Modals/ScheduleAppointment";
+import AddPatient from "../Modals/AddPatients";
 
 function Index() {
   return (
@@ -76,15 +77,7 @@ function Index() {
                       </div>
                     </span>
 
-                    <span className={`${frame44Styles.Tab} col-md-3`}>
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={appointmenticon} alt="icon-img" />
-                      </div>
-
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>Add Patient</h4>
-                      </div>
-                    </span>
+                    <AddPatient />
                   </div>
                   <PatientList />
                 </div>

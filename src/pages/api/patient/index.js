@@ -31,10 +31,12 @@ export default async function handler(req, res) {
             .limit(perPage)
             .skip(perPage * page)
             .populate("appointments")
+            .sort({ createdAt: "asc" })
             .exec();
         } else {
           patients = await Patient.find({})
             .populate("appointments")
+            .sort({ createdAt: "desc" })
             .exec(); /* find all the data in our database */
         }
         const recentPatient = await Patient.findOne(

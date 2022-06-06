@@ -1,47 +1,111 @@
 import { fetcher } from "@/context/AuthContext";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import useSWR from "swr";
 
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 
-export default function PatientModal(props) {
+const initialValues = {
+  firstname: "",
+  lastname: "",
+  middlename: "",
+  street_address: "",
+  city_state_zip: "",
+  home_phone: "",
+  providers_code: "",
+  assistant_providers_code: "",
+  image_url: "",
+  birth_date: "",
+  chart_number: "",
+  ssn: "",
+  gender: "",
+  marital_status: "",
+};
+export default function AddPatientModal(props) {
   const { mutate } = useSWR("/api/patient", fetcher);
-  const { modaldata = {} } = props;
-  const [mData, setMData] = useState({});
-  useEffect(() => {
-    setMData({ ...modaldata });
-    return () => {
-      setMData({});
-    };
-  }, [modaldata]);
+  const [patientData, setPatientData] = useState(initialValues);
+  const [success, setSuccess] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [imageSrc, setImageSrc] = useState();
+  const [uploadData, setUploadData] = useState();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log({ mData });
-    const response = await fetch("/api/patient", {
-      method: "PUT",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...mData }),
-    });
-
-    const data = await response.json();
-    console.log({ data });
-    if (data.success) {
-      mutate();
-      setMData({});
-      props.setModalShow(false);
-    } else {
-    }
-  };
   const handleChange = (e) => {
-    const value = e.target.value;
+    setSuccess(false);
     const name = e.target.name;
-    setMData((prevValues) => ({
+    const value = e.target.value;
+    setPatientData((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
+  };
+
+  const handleOnChange = (changeEvent) => {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      setImageSrc(onLoadEvent.target.result);
+      setUploadData(undefined);
+    };
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  };
+  const handleSubmit = async (e) => {
+    setProcessing(true);
+    e.preventDefault();
+
+    const formElement = e.currentTarget;
+    const fileInput = Array.from(formElement.elements).find(
+      ({ name }) => name === "image_url"
+    );
+
+    const formData = new FormData();
+
+    for (const file of fileInput.files) {
+      formData.append("file", file);
+    }
+
+    let cloud_image;
+
+    formData.append("upload_preset", "rptgen");
+
+    console.log(fileInput.files.length > 1);
+
+    if (fileInput.files.length > 0) {
+      cloud_image = await fetch(
+        "https://api.cloudinary.com/v1_1/altitude-tech-com/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      ).then((r) => r.json());
+      setImageSrc(cloud_image?.secure_url);
+      setUploadData(cloud_image);
+    }
+
+    console.log({ cloud_image });
+
+    try {
+      const response = await fetch("/api/patient", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...patientData,
+          image_url:
+            cloud_image?.secure_url ??
+            "https://res.cloudinary.com/altitude-tech-com/image/upload/v1654090662/rptgen/default.png",
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        mutate();
+        setSuccess(true);
+        setPatientData(initialValues);
+      }
+    } catch (error) {
+      console.log({ error: error.message });
+    }
+    setProcessing(false);
   };
   return (
     <Modal
@@ -56,7 +120,7 @@ export default function PatientModal(props) {
           id="contained-modal-title-vcenter"
           className={`${functionalStyles.Modal_title}`}
         >
-          Edit Patient
+          Add Patient
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit}>
@@ -69,23 +133,25 @@ export default function PatientModal(props) {
             </div>
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Patient Last Name</label>
+                <label>Patient First Name</label>
                 <input
                   type="text"
-                  placeholder="Last Name"
-                  value={mData.lastname}
-                  name="lastname"
+                  placeholder="First Name"
+                  required
+                  name="firstname"
+                  value={patientData.firstname}
                   onChange={handleChange}
                 />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Patient First Name</label>
+                <label>Patient Last Name</label>
                 <input
                   type="text"
-                  placeholder="First Name"
-                  value={mData.firstname}
-                  name="firstname"
+                  placeholder="Last Name"
+                  required
+                  name="lastname"
+                  value={patientData.lastname}
                   onChange={handleChange}
                 />
               </div>
@@ -95,8 +161,8 @@ export default function PatientModal(props) {
                 <input
                   type="text"
                   placeholder="Middle Name"
-                  value={mData.middlename}
                   name="middlename"
+                  value={patientData.middlename}
                   onChange={handleChange}
                 />
               </div>
@@ -106,8 +172,9 @@ export default function PatientModal(props) {
                 <input
                   type="text"
                   placeholder="Enter Provider Code"
-                  value={mData.providers_code}
+                  required
                   name="providers_code"
+                  value={patientData.providers_code}
                   onChange={handleChange}
                 />
               </div>
@@ -117,8 +184,8 @@ export default function PatientModal(props) {
                 <input
                   type="text"
                   placeholder="Enter Asst Provider Code"
-                  value={mData.assitant_providers_code}
-                  name="assitant_providers_code"
+                  name="assistant_providers_code"
+                  value={patientData.assistant_providers_code}
                   onChange={handleChange}
                 />
               </div>
@@ -137,8 +204,9 @@ export default function PatientModal(props) {
                 <input
                   type="text"
                   placeholder="Street Address"
-                  value={mData.street_address}
+                  required
                   name="street_address"
+                  value={patientData.street_address}
                   onChange={handleChange}
                 />
               </div>
@@ -150,8 +218,9 @@ export default function PatientModal(props) {
                 <input
                   type="text"
                   placeholder="City, State, and Zip"
-                  value={mData.city_state_zip}
+                  required
                   name="city_state_zip"
+                  value={patientData.city_state_zip}
                   onChange={handleChange}
                 />
               </div>
@@ -159,20 +228,36 @@ export default function PatientModal(props) {
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Home Phone</label>
                 <input
-                  type="text"
+                  type="tel"
+                  min="0"
                   placeholder="Enter Home Phone"
-                  value={mData.home_phone}
+                  required
                   name="home_phone"
+                  value={patientData.home_phone}
                   onChange={handleChange}
                 />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Change Patient Picture</label>
-                <input type="file" placeholder="Browse File" />
-                <div className="m-5 text-center">
-                  <img src={mData.image_url} style={{ maxWidth: "150px" }} />
-                </div>
+                <label>Upload Patient Picture</label>
+                <input
+                  type="file"
+                  placeholder="Browse File"
+                  multiple={false}
+                  accept="image/*"
+                  name="image_url"
+                  onChange={handleOnChange}
+                />
+              </div>
+              <div
+                style={{
+                  maxWidth: "300px",
+                  border: "1px solid lightgray",
+                  borderRadius: "10px",
+                  overflow: "hidden",
+                }}
+              >
+                <img src={imageSrc} className="img-fluid" />
               </div>
             </div>
           </div>
@@ -189,8 +274,9 @@ export default function PatientModal(props) {
                 <input
                   type="date"
                   placeholder="Select Birthdate"
-                  value={mData?.birth_date?.split("T")[0]}
+                  required
                   name="birth_date"
+                  value={patientData.birth_date}
                   onChange={handleChange}
                 />
               </div>
@@ -200,8 +286,9 @@ export default function PatientModal(props) {
                 <input
                   type="text"
                   placeholder="Enter Chart Number"
-                  value={mData.chart_number}
+                  required
                   name="chart_number"
+                  value={patientData.chart_number}
                   onChange={handleChange}
                 />
               </div>
@@ -209,50 +296,56 @@ export default function PatientModal(props) {
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>SSN</label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Enter SSN Number"
-                  value={mData.ssn}
+                  required
                   name="ssn"
+                  value={patientData.ssn}
                   onChange={handleChange}
                 />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Select Gender</label>
-                <select
-                  name="gender"
-                  onChange={handleChange}
-                  value={mData.gender}
-                >
-                  <option>Male</option>
-                  <option>Female</option>
+                <select>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
                 </select>
+                {/* <input
+                    type="text"
+                    placeholder="Select Gender"
+                    required
+                    name="gender"
+                    value={patientData.gender}
+                    onChange={handleChange}
+                  /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Marital Status</label>
-                <select
-                  name="marital_status"
-                  onChange={handleChange}
-                  value={mData.marital_status}
-                >
-                  <option>Single</option>
-                  <option>Married</option>
-                  <option>Divorced</option>
+                <select>
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                  <option value="widowed">Widowed</option>
+                  <option value="divorced">Divorced</option>
                 </select>
                 {/* <input
-                  type="text"
-                  placeholder="Enter Marital Status"
-                  value={mData.marital_status}
-                  name="marital_status"
-                  onChange={handleChange}
-                /> */}
+                    type="text"
+                    placeholder="Enter Marital Status"
+                    required
+                    name="marital_status"
+                    value={patientData.marital_status}
+                    onChange={handleChange}
+                  /> */}
               </div>
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-          <button>Update</button>
+          <p>{success && <span>Patient Successfully Added</span>}</p>
+          <button type="submit" disabled={processing}>
+            {processing ? "Please Wait..." : "Save"}
+          </button>
         </Modal.Footer>
       </form>
     </Modal>

@@ -64,104 +64,113 @@ function AppointmentList({ title = "Upcoming Appointments" }) {
         </h3>
       </div>
 
-      {data?.data?.appointments?.length > 0 && (
-        <div className={`${frame44Styles.Appointmentlist_section}`}>
-          <div className={`${frame44Styles.Appointmentlist_title}`}>
-            <div className={`${frame44Styles.Name}`}>
-              <h4>Name</h4>
-            </div>
+      <div className={`${frame44Styles.Appointmentlist_section}`}>
+        {data?.data?.appointments?.length > 0 && (
+          <>
+            <table className="table">
+              <thead>
+                <tr className={`${frame44Styles.Appointmentlist_title}`}>
+                  <td className={`${frame44Styles.Name}`}>
+                    <h4>Name</h4>
+                  </td>
 
-            <div className={`${frame44Styles.Name}`}>
-              <h4>Email</h4>
-            </div>
+                  <td className={`${frame44Styles.Name}`}>
+                    <h4>Email</h4>
+                  </td>
 
-            <div className={`${frame44Styles.Name}`}>
-              <h4>Date</h4>
-            </div>
+                  <td className={`${frame44Styles.Name}`}>
+                    <h4>Date</h4>
+                  </td>
 
-            <div className={`${frame44Styles.Name}`}>
-              <h4>Visit Time</h4>
-            </div>
+                  <td className={`${frame44Styles.Name}`}>
+                    <h4>Visit Time</h4>
+                  </td>
 
-            <div className={`${frame44Styles.Name}`}>
-              <h4>Doctor</h4>
-            </div>
+                  <td className={`${frame44Styles.Name}`}>
+                    <h4>Doctor</h4>
+                  </td>
 
-            <div className={`${frame44Styles.Name}`}>
-              <h4>Conditions</h4>
-            </div>
+                  <td className={`${frame44Styles.Name}`}>
+                    <h4>Conditions</h4>
+                  </td>
 
-            <div className={`${frame44Styles.Name}`}>
-              <h4>&nbsp;</h4>
-            </div>
-          </div>
+                  <td className={`${frame44Styles.Name}`}>
+                    <h4>&nbsp;</h4>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                {data?.data?.appointments?.map((appointment, index) => (
+                  <tr key={index} className={`${frame44Styles.Appointment}`}>
+                    <td className={`${frame44Styles.Name}`}>
+                      <div className={`${frame44Styles.Profilepic}`}>
+                        <Image src={profilepic} alt="profile-pic" />
+                      </div>
 
-          {data?.data?.appointments?.map((appointment, index) => (
-            <div key={index} className={`${frame44Styles.Appointment}`}>
-              <div className={`${frame44Styles.Name}`}>
-                <div className={`${frame44Styles.Profilepic}`}>
-                  <Image src={profilepic} alt="profile-pic" />
-                </div>
+                      <h4>{`${appointment.patient.firstname} ${appointment.patient.lastname}`}</h4>
+                    </td>
 
-                <h4>{`${appointment.patient.firstname} ${appointment.patient.lastname}`}</h4>
-              </div>
+                    <td className={`${frame44Styles.Name}`}>
+                      <h4></h4>
+                    </td>
 
-              <div className={`${frame44Styles.Name}`}>
-                <h4></h4>
-              </div>
+                    <td className={`${frame44Styles.Name}`}>
+                      <h4>
+                        {moment(appointment.appointment_date).format(
+                          "Do MMM YYYY"
+                        )}
+                      </h4>
+                    </td>
 
-              <div className={`${frame44Styles.Name}`}>
-                <h4>
-                  {moment(appointment.appointment_date).format("Do MMM YYYY")}
-                </h4>
-              </div>
+                    <td className={`${frame44Styles.Name}`}>
+                      <h4>{`${appointment.appointment_hour}:${appointment.appointment_minute} ${appointment.appointment_mod}`}</h4>
+                    </td>
 
-              <div className={`${frame44Styles.Name}`}>
-                <h4>{`${appointment.appointment_hour}:${appointment.appointment_minute} ${appointment.appointment_mod}`}</h4>
-              </div>
+                    <td className={`${frame44Styles.Name}`}>
+                      <h4>{appointment.doctor}</h4>
+                    </td>
 
-              <div className={`${frame44Styles.Name}`}>
-                <h4>{appointment.doctor}</h4>
-              </div>
+                    <td className={`${frame44Styles.Name}`}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        {appointment.condition.map((con, index) => (
+                          <p key={index}>{con}</p>
+                        ))}
+                      </div>
+                    </td>
 
-              <div className={`${frame44Styles.Name}`}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  {appointment.condition.map((con, index) => (
-                    <p key={index}>{con}</p>
-                  ))}
-                </div>
-              </div>
-
-              <div className={`${frame44Styles.Action_buttons}`}>
-                {/* <Image
+                    <td className={`${frame44Styles.Action_buttons}`}>
+                      {/* <Image
               variant="primary"
               onClick={() => setModalShow(true)}
               src={editicon}
               alt="edit-icon"
             /> */}
 
-                <AppointmentModal
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
+                      <AppointmentModal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                      />
 
-                <Image
-                  src={deleteicon}
-                  alt="delete-icon"
-                  onClick={() => {
-                    confirmDelete(appointment._id);
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+                      <Image
+                        src={deleteicon}
+                        alt="delete-icon"
+                        onClick={() => {
+                          confirmDelete(appointment._id);
+                        }}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
+      </div>
     </div>
   );
 }

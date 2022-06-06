@@ -5,7 +5,7 @@ import moment from "moment";
 import ReactPaginate from "react-paginate";
 import { confirmAlert } from "react-confirm-alert";
 import { fetcher } from "@/context/AuthContext";
-import PatientModal from "./patientModal";
+import EditPatientModal from "./editPatientModal";
 import Loading from "@/components/Loading";
 import profilepic from "@/images/profile-1.png";
 import editicon from "@/images/edit-icon.png";
@@ -67,7 +67,7 @@ export default function PatientList() {
             </table>
           </>
         )}
-        <PatientModal
+        <EditPatientModal
           show={modalShow}
           modaldata={modalData}
           setModalShow={setModalShow}
