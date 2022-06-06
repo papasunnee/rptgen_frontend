@@ -13,6 +13,7 @@ import deleteicon from "@/images/delete.png";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
+import Link from "next/link";
 
 const initialValues = {
   _id: null,
@@ -123,18 +124,22 @@ function Page({ currentItems = [], handleModal }) {
   };
   return currentItems.map((patient, i) => (
     <tr key={i} className={`${frame44Styles.Appointment}`}>
-      <td className={`${frame44Styles.Name} col`}>
-        <div className={`${frame44Styles.Profilepic}`}>
-          <img
-            src={patient.image_url}
-            alt="profile-pic"
-            className="img-fluid"
-            // width="150"
-            // height="150"
-          />
-        </div>
+      <td className="col">
+        <Link href={`/historian/${patient._id}/demographics`}>
+          <a className={`${frame44Styles.Name}`}>
+            <div className={`${frame44Styles.Profilepic}`}>
+              <img
+                src={patient.image_url}
+                alt="profile-pic"
+                className="img-fluid"
+                // width="150"
+                // height="150"
+              />
+            </div>
 
-        <h4>{patient.firstname + " " + patient.lastname}</h4>
+            <h4>{patient.firstname + " " + patient.lastname}</h4>
+          </a>
+        </Link>
       </td>
 
       <td className={`${frame44Styles.Name} col`}>

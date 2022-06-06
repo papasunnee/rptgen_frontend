@@ -148,7 +148,8 @@
           justify-content: space-between;
 
           background: #e8e8e8af;
-          th {
+          th,
+          td {
             border-bottom-width: 0px !important;
           }
           //   opacity: 0.2;
@@ -163,18 +164,18 @@
 
         .Appointment {
           border-top: 2px solid #e8e8e8;
-
           padding-bottom: 10px;
-
-          // padding-left: -12px;
-
           display: flex;
           flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
-
+          th,
+          td {
+            border-bottom-width: 0px !important;
+          }
           .Name {
             padding: 20px 0 20px 5px;
+            text-decoration: none !important;
             border-bottom-width: 0px !important;
             display: flex;
             flex-wrap: wrap;

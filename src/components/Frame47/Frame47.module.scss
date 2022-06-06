@@ -51,10 +51,14 @@
       justify-content: space-between;
 
       .Profilepic {
-        padding-right: 10px;
-        img {
-          border-radius: 50px;
-        }
+        margin-right: 10px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
       }
 
       .Bigname {
