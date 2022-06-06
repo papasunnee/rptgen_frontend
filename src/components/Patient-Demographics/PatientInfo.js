@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import moment from "moment";
+import useSWR from "swr";
+import { fetcher } from "@/context/AuthContext";
 
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
-function PatientInfo({ patient }) {
+function PatientInfo() {
+  const [patient, setPatient] = useState({
+    firstname: "",
+    lastname: "",
+    birth_date: "",
+    image_url:
+      "https://res.cloudinary.com/altitude-tech-com/image/upload/v1654090662/rptgen/default.png",
+  });
+  const router = useRouter();
+  const id = router.query.id;
+  const { data, error } = useSWR(`/api/patient?id=${id}`, fetcher);
+  console.log({ data });
+  useEffect(() => {
+    if (data) {
+      setPatient({ ...data?.data?.patients });
+    }
+  }, [data]);
+
   return (
     <div className={`${frame47Styles.Details}`}>
       <div className={`${frame47Styles.Namecont}`}>
@@ -18,25 +38,25 @@ function PatientInfo({ patient }) {
         <div className={`${frame47Styles.Name}`}>
           <h4
             className={`${frame47Styles.Bigname}`}
-          >{`${patient.firstname} ${patient.lastname}`}</h4>
+          >{`${patient?.firstname} ${patient?.lastname}`}</h4>
           <h5>See Patient info</h5>
         </div>
       </div>
 
       <div className={`${frame47Styles.Namecont}`}>
-        <h4>Address: {patient.address}</h4>
+        <h4>Address: {patient?.address}</h4>
       </div>
 
       <div className={`${frame47Styles.Namecont}`}>
-        <h4>Contact {patient.phone}</h4>
+        <h4>Contact {patient?.phone}</h4>
       </div>
 
       <div className={`${frame47Styles.Namecont}`}>
-        <h4>Birthdate: {patient.birth_date.split("T")[0]}</h4>
+        <h4>Birthdate: {patient?.birth_date?.split("T")[0]}</h4>
       </div>
 
       <div className={`${frame47Styles.Namecont}`}>
-        <h4>Age: {moment().diff(patient.birth_date, "years")}</h4>
+        <h4>Age: {moment().diff(patient?.birth_date, "years")}</h4>
       </div>
     </div>
   );
