@@ -9,7 +9,7 @@ function PatientInfo({ patient }) {
       <div className={`${frame47Styles.Namecont}`}>
         <div className={`${frame47Styles.Profilepic}`}>
           <img
-            src={patient.image_url}
+            src={patient?.image_url}
             alt="profile-pic"
             className="img-fluid"
           />
