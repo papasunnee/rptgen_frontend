@@ -1,8 +1,14 @@
 import dbConnect from "@/lib/dbConnect";
+import Patient from "@/models/Patient";
 import PatientPreAuthorization from "@/models/PatientPreAuthorization";
+import mongoose from "mongoose";
 
 export default async function handler(req, res) {
   const { method } = req;
+
+  const patient_id = req.body.patient_id;
+  const pre_authorization_id =
+    req.body.patient_demographic_id ?? new mongoose.mongo.ObjectID();
 
   await dbConnect();
 
@@ -11,12 +17,21 @@ export default async function handler(req, res) {
       break;
     case "POST":
       try {
-        const patientPreAuthorization = await PatientPreAuthorization.create(
-          req.body
-        ); /* create a new model in the database */
+        let preAuthorization = await PatientPreAuthorization.findOneAndUpdate(
+          {
+            $and: [{ _id: pre_authorization_id }, { patient_id }],
+          },
+          { ...req.body },
+          { new: true, upsert: true }
+        );
+        const patientRecord = await Patient.findOneAndUpdate(
+          { _id: patient_id },
+          { pre_authorization: preAuthorization._id }
+        );
+
         return res
           .status(201)
-          .json({ success: true, data: patientPreAuthorization });
+          .json({ success: true, data: { preAuthorization, patientRecord } });
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
       }

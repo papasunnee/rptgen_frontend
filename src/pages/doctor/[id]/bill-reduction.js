@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Index from "@/components/Bill-Reduction/Index";
 
-function billreduction() {
+function BillReduction() {
   return (
     <Fragment>
       <Index />
@@ -9,4 +9,4 @@ function billreduction() {
   );
 }
 
-export default billreduction;
+export default BillReduction;

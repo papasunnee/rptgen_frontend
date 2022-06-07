@@ -203,7 +203,7 @@ function Sidenav() {
 
                   <Dropdown.Menu>
                     <Dropdown.Item href="#">
-                      <Link href="/doctor/diagnosis">
+                      <Link href={`/doctor/${id}/diagnosis`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >
@@ -213,7 +213,7 @@ function Sidenav() {
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#">
-                      <Link href="/doctor/upload-records">
+                      <Link href={`/doctor/${id}/upload-records`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >
@@ -223,7 +223,7 @@ function Sidenav() {
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#">
-                      <Link href="/doctor/physical-evaluation">
+                      <Link href={`/doctor/${id}/physical-evaluation`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >
@@ -235,7 +235,7 @@ function Sidenav() {
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#">
-                      <Link href="/doctor/mil-evaluation">
+                      <Link href={`/doctor/${id}/mil-evaluation`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >
@@ -255,7 +255,7 @@ function Sidenav() {
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#">
-                      <Link href="/doctor/superbills">
+                      <Link href={`/doctor/${id}/superbills`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >
@@ -265,7 +265,7 @@ function Sidenav() {
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#">
-                      <Link href="/doctor/workstatus">
+                      <Link href={`/doctor/${id}/workstatus`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >
@@ -275,7 +275,7 @@ function Sidenav() {
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#">
-                      <Link href="/doctor/treatment-plan">
+                      <Link href={`/doctor/${id}/treatment-plan`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >
@@ -285,7 +285,7 @@ function Sidenav() {
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#">
-                      <Link href="/doctor/bill-reduction">
+                      <Link href={`/doctor/${id}/bill-reduction`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >

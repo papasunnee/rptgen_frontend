@@ -21,6 +21,7 @@ const initialValues = {
   gender: "",
   marital_status: "",
 };
+
 export default function AddPatientModal(props) {
   const { mutate } = useSWR("/api/patient", fetcher);
   const [patientData, setPatientData] = useState(initialValues);

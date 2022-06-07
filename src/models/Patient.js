@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import Appointment from "./Appointment";
 import PatientDemographic from "./PatientDemographic";
+import PatientPreAuthorization from "./PatientPreAuthorization";
+import FunctionalImprovement from "./FunctionalImprovement";
 
 /* PatientSchema will correspond to a collection in your MongoDB database. */
 
@@ -74,9 +76,19 @@ const PatientSchema = new mongoose.Schema(
         ref: "Appointment",
       },
     ],
+    functional_improvements: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "FunctionalImprovement",
+      },
+    ],
     patient_demographic_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "PatientDemographic",
+    },
+    pre_authorization: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PatientPreAuthorization",
     },
 
     role: {

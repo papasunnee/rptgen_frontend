@@ -1,6 +1,8 @@
 import dbConnect from "@/lib/dbConnect";
 import Appointment from "@/models/Appointment";
 import PatientDemographic from "@/models/PatientDemographic";
+import PatientPreAuthorization from "@/models/PatientPreAuthorization";
+import FunctionalImprovement from "@/models/FunctionalImprovement";
 import Patient from "@/models/Patient";
 
 export default async function handler(req, res) {
@@ -24,6 +26,8 @@ export default async function handler(req, res) {
           })
             .populate("appointments")
             .populate("patient_demographic_id")
+            .populate("pre_authorization")
+            .populate("functional_improvements")
             .exec(); /* find all the data in our database */
         } else if (
           page &&
@@ -34,11 +38,16 @@ export default async function handler(req, res) {
             .skip(perPage * page)
             .populate("appointments")
             .populate("patient_demographic_id")
+            .populate("pre_authorization")
+            .populate("functional_improvements")
             .sort({ createdAt: "asc" })
             .exec();
         } else {
           patients = await Patient.find({})
             .populate("appointments")
+            .populate("patient_demographic_id")
+            .populate("pre_authorization")
+            .populate("functional_improvements")
             .sort({ createdAt: "desc" })
             .exec(); /* find all the data in our database */
         }

@@ -1,9 +1,6 @@
 import React, { Fragment } from "react";
 import Image from "next/image";
 
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-
 import { BsSearch } from "react-icons/bs";
 
 import Sidenav from "../Common/Sidenav";
@@ -23,144 +20,12 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
 import functionalStyles from "./Functionalimprovement.module.scss";
+import SearchPatient from "../Patients-Database/searchPatient";
+import PatientInfo from "../Patient-Demographics/PatientInfo";
+import FunctionalImprovementTrigger from "../Modals/FunctionalImprovementTrigger";
 
-function MyVerticallyCenteredModal(props) {
-  const handleSubmit = () => {};
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      className={`${functionalStyles.Modal}`}
-    >
-      <Modal.Header closeButton>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          className={`${functionalStyles.Modal_title}`}
-        >
-          Add Functional improvement
-        </Modal.Title>
-      </Modal.Header>
-      <form onSubmit={handleSubmit}>
-        <Modal.Body className={`${functionalStyles.Modal_body}`}>
-          <div className={`${functionalStyles.Functionalimprovment_col}`}>
-            <h5>Functional Improvement</h5>
-
-            <div className={`${functionalStyles.Inputlist}`}>
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <input type="checkbox" />
-                <label>
-                  Are you using assisted ambulations or activity aids?
-                </label>
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <input type="checkbox" />
-                <label>Do you require assistance at home or at work?</label>
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <input type="checkbox" />
-                <label>Is your ongoing care stopped?</label>
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <input type="checkbox" />
-                <label>Is there a re-injury</label>
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <input type="checkbox" />
-                <label>Do you experience increase is symptoms?</label>
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <input type="checkbox" />
-                <label>Sports</label>
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <input type="checkbox" />
-                <label>Are you taking medication?</label>
-              </div>
-            </div>
-          </div>
-
-          <div className={`${functionalStyles.Adl_col}`}>
-            <h5>Activities of Daily Living (ADL)</h5>
-
-            <div className={`${functionalStyles.Inputlist}`}>
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Phyisical Activity</label>
-                <input type="text" placeholder="Eg. your text here" />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Sensory Function</label>
-                <input type="text" placeholder="Eg. your text here" />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Non-specialized hand activities</label>
-                <input type="text" placeholder="Eg. your text here" />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Travel</label>
-                <input type="text" placeholder="Eg. your text here" />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Sexual Function</label>
-                <input type="text" placeholder="Eg. your text here" />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Sleep</label>
-                <input type="text" placeholder="Eg. your text here" />
-              </div>
-            </div>
-          </div>
-
-          <div className={`${functionalStyles.Adl_col}`}>
-            <h5>Activities of Daily Living (ADL)</h5>
-
-            <div className={`${functionalStyles.Inputlist}`}>
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Self-care, personal hygiene</label>
-                <input type="text" placeholder="Eg. your text here" />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Communication</label>
-                <input type="text" placeholder="Eg. your text here" />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Description</label>
-                <textarea
-                  cols="20"
-                  rows="15"
-                  placeholder="Eg. your text here"
-                />
-              </div>
-            </div>
-          </div>
-        </Modal.Body>
-        <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-          {/* <Button onClick={props.onHide}>Close</Button> */}
-
-          <button>Save</button>
-        </Modal.Footer>
-      </form>
-    </Modal>
-  );
-}
-
+import FunctionalImprovemntList from "./functionalImprovementList";
 function Functionalimprovement(props) {
-  const [modalShow, setModalShow] = React.useState(false);
-
   return (
     <Fragment>
       <div
@@ -181,55 +46,10 @@ function Functionalimprovement(props) {
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Functional Improvement</h3>
 
-                      <div
-                        className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
-                      >
-                        <span
-                          className={`${frame47Styles.Inputgroup_text} input-group-text`}
-                          id="addon-wrapping"
-                        >
-                          <BsSearch />
-                        </span>
-                        <input
-                          type="text"
-                          className={`form-control`}
-                          placeholder="Search Category, Patient Info etc"
-                          aria-label="Username"
-                          aria-describedby="addon-wrapping"
-                        />
-                      </div>
+                      <SearchPatient />
                     </div>
 
-                    <div className={`${frame47Styles.Details}`}>
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <div className={`${frame47Styles.Profilepic}`}>
-                          <Image src={profilepic} alt="profile-pic" />
-                        </div>
-
-                        <div className={`${frame47Styles.Name}`}>
-                          <h4 className={`${frame47Styles.Bigname}`}>
-                            Gerson Basconcillo
-                          </h4>
-                          <h5>See Patient info</h5>
-                        </div>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Address: 46 Amity Ext, Paranaque City</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Contact +7 (4812) 11-22-33</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Birthdate: 06/45/1990</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Age: 32</h4>
-                      </div>
-                    </div>
+                    <PatientInfo />
                   </div>
 
                   <div className={`${frame44Styles.Toptabs} row col-md-7`}>
@@ -237,24 +57,7 @@ function Functionalimprovement(props) {
                       <h3>Quick Tasks</h3>
                     </div>
 
-                    <Button
-                      variant="primary"
-                      onClick={() => setModalShow(true)}
-                      className={`${frame44Styles.Tab} col-md-3`}
-                    >
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={appointmenticon} alt="icon-img" />
-                      </div>
-
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>Add Functional Improvement</h4>
-                      </div>
-                    </Button>
-
-                    <MyVerticallyCenteredModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    />
+                    <FunctionalImprovementTrigger />
 
                     <div className={`${frame44Styles.Tab} col-md-3`}>
                       <div className={`${frame44Styles.Image}`}>
@@ -272,7 +75,9 @@ function Functionalimprovement(props) {
                       <h3>Data</h3>
                     </div>
 
-                    <div className={`${frame44Styles.Appointmentlist_section}`}>
+                    <FunctionalImprovemntList />
+
+                    {/* <div className={`${frame44Styles.Appointmentlist_section}`}>
                       <div className={`${frame44Styles.Appointmentlist_title}`}>
                         <div className={`${frame44Styles.Name}`}>
                           <h4>Name</h4>
@@ -369,7 +174,7 @@ function Functionalimprovement(props) {
                           <Image src={deleteicon} alt="delete-icon" />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

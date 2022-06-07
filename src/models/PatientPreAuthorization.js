@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Patient from "./Patient";
 
 /* PatientPreAuthorizationSchema will correspond to a collection in your MongoDB database. */
 
@@ -84,6 +85,10 @@ const PatientPreAuthorizationSchema = new mongoose.Schema(
     },
     first_attempt_result: {
       type: String,
+    },
+    patient_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Patient",
     },
   },
   { timestamps: true }
