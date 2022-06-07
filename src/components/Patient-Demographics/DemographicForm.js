@@ -57,6 +57,7 @@ function DemographicForm() {
   const [form, setForm] = useState(initialFormValues);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  console.log(data);
 
   useEffect(() => {
     setPatient({ ...data });
