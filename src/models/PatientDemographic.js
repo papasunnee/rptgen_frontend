@@ -143,7 +143,7 @@ const PatientDemographicSchema = new mongoose.Schema(
     interpreter_eams_adjuster: {
       type: String,
     },
-    user: {
+    patient_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Patient",
     },

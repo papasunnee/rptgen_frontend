@@ -1,6 +1,7 @@
 import { fetcher } from "@/context/AuthContext";
+import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import Select from "react-select";
 import useSWR from "swr";
@@ -8,6 +9,7 @@ import useSWR from "swr";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
 function SearchPatient() {
+  // const [val, setVal] = useContext(UserContext);
   const { data } = useSWR("/api/patient", fetcher);
   const router = useRouter();
   const [patientSelect, setPatientSelect] = useState(null);

@@ -49,21 +49,32 @@ const initialFormValues = {
   interpreter_fax: "",
   interpreter_phone: "",
   interpreter_eams_adjuster: "",
+  patient_id: null,
 };
 
 function DemographicForm() {
   const data = useContext(UserContext);
+  const [error, setError] = useState(null);
   const [patient, setPatient] = useState();
   const [form, setForm] = useState(initialFormValues);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log(data);
 
   useEffect(() => {
     setPatient({ ...data });
-  }, []);
+    if (data.patient_demographic_id) {
+      setForm((prevValues) => ({
+        ...prevValues,
+        ...data.patient_demographic_id,
+        patient_demographic_id: data.patient_demographic_id._id,
+      }));
+    } else {
+      setForm(initialFormValues);
+    }
+  }, [data]);
 
   const handleChange = (e) => {
+    setError(null);
     setSuccessMessage(null);
     const { name, value } = e.target;
 
@@ -74,29 +85,46 @@ function DemographicForm() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
-    try {
-      const response = await fetch("/api/patient/demographic", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await response.json();
-      console.log(data);
-      if (data.success) {
-        setSuccessMessage("Patient Demographic Successfully Added");
-        setForm(initialFormValues);
+    setError(null);
+    const isEmpty = Object.values(form).every(
+      (item) => item === null || item === ""
+    );
+    if (!isEmpty) {
+      try {
+        const response = await fetch("/api/patient/demographic", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...form, patient_id: data._id }),
+        });
+        const demoData = await response.json();
+
+        if (demoData.success) {
+          global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
+          setSuccessMessage("Patient Demographic Successfully Added");
+          setTimeout(() => setSuccessMessage(null), 5000);
+        } else {
+          throw new Error("Cannot Create Demographic Data");
+        }
+      } catch (error) {
+        console.log(error.message);
       }
-    } catch (error) {
-      console.log(error.message);
+    } else {
+      global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
+      setError("Please Fill at least one field");
     }
     setLoading(false);
   };
   return (
     <form className={`${demographicsStyles.Form}`} onSubmit={handleSubmit}>
       <div id="headerinfo" className={`${demographicsStyles.Header_section}`}>
+        <div style={{ minHeight: "22px" }}>
+          {error && <p className="bg-danger text-white p-2">{error}</p>}
+          {successMessage && (
+            <p className="bg-success text-white p-2">{successMessage}</p>
+          )}
+        </div>
         <h3>Header Information</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -112,7 +140,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="providers_code"
                 value={form.providers_code}
                 onChange={handleChange}
@@ -132,7 +159,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="assistant_providers_code"
                 value={form.assistant_providers_code}
                 onChange={handleChange}
@@ -152,7 +178,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="providers_code_2"
                 value={form.providers_code_2}
                 onChange={handleChange}
@@ -181,7 +206,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="insurance_company_name"
                 value={form.insurance_company_name}
                 onChange={handleChange}
@@ -201,7 +225,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="insurance_address"
                 value={form.insurance_address}
                 onChange={handleChange}
@@ -221,7 +244,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="insurance_city_state"
                 value={form.insurance_city_state}
                 onChange={handleChange}
@@ -243,7 +265,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="insurance_claim_adjuster"
                 value={form.insurance_claim_adjuster}
                 onChange={handleChange}
@@ -263,7 +284,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="insurance_claim_number"
                 value={form.insurance_claim_number}
                 onChange={handleChange}
@@ -283,7 +303,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="insurance_telephone"
                 value={form.insurance_telephone}
                 onChange={handleChange}
@@ -305,7 +324,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="insurance_fax"
                 value={form.insurance_fax}
                 onChange={handleChange}
@@ -331,7 +349,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="account_rep_name"
                 value={form.account_rep_name}
                 onChange={handleChange}
@@ -351,7 +368,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="account_description"
                 value={form.account_description}
                 onChange={handleChange}
@@ -380,7 +396,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="applicant_name"
                 value={form.applicant_name}
                 onChange={handleChange}
@@ -400,7 +415,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="applicant_address"
                 value={form.applicant_address}
                 onChange={handleChange}
@@ -420,7 +434,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="applicant_city_state"
                 value={form.applicant_city_state}
                 onChange={handleChange}
@@ -442,7 +455,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="applicant_fax"
                 value={form.applicant_fax}
                 onChange={handleChange}
@@ -462,7 +474,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="applicant_telephone"
                 value={form.applicant_telephone}
                 onChange={handleChange}
@@ -491,7 +502,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="defence_name"
                 value={form.defence_name}
                 onChange={handleChange}
@@ -511,7 +521,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="defence_address"
                 value={form.defence_address}
                 onChange={handleChange}
@@ -531,7 +540,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="defence_state_city"
                 value={form.defence_state_city}
                 onChange={handleChange}
@@ -553,7 +561,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="defence_fax"
                 value={form.defence_fax}
                 onChange={handleChange}
@@ -573,7 +580,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="defence_phone"
                 value={form.defence_phone}
                 onChange={handleChange}
@@ -599,7 +605,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_name"
                 value={form.wcab_name}
                 onChange={handleChange}
@@ -619,7 +624,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_address"
                 value={form.wcab_address}
                 onChange={handleChange}
@@ -639,7 +643,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_city_state"
                 value={form.wcab_city_state}
                 onChange={handleChange}
@@ -661,7 +664,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_fax"
                 value={form.wcab_fax}
                 onChange={handleChange}
@@ -681,7 +683,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_phone"
                 value={form.wcab_phone}
                 onChange={handleChange}
@@ -701,7 +702,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_eams_adjuster"
                 value={form.wcab_eams_adjuster}
                 onChange={handleChange}
@@ -730,7 +730,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="referring_physician_name"
                 value={form.referring_physician_name}
                 onChange={handleChange}
@@ -750,7 +749,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="referring_physician_address"
                 value={form.referring_physician_address}
                 onChange={handleChange}
@@ -770,7 +768,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="referring_physician_city_state"
                 value={form.referring_physician_city_state}
                 onChange={handleChange}
@@ -792,7 +789,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="referring_physician_fax"
                 value={form.referring_physician_fax}
                 onChange={handleChange}
@@ -812,7 +808,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="referring_physician_phone"
                 value={form.referring_physician_phone}
                 onChange={handleChange}
@@ -832,7 +827,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="referring_physician_eams_adjuster"
                 value={form.referring_physician_eams_adjuster}
                 onChange={handleChange}
@@ -858,7 +852,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_name"
                 value={form.employer_name}
                 onChange={handleChange}
@@ -878,7 +871,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_address"
                 value={form.employer_address}
                 onChange={handleChange}
@@ -898,7 +890,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_city_state"
                 value={form.employer_city_state}
                 onChange={handleChange}
@@ -920,7 +911,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_fax"
                 value={form.employer_fax}
                 onChange={handleChange}
@@ -940,7 +930,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_phone"
                 value={form.employer_phone}
                 onChange={handleChange}
@@ -960,7 +949,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_eams_adjuster"
                 value={form.employer_eams_adjuster}
                 onChange={handleChange}
@@ -986,7 +974,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_name"
                 value={form.interpreter_name}
                 onChange={handleChange}
@@ -1006,7 +993,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_address"
                 value={form.interpreter_address}
                 onChange={handleChange}
@@ -1026,7 +1012,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_city_state"
                 value={form.interpreter_city_state}
                 onChange={handleChange}
@@ -1048,7 +1033,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_fax"
                 value={form.interpreter_fax}
                 onChange={handleChange}
@@ -1068,7 +1052,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_phone"
                 value={form.interpreter_phone}
                 onChange={handleChange}
@@ -1088,7 +1071,6 @@ function DemographicForm() {
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_eams_adjuster"
                 value={form.interpreter_eams_adjuster}
                 onChange={handleChange}
@@ -1098,7 +1080,6 @@ function DemographicForm() {
         </div>
       </div>
 
-      <p>{successMessage}</p>
       <div className={`${demographicsStyles.Button}`}>
         <button disabled={loading}>
           {loading ? "...Please wait" : "Save"}

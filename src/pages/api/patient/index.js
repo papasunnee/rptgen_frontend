@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import Appointment from "@/models/Appointment";
+import PatientDemographic from "@/models/PatientDemographic";
 import Patient from "@/models/Patient";
 
 export default async function handler(req, res) {
@@ -22,6 +23,7 @@ export default async function handler(req, res) {
             _id: id,
           })
             .populate("appointments")
+            .populate("patient_demographic_id")
             .exec(); /* find all the data in our database */
         } else if (
           page &&
@@ -31,6 +33,7 @@ export default async function handler(req, res) {
             .limit(perPage)
             .skip(perPage * page)
             .populate("appointments")
+            .populate("patient_demographic_id")
             .sort({ createdAt: "asc" })
             .exec();
         } else {
@@ -56,6 +59,7 @@ export default async function handler(req, res) {
           data: { patients, recentPatient, recentPatients },
         });
       } catch (error) {
+        console.log(error);
         return res.status(400).json({ success: false, error: error.message });
       }
     case "POST":

@@ -13,6 +13,7 @@ const initialValues = {
 };
 
 function PatientInfo() {
+  // const [data] = useContext(UserContext);
   const data = useContext(UserContext);
   const [patient, setPatient] = useState(initialValues);
 

@@ -16,7 +16,10 @@ function PatientDemographics({ data }) {
 export async function getServerSideProps({ params }) {
   // Fetch data from API with absolute URL
   const res = await fetch(
-    `${process.env.NEXTAUTH_URL}/api/patient?id=${params.id}`
+    `${process.env.NEXTAUTH_URL}/api/patient?id=${params.id}`,
+    {
+      method: "GET",
+    }
   );
   const data = await res.json();
 
@@ -31,7 +34,6 @@ export async function getServerSideProps({ params }) {
       props: {},
     };
   }
-  // Pass data to the page via props
 }
 
 export default PatientDemographics;

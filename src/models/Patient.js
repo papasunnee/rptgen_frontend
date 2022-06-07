@@ -74,7 +74,7 @@ const PatientSchema = new mongoose.Schema(
         ref: "Appointment",
       },
     ],
-    patientDemographic: {
+    patient_demographic_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "PatientDemographic",
     },
