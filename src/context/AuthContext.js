@@ -45,7 +45,6 @@ const AuthProvider = (props) => {
     setLoading(true);
     const response = await fetch("/api/logout", { method: "POST" });
     const data = await response.json();
-    console.log({ data });
     setLoading(false);
     return data;
   };
@@ -83,6 +82,24 @@ const AuthProvider = (props) => {
     }
   };
 
+  const getUser = async (id) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/patient?id=${id}`, {
+        method: "GET",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await response.json();
+      setLoading(false);
+      return { data: data.data.patients };
+    } catch (error) {
+      // setLoading(false);
+      console.log(error);
+      return { error: error.message };
+    }
+  };
+
   // useEffect(() => {
   //   checkAuth();
   // }, []);
@@ -99,6 +116,7 @@ const AuthProvider = (props) => {
     errorSWR,
     newPatient,
     setUser,
+    getUser,
     checkAuth,
     setLoading,
   };

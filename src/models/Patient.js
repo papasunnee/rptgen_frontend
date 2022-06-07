@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Appointment from "./Appointment";
+import PatientDemographic from "./PatientDemographic";
 
 /* PatientSchema will correspond to a collection in your MongoDB database. */
 
@@ -73,6 +74,11 @@ const PatientSchema = new mongoose.Schema(
         ref: "Appointment",
       },
     ],
+    patientDemographic: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PatientDemographic",
+    },
+
     role: {
       type: String,
       default: "patient",

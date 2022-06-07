@@ -24,7 +24,7 @@ import DemographicForm from "./DemographicForm";
 import PatientInfo from "./PatientInfo";
 import SearchPatient from "../Patients-Database/searchPatient";
 
-function Index({ patient }) {
+function Index() {
   return (
     <Fragment>
       <div className={`${frame44Styles.Frame34} container-fluid`}>
@@ -47,7 +47,7 @@ function Index({ patient }) {
                       <SearchPatient />
                     </div>
 
-                    <PatientInfo patient={patient} />
+                    <PatientInfo />
                   </div>
 
                   <div className={`${demographicsStyles.Formtab_titles}`}>
