@@ -27,7 +27,7 @@ function JobDescriptionTrigger() {
         </div>
 
         <div className={`${frame44Styles.Content}`}>
-          <h4>Add Functional Improvement</h4>
+          <h4>Add Job Description</h4>
         </div>
       </Button>
 
