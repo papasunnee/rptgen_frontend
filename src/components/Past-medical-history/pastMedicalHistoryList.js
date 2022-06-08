@@ -11,16 +11,14 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 // import AppointmentModal from "./appointmentModal";
 import { UserContext } from "@/context/UserContext";
 
-function FunctionalImprovemntList() {
+function PastMedicalHistoryList() {
   const contextData = useContext(UserContext);
   const { data, mutate } = useSWR(
-    `/api/patient/functional?patient_id=${contextData._id}`,
+    `/api/patient/pastmedicalhistory?patient_id=${contextData._id}`,
     fetcher
   );
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  console.log({ sss: data });
 
   const confirmDelete = (id) => {
     confirmAlert({
@@ -49,7 +47,7 @@ function FunctionalImprovemntList() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch("/api/patient/functional", {
+      const response = await fetch("/api/patient/pastmedicalhistory", {
         method: "DELETE",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -68,33 +66,29 @@ function FunctionalImprovemntList() {
       </div>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>
-        {data?.data?.functionalImprovements?.length > 0 && (
+        {data?.data?.pastMedicalHistories?.length > 0 && (
           <>
             <table className="table">
               <thead>
                 <tr className={`${frame44Styles.Appointmentlist_title}`}>
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Communication</h4>
+                    <h4>Body Part</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Description</h4>
+                    <h4>Injury Date</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Non Specialized Hand</h4>
+                    <h4>Injury Mechanism</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Physical Activity</h4>
+                    <h4>Treatment Type</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Self Care</h4>
-                  </td>
-
-                  <td className={`${frame44Styles.Name} col`}>
-                    <h4>Sensory Function</h4>
+                    <h4>Type</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
@@ -103,31 +97,27 @@ function FunctionalImprovemntList() {
                 </tr>
               </thead>
               <tbody>
-                {data?.data?.functionalImprovements?.map(
-                  (functionalImprovement, index) => (
+                {data?.data?.pastMedicalHistories?.map(
+                  (pastMedicalHistory, index) => (
                     <tr key={index} className={`${frame44Styles.Appointment}`}>
                       <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.communication}</h4>
+                        <h4>{pastMedicalHistory.body_part}</h4>
                       </td>
 
                       <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.description}</h4>
+                        <h4>{pastMedicalHistory.injury_date}</h4>
                       </td>
 
                       <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.non_specialized_hand}</h4>
+                        <h4>{pastMedicalHistory.injury_mechanism}</h4>
                       </td>
 
                       <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.physical_activity}</h4>
+                        <h4>{pastMedicalHistory.treatment_type}</h4>
                       </td>
 
                       <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.self_care}</h4>
-                      </td>
-
-                      <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.sensory_function}</h4>
+                        <h4>{pastMedicalHistory.type}</h4>
                       </td>
 
                       <td className={`${frame44Styles.Action_buttons}`}>
@@ -147,7 +137,7 @@ function FunctionalImprovemntList() {
                           src={deleteicon}
                           alt="delete-icon"
                           onClick={() => {
-                            confirmDelete(functionalImprovement._id);
+                            confirmDelete(pastMedicalHistory._id);
                           }}
                         />
                       </td>
@@ -163,4 +153,4 @@ function FunctionalImprovemntList() {
   );
 }
 
-export default FunctionalImprovemntList;
+export default PastMedicalHistoryList;

@@ -3,6 +3,8 @@ import Appointment from "./Appointment";
 import PatientDemographic from "./PatientDemographic";
 import PatientPreAuthorization from "./PatientPreAuthorization";
 import FunctionalImprovement from "./FunctionalImprovement";
+import JobDescription from "./JobDescription";
+import PastMedicalHistory from "./PastMedicalHistory";
 
 /* PatientSchema will correspond to a collection in your MongoDB database. */
 
@@ -80,6 +82,18 @@ const PatientSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "FunctionalImprovement",
+      },
+    ],
+    job_descriptions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "JobDescription",
+      },
+    ],
+    past_medical_histories: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PastMedicalHistory",
       },
     ],
     patient_demographic_id: {

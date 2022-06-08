@@ -25,6 +25,8 @@ import frame47Styles from "../Frame47/Frame47.module.scss";
 import diagnosisStyles from "./Diagnosis.module.scss";
 
 import presentcomplainStyles from "../Present-Complaints/Complaints.module.scss";
+import SearchPatient from "../Patients-Database/searchPatient";
+import PatientInfo from "../Patient-Demographics/PatientInfo";
 
 function MyVerticallyCenteredModal(props) {
   return (
@@ -35,7 +37,10 @@ function MyVerticallyCenteredModal(props) {
       centered
       className={`${presentcomplainStyles.Modal}`}
     >
-      <Modal.Header className={`${presentcomplainStyles.Modal_header}`} closeButton>
+      <Modal.Header
+        className={`${presentcomplainStyles.Modal_header}`}
+        closeButton
+      >
         <Modal.Title
           id="contained-modal-title-vcenter"
           className={`${presentcomplainStyles.Modal_title}`}
@@ -85,7 +90,6 @@ function MyVerticallyCenteredModal(props) {
               <h4>Right Wrist</h4>
             </div>
           </div>
-
         </div>
 
         <div className={`${presentcomplainStyles.Body_parts_col}`}>
@@ -128,7 +132,6 @@ function MyVerticallyCenteredModal(props) {
               <h4>Left Wrist</h4>
             </div>
           </div>
-
         </div>
 
         <div className={`${presentcomplainStyles.Body_parts_col}`}>
@@ -171,9 +174,7 @@ function MyVerticallyCenteredModal(props) {
               <h4>Right Hip</h4>
             </div>
           </div>
-
         </div>
-
       </Modal.Body>
 
       <Modal.Footer className={`${presentcomplainStyles.Modal_footer}`}>
@@ -190,12 +191,8 @@ function Index() {
 
   return (
     <Fragment>
-      <div
-        className={`${frame44Styles.Frame34} container-fluid`}
-      >
-        <div
-          className={`${frame44Styles.Heightadjust} row vh-100`}
-        >
+      <div className={`${frame44Styles.Frame34} container-fluid`}>
+        <div className={`${frame44Styles.Heightadjust} row vh-100`}>
           <Sidenav className={`${frame44Styles.Sidebar} container-fluid`} />
 
           <div className={`col d-flex flex-column h-sm-100`}>
@@ -203,62 +200,15 @@ function Index() {
               <div className={`${frame44Styles.Contentcon} col pt-4`}>
                 <Topnav />
 
-                <div
-                  className={`${frame44Styles.Body}`}>
-                  <div
-                    className={`${frame47Styles.Patientsdetails} row`}>
+                <div className={`${frame44Styles.Body}`}>
+                  <div className={`${frame47Styles.Patientsdetails} row`}>
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Diagnosis</h3>
 
-                      <div
-                        className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
-                      >
-                        <span
-                          className={`${frame47Styles.Inputgroup_text} input-group-text`}
-                          id="addon-wrapping"
-                        >
-                          <BsSearch />
-                        </span>
-                        <input
-                          type="text"
-                          className={`form-control`}
-                          placeholder="Search Category, Patient Info etc"
-                          aria-label="Username"
-                          aria-describedby="addon-wrapping"
-                        />
-                      </div>
+                      <SearchPatient />
                     </div>
 
-                    <div className={`${frame47Styles.Details}`}>
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <div className={`${frame47Styles.Profilepic}`}>
-                          <Image src={profilepic} alt="profile-pic" />
-                        </div>
-
-                        <div className={`${frame47Styles.Name}`}>
-                          <h4 className={`${frame47Styles.Bigname}`}>
-                            Gerson Basconcillo
-                          </h4>
-                          <h5>See Patient info</h5>
-                        </div>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Address: 46 Amity Ext, Paranaque City</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Contact +7 (4812) 11-22-33</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Birthdate: 06/45/1990</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Age: 32</h4>
-                      </div>
-                    </div>
+                    <PatientInfo />
                   </div>
 
                   <div
@@ -319,7 +269,10 @@ function Index() {
                   </div>
 
                   <form className={`${diagnosisStyles.Form}`}>
-                    <div id="cervicalspine" className={`${diagnosisStyles.Toprow}`}>
+                    <div
+                      id="cervicalspine"
+                      className={`${diagnosisStyles.Toprow}`}
+                    >
                       <div className={`${diagnosisStyles.Title}`}>
                         <h3>Cervical Spine</h3>
                       </div>
@@ -386,7 +339,10 @@ function Index() {
                       </div>
                     </div>
 
-                    <div id="leftshoulder" className={`${diagnosisStyles.Toprow}`}>
+                    <div
+                      id="leftshoulder"
+                      className={`${diagnosisStyles.Toprow}`}
+                    >
                       <div className={`${diagnosisStyles.Title}`}>
                         <h3>Left Shoulder</h3>
                       </div>

@@ -11,10 +11,10 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 // import AppointmentModal from "./appointmentModal";
 import { UserContext } from "@/context/UserContext";
 
-function FunctionalImprovemntList() {
+function JobDescriptionList() {
   const contextData = useContext(UserContext);
   const { data, mutate } = useSWR(
-    `/api/patient/functional?patient_id=${contextData._id}`,
+    `/api/patient/jobdescription?patient_id=${contextData._id}`,
     fetcher
   );
   const [modalShow, setModalShow] = useState(false);
@@ -49,7 +49,7 @@ function FunctionalImprovemntList() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch("/api/patient/functional", {
+      const response = await fetch("/api/patient/jobdescription", {
         method: "DELETE",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -68,33 +68,33 @@ function FunctionalImprovemntList() {
       </div>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>
-        {data?.data?.functionalImprovements?.length > 0 && (
+        {data?.data?.jobDescriptions?.length > 0 && (
           <>
             <table className="table">
               <thead>
                 <tr className={`${frame44Styles.Appointmentlist_title}`}>
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Communication</h4>
+                    <h4>Dominant Hand</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Description</h4>
+                    <h4>Employee Name</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Non Specialized Hand</h4>
+                    <h4>Hours Worked</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Physical Activity</h4>
+                    <h4>Job Title</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Self Care</h4>
+                    <h4>Job Type</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Sensory Function</h4>
+                    <h4>Reason</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
@@ -103,57 +103,55 @@ function FunctionalImprovemntList() {
                 </tr>
               </thead>
               <tbody>
-                {data?.data?.functionalImprovements?.map(
-                  (functionalImprovement, index) => (
-                    <tr key={index} className={`${frame44Styles.Appointment}`}>
-                      <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.communication}</h4>
-                      </td>
+                {data?.data?.jobDescriptions?.map((jobDescription, index) => (
+                  <tr key={index} className={`${frame44Styles.Appointment}`}>
+                    <td className={`${frame44Styles.Name} col`}>
+                      <h4>{jobDescription.dominant_hand}</h4>
+                    </td>
 
-                      <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.description}</h4>
-                      </td>
+                    <td className={`${frame44Styles.Name} col`}>
+                      <h4>{jobDescription.employee_name}</h4>
+                    </td>
 
-                      <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.non_specialized_hand}</h4>
-                      </td>
+                    <td className={`${frame44Styles.Name} col`}>
+                      <h4>{jobDescription.hours_worked}</h4>
+                    </td>
 
-                      <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.physical_activity}</h4>
-                      </td>
+                    <td className={`${frame44Styles.Name} col`}>
+                      <h4>{jobDescription.job_title}</h4>
+                    </td>
 
-                      <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.self_care}</h4>
-                      </td>
+                    <td className={`${frame44Styles.Name} col`}>
+                      <h4>{jobDescription.job_type}</h4>
+                    </td>
 
-                      <td className={`${frame44Styles.Name} col`}>
-                        <h4>{functionalImprovement.sensory_function}</h4>
-                      </td>
+                    <td className={`${frame44Styles.Name} col`}>
+                      <h4>{jobDescription.job_title}</h4>
+                    </td>
 
-                      <td className={`${frame44Styles.Action_buttons}`}>
-                        {/* <Image
+                    <td className={`${frame44Styles.Action_buttons}`}>
+                      {/* <Image
                           variant="primary"
                           onClick={() => setModalShow(true)}
                           src={editicon}
                           alt="edit-icon"
                         /> */}
 
-                        {/* <AppointmentModal
+                      {/* <AppointmentModal
                         show={modalShow}
                         onHide={() => setModalShow(false)}
                       /> */}
 
-                        <Image
-                          src={deleteicon}
-                          alt="delete-icon"
-                          onClick={() => {
-                            confirmDelete(functionalImprovement._id);
-                          }}
-                        />
-                      </td>
-                    </tr>
-                  )
-                )}
+                      <Image
+                        src={deleteicon}
+                        alt="delete-icon"
+                        onClick={() => {
+                          confirmDelete(jobDescription._id);
+                        }}
+                      />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </>
@@ -163,4 +161,4 @@ function FunctionalImprovemntList() {
   );
 }
 
-export default FunctionalImprovemntList;
+export default JobDescriptionList;

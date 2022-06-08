@@ -1,12 +1,12 @@
 import dbConnect from "@/lib/dbConnect";
 import Patient from "@/models/Patient";
-import FunctionalImprovement from "@/models/FunctionalImprovement";
+import PastMedicalHistory from "@/models/PastMedicalHistory";
 import mongoose from "mongoose";
 
 export default async function handler(req, res) {
   const { method } = req;
 
-  let functionalImprovements;
+  let pastMedicalHistories;
   const id = req.query.patient_id;
   const patient_id = req.body.patient_id;
   const delete_id = req.body.delete_id;
@@ -17,36 +17,36 @@ export default async function handler(req, res) {
     case "GET":
       try {
         if (id && (id != "undefined" || id != null || id != "null")) {
-          functionalImprovements = await FunctionalImprovement.find({
+          pastMedicalHistories = await PastMedicalHistory.find({
             patient_id: id,
           }).exec(); /* find all the data in our database */
         } else {
-          functionalImprovements = await FunctionalImprovement.find(
+          pastMedicalHistories = await PastMedicalHistory.find(
             {}
           ).exec(); /* find all the data in our database */
         }
 
         return res.status(200).json({
           success: true,
-          data: { functionalImprovements },
+          data: { pastMedicalHistories },
         });
       } catch (error) {
         console.log(error);
         return res.status(400).json({ success: false, error: error.message });
       }
-      break;
+
     case "POST":
       try {
-        let functionalImprovement = await FunctionalImprovement.create({
+        let pastmedicalhistory = await PastMedicalHistory.create({
           ...req.body,
         });
         const patientRecord = await Patient.findOne({ _id: patient_id });
-        patientRecord.functional_improvements.push(functionalImprovement._id);
+        patientRecord.past_medical_histories.push(pastmedicalhistory._id);
         await patientRecord.save();
 
         return res.status(201).json({
           success: true,
-          data: { functionalImprovement, patientRecord },
+          data: { pastmedicalhistory, patientRecord },
         });
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
@@ -57,21 +57,19 @@ export default async function handler(req, res) {
           delete_id &&
           (delete_id != "undefined" || delete_id != null || delete_id != "null")
         ) {
-          const functionalImprovement =
-            await FunctionalImprovement.findOneAndDelete({
-              _id: delete_id,
-            });
+          const pastMedicalHistory = await PastMedicalHistory.findOneAndDelete({
+            _id: delete_id,
+          });
 
-          if (functionalImprovement) {
+          if (pastMedicalHistory) {
             const patientRecord = await Patient.findOne({
-              _id: functionalImprovement.patient_id,
+              _id: pastMedicalHistory.patient_id,
             });
-            const itemToRemove =
-              patientRecord.functional_improvements.findIndex(
-                (item) => item == functionalImprovement._id
-              );
+            const itemToRemove = patientRecord.past_medical_histories.findIndex(
+              (item) => item == pastMedicalHistory._id
+            );
             if (itemToRemove > -1) {
-              patientRecord.functional_improvements.splice(itemToRemove, 1);
+              patientRecord.past_medical_histories.splice(itemToRemove, 1);
               await patientRecord.save();
             }
 
@@ -82,7 +80,6 @@ export default async function handler(req, res) {
 
           return res.status(400).json({ success: false });
         } else {
-          console.log(delete_id);
           return res
             .status(400)
             .json({ success: false, error: "Unprocessed delete_id" });

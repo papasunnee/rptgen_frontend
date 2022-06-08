@@ -3,6 +3,8 @@ import Appointment from "@/models/Appointment";
 import PatientDemographic from "@/models/PatientDemographic";
 import PatientPreAuthorization from "@/models/PatientPreAuthorization";
 import FunctionalImprovement from "@/models/FunctionalImprovement";
+import JobDescription from "@/models/JobDescription";
+import PastMedicalHistory from "@/models/PastMedicalHistory";
 import Patient from "@/models/Patient";
 
 export default async function handler(req, res) {
@@ -28,6 +30,8 @@ export default async function handler(req, res) {
             .populate("patient_demographic_id")
             .populate("pre_authorization")
             .populate("functional_improvements")
+            .populate("job_descriptions")
+            .populate("past_medical_histories")
             .exec(); /* find all the data in our database */
         } else if (
           page &&
@@ -40,6 +44,8 @@ export default async function handler(req, res) {
             .populate("patient_demographic_id")
             .populate("pre_authorization")
             .populate("functional_improvements")
+            .populate("job_descriptions")
+            .populate("past_medical_histories")
             .sort({ createdAt: "asc" })
             .exec();
         } else {
@@ -48,6 +54,8 @@ export default async function handler(req, res) {
             .populate("patient_demographic_id")
             .populate("pre_authorization")
             .populate("functional_improvements")
+            .populate("job_descriptions")
+            .populate("past_medical_histories")
             .sort({ createdAt: "desc" })
             .exec(); /* find all the data in our database */
         }
