@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Patient from "./Patient";
 
 /* PatientDemographicSchema will correspond to a collection in your MongoDB database. */
 
@@ -141,6 +142,10 @@ const PatientDemographicSchema = new mongoose.Schema(
     },
     interpreter_eams_adjuster: {
       type: String,
+    },
+    patient_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Patient",
     },
   },
   { timestamps: true }

@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 import Appointment from "./Appointment";
+import PatientDemographic from "./PatientDemographic";
+import PatientPreAuthorization from "./PatientPreAuthorization";
+import FunctionalImprovement from "./FunctionalImprovement";
+import JobDescription from "./JobDescription";
+import PastMedicalHistory from "./PastMedicalHistory";
+import SuperBill from "./SuperBill";
+import BillReduction from "./BillReduction";
 
 /* PatientSchema will correspond to a collection in your MongoDB database. */
 
@@ -73,6 +80,45 @@ const PatientSchema = new mongoose.Schema(
         ref: "Appointment",
       },
     ],
+    functional_improvements: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "FunctionalImprovement",
+      },
+    ],
+    job_descriptions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "JobDescription",
+      },
+    ],
+    past_medical_histories: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PastMedicalHistory",
+      },
+    ],
+    super_bills: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SuperBill",
+      },
+    ],
+    bill_reductions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "BillReduction",
+      },
+    ],
+    patient_demographic_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PatientDemographic",
+    },
+    pre_authorization: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PatientPreAuthorization",
+    },
+
     role: {
       type: String,
       default: "patient",

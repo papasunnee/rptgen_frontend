@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "@/context/UserContext";
 
 import demographicsStyles from "../../Patient-Demographics/Demographics.module.scss";
 
@@ -30,13 +31,31 @@ const initialFormValues = {
   first_attempt_contact_name: "",
   first_attempt_title_position: "",
   first_attempt_result: "",
+  patient_id: null,
 };
 function PreAuthorizationForm() {
+  const data = useContext(UserContext);
+  const [error, setError] = useState(null);
+  const [patient, setPatient] = useState();
   const [form, setForm] = useState(initialFormValues);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    setPatient({ ...data });
+    if (data.pre_authorization) {
+      setForm((prevValues) => ({
+        ...prevValues,
+        ...data.pre_authorization,
+        pre_authorization: data.pre_authorization._id,
+      }));
+    } else {
+      setForm(initialFormValues);
+    }
+  }, [data]);
+
   const handleChange = (e) => {
+    setError(null);
     setSuccessMessage(null);
     const { name, value } = e.target;
 
@@ -47,29 +66,49 @@ function PreAuthorizationForm() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
-    try {
-      const response = await fetch("/api/patient/preauthorization", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await response.json();
-      console.log(data);
-      if (data.success) {
-        setSuccessMessage("Patient PreAuthorization Successfully Added");
-        setForm(initialFormValues);
+    setError(null);
+    const isEmpty = Object.values(form).every(
+      (item) => item === null || item === ""
+    );
+    if (!isEmpty) {
+      let postData = { ...form, patient_id: data._id };
+      delete postData._id;
+
+      try {
+        const response = await fetch("/api/patient/preauthorization", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(postData),
+        });
+        const preAuthData = await response.json();
+        console.log({ preAuthData });
+        if (preAuthData.success) {
+          global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
+          setSuccessMessage("Patient Pre-Authorization Successfully Updated");
+          setTimeout(() => setSuccessMessage(null), 5000);
+        } else {
+          throw new Error("Cannot Update Pre-Authorization Data");
+        }
+      } catch (error) {
+        console.log(error.message);
       }
-    } catch (error) {
-      console.log(error.message);
+    } else {
+      setError("Please Fill at least one field");
     }
+    global.window.scrollTo({ top: 300, left: 0, behavior: "smooth" });
     setLoading(false);
   };
   return (
     <form className={`${demographicsStyles.Form}`} onSubmit={handleSubmit}>
       <div className={`${demographicsStyles.Header_section}`}>
+        <div style={{ minHeight: "22px" }}>
+          {error && <p className="bg-danger text-white p-2">{error}</p>}
+          {successMessage && (
+            <p className="bg-success text-white p-2">{successMessage}</p>
+          )}
+        </div>
         <h3>Interpreter</h3>
 
         <div className={`${demographicsStyles.Inputflex}`}>
@@ -79,14 +118,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_name"
                 value={form.interpreter_name}
                 onChange={handleChange}
@@ -100,14 +137,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_language"
                 value={form.interpreter_language}
                 onChange={handleChange}
@@ -121,14 +156,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="interpreter_certification"
                 value={form.interpreter_certification}
                 onChange={handleChange}
@@ -148,14 +181,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="questionnaire_insurance"
                 value={form.questionnaire_insurance}
                 onChange={handleChange}
@@ -169,14 +200,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="questionnaire_address"
                 value={form.questionnaire_address}
                 onChange={handleChange}
@@ -190,14 +219,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="questionnaire_city_state_zip"
                 value={form.questionnaire_city_state_zip}
                 onChange={handleChange}
@@ -213,14 +240,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="questionnaire_claim_adjuster"
                 value={form.questionnaire_claim_adjuster}
                 onChange={handleChange}
@@ -234,14 +259,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="questionnaire_claim_number"
                 value={form.questionnaire_claim_number}
                 onChange={handleChange}
@@ -255,14 +278,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="questionnaire_telephone"
                 value={form.questionnaire_telephone}
                 onChange={handleChange}
@@ -278,14 +299,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="questionnaire_fax"
                 value={form.questionnaire_fax}
                 onChange={handleChange}
@@ -305,14 +324,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_name"
                 value={form.wcab_name}
                 onChange={handleChange}
@@ -326,14 +343,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_address"
                 value={form.wcab_address}
                 onChange={handleChange}
@@ -347,14 +362,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_city_state_zip"
                 value={form.wcab_city_state_zip}
                 onChange={handleChange}
@@ -370,14 +383,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_fax"
                 value={form.wcab_fax}
                 onChange={handleChange}
@@ -391,14 +402,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_telephone"
                 value={form.wcab_telephone}
                 onChange={handleChange}
@@ -412,14 +421,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="wcab_eams_adjuster"
                 value={form.wcab_eams_adjuster}
                 onChange={handleChange}
@@ -439,14 +446,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_name"
                 value={form.employer_name}
                 onChange={handleChange}
@@ -460,14 +465,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_address"
                 value={form.employer_address}
                 onChange={handleChange}
@@ -481,14 +484,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_city_state_zip"
                 value={form.employer_city_state_zip}
                 onChange={handleChange}
@@ -504,14 +505,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_fax"
                 value={form.employer_fax}
                 onChange={handleChange}
@@ -525,14 +524,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_telephone"
                 value={form.employer_telephone}
                 onChange={handleChange}
@@ -546,14 +543,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="employer_eams_adjuster"
                 value={form.employer_eams_adjuster}
                 onChange={handleChange}
@@ -573,14 +568,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="first_attempt_date"
                 value={form.first_attempt_date}
                 onChange={handleChange}
@@ -594,14 +587,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="first_attempt_time"
                 value={form.first_attempt_time}
                 onChange={handleChange}
@@ -615,14 +606,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="first_attempt_contact_name"
                 value={form.first_attempt_contact_name}
                 onChange={handleChange}
@@ -638,14 +627,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="first_attempt_title_position"
                 value={form.first_attempt_title_position}
                 onChange={handleChange}
@@ -659,14 +646,12 @@ function PreAuthorizationForm() {
             <div
               className={`${demographicsStyles.Inputgroup} input-group mb-3`}
             >
-
               <input
                 type="text"
                 className={`form-control`}
                 placeholder="Eg. your text here"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                required
                 name="first_attempt_result"
                 value={form.first_attempt_result}
                 onChange={handleChange}
@@ -675,7 +660,6 @@ function PreAuthorizationForm() {
           </div>
         </div>
       </div>
-      <p>{successMessage}</p>
       <div className={`${demographicsStyles.Button}`}>
         <button disabled={loading}>
           {loading ? "...Please wait" : "Save"}

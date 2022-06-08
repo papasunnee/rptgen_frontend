@@ -90,7 +90,7 @@ function Index() {
                     </span>
                   </div>
 
-                  <AppointmentList />
+                  <AppointmentList type="next" />
 
                   <AppointmentList title="Previous Appointments" />
                 </div>

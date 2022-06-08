@@ -2,9 +2,10 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import "bootstrap/dist/css/bootstrap.css";
+import Dropdown from "react-bootstrap/Dropdown";
+
 import { Accordion, Card, Button } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.css';
-import Dropdown from 'react-bootstrap/Dropdown';
 
 import logoimg from "@/images/logo.png";
 import overviewicon from "@/images/overview-icon.png";
@@ -20,13 +21,23 @@ import { useRouter } from "next/router";
 function Sidenav() {
   const { logout } = useAuth();
   const router = useRouter();
-
+  const id = router.query?.id;
   const handleLogout = async (event) => {
     event.preventDefault();
     await logout();
     router.push("/");
     return;
   };
+
+  function openNav() {
+    document.getElementById("link").style.backgroundColor = "red";
+
+    // If localStorage is supported by the browser
+    if (typeof Storage !== "undefined") {
+      // Save the state of the sidebar as "open"
+      localStorage.setItem("sidebar", "opened");
+    }
+  }
 
   return (
     <Fragment>
@@ -87,13 +98,16 @@ function Sidenav() {
                   <Link href="/patient/database">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >Patient Database
+                    >
+                      Patient Database
                     </a>
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item href="#">
                   <Link href="/patient/appoinments">
-                    <a className={`${frame34Styles.Navlink} dropdown-item px-0 px-0`}>
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0 px-0`}
+                    >
                       <div className={`d-sm-inline`}>Appoinments</div>
                     </a>
                   </Link>
@@ -291,7 +305,7 @@ function Sidenav() {
                 <div className={`ms-1 d-none d-sm-inline`}>Admin</div>
               </a>
             </li>
-          </ul>
+          </ul >
 
           <hr />
           <ul className={`${frame34Styles.Logout} pb-4`}>
@@ -326,9 +340,9 @@ function Sidenav() {
                             <li><a className="dropdown-item" >Sign out</a></li>
                         </ul>
                     </div> */}
-        </div>
-      </span>
-    </Fragment>
+        </div >
+      </span >
+    </Fragment >
   );
 }
 

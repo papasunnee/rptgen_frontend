@@ -23,137 +23,10 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
 import descriptionStyles from "./jobdescription.module.scss";
-
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="xl"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      className={`${descriptionStyles.Modal}`}
-    >
-      <Modal.Header className={`${descriptionStyles.Modal_header}`} closeButton>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          className={`${descriptionStyles.Modal_title}`}
-        >
-          Add Job Description
-        </Modal.Title>
-      </Modal.Header>
-
-      <div className={`${descriptionStyles.Formtab_titles}`}>
-        <div
-          className={`${descriptionStyles.Formtab_titles}`}
-          style={{ padding: 0 }}
-        >
-          <div className={`${descriptionStyles.Tab}`}>
-            <h4>Main</h4>
-          </div>
-
-          <div className={`${descriptionStyles.Tab}`}>
-            <h4 style={{ color: "#336CFB" }}>Activity (Hours per day)</h4>
-          </div>
-
-          <div className={`${descriptionStyles.Tab}`}>
-            <h4>Other History</h4>
-          </div>
-
-          <div className={`${descriptionStyles.Tab}`}>
-            <h4>Pre-injury Lifting Capacity</h4>
-          </div>
-
-          <div className={`${descriptionStyles.Tab}`}>
-            <h4>Other Details</h4>
-          </div>
-        </div>
-      </div>
-      <Modal.Body className={`${descriptionStyles.Modal_body}`}>
-        <div className={`${descriptionStyles.Adl_col}`}>
-          <div className={`${descriptionStyles.Inputlist}`}>
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Dominant Hand</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Type of Job</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Employee Name</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Work Site Address</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Job Title</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Wages</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-          </div>
-        </div>
-
-        <div className={`${descriptionStyles.Adl_col}`}>
-          <div className={`${descriptionStyles.Inputlist}`}>
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Hrs. Worked Per Days</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Days Worked for week</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Start Working Date</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Last Working Date</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Reason</label>
-              <textarea cols="20" rows="15" placeholder="Eg. your text here" />
-            </div>
-          </div>
-        </div>
-
-        <div className={`${descriptionStyles.Adl_col}`}>
-          <div className={`${descriptionStyles.Inputlist}`}>
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>Description</label>
-              <textarea cols="20" rows="15" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${descriptionStyles.Inputlist_con}`}>
-              <label>New/Current Employment</label>
-              <textarea cols="20" rows="15" placeholder="Eg. your text here" />
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer className={`${descriptionStyles.Modal_footer}`}>
-        {/* <Button onClick={props.onHide}>Close</Button> */}
-
-        <button>Save</button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+import SearchPatient from "../Patients-Database/searchPatient";
+import PatientInfo from "../Patient-Demographics/PatientInfo";
+import JobDescriptionTrigger from "../Modals/JobDescriptionTrigger";
+import JobDescriptionList from "./jobDescriptionList";
 
 function Jobdescription() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -173,61 +46,14 @@ function Jobdescription() {
               <div className={`${frame44Styles.Contentcon} col pt-4`}>
                 <Topnav />
 
-                <div
-                  className={`${frame44Styles.Body}`}>
+                <div className={`${frame44Styles.Body}`}>
                   <div className={`${frame47Styles.Patientsdetails} row`}>
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Job Description</h3>
 
-                      <div
-                        className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
-                      >
-                        <span
-                          className={`${frame47Styles.Inputgroup_text} input-group-text`}
-                          id="addon-wrapping"
-                        >
-                          <BsSearch />
-                        </span>
-                        <input
-                          type="text"
-                          className={`form-control`}
-                          placeholder="Search Category, Patient Info etc"
-                          aria-label="Username"
-                          aria-describedby="addon-wrapping"
-                        />
-                      </div>
+                      <SearchPatient />
                     </div>
-
-                    <div className={`${frame47Styles.Details}`}>
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <div className={`${frame47Styles.Profilepic}`}>
-                          <Image src={profilepic} alt="profile-pic" />
-                        </div>
-
-                        <div className={`${frame47Styles.Name}`}>
-                          <h4 className={`${frame47Styles.Bigname}`}>
-                            Gerson Basconcillo
-                          </h4>
-                          <h5>See Patient info</h5>
-                        </div>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Address: 46 Amity Ext, Paranaque City</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Contact +7 (4812) 11-22-33</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Birthdate: 06/45/1990</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Age: 32</h4>
-                      </div>
-                    </div>
+                    <PatientInfo />
                   </div>
 
                   <div className={`${frame44Styles.Toptabs} row col-md-7`}>
@@ -235,24 +61,12 @@ function Jobdescription() {
                       <h3>Quick Tasks</h3>
                     </div>
 
-                    <Button
-                      variant="primary"
-                      onClick={() => setModalShow(true)}
-                      className={`${frame44Styles.Tab} col-md-3`}
-                    >
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={appointmenticon} alt="icon-img" />
-                      </div>
+                    <JobDescriptionTrigger />
 
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>Add Job Description</h4>
-                      </div>
-                    </Button>
-
-                    <MyVerticallyCenteredModal
+                    {/* <MyVerticallyCenteredModal
                       show={modalShow}
                       onHide={() => setModalShow(false)}
-                    />
+                    /> */}
 
                     <div className={`${frame44Styles.Tab} col-md-3`}>
                       <div className={`${frame44Styles.Image}`}>
@@ -270,104 +84,7 @@ function Jobdescription() {
                       <h3>Data</h3>
                     </div>
 
-                    <div className={`${frame44Styles.Appointmentlist_section}`}>
-                      <div className={`${frame44Styles.Appointmentlist_title}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Name</h4>
-                        </div>
-
-                        <div
-                          className={`${frame44Styles.Name}`}
-                          style={{ marginLeft: "4%" }}
-                        >
-                          <h4>Date</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Doctor</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Action</h4>
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Lesile Alexander</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Dr. Jacob Jones</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Lesile Alexander</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Dr. Jacob Jones</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Lesile Alexander</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Dr. Jacob Jones</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Lesile Alexander</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Dr. Jacob Jones</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-                    </div>
+                    <JobDescriptionList />
                   </div>
                 </div>
               </div>

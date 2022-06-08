@@ -64,8 +64,8 @@ function AppointmentModal(props) {
     setLoading(true);
     e.preventDefault();
     try {
-      const response = await fetch("/api/patient", {
-        method: "PUT",
+      const response = await fetch("/api/appointment", {
+        method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, put_id: patientSelect }),

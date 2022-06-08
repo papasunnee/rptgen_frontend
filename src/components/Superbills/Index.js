@@ -23,86 +23,10 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
-
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      className={`${functionalStyles.Modal}`}
-    >
-      <Modal.Header closeButton>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          className={`${functionalStyles.Modal_title}`}
-        >
-          Add Superbill
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body className={`${functionalStyles.Modal_body}`}>
-        <div
-          className={`${functionalStyles.Adl_col}`}
-          style={{ width: "400px" }}
-        >
-          <h5>Initial</h5>
-
-          <div className={`${functionalStyles.Inputlist}`}>
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Initial Code for History</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Initial Code for Physical Examination</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Prolonged Code</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Review of records</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={`${functionalStyles.Adl_col}`}
-          style={{ width: "400px" }}
-        >
-          <h5>Re-Evaluation</h5>
-
-          <div className={`${functionalStyles.Inputlist}`}>
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Re-Evaluation Code</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Prolonged Code</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-
-            <div className={`${functionalStyles.Inputlist_con}`}>
-              <label>Review of records</label>
-              <input type="text" placeholder="Eg. your text here" />
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-        {/* <Button onClick={props.onHide}>Close</Button> */}
-
-        <button>Save</button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+import SearchPatient from "../Patients-Database/searchPatient";
+import PatientInfo from "../Patient-Demographics/PatientInfo";
+import SuperBillTrigger from "../Modals/SuperBillTrigger";
+import SuperBillList from "../Jobdescription/superBillList";
 
 function Index() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -122,86 +46,22 @@ function Index() {
               <div className={`${frame44Styles.Contentcon} col pt-4`}>
                 <Topnav />
 
-                <div
-                  className={`${frame44Styles.Body}`}>
+                <div className={`${frame44Styles.Body}`}>
                   <div className={`${frame47Styles.Patientsdetails} row`}>
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Superbills</h3>
 
-                      <div
-                        className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
-                      >
-                        <span
-                          className={`${frame47Styles.Inputgroup_text} input-group-text`}
-                          id="addon-wrapping"
-                        >
-                          <BsSearch />
-                        </span>
-                        <input
-                          type="text"
-                          className={`form-control`}
-                          placeholder="Search Category, Patient Info etc"
-                          aria-label="Username"
-                          aria-describedby="addon-wrapping"
-                        />
-                      </div>
+                      <SearchPatient />
                     </div>
 
-                    <div className={`${frame47Styles.Details}`}>
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <div className={`${frame47Styles.Profilepic}`}>
-                          <Image src={profilepic} alt="profile-pic" />
-                        </div>
-
-                        <div className={`${frame47Styles.Name}`}>
-                          <h4 className={`${frame47Styles.Bigname}`}>
-                            Gerson Basconcillo
-                          </h4>
-                          <h5>See Patient info</h5>
-                        </div>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Address: 46 Amity Ext, Paranaque City</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Contact +7 (4812) 11-22-33</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Birthdate: 06/45/1990</h4>
-                      </div>
-
-                      <div className={`${frame47Styles.Namecont}`}>
-                        <h4>Age: 32</h4>
-                      </div>
-                    </div>
+                    <PatientInfo />
                   </div>
 
                   <div className={`${frame44Styles.Toptabs} row col-md-7`}>
                     <div className={`${frame47Styles.Toptabs_title}`}>
                       <h3>Quick Tasks</h3>
                     </div>
-
-                    <Button
-                      variant="primary"
-                      onClick={() => setModalShow(true)}
-                      className={`${frame44Styles.Tab} col-md-3`}
-                    >
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={appointmenticon} alt="icon-img" />
-                      </div>
-
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>Add Superbill</h4>
-                      </div>
-                    </Button>
-
-                    <MyVerticallyCenteredModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    />
+                    <SuperBillTrigger />
                   </div>
 
                   <div className={`${frame44Styles.Appointment_activity}`}>
@@ -209,45 +69,7 @@ function Index() {
                       <h3>Record Reviews</h3>
                     </div>
 
-                    <div className={`${frame44Styles.Appointmentlist_section}`}>
-                      <div className={`${frame44Styles.Appointmentlist_title}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Uploaded File</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Date Uploaded</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Actions</h4>
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <div
-                            className={`${frame44Styles.Profilepic}`}
-                          >
-                            <Image
-                              src={appointmenticon}
-                              alt="icon-img"
-                              style={{ borderRadius: 0 }}
-                            />
-                          </div>
-                          <h4>MIL-171948999</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-                    </div>
+                    <SuperBillList />
                   </div>
                 </div>
               </div>
