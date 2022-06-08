@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Accordion, Card, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -27,24 +28,13 @@ function Sidenav() {
     return;
   };
 
-  function openNav() {
-    document.getElementById("link").style.backgroundColor = "red";
-
-    // If localStorage is supported by the browser
-    if (typeof (Storage) !== "undefined") {
-      // Save the state of the sidebar as "open"
-      localStorage.setItem("sidebar", "opened");
-    }
-  }
-
-
   return (
     <Fragment>
       <span
         className={`${frame34Styles.Sidenav} col-12 col-sm-3 col-xl-2 px-sm-2 px-0 d-flex`}
       >
         <div
-          className={`d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white`}
+          className={`d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start pt-2 text-white`}
         >
           <Link
             href="/"
@@ -68,12 +58,29 @@ function Sidenav() {
               </Link>
             </li>
 
-            <Dropdown className="d-inline" autoClose={false}>
-              <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
-                <Image src={overviewicon} alt="overview-icon" />
-                {/* &nbsp; Patients */}
-                <div className={`ms-1 d-none d-sm-inline`}>Patients</div>
-              </Dropdown.Toggle>
+            <Accordion defaultActiveKey={['0']} alwaysOpen className={`${frame34Styles.Accordition}`}>
+              <Accordion.Item eventKey="0" className={`${frame34Styles.Dropdownbutton}`}>
+                <Accordion.Header>
+                  <Image src={overviewicon} alt="overview-icon" />
+                  {/* &nbsp; Patients */}
+                  <div className={`ms-1 d-none d-sm-inline`}>Patients</div>
+                </Accordion.Header>
+
+                <Accordion.Body className={`${frame34Styles.Accorditionbody}`}>
+                  <Link href="/patient/database">
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >Patient Database
+                    </a>
+                  </Link>
+
+                  <Link href="/patient/appoinments">
+                    <a className={`${frame34Styles.Navlink} dropdown-item px-0 px-0`}>
+                      <div className={`d-sm-inline`}>Appoinments</div>
+                    </a>
+                  </Link>
+                </Accordion.Body>
+              </Accordion.Item>
 
               <Dropdown.Menu className={`${frame34Styles.Dropdownmenu}`}>
                 <Dropdown.Item href="#">
@@ -92,17 +99,17 @@ function Sidenav() {
                   </Link>
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown>
+            </Accordion>
 
-            <Dropdown className="d-inline" autoClose={false}>
-              <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
-                <Image src={historianicon} alt="historian-icon" />
-                {/* &nbsp; Historian */}
-                <div className={`ms-1 d-none d-sm-inline`}>Historian</div>
-              </Dropdown.Toggle>
+            <Accordion className={`${frame34Styles.Accordition}`}>
+              <Accordion.Item eventKey="0" className={`${frame34Styles.Dropdownbutton}`}>
+                <Accordion.Header>
+                  <Image src={historianicon} alt="historian-icon" />
+                  {/* &nbsp; Patients */}
+                  <div className={`ms-1 d-none d-sm-inline`}>Historian</div>
+                </Accordion.Header>
 
-              <Dropdown.Menu>
-                <Dropdown.Item href="#">
+                <Accordion.Body className={`${frame34Styles.Accorditionbody}`}>
                   <Link href="/historian/demographics">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -110,9 +117,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Patient Demographics</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/historian/pre-authorization">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -120,10 +125,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Pre-authorization</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-
-                <Dropdown.Item href="#">
                   <Link href="/historian/functional-improvement">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -131,9 +133,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Functional Improvement</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/historian/job-description">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -141,9 +141,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Job Description</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="present-complaints">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -151,9 +149,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Complaints</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/historian/past-medical-history">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -161,9 +157,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Medical History</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/historian/cumulative-trauma">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -171,22 +165,37 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Cummulative Trauma</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
+                </Accordion.Body>
+              </Accordion.Item>
 
-
-              </Dropdown.Menu>
-            </Dropdown>
-
-            <Dropdown className="d-inline" autoClose={false}>
-              <Dropdown.Toggle id="dropdown-autoclose-false" className={`${frame34Styles.Dropdownbutton}`}>
-                <Image src={doctorsicon} alt="doctors-icon" />
-                {/* &nbsp; Doctors */}
-
-                <div className={`ms-1 d-none d-sm-inline`}>Doctors</div>
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
+              <Dropdown.Menu className={`${frame34Styles.Dropdownmenu}`}>
                 <Dropdown.Item href="#">
+                  <Link href="/patient/database">
+                    <a
+                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    >Patient Database
+                    </a>
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item href="#">
+                  <Link href="/patient/appoinments">
+                    <a className={`${frame34Styles.Navlink} dropdown-item px-0 px-0`}>
+                      <div className={`d-sm-inline`}>Appoinments</div>
+                    </a>
+                  </Link>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Accordion>
+
+            <Accordion className={`${frame34Styles.Accordition}`}>
+              <Accordion.Item eventKey="0" className={`${frame34Styles.Dropdownbutton}`}>
+                <Accordion.Header>
+                  <Image src={doctorsicon} alt="doctors-icon" />
+                  {/* &nbsp; Patients */}
+                  <div className={`ms-1 d-none d-sm-inline`}>Doctors</div>
+                </Accordion.Header>
+
+                <Accordion.Body className={`${frame34Styles.Accorditionbody}`}>
                   <Link href="/doctor/diagnosis">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -194,9 +203,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Diagnosis</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/doctor/upload-records">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -204,10 +211,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Upload Record</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-
-                <Dropdown.Item href="#">
                   <Link href="/doctor/physical-evaluation">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -215,9 +219,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Physical Evaluation</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/doctor/mil-evaluation">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -225,9 +227,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>MIL Evaluation</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="present-complaints">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -235,9 +235,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Complaints</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/doctor/superbills">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -245,9 +243,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Superbills</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/doctor/workstatus">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -255,9 +251,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Work Status</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/doctor/treatment-plan">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -265,9 +259,7 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Treatment Plan</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
 
-                <Dropdown.Item href="#">
                   <Link href="/doctor/bill-reduction">
                     <a
                       className={`${frame34Styles.Navlink} dropdown-item px-0`}
@@ -275,11 +267,9 @@ function Sidenav() {
                       <div className={`d-sm-inline`}>Bill Reduction</div>
                     </a>
                   </Link>
-                </Dropdown.Item>
-
-
-              </Dropdown.Menu>
-            </Dropdown>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
 
             <li className={`${frame34Styles.Navitem}`}>
               <a className={`${frame34Styles.Navlink} align-middle px-0`}>
