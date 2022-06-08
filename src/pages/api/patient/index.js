@@ -5,6 +5,8 @@ import PatientPreAuthorization from "@/models/PatientPreAuthorization";
 import FunctionalImprovement from "@/models/FunctionalImprovement";
 import JobDescription from "@/models/JobDescription";
 import PastMedicalHistory from "@/models/PastMedicalHistory";
+import SuperBill from "@/models/SuperBill";
+import BillReduction from "@/models/BillReduction";
 import Patient from "@/models/Patient";
 
 export default async function handler(req, res) {
@@ -46,6 +48,8 @@ export default async function handler(req, res) {
             .populate("functional_improvements")
             .populate("job_descriptions")
             .populate("past_medical_histories")
+            .populate("super_bills")
+            .populate("bill_reductions")
             .sort({ createdAt: "asc" })
             .exec();
         } else {
@@ -56,6 +60,8 @@ export default async function handler(req, res) {
             .populate("functional_improvements")
             .populate("job_descriptions")
             .populate("past_medical_histories")
+            .populate("super_bills")
+            .populate("bill_reductions")
             .sort({ createdAt: "desc" })
             .exec(); /* find all the data in our database */
         }

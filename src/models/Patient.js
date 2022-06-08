@@ -6,6 +6,7 @@ import FunctionalImprovement from "./FunctionalImprovement";
 import JobDescription from "./JobDescription";
 import PastMedicalHistory from "./PastMedicalHistory";
 import SuperBill from "./SuperBill";
+import BillReduction from "./BillReduction";
 
 /* PatientSchema will correspond to a collection in your MongoDB database. */
 
@@ -101,6 +102,12 @@ const PatientSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "SuperBill",
+      },
+    ],
+    bill_reductions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "BillReduction",
       },
     ],
     patient_demographic_id: {

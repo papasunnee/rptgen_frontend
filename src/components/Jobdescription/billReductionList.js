@@ -11,10 +11,10 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 // import AppointmentModal from "./appointmentModal";
 import { UserContext } from "@/context/UserContext";
 
-function SuperBillList() {
+function BillReductionList() {
   const contextData = useContext(UserContext);
   const { data, mutate } = useSWR(
-    `/api/patient/superbill?patient_id=${contextData._id}`,
+    `/api/patient/billreduction?patient_id=${contextData._id}`,
     fetcher
   );
   const [modalShow, setModalShow] = useState(false);
@@ -49,7 +49,7 @@ function SuperBillList() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch("/api/patient/superbill", {
+      const response = await fetch("/api/patient/billreduction", {
         method: "DELETE",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -68,33 +68,25 @@ function SuperBillList() {
       </div>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>
-        {data?.data?.superBills?.length > 0 && (
+        {data?.data?.billReductions?.length > 0 && (
           <>
             <table className="table">
               <thead>
                 <tr className={`${frame44Styles.Appointmentlist_title}`}>
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Evaluation Prolonged Code</h4>
+                    <h4>Body Part</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Initail History Code</h4>
+                    <h4>Injury Date</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Initial Physical Examination Code</h4>
+                    <h4>Injury Mechanism</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
-                    <h4>Prolonged Code</h4>
-                  </td>
-
-                  <td className={`${frame44Styles.Name} col`}>
-                    <h4>Re Evaluation Code</h4>
-                  </td>
-
-                  <td className={`${frame44Styles.Name} col`}>
-                    <h4>Review Records</h4>
+                    <h4>Treatment Type</h4>
                   </td>
 
                   <td className={`${frame44Styles.Name} col`}>
@@ -103,30 +95,22 @@ function SuperBillList() {
                 </tr>
               </thead>
               <tbody>
-                {data?.data?.superBills?.map((superBill, index) => (
+                {data?.data?.billReductions?.map((billReduction, index) => (
                   <tr key={index} className={`${frame44Styles.Appointment}`}>
                     <td className={`${frame44Styles.Name} col`}>
-                      <h4>{superBill.eveluation_prolonged_code}</h4>
+                      <h4>{billReduction.body_part}</h4>
                     </td>
 
                     <td className={`${frame44Styles.Name} col`}>
-                      <h4>{superBill.initial_history_code}</h4>
+                      <h4>{billReduction.injury_date}</h4>
                     </td>
 
                     <td className={`${frame44Styles.Name} col`}>
-                      <h4>{superBill.initial_physical_examination}</h4>
+                      <h4>{billReduction.injury_mechanism}</h4>
                     </td>
 
                     <td className={`${frame44Styles.Name} col`}>
-                      <h4>{superBill.prolonged_code}</h4>
-                    </td>
-
-                    <td className={`${frame44Styles.Name} col`}>
-                      <h4>{superBill.re_evaluation_code}</h4>
-                    </td>
-
-                    <td className={`${frame44Styles.Name} col`}>
-                      <h4>{superBill.review_records}</h4>
+                      <h4>{billReduction.treatment_type}</h4>
                     </td>
 
                     <td className={`${frame44Styles.Action_buttons}`}>
@@ -146,7 +130,7 @@ function SuperBillList() {
                         src={deleteicon}
                         alt="delete-icon"
                         onClick={() => {
-                          confirmDelete(superBill._id);
+                          confirmDelete(billReduction._id);
                         }}
                       />
                     </td>
@@ -161,4 +145,4 @@ function SuperBillList() {
   );
 }
 
-export default SuperBillList;
+export default BillReductionList;
