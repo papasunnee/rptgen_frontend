@@ -5,6 +5,7 @@ import PatientPreAuthorization from "./PatientPreAuthorization";
 import FunctionalImprovement from "./FunctionalImprovement";
 import JobDescription from "./JobDescription";
 import PastMedicalHistory from "./PastMedicalHistory";
+import SuperBill from "./SuperBill";
 
 /* PatientSchema will correspond to a collection in your MongoDB database. */
 
@@ -94,6 +95,12 @@ const PatientSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "PastMedicalHistory",
+      },
+    ],
+    super_bills: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SuperBill",
       },
     ],
     patient_demographic_id: {

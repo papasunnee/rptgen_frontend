@@ -245,7 +245,7 @@ function Sidenav() {
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#">
-                      <Link href="present-complaints">
+                      <Link href={`/doctor/${id}/present-complaints`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { UserContext } from "@/context/UserContext";
 import { SSRProvider } from "react-bootstrap";
-import Index from "@/components/Mil-Evaluation/Index";
+import Index from "@/components/Present-Complaints/Index";
 
-function MilEvaluationPage({ data }) {
+function PresentComplaintsPage({ data }) {
   return (
     <SSRProvider>
       <UserContext.Provider value={data}>
@@ -36,4 +36,4 @@ export async function getServerSideProps({ params }) {
   }
 }
 
-export default MilEvaluationPage;
+export default PresentComplaintsPage;
