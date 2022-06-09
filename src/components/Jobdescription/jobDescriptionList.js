@@ -20,8 +20,6 @@ function JobDescriptionList() {
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  console.log({ sss: data });
-
   const confirmDelete = (id) => {
     confirmAlert({
       title: <span style={{ fontSize: "20px" }}>Confirm to Delete Record</span>,

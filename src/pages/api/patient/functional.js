@@ -9,6 +9,7 @@ export default async function handler(req, res) {
   let functionalImprovements;
   const id = req.query.patient_id;
   const patient_id = req.body.patient_id;
+  const put_id = req.body._id;
   const delete_id = req.body.delete_id;
 
   await dbConnect();
@@ -34,7 +35,6 @@ export default async function handler(req, res) {
         console.log(error);
         return res.status(400).json({ success: false, error: error.message });
       }
-      break;
     case "POST":
       try {
         let functionalImprovement = await FunctionalImprovement.create({
@@ -48,6 +48,33 @@ export default async function handler(req, res) {
           success: true,
           data: { functionalImprovement, patientRecord },
         });
+      } catch (error) {
+        return res.status(400).json({ success: false, error: error.message });
+      }
+    case "PUT":
+      try {
+        if (
+          put_id &&
+          (put_id != "undefined" || put_id != null || put_id != "null")
+        ) {
+          delete req.body._id;
+          let updateFunctionalImprovement =
+            await FunctionalImprovement.findOneAndUpdate(
+              { _id: put_id },
+              req.body,
+              {
+                new: true,
+              }
+            );
+
+          return res
+            .status(400)
+            .json({ success: true, data: { updateFunctionalImprovement } });
+        } else {
+          return res
+            .status(400)
+            .json({ success: false, error: "unprocessed put_id" });
+        }
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
       }

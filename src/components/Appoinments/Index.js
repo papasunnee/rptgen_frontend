@@ -24,6 +24,7 @@ import functionalStyles from "../Functionalimprovement/Functionalimprovement.mod
 
 import ScheduleAppointment from "../Modals/ScheduleAppointment";
 import AppointmentList from "./appointmentList";
+import SearchPatient from "../Patients-Database/searchPatient";
 
 function Index() {
   return (
@@ -49,23 +50,7 @@ function Index() {
                     >
                       <h3>Appointments</h3>
 
-                      <div
-                        className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
-                      >
-                        <span
-                          className={`${frame47Styles.Inputgroup_text} input-group-text`}
-                          id="addon-wrapping"
-                        >
-                          <BsSearch />
-                        </span>
-                        <input
-                          type="text"
-                          className={`form-control`}
-                          placeholder="Search Category, Patient Info etc"
-                          aria-label="Username"
-                          aria-describedby="addon-wrapping"
-                        />
-                      </div>
+                      <SearchPatient />
                     </div>
                   </div>
 

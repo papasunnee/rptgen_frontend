@@ -5,6 +5,34 @@ import Patient from "./Patient";
 
 const FunctionalImprovementSchema = new mongoose.Schema(
   {
+    value_a: {
+      type: Boolean,
+      default: false,
+    },
+    value_b: {
+      type: Boolean,
+      default: false,
+    },
+    value_c: {
+      type: Boolean,
+      default: false,
+    },
+    value_d: {
+      type: Boolean,
+      default: false,
+    },
+    value_e: {
+      type: Boolean,
+      default: false,
+    },
+    value_f: {
+      type: Boolean,
+      default: false,
+    },
+    value_g: {
+      type: Boolean,
+      default: false,
+    },
     providers_code: {
       type: String,
     },

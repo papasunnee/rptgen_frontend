@@ -8,7 +8,7 @@ const withoutAuth = (Component) => {
   const Auth = (props) => {
     // const { user, loading } = useContext(oadin);
     const { data, isValidating } = useSWR("/api/isLoggedIn", fetcher);
-    console.log({ data });
+
     const router = useRouter();
     if (isValidating) return <Loading />;
     if (!data.isLoggedIn) {

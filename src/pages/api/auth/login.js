@@ -36,7 +36,7 @@ async function handler(req, res) {
       if (!hash) {
         return res
           .status(422)
-          .json({ success: false, message: "Invalid login detailsss" });
+          .json({ success: false, message: "Invalid login detail" });
       }
       const token = jwt.sign(
         {

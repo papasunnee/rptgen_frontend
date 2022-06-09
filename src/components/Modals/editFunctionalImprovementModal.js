@@ -1,145 +1,62 @@
 import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
-import { Modal } from "react-bootstrap";
-import Select from "react-select";
-import Button from "react-bootstrap/Button";
-
-import appointmenticon from "@/images/appointment-icon.png";
-
-import frame44Styles from "../Frame44/Frame44.module.scss";
-import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
-import AddPatientModal from "../Patients-Database/addPatientModal";
 import { UserContext } from "@/context/UserContext";
+import Modal from "react-bootstrap/Modal";
 
-function FunctionalImprovementTrigger() {
-  const [modalShow, setModalShow] = React.useState(false);
-  return (
-    <>
-      <Button
-        variant="primary"
-        onClick={() => setModalShow(true)}
-        className={`${frame44Styles.Tab} col-md-3`}
-      >
-        <div className={`${frame44Styles.Image}`}>
-          <Image src={appointmenticon} alt="icon-img" />
-        </div>
+import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 
-        <div className={`${frame44Styles.Content}`}>
-          <h4>Add Functional Improvement</h4>
-        </div>
-      </Button>
-
-      <FunctionalImprovementModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        setModalShow={setModalShow}
-      />
-    </>
-  );
-}
-
-export default FunctionalImprovementTrigger;
-
-const initialValues = {
-  physical_activity: "",
-  sensory_function: "",
-  non_specialized_hand: "",
-  travel: "",
-  sexual_function: "",
-  sleep: "",
-  self_care: "",
-  communication: "",
-  description: "",
-};
-
-const initialCheckBoxes = {
-  value_a: false,
-  value_b: false,
-  value_c: false,
-  value_d: false,
-  value_e: false,
-  value_f: false,
-  value_g: false,
-};
-
-function FunctionalImprovementModal(props) {
+export default function EditFunctionalImprovementModal(props) {
   const data = useContext(UserContext);
   const { mutate } = useSWR(
     `/api/patient/functional?patient_id=${data._id}`,
     fetcher
   );
-  const [error, setError] = useState(null);
-  const [patient, setPatient] = useState();
-  const [form, setForm] = useState(initialValues);
-  const [checkboxes, setCheckBoxes] = useState(initialCheckBoxes);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const { modaldata = {} } = props;
+  const [mData, setMData] = useState({});
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setMData({ ...modaldata });
+    return () => {
+      setMData({});
+    };
+  }, [modaldata]);
 
-  const handleChange = (e) => {
-    setError(null);
-    setSuccessMessage(null);
-    const { name, value } = e.target;
-
-    setForm((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
-
-  const handleCheckboxes = (e) => {
-    const name = e.target.name;
-    const checked = e.target.checked;
-    setCheckBoxes((prevValues) => ({
-      ...prevValues,
-      [name]: checked,
-    }));
-  };
   const handleSubmit = async (e) => {
-    e.preventDefault();
     setLoading(true);
-    setError(null);
-    const isEmpty = Object.values(form).every(
-      (item) => item === null || item === ""
-    );
+    e.preventDefault();
+    const response = await fetch("/api/patient/functional", {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...mData }),
+    });
 
-    if (!isEmpty) {
-      try {
-        const response = await fetch("/api/patient/functional", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...form,
-            ...checkboxes,
-            patient_id: data._id,
-          }),
-        });
-        const functionData = await response.json();
-        if (functionData.success) {
-          global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
-          setSuccessMessage(
-            "Patient Functional Improvement Successfully Added"
-          );
-          setForm(initialValues);
-          setCheckBoxes(initialCheckBoxes);
-          setTimeout(() => {
-            setSuccessMessage(null);
-            mutate();
-            props.setModalShow(false);
-          }, 5000);
-        } else {
-          throw new Error("Cannot Create Functional Improvement Data");
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
+    const data = await response.json();
+    if (data.success) {
+      mutate();
+      setMData({});
+      setLoading(false);
+      props.setModalShow(false);
     } else {
-      global.window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-      setError("Please Fill at least one field");
     }
     setLoading(false);
+  };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    if (name.includes("value_")) {
+      const checked = e.target.checked;
+      setMData((prevValues) => ({
+        ...prevValues,
+        [name]: checked,
+      }));
+    } else {
+      const value = e.target.value;
+      setMData((prevValues) => ({
+        ...prevValues,
+        [name]: value,
+      }));
+    }
   };
 
   return (
@@ -155,19 +72,18 @@ function FunctionalImprovementModal(props) {
           id="contained-modal-title-vcenter"
           className={`${functionalStyles.Modal_title}`}
         >
-          Add Functional improvement
+          Edit Functional improvement
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Body className={`${functionalStyles.Modal_body}`}>
           <div className={`${functionalStyles.Functionalimprovment_col}`}>
             <div style={{ minHeight: "22px" }}>
-              {error && <p className="bg-danger text-white p-2">{error}</p>}
+              {/* {error && <p className="bg-danger text-white p-2">{error}</p>}
               {successMessage && (
                 <p className="bg-success text-white p-2">{successMessage}</p>
-              )}
+              )} */}
             </div>
-            <h5>Functional Improvement</h5>
 
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
@@ -175,8 +91,8 @@ function FunctionalImprovementModal(props) {
                   <input
                     type="checkbox"
                     name="value_a"
-                    checked={checkboxes.value_a}
-                    onChange={(e) => handleCheckboxes(e)}
+                    checked={mData.value_a}
+                    onChange={(e) => handleChange(e)}
                   />
                   <span>
                     {" "}
@@ -190,8 +106,8 @@ function FunctionalImprovementModal(props) {
                   <input
                     type="checkbox"
                     name="value_b"
-                    checked={checkboxes.value_b}
-                    onChange={(e) => handleCheckboxes(e)}
+                    checked={mData.value_b}
+                    onChange={(e) => handleChange(e)}
                   />
                   <span> Do you require assistance at home or at work?</span>
                 </label>
@@ -202,8 +118,8 @@ function FunctionalImprovementModal(props) {
                   <input
                     type="checkbox"
                     name="value_c"
-                    checked={checkboxes.value_c}
-                    onChange={(e) => handleCheckboxes(e)}
+                    checked={mData.value_c}
+                    onChange={(e) => handleChange(e)}
                   />
                   <span> Is your ongoing care stopped?</span>
                 </label>
@@ -214,8 +130,8 @@ function FunctionalImprovementModal(props) {
                   <input
                     type="checkbox"
                     name="value_d"
-                    checked={checkboxes.value_d}
-                    onChange={(e) => handleCheckboxes(e)}
+                    checked={mData.value_d}
+                    onChange={(e) => handleChange(e)}
                   />
                   <span> Is there a re-injury</span>
                 </label>
@@ -226,8 +142,8 @@ function FunctionalImprovementModal(props) {
                   <input
                     type="checkbox"
                     name="value_e"
-                    checked={checkboxes.value_e}
-                    onChange={(e) => handleCheckboxes(e)}
+                    checked={mData.value_e}
+                    onChange={(e) => handleChange(e)}
                   />
                   <span> Do you experience increase is symptoms?</span>
                 </label>
@@ -238,8 +154,8 @@ function FunctionalImprovementModal(props) {
                   <input
                     type="checkbox"
                     name="value_f"
-                    checked={checkboxes.value_f}
-                    onChange={(e) => handleCheckboxes(e)}
+                    checked={mData.value_f}
+                    onChange={(e) => handleChange(e)}
                   />
                   <span> Sports</span>
                 </label>
@@ -250,8 +166,8 @@ function FunctionalImprovementModal(props) {
                   <input
                     type="checkbox"
                     name="value_g"
-                    checked={checkboxes.value_g}
-                    onChange={(e) => handleCheckboxes(e)}
+                    checked={mData.value_g}
+                    onChange={(e) => handleChange(e)}
                   />
                   <span> Are you taking medication?</span>
                 </label>
@@ -269,7 +185,7 @@ function FunctionalImprovementModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="physical_activity"
-                  value={form.physical_activity}
+                  value={mData.physical_activity}
                   onChange={handleChange}
                 />
               </div>
@@ -280,7 +196,7 @@ function FunctionalImprovementModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="sensory_function"
-                  value={form.sensory_function}
+                  value={mData.sensory_function}
                   onChange={handleChange}
                 />
               </div>
@@ -291,7 +207,7 @@ function FunctionalImprovementModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="non_specialized_hand"
-                  value={form.non_specialized_hand}
+                  value={mData.non_specialized_hand}
                   onChange={handleChange}
                 />
               </div>
@@ -302,7 +218,7 @@ function FunctionalImprovementModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="travel"
-                  value={form.travel}
+                  value={mData.travel}
                   onChange={handleChange}
                 />
               </div>
@@ -313,7 +229,7 @@ function FunctionalImprovementModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="sexual_function"
-                  value={form.sexual_function}
+                  value={mData.sexual_function}
                   onChange={handleChange}
                 />
               </div>
@@ -324,7 +240,7 @@ function FunctionalImprovementModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="sleep"
-                  value={form.sleep}
+                  value={mData.sleep}
                   onChange={handleChange}
                 />
               </div>
@@ -341,7 +257,7 @@ function FunctionalImprovementModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="self_care"
-                  value={form.self_care}
+                  value={mData.self_care}
                   onChange={handleChange}
                 />
               </div>
@@ -352,7 +268,7 @@ function FunctionalImprovementModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="communication"
-                  value={form.communication}
+                  value={mData.communication}
                   onChange={handleChange}
                 />
               </div>
@@ -364,7 +280,7 @@ function FunctionalImprovementModal(props) {
                   rows="15"
                   placeholder="Eg. your text here"
                   name="description"
-                  value={form.description}
+                  value={mData.description}
                   onChange={handleChange}
                 />
               </div>
@@ -373,7 +289,7 @@ function FunctionalImprovementModal(props) {
         </Modal.Body>
         <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
           <button type="submit" disabled={loading}>
-            {loading ? "Please Wait..." : "Save"}
+            {loading ? "...Updating" : "Update"}
           </button>
         </Modal.Footer>
       </form>

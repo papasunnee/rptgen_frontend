@@ -1,16 +1,39 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import useSWR from "swr";
 import { confirmAlert } from "react-confirm-alert";
+
+import { UserContext } from "@/context/UserContext";
 import { fetcher } from "@/context/AuthContext";
 
+import editicon from "@/images/edit-icon.png";
 import deleteicon from "@/images/delete.png";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
-// import AppointmentModal from "./appointmentModal";
-import { UserContext } from "@/context/UserContext";
+import EditFunctionalImprovementModal from "../Modals/editFunctionalImprovementModal";
 
+const initialValues = {
+  physical_activity: "",
+  sensory_function: "",
+  non_specialized_hand: "",
+  travel: "",
+  sexual_function: "",
+  sleep: "",
+  self_care: "",
+  communication: "",
+  description: "",
+};
+
+const initialCheckBoxes = {
+  value_a: false,
+  value_b: false,
+  value_c: false,
+  value_d: false,
+  value_e: false,
+  value_f: false,
+  value_g: false,
+};
 function FunctionalImprovemntList() {
   const contextData = useContext(UserContext);
   const { data, mutate } = useSWR(
@@ -18,9 +41,13 @@ function FunctionalImprovemntList() {
     fetcher
   );
   const [modalShow, setModalShow] = useState(false);
+  const [modalData, setModalData] = useState(initialValues);
   const [loading, setLoading] = useState(false);
 
-  console.log({ sss: data });
+  const handleEditModal = (functionalImprovement) => {
+    setModalShow(true);
+    setModalData(functionalImprovement);
+  };
 
   const confirmDelete = (id) => {
     confirmAlert({
@@ -131,17 +158,13 @@ function FunctionalImprovemntList() {
                       </td>
 
                       <td className={`${frame44Styles.Action_buttons}`}>
-                        {/* <Image
+                        <Image
                           variant="primary"
-                          onClick={() => setModalShow(true)}
+                          title="Edit Functional Improvement record"
+                          onClick={() => handleEditModal(functionalImprovement)}
                           src={editicon}
                           alt="edit-icon"
-                        /> */}
-
-                        {/* <AppointmentModal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                      /> */}
+                        />
 
                         <Image
                           src={deleteicon}
@@ -156,6 +179,14 @@ function FunctionalImprovemntList() {
                 )}
               </tbody>
             </table>
+            <EditFunctionalImprovementModal
+              show={modalShow}
+              modaldata={modalData}
+              setModalShow={setModalShow}
+              onHide={() => {
+                setModalShow(false);
+              }}
+            />
           </>
         )}
       </div>

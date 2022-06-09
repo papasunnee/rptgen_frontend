@@ -65,8 +65,6 @@ function JobDescriptionModal(props) {
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  console.log({ data });
-
   const handleChange = (e) => {
     setError(null);
     setSuccessMessage(null);
