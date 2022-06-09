@@ -162,6 +162,7 @@ function FunctionalImprovemntList() {
 
                         <Image
                           src={deleteicon}
+                          title="Delete Functional Improvement record"
                           alt="delete-icon"
                           onClick={() => {
                             confirmDelete(functionalImprovement._id);

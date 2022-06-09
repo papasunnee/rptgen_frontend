@@ -5,11 +5,23 @@ import { confirmAlert } from "react-confirm-alert";
 import { fetcher } from "@/context/AuthContext";
 
 import deleteicon from "@/images/delete.png";
+import editicon from "@/images/edit-icon.png";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
 // import AppointmentModal from "./appointmentModal";
 import { UserContext } from "@/context/UserContext";
+import EditSuperBillModal from "../Modals/editSuperBillModal";
+
+const initialValues = {
+  initial_history_code: "",
+  initial_physical_exam_code: "",
+  prolonged_code: "",
+  review_records: "",
+  re_evaluation_code: "",
+  eveluation_prolonged_code: "",
+  review_records: "",
+};
 
 function SuperBillList() {
   const contextData = useContext(UserContext);
@@ -18,7 +30,13 @@ function SuperBillList() {
     fetcher
   );
   const [modalShow, setModalShow] = useState(false);
+  const [modalData, setModalData] = useState(initialValues);
   const [loading, setLoading] = useState(false);
+
+  const handleEditModal = (superBill) => {
+    setModalShow(true);
+    setModalData(superBill);
+  };
 
   const confirmDelete = (id) => {
     confirmAlert({
@@ -62,7 +80,7 @@ function SuperBillList() {
   return (
     <div className={`${frame44Styles.Appointment_activity}`}>
       <div className={`${frame44Styles.Title}`}>
-        {/* <h3>({data?.data?.appointments?.length || 0})</h3> */}
+        <h3>Super Bills ({data?.data?.superBills?.length || 0})</h3>
       </div>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>
@@ -128,21 +146,18 @@ function SuperBillList() {
                     </td>
 
                     <td className={`${frame44Styles.Action_buttons}`}>
-                      {/* <Image
-                          variant="primary"
-                          onClick={() => setModalShow(true)}
-                          src={editicon}
-                          alt="edit-icon"
-                        /> */}
-
-                      {/* <AppointmentModal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                      /> */}
+                      <Image
+                        variant="primary"
+                        title="Edit Super Bill record"
+                        onClick={() => handleEditModal(superBill)}
+                        src={editicon}
+                        alt="edit-icon"
+                      />
 
                       <Image
                         src={deleteicon}
                         alt="delete-icon"
+                        title="Delete Super Bill record"
                         onClick={() => {
                           confirmDelete(superBill._id);
                         }}
@@ -152,6 +167,14 @@ function SuperBillList() {
                 ))}
               </tbody>
             </table>
+            <EditSuperBillModal
+              show={modalShow}
+              modaldata={modalData}
+              setModalShow={setModalShow}
+              onHide={() => {
+                setModalShow(false);
+              }}
+            />
           </>
         )}
       </div>

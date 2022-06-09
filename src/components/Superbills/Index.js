@@ -65,10 +65,6 @@ function Index() {
                   </div>
 
                   <div className={`${frame44Styles.Appointment_activity}`}>
-                    <div className={`${frame44Styles.Title}`}>
-                      <h3>Record Reviews</h3>
-                    </div>
-
                     <SuperBillList />
                   </div>
                 </div>

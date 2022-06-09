@@ -9,6 +9,7 @@ export default async function handler(req, res) {
   let superBills;
   const id = req.query.patient_id;
   const patient_id = req.body.patient_id;
+  const put_id = req.body._id;
   const delete_id = req.body.delete_id;
 
   await dbConnect();
@@ -47,6 +48,32 @@ export default async function handler(req, res) {
           success: true,
           data: { superbill, patientRecord },
         });
+      } catch (error) {
+        return res.status(400).json({ success: false, error: error.message });
+      }
+    case "PUT":
+      try {
+        if (
+          put_id &&
+          (put_id != "undefined" || put_id != null || put_id != "null")
+        ) {
+          delete req.body._id;
+          let updateSuperBill = await SuperBill.findOneAndUpdate(
+            { _id: put_id },
+            req.body,
+            {
+              new: true,
+            }
+          );
+
+          return res
+            .status(400)
+            .json({ success: true, data: { updateSuperBill } });
+        } else {
+          return res
+            .status(400)
+            .json({ success: false, error: "unprocessed put_id" });
+        }
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
       }
