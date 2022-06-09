@@ -98,10 +98,6 @@ function Pastmedicalhistory() {
                   </div>
 
                   <div className={`${frame44Styles.Appointment_activity}`}>
-                    <div className={`${frame44Styles.Title}`}>
-                      <h3>History</h3>
-                    </div>
-
                     <PastMedicalHistoryList />
                   </div>
                 </div>
