@@ -9,13 +9,11 @@ import useSWR from "swr";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
 function SearchPatient() {
-  // const [val, setVal] = useContext(UserContext);
   const { data } = useSWR("/api/patient", fetcher);
   const router = useRouter();
   const [patientSelect, setPatientSelect] = useState(null);
   const handlePatientSelect = (e) => {
     setPatientSelect(e.value);
-    console.log(e.value);
     let routePath = router.route;
     if (routePath.includes("[id]")) {
       let newPath = routePath.replace("[id]", e.value);
@@ -30,7 +28,10 @@ function SearchPatient() {
   //     setPatient({ ...data?.data?.patients });
   //   });
   return (
-    <div className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}>
+    <div
+      className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
+      style={{ zIndex: "5 !important" }}
+    >
       <span
         className={`${frame47Styles.Inputgroup_text} input-group-text`}
         id="addon-wrapping"

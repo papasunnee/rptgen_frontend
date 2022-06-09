@@ -102,7 +102,7 @@ function DemographicForm() {
 
         if (demoData.success) {
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
-          setSuccessMessage("Patient Demographic Successfully Added");
+          setSuccessMessage("Patient Demographic Data Successfully Updated");
           setTimeout(() => setSuccessMessage(null), 5000);
         } else {
           throw new Error("Cannot Create Demographic Data");
