@@ -125,186 +125,200 @@ function Sidenav() {
               </Dropdown.Menu>
             </Accordion>
 
-            <Accordion className={`${frame34Styles.Accordition}`}>
-              <Accordion.Item
-                eventKey="0"
-                className={`${frame34Styles.Dropdownbutton}`}
-              >
-                <Accordion.Header>
-                  <Image src={historianicon} alt="historian-icon" />
-                  {/* &nbsp; Patients */}
-                  <div className={`ms-1 d-none d-sm-inline`}>Historian</div>
-                </Accordion.Header>
+            {id && id != "undefined" && (
+              <>
+                <Accordion className={`${frame34Styles.Accordition}`}>
+                  <Accordion.Item
+                    eventKey="0"
+                    className={`${frame34Styles.Dropdownbutton}`}
+                  >
+                    <Accordion.Header>
+                      <Image src={historianicon} alt="historian-icon" />
+                      {/* &nbsp; Patients */}
+                      <div className={`ms-1 d-none d-sm-inline`}>Historian</div>
+                    </Accordion.Header>
 
-                <Accordion.Body className={`${frame34Styles.Accorditionbody}`}>
-                  <Link href={`/historian/${id}/demographics`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    <Accordion.Body
+                      className={`${frame34Styles.Accorditionbody}`}
                     >
-                      <div className={`d-sm-inline`}>Patient Demographics</div>
-                    </a>
-                  </Link>
+                      <Link href={`/historian/${id}/demographics`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>
+                            Patient Demographics
+                          </div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/historian/${id}/pre-authorization`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Pre-authorization</div>
-                    </a>
-                  </Link>
+                      <Link href={`/historian/${id}/pre-authorization`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Pre-authorization</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/historian/${id}/functional-improvement`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>
-                        Functional Improvement
-                      </div>
-                    </a>
-                  </Link>
+                      <Link href={`/historian/${id}/functional-improvement`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>
+                            Functional Improvement
+                          </div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/historian/${id}/job-description`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Job Description</div>
-                    </a>
-                  </Link>
+                      <Link href={`/historian/${id}/job-description`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Job Description</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/historian/${id}/present-complaints`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Complaints</div>
-                    </a>
-                  </Link>
+                      <Link href={`/historian/${id}/present-complaints`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Complaints</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/historian/${id}/past-medical-history`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Medical History</div>
-                    </a>
-                  </Link>
+                      <Link href={`/historian/${id}/past-medical-history`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Medical History</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/historian/${id}/cumulative-trauma`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Cummulative Trauma</div>
-                    </a>
-                  </Link>
-                </Accordion.Body>
-              </Accordion.Item>
+                      <Link href={`/historian/${id}/cumulative-trauma`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>
+                            Cummulative Trauma
+                          </div>
+                        </a>
+                      </Link>
+                    </Accordion.Body>
+                  </Accordion.Item>
 
-              <Dropdown.Menu className={`${frame34Styles.Dropdownmenu}`}>
-                <Dropdown.Item href="#">
-                  <Link href="/patient/database">
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      Patient Database
-                    </a>
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item href="#">
-                  <Link href="/patient/appoinments">
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0 px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Appoinments</div>
-                    </a>
-                  </Link>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Accordion>
+                  <Dropdown.Menu className={`${frame34Styles.Dropdownmenu}`}>
+                    <Dropdown.Item href="#">
+                      <Link href="/patient/database">
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          Patient Database
+                        </a>
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#">
+                      <Link href="/patient/appoinments">
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0 px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Appoinments</div>
+                        </a>
+                      </Link>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Accordion>
 
-            <Accordion className={`${frame34Styles.Accordition}`}>
-              <Accordion.Item
-                eventKey="0"
-                className={`${frame34Styles.Dropdownbutton}`}
-              >
-                <Accordion.Header>
-                  <Image src={doctorsicon} alt="doctors-icon" />
-                  {/* &nbsp; Patients */}
-                  <div className={`ms-1 d-none d-sm-inline`}>Doctors</div>
-                </Accordion.Header>
+                <Accordion className={`${frame34Styles.Accordition}`}>
+                  <Accordion.Item
+                    eventKey="0"
+                    className={`${frame34Styles.Dropdownbutton}`}
+                  >
+                    <Accordion.Header>
+                      <Image src={doctorsicon} alt="doctors-icon" />
+                      {/* &nbsp; Patients */}
+                      <div className={`ms-1 d-none d-sm-inline`}>Doctors</div>
+                    </Accordion.Header>
 
-                <Accordion.Body className={`${frame34Styles.Accorditionbody}`}>
-                  <Link href={`/doctor/${id}/diagnosis`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                    <Accordion.Body
+                      className={`${frame34Styles.Accorditionbody}`}
                     >
-                      <div className={`d-sm-inline`}>Diagnosis</div>
-                    </a>
-                  </Link>
+                      <Link href={`/doctor/${id}/diagnosis`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Diagnosis</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/doctor/${id}/upload-records`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Upload Record</div>
-                    </a>
-                  </Link>
+                      <Link href={`/doctor/${id}/upload-records`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Upload Record</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/doctor/${id}/physical-evaluation`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Physical Evaluation</div>
-                    </a>
-                  </Link>
+                      <Link href={`/doctor/${id}/physical-evaluation`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>
+                            Physical Evaluation
+                          </div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/doctor/${id}/mil-evaluation`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>MIL Evaluation</div>
-                    </a>
-                  </Link>
+                      <Link href={`/doctor/${id}/mil-evaluation`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>MIL Evaluation</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/doctor/${id}/present-complaints`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Complaints</div>
-                    </a>
-                  </Link>
+                      <Link href={`/doctor/${id}/present-complaints`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Complaints</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/doctor/${id}/superbills`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Superbills</div>
-                    </a>
-                  </Link>
+                      <Link href={`/doctor/${id}/superbills`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Superbills</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/doctor/${id}/workstatus`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Work Status</div>
-                    </a>
-                  </Link>
+                      <Link href={`/doctor/${id}/workstatus`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Work Status</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/doctor/${id}/treatment-plan`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Treatment Plan</div>
-                    </a>
-                  </Link>
+                      <Link href={`/doctor/${id}/treatment-plan`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Treatment Plan</div>
+                        </a>
+                      </Link>
 
-                  <Link href={`/doctor/${id}/bill-reduction`}>
-                    <a
-                      className={`${frame34Styles.Navlink} dropdown-item px-0`}
-                    >
-                      <div className={`d-sm-inline`}>Bill Reduction</div>
-                    </a>
-                  </Link>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+                      <Link href={`/doctor/${id}/bill-reduction`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Bill Reduction</div>
+                        </a>
+                      </Link>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </>
+            )}
 
             <li className={`${frame34Styles.Navitem}`}>
               <a className={`${frame34Styles.Navlink} align-middle px-0`}>
