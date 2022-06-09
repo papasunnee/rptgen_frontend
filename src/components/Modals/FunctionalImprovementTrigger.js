@@ -10,7 +10,6 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
-import AddPatientModal from "../Patients-Database/addPatientModal";
 import { UserContext } from "@/context/UserContext";
 
 function FunctionalImprovementTrigger() {
@@ -124,9 +123,9 @@ function FunctionalImprovementModal(props) {
           );
           setForm(initialValues);
           setCheckBoxes(initialCheckBoxes);
+          setSuccessMessage(null);
+          mutate();
           setTimeout(() => {
-            setSuccessMessage(null);
-            mutate();
             props.setModalShow(false);
           }, 5000);
         } else {

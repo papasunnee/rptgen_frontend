@@ -25,15 +25,6 @@ const initialValues = {
   description: "",
 };
 
-const initialCheckBoxes = {
-  value_a: false,
-  value_b: false,
-  value_c: false,
-  value_d: false,
-  value_e: false,
-  value_f: false,
-  value_g: false,
-};
 function FunctionalImprovemntList() {
   const contextData = useContext(UserContext);
   const { data, mutate } = useSWR(
@@ -91,7 +82,10 @@ function FunctionalImprovemntList() {
   return (
     <div className={`${frame44Styles.Appointment_activity}`}>
       <div className={`${frame44Styles.Title}`}>
-        {/* <h3>({data?.data?.appointments?.length || 0})</h3> */}
+        <h3>
+          Functional Improvement (
+          {data?.data?.functionalImprovements?.length || 0})
+        </h3>
       </div>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>

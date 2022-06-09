@@ -1,123 +1,54 @@
 import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
-import { Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-
-import appointmenticon from "@/images/appointment-icon.png";
-
-import frame44Styles from "../Frame44/Frame44.module.scss";
-
-import descriptionStyles from "../Jobdescription/jobdescription.module.scss";
 import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
-import AddPatientModal from "../Patients-Database/addPatientModal";
 import { UserContext } from "@/context/UserContext";
+import Modal from "react-bootstrap/Modal";
 
-function JobDescriptionTrigger() {
-  const [modalShow, setModalShow] = React.useState(false);
-  return (
-    <>
-      <Button
-        variant="primary"
-        onClick={() => setModalShow(true)}
-        className={`${frame44Styles.Tab} col-md-3`}
-      >
-        <div className={`${frame44Styles.Image}`}>
-          <Image src={appointmenticon} alt="icon-img" />
-        </div>
+import descriptionStyles from "../Jobdescription/jobdescription.module.scss";
 
-        <div className={`${frame44Styles.Content}`}>
-          <h4>Add Job Description</h4>
-        </div>
-      </Button>
-
-      <JobDescriptionModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        setModalShow={setModalShow}
-      />
-    </>
-  );
-}
-
-export default JobDescriptionTrigger;
-
-const initialValues = {
-  dominant_hand: "",
-  job_type: "",
-  employee_name: "",
-  site_address: "",
-  job_title: "",
-  wages: "",
-  hours_worked: "",
-  days_worked: "",
-  starting_date: "",
-  last_working_date: "",
-  reason: "",
-  description: "",
-  employment_status: "",
-};
-
-function JobDescriptionModal(props) {
+export default function EditJobDescriptionModal(props) {
   const data = useContext(UserContext);
   const { mutate } = useSWR(
     `/api/patient/jobdescription?patient_id=${data._id}`,
     fetcher
   );
-  const [error, setError] = useState(null);
-  const [patient, setPatient] = useState();
-  const [form, setForm] = useState(initialValues);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const { modaldata = {} } = props;
+  const [mData, setMData] = useState({});
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setMData({ ...modaldata });
+    return () => {
+      setMData({});
+    };
+  }, [modaldata]);
 
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    const response = await fetch("/api/patient/jobdescription", {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...mData }),
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      mutate();
+      setMData({});
+      setLoading(false);
+      props.setModalShow(false);
+    } else {
+    }
+    setLoading(false);
+  };
   const handleChange = (e) => {
-    setError(null);
-    setSuccessMessage(null);
-    const { name, value } = e.target;
-
-    setForm((prevValues) => ({
+    const name = e.target.name;
+    const value = e.target.value;
+    setMData((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    const isEmpty = Object.values(form).every(
-      (item) => item === null || item === ""
-    );
-    if (!isEmpty) {
-      try {
-        const response = await fetch("/api/patient/jobdescription", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...form, patient_id: data._id }),
-        });
-        const functionData = await response.json();
-
-        if (functionData.success) {
-          global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
-          setSuccessMessage("Patient Job Description Successfully Added");
-          setForm(initialValues);
-          mutate();
-          setTimeout(() => {
-            setSuccessMessage(null);
-            props.setModalShow(false);
-          }, 3000);
-        } else {
-          throw new Error("Cannot Create Job Description Data");
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
-    } else {
-      global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
-      setError("Please Fill at least one field");
-    }
-    setLoading(false);
   };
 
   return (
@@ -133,7 +64,7 @@ function JobDescriptionModal(props) {
           id="contained-modal-title-vcenter"
           className={`${descriptionStyles.Modal_title}`}
         >
-          Add Job Description
+          Edit Job Description
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit}>
@@ -163,12 +94,7 @@ function JobDescriptionModal(props) {
             </div>
           </div>
         </div>
-        <div style={{ minHeight: "22px" }}>
-          {error && <p className="bg-danger text-white p-2">{error}</p>}
-          {successMessage && (
-            <p className="bg-success text-white p-2">{successMessage}</p>
-          )}
-        </div>
+
         <Modal.Body className={`${descriptionStyles.Modal_body}`}>
           <div className={`${descriptionStyles.Adl_col}`}>
             <div className={`${descriptionStyles.Inputlist}`}>
@@ -178,7 +104,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="dominant_hand"
-                  value={form.dominant_hand}
+                  value={mData.dominant_hand}
                   onChange={handleChange}
                 />
               </div>
@@ -189,7 +115,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="job_type"
-                  value={form.job_type}
+                  value={mData.job_type}
                   onChange={handleChange}
                 />
               </div>
@@ -200,7 +126,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="employee_name"
-                  value={form.employee_name}
+                  value={mData.employee_name}
                   onChange={handleChange}
                 />
               </div>
@@ -211,7 +137,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="site_address"
-                  value={form.site_address}
+                  value={mData.site_address}
                   onChange={handleChange}
                 />
               </div>
@@ -222,7 +148,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="job_title"
-                  value={form.job_title}
+                  value={mData.job_title}
                   onChange={handleChange}
                 />
               </div>
@@ -233,7 +159,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="wages"
-                  value={form.wages}
+                  value={mData.wages}
                   onChange={handleChange}
                 />
               </div>
@@ -248,7 +174,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="hours_worked"
-                  value={form.hours_worked}
+                  value={mData.hours_worked}
                   onChange={handleChange}
                 />
               </div>
@@ -259,7 +185,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="days_worked"
-                  value={form.days_worked}
+                  value={mData.days_worked}
                   onChange={handleChange}
                 />
               </div>
@@ -270,7 +196,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="starting_date"
-                  value={form.starting_date}
+                  value={mData.starting_date}
                   onChange={handleChange}
                 />
               </div>
@@ -281,7 +207,7 @@ function JobDescriptionModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="last_working_date"
-                  value={form.last_working_date}
+                  value={mData.last_working_date}
                   onChange={handleChange}
                 />
               </div>
@@ -293,7 +219,7 @@ function JobDescriptionModal(props) {
                   rows="15"
                   placeholder="Eg. your text here"
                   name="reason"
-                  value={form.reason}
+                  value={mData.reason}
                   onChange={handleChange}
                 />
               </div>
@@ -309,7 +235,7 @@ function JobDescriptionModal(props) {
                   rows="15"
                   placeholder="Eg. your text here"
                   name="description"
-                  value={form.description}
+                  value={mData.description}
                   onChange={handleChange}
                 />
               </div>
@@ -321,7 +247,7 @@ function JobDescriptionModal(props) {
                   rows="15"
                   placeholder="Eg. your text here"
                   name="employment_status"
-                  value={form.employment_status}
+                  value={mData.employment_status}
                   onChange={handleChange}
                 />
               </div>
@@ -330,7 +256,7 @@ function JobDescriptionModal(props) {
         </Modal.Body>
         <Modal.Footer className={`${descriptionStyles.Modal_footer}`}>
           <button type="submit" disabled={loading}>
-            {loading ? "Please Wait..." : "Save"}
+            {loading ? "Updating" : "Update"}
           </button>
         </Modal.Footer>
       </form>

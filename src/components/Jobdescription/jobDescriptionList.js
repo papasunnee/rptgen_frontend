@@ -1,16 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import useSWR from "swr";
 import { confirmAlert } from "react-confirm-alert";
 import { fetcher } from "@/context/AuthContext";
 
 import deleteicon from "@/images/delete.png";
+import editicon from "@/images/edit-icon.png";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
-// import AppointmentModal from "./appointmentModal";
 import { UserContext } from "@/context/UserContext";
+import EditJobDescriptionModal from "../Modals/editJobDescriptionModal";
 
+const initialValues = {
+  dominant_hand: "",
+  job_type: "",
+  employee_name: "",
+  site_address: "",
+  job_title: "",
+  wages: "",
+  hours_worked: "",
+  days_worked: "",
+  starting_date: "",
+  last_working_date: "",
+  reason: "",
+  description: "",
+  employment_status: "",
+};
 function JobDescriptionList() {
   const contextData = useContext(UserContext);
   const { data, mutate } = useSWR(
@@ -18,7 +34,13 @@ function JobDescriptionList() {
     fetcher
   );
   const [modalShow, setModalShow] = useState(false);
+  const [modalData, setModalData] = useState(initialValues);
   const [loading, setLoading] = useState(false);
+
+  const handleEditModal = (jobDescription) => {
+    setModalShow(true);
+    setModalData(jobDescription);
+  };
 
   const confirmDelete = (id) => {
     confirmAlert({
@@ -62,7 +84,7 @@ function JobDescriptionList() {
   return (
     <div className={`${frame44Styles.Appointment_activity}`}>
       <div className={`${frame44Styles.Title}`}>
-        {/* <h3>({data?.data?.appointments?.length || 0})</h3> */}
+        <h3>Job Description ({data?.data?.jobDescriptions?.length || 0})</h3>
       </div>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>
@@ -128,21 +150,18 @@ function JobDescriptionList() {
                     </td>
 
                     <td className={`${frame44Styles.Action_buttons}`}>
-                      {/* <Image
-                          variant="primary"
-                          onClick={() => setModalShow(true)}
-                          src={editicon}
-                          alt="edit-icon"
-                        /> */}
-
-                      {/* <AppointmentModal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                      /> */}
+                      <Image
+                        variant="primary"
+                        title="Edit Job Description record"
+                        onClick={() => handleEditModal(jobDescription)}
+                        src={editicon}
+                        alt="edit-icon"
+                      />
 
                       <Image
                         src={deleteicon}
                         alt="delete-icon"
+                        title="Delete Job Description record"
                         onClick={() => {
                           confirmDelete(jobDescription._id);
                         }}
@@ -152,6 +171,14 @@ function JobDescriptionList() {
                 ))}
               </tbody>
             </table>
+            <EditJobDescriptionModal
+              show={modalShow}
+              modaldata={modalData}
+              setModalShow={setModalShow}
+              onHide={() => {
+                setModalShow(false);
+              }}
+            />
           </>
         )}
       </div>

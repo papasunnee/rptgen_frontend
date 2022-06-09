@@ -63,11 +63,6 @@ function Jobdescription() {
 
                     <JobDescriptionTrigger />
 
-                    {/* <MyVerticallyCenteredModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    /> */}
-
                     <div className={`${frame44Styles.Tab} col-md-3`}>
                       <div className={`${frame44Styles.Image}`}>
                         <Image src={newpatientsicon} alt="icon-img" />
@@ -80,10 +75,6 @@ function Jobdescription() {
                   </div>
 
                   <div className={`${frame44Styles.Appointment_activity}`}>
-                    <div className={`${frame44Styles.Title}`}>
-                      <h3>Data</h3>
-                    </div>
-
                     <JobDescriptionList />
                   </div>
                 </div>
