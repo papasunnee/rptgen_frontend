@@ -4,12 +4,22 @@ import useSWR from "swr";
 import { confirmAlert } from "react-confirm-alert";
 import { fetcher } from "@/context/AuthContext";
 
+import editicon from "@/images/edit-icon.png";
 import deleteicon from "@/images/delete.png";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
 // import AppointmentModal from "./appointmentModal";
 import { UserContext } from "@/context/UserContext";
+import EditBillReductionModal from "../Modals/editBillReductionModal";
+
+const initialValues = {
+  body_part: "",
+  injury_date: "",
+  treatment_type: "",
+  injury_mechanism: "",
+  fully_recovered: false,
+};
 
 function BillReductionList() {
   const contextData = useContext(UserContext);
@@ -17,8 +27,15 @@ function BillReductionList() {
     `/api/patient/billreduction?patient_id=${contextData._id}`,
     fetcher
   );
+
   const [modalShow, setModalShow] = useState(false);
+  const [modalData, setModalData] = useState(initialValues);
   const [loading, setLoading] = useState(false);
+
+  const handleEditModal = (billReduction) => {
+    setModalShow(true);
+    setModalData(billReduction);
+  };
 
   const confirmDelete = (id) => {
     confirmAlert({
@@ -62,7 +79,7 @@ function BillReductionList() {
   return (
     <div className={`${frame44Styles.Appointment_activity}`}>
       <div className={`${frame44Styles.Title}`}>
-        {/* <h3>({data?.data?.appointments?.length || 0})</h3> */}
+        <h3>Bill Reduction ({data?.data?.billReductions?.length || 0})</h3>
       </div>
 
       <div className={`${frame44Styles.Appointmentlist_section}`}>
@@ -112,20 +129,17 @@ function BillReductionList() {
                     </td>
 
                     <td className={`${frame44Styles.Action_buttons}`}>
-                      {/* <Image
-                          variant="primary"
-                          onClick={() => setModalShow(true)}
-                          src={editicon}
-                          alt="edit-icon"
-                        /> */}
-
-                      {/* <AppointmentModal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                      /> */}
+                      <Image
+                        variant="primary"
+                        title="Edit Bill Reduction record"
+                        onClick={() => handleEditModal(billReduction)}
+                        src={editicon}
+                        alt="edit-icon"
+                      />
 
                       <Image
                         src={deleteicon}
+                        title="Delete Bill Reduction record"
                         alt="delete-icon"
                         onClick={() => {
                           confirmDelete(billReduction._id);
@@ -136,6 +150,14 @@ function BillReductionList() {
                 ))}
               </tbody>
             </table>
+            <EditBillReductionModal
+              show={modalShow}
+              modaldata={modalData}
+              setModalShow={setModalShow}
+              onHide={() => {
+                setModalShow(false);
+              }}
+            />
           </>
         )}
       </div>

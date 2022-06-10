@@ -17,6 +17,10 @@ const BillReductionSchema = new mongoose.Schema(
     injury_mechanism: {
       type: String,
     },
+    fully_recovered: {
+      type: Boolean,
+      default: false,
+    },
     patient_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Patient",

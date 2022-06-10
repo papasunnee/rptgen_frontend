@@ -1,45 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
-import { Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-
-import appointmenticon from "@/images/appointment-icon.png";
-
-import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
-import frame44Styles from "../Frame44/Frame44.module.scss";
-
 import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
+import Modal from "react-bootstrap/Modal";
 
-function PastMedicalHistoryTrigger() {
-  const [modalShow, setModalShow] = useState(false);
-  return (
-    <>
-      <Button
-        variant="primary"
-        onClick={() => setModalShow(true)}
-        className={`${frame44Styles.Tab} col-md-3`}
-      >
-        <div className={`${frame44Styles.Image}`}>
-          <Image src={appointmenticon} alt="icon-img" />
-        </div>
-
-        <div className={`${frame44Styles.Content}`}>
-          <h4>Add Medical History</h4>
-        </div>
-      </Button>
-
-      <PastMedicalHistoryModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        setModalShow={setModalShow}
-      />
-    </>
-  );
-}
-
-export default PastMedicalHistoryTrigger;
+import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 
 const initialValues = {
   type: "",
@@ -50,74 +15,57 @@ const initialValues = {
   fully_recovered: false,
 };
 
-function PastMedicalHistoryModal(props) {
+export default function EditBillReductionModal(props) {
   const data = useContext(UserContext);
   const { mutate } = useSWR(
-    `/api/patient/pastmedicalhistory?patient_id=${data._id}`,
+    `/api/patient/billreduction?patient_id=${data._id}`,
     fetcher
   );
-  const [error, setError] = useState(null);
-  const [patient, setPatient] = useState();
-  const [form, setForm] = useState(initialValues);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const { modaldata = {} } = props;
+  const [mData, setMData] = useState({});
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setMData({ ...modaldata });
+    return () => {
+      setMData({});
+    };
+  }, [modaldata]);
 
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    const response = await fetch("/api/patient/billreduction", {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...mData }),
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      mutate();
+      setMData({});
+      setLoading(false);
+      props.setModalShow(false);
+    } else {
+    }
+    setLoading(false);
+  };
   const handleChange = (e) => {
-    setError(null);
-    setSuccessMessage(null);
     const name = e.target.name;
-    if (name == "fully_recovered") {
+    if (name.includes("fully_recovered")) {
       const checked = e.target.checked;
-      setForm((prevValues) => ({
+      setMData((prevValues) => ({
         ...prevValues,
         [name]: checked,
       }));
     } else {
       const value = e.target.value;
-      setForm((prevValues) => ({
+      setMData((prevValues) => ({
         ...prevValues,
         [name]: value,
       }));
     }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    const isEmpty = Object.values(form).every(
-      (item) => item === null || item === ""
-    );
-    if (!isEmpty) {
-      try {
-        const response = await fetch("/api/patient/pastmedicalhistory", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...form, patient_id: data._id }),
-        });
-        const pastMedicalHistory = await response.json();
-
-        if (pastMedicalHistory.success) {
-          setForm(initialValues);
-          global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
-          setSuccessMessage("Patient Past Medical History Successfully Added");
-          mutate();
-          setTimeout(() => {
-            setSuccessMessage(null);
-            props.setModalShow(false);
-          }, 3000);
-        } else {
-          throw new Error("Cannot Create Past Medical History Data");
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
-    } else {
-      global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
-      setError("Please Fill at least one field");
-    }
-    setLoading(false);
   };
 
   return (
@@ -133,28 +81,16 @@ function PastMedicalHistoryModal(props) {
           id="contained-modal-title-vcenter"
           className={`${functionalStyles.Modal_title}`}
         >
-          Add Medical History
+          Edit Bill Reduction
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit}>
-        <div style={{ minHeight: "22px" }}>
-          {error && <p className="bg-danger text-white p-2">{error}</p>}
-          {successMessage && (
-            <p className="bg-success text-white p-2">{successMessage}</p>
-          )}
-        </div>
         <Modal.Body className={`${functionalStyles.Modal_body}`}>
           <div className={`${functionalStyles.Adl_col}`}>
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Type</label>
-                <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="type"
-                  value={form.type}
-                  onChange={handleChange}
-                />
+                <input type="text" placeholder="Eg. your text here" />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
@@ -163,7 +99,7 @@ function PastMedicalHistoryModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="body_part"
-                  value={form.body_part}
+                  value={mData.body_part}
                   onChange={handleChange}
                 />
               </div>
@@ -174,7 +110,7 @@ function PastMedicalHistoryModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="injury_date"
-                  value={form.injury_date}
+                  value={mData.injury_date}
                   onChange={handleChange}
                 />
               </div>
@@ -185,7 +121,7 @@ function PastMedicalHistoryModal(props) {
                   type="text"
                   placeholder="Eg. your text here"
                   name="treatment_type"
-                  value={form.treatment_type}
+                  value={mData.treatment_type}
                   onChange={handleChange}
                 />
               </div>
@@ -202,7 +138,7 @@ function PastMedicalHistoryModal(props) {
                   <input
                     type="checkbox"
                     name="fully_recovered"
-                    checked={form.fully_recovered}
+                    checked={mData.fully_recovered}
                     onChange={(e) => handleChange(e)}
                     style={{ width: "20px" }}
                   />{" "}
@@ -217,7 +153,7 @@ function PastMedicalHistoryModal(props) {
                   rows="15"
                   placeholder="Eg. your text here"
                   name="injury_mechanism"
-                  value={form.injury_mechanism}
+                  value={mData.injury_mechanism}
                   onChange={handleChange}
                 />
               </div>

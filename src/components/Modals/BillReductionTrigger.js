@@ -10,11 +10,10 @@ import functionalStyles from "../Functionalimprovement/Functionalimprovement.mod
 import descriptionStyles from "../Jobdescription/jobdescription.module.scss";
 import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
-import AddPatientModal from "../Patients-Database/addPatientModal";
 import { UserContext } from "@/context/UserContext";
 
 function BillReductionTrigger() {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <Button
@@ -31,7 +30,11 @@ function BillReductionTrigger() {
         </div>
       </Button>
 
-      <BillReductionModal show={modalShow} onHide={() => setModalShow(false)} />
+      <BillReductionModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        setModalShow={setModalShow}
+      />
     </>
   );
 }
@@ -43,10 +46,15 @@ const initialValues = {
   injury_date: "",
   treatment_type: "",
   injury_mechanism: "",
+  fully_recovered: false,
 };
 
 function BillReductionModal(props) {
   const data = useContext(UserContext);
+  const { mutate } = useSWR(
+    `/api/patient/billreduction?patient_id=${data._id}`,
+    fetcher
+  );
   const [error, setError] = useState(null);
   const [patient, setPatient] = useState();
   const [form, setForm] = useState(initialValues);
@@ -56,12 +64,20 @@ function BillReductionModal(props) {
   const handleChange = (e) => {
     setError(null);
     setSuccessMessage(null);
-    const { name, value } = e.target;
-
-    setForm((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    const name = e.target.name;
+    if (name == "fully_recovered") {
+      const checked = e.target.checked;
+      setForm((prevValues) => ({
+        ...prevValues,
+        [name]: checked,
+      }));
+    } else {
+      const value = e.target.value;
+      setForm((prevValues) => ({
+        ...prevValues,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -85,7 +101,11 @@ function BillReductionModal(props) {
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
           setSuccessMessage("Patient Super Bill Successfully Added");
           setForm(initialValues);
-          setTimeout(() => setSuccessMessage(null), 5000);
+          mutate();
+          setTimeout(() => {
+            setSuccessMessage(null);
+            props.setModalShow(false);
+          }, 3000);
         } else {
           throw new Error("Cannot Create Super Bill Data");
         }
@@ -171,8 +191,16 @@ function BillReductionModal(props) {
           >
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
-                <input type="checkbox" style={{ width: "20px" }} />
-                <label>Fully Recovered</label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="fully_recovered"
+                    checked={form.fully_recovered}
+                    onChange={(e) => handleChange(e)}
+                    style={{ width: "20px" }}
+                  />{" "}
+                  Fully Recovered
+                </label>
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
