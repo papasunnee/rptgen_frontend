@@ -127,7 +127,7 @@ function FunctionalImprovementModal(props) {
           mutate();
           setTimeout(() => {
             props.setModalShow(false);
-          }, 5000);
+          }, 1500);
         } else {
           throw new Error("Cannot Create Functional Improvement Data");
         }

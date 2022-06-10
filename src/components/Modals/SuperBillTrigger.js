@@ -98,7 +98,7 @@ function SuperBillModal(props) {
           setTimeout(() => {
             setSuccessMessage(null);
             props.setModalShow(false);
-          }, 3000);
+          }, 1500);
         } else {
           throw new Error("Cannot Create Super Bill Data");
         }

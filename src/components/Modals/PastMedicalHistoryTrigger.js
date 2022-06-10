@@ -106,7 +106,7 @@ function PastMedicalHistoryModal(props) {
           setTimeout(() => {
             setSuccessMessage(null);
             props.setModalShow(false);
-          }, 3000);
+          }, 1500);
         } else {
           throw new Error("Cannot Create Past Medical History Data");
         }
