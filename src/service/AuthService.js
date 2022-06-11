@@ -40,26 +40,3 @@ export const sendRefreshToken = (res, token) => {
     })
   );
 };
-
-export const AuthService = {
-  login: async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-      const userCred = await firebase.auth().signInWithPopup(provider);
-      return {
-        user: userCred.user,
-      };
-    } catch (e) {
-      return {
-        error: e.message,
-      };
-    }
-  },
-  logout: async () => {
-    alert("logout");
-  },
-
-  isLoggedIn: async () => {
-    await firebase.auth().signOut();
-  },
-};
