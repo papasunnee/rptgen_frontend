@@ -228,17 +228,16 @@
   }
 }
 
-@media (max-width: 1080px) {
-  .Heightadjust {
-    // flex-wrap: nowrap;
-    border: 3px solid red;
-  }
-}
+// @media (max-width: 1080px) {
+//   // .Heightadjust {
+//   //   // flex-wrap: nowrap;
+//   //   border: 3px solid red;
+//   // }
+// }
 
 @media (min-width: 1544px) {
   .Heightadjust {
     flex-wrap: nowrap;
-    border: 3px solid blue;
   }
 }
 
