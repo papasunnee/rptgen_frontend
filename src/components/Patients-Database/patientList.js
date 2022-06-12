@@ -35,7 +35,6 @@ const initialValues = {
 
 export default function PatientList() {
   const { data } = useSWR("/api/patient", fetcher);
-  console.log({ xxx: data });
 
   const [modalShow, setModalShow] = useState(false);
   const [modalData, setModalData] = useState(initialValues);
