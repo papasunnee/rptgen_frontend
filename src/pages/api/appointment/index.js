@@ -124,7 +124,6 @@ export default async function handler(req, res) {
 
           return res.status(400).json({ success: false });
         } else {
-          console.log(delete_id);
           return res
             .status(400)
             .json({ success: false, error: "Unprocessed delete_id" });

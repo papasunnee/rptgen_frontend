@@ -30,12 +30,11 @@
         .Inputlist_con {
           display: flex;
           align-items: center;
-
           margin-bottom: 8%;
 
           label {
             font-weight: 400;
-            font-size: 16px;
+            font-size: 14px;
             color: #6d6b80;
 
             padding-left: 10px;
@@ -139,6 +138,26 @@
       font-size: 14px;
       font-weight: 700;
       color: #52575c;
+    }
+  }
+}
+
+.modalForm {
+  label {
+    color: grey;
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  select {
+    appearance: initial;
+  }
+  select,
+  input {
+    outline: none;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border: 1px solid #558efe;
     }
   }
 }

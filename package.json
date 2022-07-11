@@ -1,7 +1,9 @@
 {
-  "name": "rptgen-frontend",
+  "name": "rptgen_frontend",
   "version": "0.1.0",
   "private": true,
+  "repository": "https://github.com/papasunnee/rptgen-frontend.git",
+  "author": "Adetona Sunday <papasunnee@gmail.com>, Miracle Chinedum",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

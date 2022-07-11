@@ -42,7 +42,8 @@ const PatientSchema = new mongoose.Schema(
     },
     providers_code: {
       type: String,
-      maxlength: [20, "Providers Code cannot be more than 20 characters"],
+      required: [true, "Please provide your providers code"],
+      maxlength: [50, "Providers Code cannot be more than 50 characters"],
     },
     assistant_providers_code: {
       type: String,
