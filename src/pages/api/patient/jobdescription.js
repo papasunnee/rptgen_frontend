@@ -1,10 +1,14 @@
 import dbConnect from "@/lib/dbConnect";
+import cookie from "cookie";
+import { verify } from "jsonwebtoken";
+import User from "@/models/User";
 import Patient from "@/models/Patient";
 import JobDescription from "@/models/JobDescription";
 import mongoose from "mongoose";
 
 export default async function handler(req, res) {
   const { method } = req;
+  await dbConnect();
 
   let jobDescriptions;
   const id = req.query.patient_id;
@@ -12,7 +16,32 @@ export default async function handler(req, res) {
   const put_id = req.body._id;
   const delete_id = req.body.delete_id;
 
-  await dbConnect();
+  if (!req.headers.cookie) {
+    return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+  const getToken = cookie.parse(req.headers.cookie);
+
+  if (!getToken.refreshToken) {
+    return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+
+  const payload = verify(
+    getToken.refreshToken,
+    process.env.REFRESH_TOKEN_SECRET
+  );
+
+  const user = await User.findOne(
+    {
+      email: payload?.userEmail,
+    },
+    {
+      password: false,
+    }
+  );
+
+  if (!user) {
+    return res.json({ isLoggedIn: false, error: "Unauthorized" });
+  }
 
   switch (method) {
     case "GET":
@@ -59,14 +88,13 @@ export default async function handler(req, res) {
           (put_id != "undefined" || put_id != null || put_id != "null")
         ) {
           delete req.body._id;
-          let updateJobDescription =
-            await JobDescription.findOneAndUpdate(
-              { _id: put_id },
-              req.body,
-              {
-                new: true,
-              }
-            );
+          let updateJobDescription = await JobDescription.findOneAndUpdate(
+            { _id: put_id },
+            req.body,
+            {
+              new: true,
+            }
+          );
 
           return res
             .status(400)

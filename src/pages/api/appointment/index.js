@@ -1,17 +1,47 @@
 import dbConnect from "@/lib/dbConnect";
+import cookie from "cookie";
+import { verify } from "jsonwebtoken";
+import User from "@/models/User";
 import Appointment from "@/models/Appointment";
 import Doctor from "@/models/Doctor";
 import Patient from "@/models/Patient";
 
 export default async function handler(req, res) {
   const { method } = req;
+  await dbConnect();
+
   let appointments;
   let id = req?.query?.id;
   let type = req?.query?.type;
   let put_id = req?.body?.put_id;
   let delete_id = req?.body?.delete_id;
 
-  await dbConnect();
+  if (!req.headers.cookie) {
+    return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+  const getToken = cookie.parse(req.headers.cookie);
+
+  if (!getToken.refreshToken) {
+    return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+
+  const payload = verify(
+    getToken.refreshToken,
+    process.env.REFRESH_TOKEN_SECRET
+  );
+
+  const user = await User.findOne(
+    {
+      email: payload?.userEmail,
+    },
+    {
+      password: false,
+    }
+  );
+
+  if (!user) {
+    return res.json({ isLoggedIn: false, error: "Unauthorized" });
+  }
 
   switch (method) {
     case "GET":
@@ -94,7 +124,6 @@ export default async function handler(req, res) {
 
           return res.status(400).json({ success: false });
         } else {
-          console.log(delete_id);
           return res
             .status(400)
             .json({ success: false, error: "Unprocessed delete_id" });

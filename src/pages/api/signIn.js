@@ -30,7 +30,6 @@ export default async (req, res) => {
           firstname: user.firstname,
           lastname: user.lastname,
           email: user.email,
-          payments: user.payments,
           isAdmin: user.isAdmin,
           role: user.role,
         },

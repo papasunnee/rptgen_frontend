@@ -1,6 +1,6 @@
 import { fetcher } from "@/context/AuthContext";
 import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
+import { Container, Row, Col, Modal } from "react-bootstrap";
 import useSWR from "swr";
 
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
@@ -111,6 +111,7 @@ export default function AddPatientModal(props) {
   return (
     <Modal
       {...props}
+      backdrop="static"
       size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -126,193 +127,122 @@ export default function AddPatientModal(props) {
       </Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Body className={`${functionalStyles.Modal_body}`}>
-          <div className={`${functionalStyles.Adl_col}`}>
-            <div className={`${functionalStyles.Adl_col_title}`}>
-              <h3 style={{ fontSize: "23px", paddingBottom: "15px" }}>
-                Basic Information
-              </h3>
-            </div>
-            <div className={`${functionalStyles.Inputlist}`}>
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Patient First Name</label>
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  required
-                  name="firstname"
-                  value={patientData.firstname}
-                  onChange={handleChange}
-                />
-              </div>
+          <Container fluid className={`${functionalStyles.modalForm}`}>
+            <Row>
+              <Col md={12}>
+                <h5>Basic Information</h5>
+              </Col>
+              <Col lg={4} className="my-3">
+                <div className="form-group">
+                  <label>Patient First Name</label>
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    className="form-control"
+                    required
+                    name="firstname"
+                    value={patientData.firstname}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Patient Last Name</label>
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  required
-                  name="lastname"
-                  value={patientData.lastname}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="form-group">
+                  <label>Patient Last Name</label>
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    required
+                    className="form-control"
+                    name="lastname"
+                    value={patientData.lastname}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Patient Middle Name</label>
-                <input
-                  type="text"
-                  placeholder="Middle Name"
-                  name="middlename"
-                  value={patientData.middlename}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="form-group">
+                  <label>Patient Middle Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Middle Name"
+                    name="middlename"
+                    value={patientData.middlename}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Provider Code</label>
-                <input
-                  type="text"
-                  placeholder="Enter Provider Code"
-                  required
-                  name="providers_code"
-                  value={patientData.providers_code}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="form-group">
+                  <label>Provider Code</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Provider Code"
+                    required
+                    className="form-control"
+                    name="providers_code"
+                    value={patientData.providers_code}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Asst Provider Code</label>
-                <input
-                  type="text"
-                  placeholder="Enter Asst Provider Code"
-                  name="assistant_providers_code"
-                  value={patientData.assistant_providers_code}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-          </div>
+                <div className="form-group">
+                  <label>Asst Provider Code</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Asst Provider Code"
+                    className="form-control"
+                    name="assistant_providers_code"
+                    value={patientData.assistant_providers_code}
+                    onChange={handleChange}
+                  />
+                </div>
+              </Col>
+              <Col lg={4} className="my-3">
+                <div className="form-group">
+                  <label>Date of Birth</label>
+                  <input
+                    type="date"
+                    placeholder="Select Birthdate"
+                    required
+                    className="form-control"
+                    name="birth_date"
+                    value={patientData.birth_date}
+                    onChange={handleChange}
+                  />
+                </div>
 
-          <div className={`${functionalStyles.Adl_col}`}>
-            <div className={`${functionalStyles.Adl_col_title}`}>
-              <h3 style={{ fontSize: "23px", paddingBottom: "15px" }}>
-                &nbsp;
-              </h3>
-            </div>
-            <div className={`${functionalStyles.Inputlist}`}>
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Street Address</label>
-                <input
-                  type="text"
-                  placeholder="Street Address"
-                  required
-                  name="street_address"
-                  value={patientData.street_address}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="form-group">
+                  <label>Chart Number</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Chart Number"
+                    className="form-control"
+                    required
+                    name="chart_number"
+                    value={patientData.chart_number}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>
-                  City, State, and Zip (Place a comma “,” after the city)
-                </label>
-                <input
-                  type="text"
-                  placeholder="City, State, and Zip"
-                  required
-                  name="city_state_zip"
-                  value={patientData.city_state_zip}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="form-group">
+                  <label>SSN</label>
+                  <input
+                    type="number"
+                    placeholder="Enter SSN Number"
+                    className="form-control"
+                    required
+                    name="ssn"
+                    value={patientData.ssn}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Home Phone</label>
-                <input
-                  type="tel"
-                  min="0"
-                  placeholder="Enter Home Phone"
-                  required
-                  name="home_phone"
-                  value={patientData.home_phone}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Upload Patient Picture</label>
-                <input
-                  type="file"
-                  placeholder="Browse File"
-                  multiple={false}
-                  accept="image/*"
-                  name="image_url"
-                  onChange={handleOnChange}
-                />
-              </div>
-              <div
-                style={{
-                  maxWidth: "300px",
-                  border: "1px solid lightgray",
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                }}
-              >
-                <img src={imageSrc} className="img-fluid" />
-              </div>
-            </div>
-          </div>
-
-          <div className={`${functionalStyles.Adl_col}`}>
-            <div className={`${functionalStyles.Adl_col_title}`}>
-              <h3 style={{ fontSize: "23px", paddingBottom: "15px" }}>
-                Status
-              </h3>
-            </div>
-            <div className={`${functionalStyles.Inputlist}`}>
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Date of Birth</label>
-                <input
-                  type="date"
-                  placeholder="Select Birthdate"
-                  required
-                  name="birth_date"
-                  value={patientData.birth_date}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Chart Number</label>
-                <input
-                  type="text"
-                  placeholder="Enter Chart Number"
-                  required
-                  name="chart_number"
-                  value={patientData.chart_number}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>SSN</label>
-                <input
-                  type="number"
-                  placeholder="Enter SSN Number"
-                  required
-                  name="ssn"
-                  value={patientData.ssn}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Select Gender</label>
-                <select>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-                {/* <input
+                <div className="form-group">
+                  <label>Select Gender</label>
+                  <select className="form-control">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                  {/* <input
                     type="text"
                     placeholder="Select Gender"
                     required
@@ -320,17 +250,17 @@ export default function AddPatientModal(props) {
                     value={patientData.gender}
                     onChange={handleChange}
                   /> */}
-              </div>
+                </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Marital Status</label>
-                <select>
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="widowed">Widowed</option>
-                  <option value="divorced">Divorced</option>
-                </select>
-                {/* <input
+                <div className="form-group">
+                  <label>Marital Status</label>
+                  <select className="form-control">
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="widowed">Widowed</option>
+                    <option value="divorced">Divorced</option>
+                  </select>
+                  {/* <input
                     type="text"
                     placeholder="Enter Marital Status"
                     required
@@ -338,13 +268,89 @@ export default function AddPatientModal(props) {
                     value={patientData.marital_status}
                     onChange={handleChange}
                   /> */}
-              </div>
-            </div>
-          </div>
+                </div>
+              </Col>
+              <Col lg={4} className="my-3">
+                <div className="form-group">
+                  <label>Street Address</label>
+                  <input
+                    type="text"
+                    placeholder="Street Address"
+                    required
+                    className="form-control"
+                    name="street_address"
+                    value={patientData.street_address}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>
+                    City, State, and Zip{" "}
+                    <em style={{ fontSize: "9px" }}>
+                      (Place a comma “,” after the city)
+                    </em>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="City, State, and Zip"
+                    required
+                    className="form-control"
+                    name="city_state_zip"
+                    value={patientData.city_state_zip}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Home Phone</label>
+                  <input
+                    type="tel"
+                    min="0"
+                    placeholder="Enter Home Phone"
+                    required
+                    className="form-control"
+                    name="home_phone"
+                    value={patientData.home_phone}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Upload Patient Picture</label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    placeholder="Browse File"
+                    multiple={false}
+                    accept="image/*"
+                    name="image_url"
+                    onChange={handleOnChange}
+                  />
+                </div>
+                <div
+                  style={{
+                    margin: "auto",
+                    marginTop: "20px",
+                    maxHeight: "200px",
+                    maxWidth: "200px",
+                    borderRadius: "5px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <img
+                    src={imageSrc}
+                    style={{ objectFit: "contain" }}
+                    className="img-fluid"
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Container>
         </Modal.Body>
         <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
           <p>{success && <span>Patient Successfully Added</span>}</p>
-          <button type="submit" disabled={processing}>
+          <button type="submit" disabled={processing} className="mt-0">
             {processing ? "Please Wait..." : "Save"}
           </button>
         </Modal.Footer>

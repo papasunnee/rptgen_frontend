@@ -13,12 +13,16 @@ function PatientPreauthorization({ data }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
   // Fetch data from API with absolute URL
   const res = await fetch(
     `${process.env.NEXTAUTH_URL}/api/patient?id=${params.id}`,
     {
       method: "GET",
+      credentials: "same-origin",
+      headers: {
+        Cookie: req.headers.cookie,
+      },
     }
   );
   const data = await res.json();

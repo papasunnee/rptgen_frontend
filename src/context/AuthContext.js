@@ -4,7 +4,8 @@ import useSWR from "swr";
 
 export const AuthContext = createContext();
 
-export const fetcher = (url) => fetch(url).then((r) => r.json());
+export const fetcher = (url) =>
+  fetch(url, { credentials: "same-origin" }).then((r) => r.json());
 
 const AuthProvider = (props) => {
   const router = useRouter();

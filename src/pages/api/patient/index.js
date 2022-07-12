@@ -1,3 +1,6 @@
+import cookie from "cookie";
+import { verify } from "jsonwebtoken";
+import User from "@/models/User";
 import dbConnect from "@/lib/dbConnect";
 import Appointment from "@/models/Appointment";
 import PatientDemographic from "@/models/PatientDemographic";
@@ -11,6 +14,7 @@ import Patient from "@/models/Patient";
 
 export default async function handler(req, res) {
   const { method } = req;
+  await dbConnect();
 
   let patients;
   let id = req?.query?.id;
@@ -19,7 +23,32 @@ export default async function handler(req, res) {
   let page = req?.query?.page;
   let perPage = 10;
 
-  await dbConnect();
+  if (!req.headers.cookie) {
+    return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+  const getToken = cookie.parse(req.headers.cookie);
+
+  if (!getToken.refreshToken) {
+    return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+
+  const payload = verify(
+    getToken.refreshToken,
+    process.env.REFRESH_TOKEN_SECRET
+  );
+
+  const user = await User.findOne(
+    {
+      email: payload?.userEmail,
+    },
+    {
+      password: false,
+    }
+  );
+
+  if (!user) {
+    return res.json({ isLoggedIn: false, error: "Unauthorized" });
+  }
 
   switch (method) {
     case "GET":
@@ -82,7 +111,6 @@ export default async function handler(req, res) {
           data: { patients, recentPatient, recentPatients },
         });
       } catch (error) {
-        console.log(error);
         return res.status(400).json({ success: false, error: error.message });
       }
     case "POST":

@@ -1,12 +1,8 @@
 import React, { useState, Fragment } from "react";
 import Image from "next/image";
-
-import useLocalStorage from "use-local-storage";
-
 import { BsSearch } from "react-icons/bs";
 
 import PatientList from "../Patients-Database/patientList";
-
 import Sidenav from "../Common/Sidenav";
 import Topnav from "../Common/Topnav";
 import moreimg from "@/images/more-icon.png";
@@ -35,15 +31,6 @@ import AddPatientModal from "../Patients-Database/addPatientModal";
 
 function Frame47() {
   const [modalShow, setModalShow] = useState(true);
-
-  const [theme, setTheme] = useLocalStorage("light");
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
 
   return (
     <Fragment>
