@@ -55,13 +55,13 @@ export default function PatientList() {
             <table className="table">
               <thead>
                 <tr className={`${frame44Styles.Appointmentlist_title}`}>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Visit Time</th>
-                  <th scope="col">Doctor</th>
-                  <th scope="col">Conditions</th>
-                  <th scope="col">&nbsp;</th>
+                  <th scope="col" className={`col-md-2`}>Patient</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col">Create Time</th>
+                  <th scope="col">Updated By</th>
+                  <th scope="col">Update Time</th>
+                  {/* <th scope="col">Conditions</th> */}
+                  <th scope="col">Actions</th>
                 </tr>
               </thead>
               <PaginatedPatient handleModal={handleModal} />
@@ -127,17 +127,47 @@ function Page({ currentItems = [], handleModal }) {
       <td className="col">
         <Link href={`/historian/${patient._id}/demographics`}>
           <a className={`${frame44Styles.Name}`}>
-            <div className={`${frame44Styles.Profilepic}`}>
+            {/* <div className={`${frame44Styles.Profilepic}`}>
               <img
                 src={patient.image_url}
                 alt="profile-pic"
-                className="img-fluid"
-                // width="150"
-                // height="150"
-              />
+                className="img-fluid" */}
+            {/* // width="150"
+              // height="150"
+            //   />
+            // </div> */}
+
+            <div className={`${frame44Styles.Checkbox_div}`}>
+              <input type="checkbox" />
+
+              <h4>{patient.firstname + " " + patient.lastname}</h4>
             </div>
 
-            <h4>{patient.firstname + " " + patient.lastname}</h4>
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Date of Birth:
+              <span>09/20/1965</span>
+            </h4>
+
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Insurance:
+              <span>The Hartford</span>
+            </h4>
+
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Provider:
+              <span>mah</span>
+            </h4>
+
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Chart No:
+              <span>HEMA1965100</span>
+            </h4>
+
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Employer:
+              <span>Markwins Beauty Brands, Inc.</span>
+            </h4>
+
           </a>
         </Link>
       </td>
@@ -158,9 +188,9 @@ function Page({ currentItems = [], handleModal }) {
         <h4>{patient.appointments.length > 0 ? "Not Assigned" : "Null"}</h4>
       </td>
 
-      <td className={`${frame44Styles.Name} col text-center`}>
+      {/* <td className={`${frame44Styles.Name} col text-center`}>
         <h4>{patient.appointments.length > 0 ? "Not Assigned" : "Null"}</h4>
-      </td>
+      </td> */}
 
       <td className={`${frame44Styles.Action_buttons}`}>
         <Image
@@ -178,7 +208,7 @@ function Page({ currentItems = [], handleModal }) {
           onClick={() => confirmDelete(patient._id)}
         />
       </td>
-    </tr>
+    </tr >
   ));
 }
 

@@ -1,6 +1,9 @@
 import React, { useEffect, Fragment } from "react";
 import Image from "next/image";
 
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import loginimg from "@/images/login.png";
@@ -24,7 +27,7 @@ function Optionselect() {
         <div
           className={`${optionselectStyles.Image} col-lg-7 col-md-4 d-lg-block d-none`}
         >
-          <Image src={loginimg} alt="login-img" />
+          {/* <Image src={loginimg} alt="login-img" className={`${optionselectStyles.Goat}`} /> */}
         </div>
 
         <div className={`${optionselectStyles.Formsection} col-lg-5 col-md-12`}>
@@ -46,7 +49,7 @@ function Optionselect() {
             </div>
 
             <div className={`${optionselectStyles.Button}`}>
-              <Link href="/patient/database">
+              <Link href="/enter-provider-code">
                 <a>Next</a>
               </Link>
             </div>
