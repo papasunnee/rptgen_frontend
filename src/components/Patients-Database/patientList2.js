@@ -13,9 +13,7 @@ import deleteicon from "@/images/delete.png";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
-import PLStyles from "./patientList.module.scss";
 import Link from "next/link";
-import ProvidercodeModal from "../Optionselect/ProvidercodeModal";
 
 const initialValues = {
   _id: null,
@@ -37,7 +35,7 @@ const initialValues = {
 
 export default function PatientList() {
   const { data } = useSWR("/api/patient", fetcher);
-  console.log({ data });
+
   const [modalShow, setModalShow] = useState(false);
   const [modalData, setModalData] = useState(initialValues);
 
@@ -51,19 +49,20 @@ export default function PatientList() {
         <h3>Patients ({data?.data?.patients?.length})</h3>
       </div>
 
-      <div className={PLStyles.wrapper}>
+      <div className={`${frame44Styles.Appointmentlist_section}`}>
         {data?.data?.patients?.length > 0 && (
           <>
-            <table className="table table-bordered">
+            <table className="table">
               <thead>
-                <tr>
-                  <th>
-                    <input type="checkbox" /> Patient
+                <tr className={`${frame44Styles.Appointmentlist_title}`}>
+                  <th scope="col" className={`col-md-2`}>
+                    Patient
                   </th>
                   <th scope="col">Created By</th>
                   <th scope="col">Create Time</th>
                   <th scope="col">Updated By</th>
                   <th scope="col">Update Time</th>
+                  {/* <th scope="col">Conditions</th> */}
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -87,12 +86,6 @@ export default function PatientList() {
 function Page({ currentItems = [], handleModal }) {
   const { mutate } = useSWR("/api/patient", fetcher);
   const [loading, setLoading] = useState(false);
-  const [modalShow, setModalShow] = useState(false);
-
-  const hanndleRedirectModal = (event) => {
-    event.preventDefault();
-    setModalShow(true);
-  };
   const handleDelete = async (id) => {
     try {
       const response = await fetch("/api/patient", {
@@ -131,135 +124,97 @@ function Page({ currentItems = [], handleModal }) {
       ],
     });
   };
-  return (
-    <>
-      <ProvidercodeModal show={modalShow} onHide={() => setModalShow(false)} />
-      {currentItems.map((patient, i) => (
-        <tr key={i}>
-          <td>
-            <div className={PLStyles.bioData}>
-              <input type="checkbox" className="mt-1" />
-
-              {/* <Link href={`/historian/${patient._id}/demographics`}> */}
-              <Link href="">
-                <a onClick={hanndleRedirectModal}>
-                  {/* <div className={`${frame44Styles.Profilepic}`}>
+  return currentItems.map((patient, i) => (
+    <tr key={i} className={`${frame44Styles.Appointment}`}>
+      <td className="col">
+        <Link href={`/historian/${patient._id}/demographics`}>
+          <a className={`${frame44Styles.Name}`}>
+            {/* <div className={`${frame44Styles.Profilepic}`}>
               <img
                 src={patient.image_url}
                 alt="profile-pic"
                 className="img-fluid" */}
-                  {/* // width="150"
+            {/* // width="150"
               // height="150"
             //   />
             // </div> */}
 
-                  <div>
-                    <h4 className={PLStyles.patientName}>
-                      {patient.firstname + " " + patient.lastname}
-                    </h4>
-                  </div>
+            <div className={`${frame44Styles.Checkbox_div}`}>
+              <input type="checkbox" />
 
-                  <p>
-                    <span>Date of Birth:</span>
-                    <span>
-                      {moment(patient?.birth_date).format("DD/MM/YY") ||
-                        "mm/dd/yy"}
-                    </span>
-                  </p>
-
-                  <p>
-                    <span>Insurance:</span>
-                    <span>
-                      {patient?.patient_demographic_id
-                        ?.insurance_company_name || "-"}
-                    </span>
-                  </p>
-
-                  <p>
-                    <span>Provider:</span>
-                    <span> {patient?.providers_code || "-"}</span>
-                  </p>
-
-                  <p>
-                    <span>Chart No:</span>
-                    <span> {patient?.chart_number || "-"}</span>
-                  </p>
-
-                  <p>
-                    <span>Employer:</span>
-                    <span>
-                      {" "}
-                      {patient?.job_descriptions[0]?.employee_name || "-"}
-                    </span>
-                  </p>
-                </a>
-              </Link>
+              <h4>{patient.firstname + " " + patient.lastname}</h4>
             </div>
-          </td>
 
-          <td scope="col">
-            <p className={PLStyles.badge}>
-              <span className="badge badge-pill badge-secondary">
-                {patient?.createdBy?.email || "admin@gmail.com"}
-              </span>
-            </p>
-          </td>
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Date of Birth:
+              <span>09/20/1965</span>
+            </h4>
 
-          <td scope="col">
-            <p className={PLStyles.badge}>
-              <span className="badge badge-pill badge-secondary">
-                {moment(patient.createdAt).format("MMM Do YYYY HH:mm:ss", true)}
-              </span>
-            </p>
-          </td>
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Insurance:
+              <span>The Hartford</span>
+            </h4>
 
-          <td scope="col">
-            <p className={PLStyles.badge}>
-              <span className="badge badge-pill badge-secondary">
-                {patient?.updatedBy?.email || "admin@gmail.com"}
-              </span>
-            </p>
-          </td>
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Provider:
+              <span>mah</span>
+            </h4>
 
-          <td scope="col">
-            <p className={PLStyles.badge}>
-              <span className="badge badge-pill badge-secondary">
-                {moment(patient.updatedAt).format("MMM Do YYYY HH:mm:ss", true)}
-              </span>
-            </p>
-          </td>
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Chart No:
+              <span>HEMA1965100</span>
+            </h4>
 
-          {/* <td className={`${frame44Styles.Name} col text-center`}>
+            <h4 className={`${frame44Styles.Name_sub}`}>
+              Employer:
+              <span>Markwins Beauty Brands, Inc.</span>
+            </h4>
+          </a>
+        </Link>
+      </td>
+
+      <td className={`${frame44Styles.Name} col`}>
+        <h4>{patient.email || "No Email"}</h4>
+      </td>
+
+      <td className={`${frame44Styles.Name}`}>
+        <h4>{moment(patient.birth_date).format("MMM Do YYYY")}</h4>
+      </td>
+
+      <td className={`${frame44Styles.Name} col text-center`}>
+        <h4>{patient.appointments.length > 0 ? "Not Assigned" : "Null"}</h4>
+      </td>
+
+      <td className={`${frame44Styles.Name} col text-center`}>
+        <h4>{patient.appointments.length > 0 ? "Not Assigned" : "Null"}</h4>
+      </td>
+
+      {/* <td className={`${frame44Styles.Name} col text-center`}>
         <h4>{patient.appointments.length > 0 ? "Not Assigned" : "Null"}</h4>
       </td> */}
 
-          <td className={`${PLStyles.actionButton}`}>
-            <Image
-              className={PLStyles.imageButton}
-              variant="primary"
-              title={`Edit ${patient.firstname}`}
-              onClick={() => handleModal(patient)}
-              src={editicon}
-              alt="edit-icon"
-            />
+      <td className={`${frame44Styles.Action_buttons}`}>
+        <Image
+          variant="primary"
+          title={`Edit ${patient.firstname}`}
+          onClick={() => handleModal(patient)}
+          src={editicon}
+          alt="edit-icon"
+        />
 
-            <Image
-              className={PLStyles.imageButton}
-              src={deleteicon}
-              title={`Delete ${patient.firstname}`}
-              alt="delete-icon"
-              onClick={() => confirmDelete(patient._id)}
-            />
-          </td>
-        </tr>
-      ))}
-    </>
-  );
+        <Image
+          src={deleteicon}
+          title={`Delete ${patient.firstname}`}
+          alt="delete-icon"
+          onClick={() => confirmDelete(patient._id)}
+        />
+      </td>
+    </tr>
+  ));
 }
 
 function PaginatedPatient({ handleModal }) {
   const { data, error } = useSWR(`/api/patient`, fetcher);
-
   // if ((!data && !error) || error) {
   //   return "loading";
   // }

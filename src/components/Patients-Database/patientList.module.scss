@@ -1,0 +1,78 @@
+.wrapper {
+  table {
+    width: 100%;
+    thead {
+      tr {
+        th:first-child {
+          width: 70px !important;
+          max-width: 70px !important;
+          min-width: 70px !important;
+          overflow: hidden;
+          margin: 0;
+          white-space: nowrap;
+          word-break: break-all;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td:first-child {
+          width: 70px !important;
+          max-width: 70px !important;
+          min-width: 70px !important;
+          overflow: hidden;
+          margin: 0;
+          white-space: nowrap;
+          word-break: break-all;
+        }
+        .badge {
+          span {
+            color: #fff;
+            font-weight: normal;
+            background-color: grey;
+            border-radius: 50px;
+            font-size: 10px;
+          }
+        }
+        .bioData {
+          display: flex;
+          align-items: flex-start;
+          a {
+            text-decoration: none;
+            margin-left: 3px;
+            color: #000;
+            .patientName {
+              font-size: 14px;
+              font-weight: bold;
+            }
+            p {
+              span:first-child {
+                width: 100px;
+              }
+              span:nth-child(2) {
+                font-weight: bold;
+              }
+              margin: 0;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              font-size: 10px;
+            }
+          }
+        }
+        .actionButton {
+          .imageButton {
+            // cursor: pointer;
+            // width: 70px;
+            // height: 70px;
+            // display: inline-block !important;
+            // margin: 2px !important;
+            // padding: 2px;
+            // border: 1px solid grey !important;
+            // border-radius: 5px !important;
+          }
+        }
+      }
+    }
+  }
+}

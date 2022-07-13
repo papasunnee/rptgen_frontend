@@ -58,6 +58,8 @@ export default async function handler(req, res) {
             _id: id,
           })
             .populate("appointments")
+            .populate("createdBy")
+            .populate("updatedBy")
             .populate("patient_demographic_id")
             .populate("pre_authorization")
             .populate("functional_improvements")
@@ -72,6 +74,8 @@ export default async function handler(req, res) {
             .limit(perPage)
             .skip(perPage * page)
             .populate("appointments")
+            .populate("createdBy")
+            .populate("updatedBy")
             .populate("patient_demographic_id")
             .populate("pre_authorization")
             .populate("functional_improvements")
@@ -84,6 +88,8 @@ export default async function handler(req, res) {
         } else {
           patients = await Patient.find({})
             .populate("appointments")
+            .populate("createdBy")
+            .populate("updatedBy")
             .populate("patient_demographic_id")
             .populate("pre_authorization")
             .populate("functional_improvements")
@@ -115,9 +121,11 @@ export default async function handler(req, res) {
       }
     case "POST":
       try {
-        const patient = await Patient.create(
-          req.body
-        ); /* create a new model in the database */
+        const patient = await Patient.create({
+          ...req.body,
+          createdBy: user?._id,
+          updatedBy: user?._id,
+        }); /* create a new model in the database */
         return res.status(201).json({ success: true, data: patient });
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
@@ -129,7 +137,7 @@ export default async function handler(req, res) {
 
           let updatePatient = await Patient.findOneAndUpdate(
             { _id },
-            req.body,
+            { ...req.body, updatedBy: user._id },
             {
               new: true,
             }

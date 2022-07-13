@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from "./User";
 import Appointment from "./Appointment";
 import PatientDemographic from "./PatientDemographic";
 import PatientPreAuthorization from "./PatientPreAuthorization";
@@ -119,7 +120,14 @@ const PatientSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "PatientPreAuthorization",
     },
-
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    updatedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     role: {
       type: String,
       default: "patient",

@@ -140,8 +140,7 @@
 
       .Appointmentlist_section {
         .Appointmentlist_title {
-          padding: 10px 20px;
-
+          padding: 10px 0px;
           display: flex;
           flex-wrap: wrap;
           align-items: center;
@@ -168,7 +167,7 @@
           display: flex;
           flex-wrap: wrap;
           // align-items: center;
-          justify-content: space-between;
+          // justify-content: space-between;
           th,
           td {
             border-bottom-width: 0px !important;
