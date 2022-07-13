@@ -242,8 +242,8 @@ export default function EditPatientModal(props) {
                 </div>
 
                 <div className="form-group">
-                  <label>Change Patient Picture</label>
-                  <input type="file" placeholder="Browse File" />
+                  {/* <label>Change Patient Picture</label> */}
+                  {/* <input type="file" placeholder="Browse File" /> */}
                   <div className="m-5 text-center">
                     <img src={mData.image_url} style={{ maxWidth: "150px" }} />
                   </div>
