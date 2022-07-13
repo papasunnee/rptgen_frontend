@@ -133,8 +133,6 @@ export default async function handler(req, res) {
     case "PUT":
       try {
         if (_id && (_id != "undefined" || _id != null || _id != "null")) {
-          console.log(_id);
-
           let updatePatient = await Patient.findOneAndUpdate(
             { _id },
             { ...req.body, updatedBy: user._id },
@@ -160,7 +158,6 @@ export default async function handler(req, res) {
           delete_id &&
           (delete_id != "undefined" || delete_id != null || delete_id != "null")
         ) {
-          console.log(delete_id);
           const patient = await Patient.findOne({
             _id: delete_id,
           });
@@ -180,7 +177,6 @@ export default async function handler(req, res) {
 
           return res.status(400).json({ success: false });
         } else {
-          console.log(delete_id);
           return res
             .status(400)
             .json({ success: false, error: "Unprocessed delete_id" });

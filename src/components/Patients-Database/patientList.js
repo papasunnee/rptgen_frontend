@@ -37,7 +37,6 @@ const initialValues = {
 
 export default function PatientList() {
   const { data } = useSWR("/api/patient", fetcher);
-  console.log({ data });
   const [modalShow, setModalShow] = useState(false);
   const [modalData, setModalData] = useState(initialValues);
 
@@ -119,7 +118,6 @@ function Page({ currentItems = [], handleModal }) {
           onClick: async () => {
             try {
               const response = await handleDelete(id);
-              console.log(response);
               mutate();
             } catch (error) {
               console.log(error.message);
