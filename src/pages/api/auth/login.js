@@ -32,7 +32,7 @@ async function handler(req, res) {
 
       //Hash password
       const hash = await bcryptjs.compare(password, user.password);
-      console.log(hash);
+      
       if (!hash) {
         return res
           .status(422)

@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import Image from "next/image";
 
 import Modal from "react-bootstrap/Modal";
@@ -12,14 +12,22 @@ import useraccounticon from "@/images/useraccount-icon.png";
 
 import optionselectStyles from "./Optionselect.module.scss";
 import Link from "next/link";
+import ProvidercodeModal from "./ProvidercodeModal";
 
 function Optionselect() {
+  const [modalShow, setModalShow] = useState(false);
   useEffect(() => {
     document.body.style.overflow = "hidden";
   }, []);
 
+  const handleRedirect = (e) => {
+    e.preventDefault();
+    setModalShow(true);
+  };
+
   return (
     <Fragment>
+      <ProvidercodeModal show={modalShow} onHide={() => setModalShow(false)} />
       <div
         className={`${optionselectStyles.Optionselect} container-fluid row justify-content-around`}
         style={{ padding: 0 }}
@@ -49,8 +57,8 @@ function Optionselect() {
             </div>
 
             <div className={`${optionselectStyles.Button}`}>
-              <Link href="/enter-provider-code">
-                <a>Next</a>
+              <Link href="">
+                <a onClick={handleRedirect}>Next</a>
               </Link>
             </div>
           </div>

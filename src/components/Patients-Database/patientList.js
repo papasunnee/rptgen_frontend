@@ -56,7 +56,7 @@ export default function PatientList() {
           <>
             <table className="table table-bordered">
               <thead>
-                <tr>
+                <tr style={{ backgroundColor: "rgb(230, 230, 230)" }}>
                   <th>
                     <input type="checkbox" /> Patient
                   </th>
@@ -88,9 +88,11 @@ function Page({ currentItems = [], handleModal }) {
   const { mutate } = useSWR("/api/patient", fetcher);
   const [loading, setLoading] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [modalId, setModalId] = useState(null);
 
-  const hanndleRedirectModal = (event) => {
+  const hanndleRedirectModal = (event, patient_id) => {
     event.preventDefault();
+    setModalId(patient_id);
     setModalShow(true);
   };
   const handleDelete = async (id) => {
@@ -133,7 +135,12 @@ function Page({ currentItems = [], handleModal }) {
   };
   return (
     <>
-      <ProvidercodeModal show={modalShow} onHide={() => setModalShow(false)} />
+      <ProvidercodeModal
+        modalid={modalId}
+        show={modalShow}
+        redirectpath={`/historian/${modalId}/demographics`}
+        onHide={() => setModalShow(false)}
+      />
       {currentItems.map((patient, i) => (
         <tr key={i}>
           <td>
@@ -142,7 +149,7 @@ function Page({ currentItems = [], handleModal }) {
 
               {/* <Link href={`/historian/${patient._id}/demographics`}> */}
               <Link href="">
-                <a onClick={hanndleRedirectModal}>
+                <a onClick={(e) => hanndleRedirectModal(e, patient._id)}>
                   {/* <div className={`${frame44Styles.Profilepic}`}>
               <img
                 src={patient.image_url}
@@ -234,22 +241,24 @@ function Page({ currentItems = [], handleModal }) {
       </td> */}
 
           <td className={`${PLStyles.actionButton}`}>
-            <Image
-              className={PLStyles.imageButton}
-              variant="primary"
-              title={`Edit ${patient.firstname}`}
-              onClick={() => handleModal(patient)}
-              src={editicon}
-              alt="edit-icon"
-            />
-
-            <Image
-              className={PLStyles.imageButton}
-              src={deleteicon}
-              title={`Delete ${patient.firstname}`}
-              alt="delete-icon"
-              onClick={() => confirmDelete(patient._id)}
-            />
+            <div className={PLStyles.actionButtonWrapper}>
+              <Image
+                className={PLStyles.imageButton}
+                variant="primary"
+                title={`Edit ${patient.firstname}`}
+                onClick={() => handleModal(patient)}
+                src={editicon}
+                alt="edit-icon"
+              />
+              <div className="mx-1"></div>
+              <Image
+                className={PLStyles.imageButton}
+                src={deleteicon}
+                title={`Delete ${patient.firstname}`}
+                alt="delete-icon"
+                onClick={() => confirmDelete(patient._id)}
+              />
+            </div>
           </td>
         </tr>
       ))}

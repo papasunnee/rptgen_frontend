@@ -28,6 +28,7 @@ import { lightTheme, darkTheme } from "./theme";
 import { GlobalStyles } from "./global";
 import ScheduleAppointment from "../Modals/ScheduleAppointment";
 import AddPatientModal from "../Patients-Database/addPatientModal";
+import SearchPatient from "../Patients-Database/searchPatient";
 
 function Frame47() {
   const [modalShow, setModalShow] = useState(true);
@@ -53,23 +54,7 @@ function Frame47() {
                     <div className={`${frame47Styles.Top}`}>
                       <h3>Patients Details</h3>
 
-                      <div
-                        className={`${frame47Styles.Inputgroup} input-group flex-nowrap`}
-                      >
-                        <div
-                          className={`${frame47Styles.Inputgroup_text} input-group-text`}
-                          id="addon-wrapping"
-                        >
-                          <BsSearch />
-                        </div>
-                        <input
-                          type="text"
-                          className={`form-control`}
-                          placeholder="Search Category, Patient Info etc"
-                          aria-label="Username"
-                          aria-describedby="addon-wrapping"
-                        />
-                      </div>
+                      <SearchPatient />
                     </div>
 
                     <div className={`${frame47Styles.Details}`}>

@@ -1,34 +1,19 @@
-import { fetcher } from "@/context/AuthContext";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Modal from "react-bootstrap/Modal";
-import useSWR from "swr";
 
 import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
 
 const initialValues = {
-  firstname: "",
-  lastname: "",
-  middlename: "",
-  street_address: "",
-  city_state_zip: "",
-  home_phone: "",
   providers_code: "",
-  assistant_providers_code: "",
-  image_url: "",
-  birth_date: "",
-  chart_number: "",
-  ssn: "",
-  gender: "",
-  marital_status: "",
+  providers_key: "",
 };
 
 export default function ProvidercodeModal(props) {
-  const { mutate } = useSWR("/api/patient", fetcher);
+  const router = useRouter();
   const [patientData, setPatientData] = useState(initialValues);
   const [success, setSuccess] = useState(false);
   const [processing, setProcessing] = useState(false);
-  const [imageSrc, setImageSrc] = useState();
-  const [uploadData, setUploadData] = useState();
 
   const handleChange = (e) => {
     setSuccess(false);
@@ -41,57 +26,29 @@ export default function ProvidercodeModal(props) {
   };
 
   const handleSubmit = async (e) => {
-    setProcessing(true);
     e.preventDefault();
-
-    const formElement = e.currentTarget;
-    const fileInput = Array.from(formElement.elements).find(
-      ({ name }) => name === "image_url"
-    );
-
-    const formData = new FormData();
-
-    for (const file of fileInput.files) {
-      formData.append("file", file);
-    }
-
-    let cloud_image;
-
-    formData.append("upload_preset", "rptgen");
-
-    console.log(fileInput.files.length > 1);
-
-    if (fileInput.files.length > 0) {
-      cloud_image = await fetch(
-        "https://api.cloudinary.com/v1_1/altitude-tech-com/image/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      ).then((r) => r.json());
-      setImageSrc(cloud_image?.secure_url);
-      setUploadData(cloud_image);
-    }
-
-    console.log({ cloud_image });
-
+    setProcessing(true);
+    console.log(patientData);
     try {
-      const response = await fetch("/api/patient", {
+      const response = await fetch("/api/patient/verifyPasscode", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...patientData,
-          image_url:
-            cloud_image?.secure_url ??
-            "https://res.cloudinary.com/altitude-tech-com/image/upload/v1654090662/rptgen/default.png",
+          patient_id: props?.modalid,
         }),
       });
       const data = await response.json();
+      console.log(data);
       if (data.success) {
-        mutate();
         setSuccess(true);
         setPatientData(initialValues);
+        router.push(
+          props?.redirectpath || data?.data?._id
+            ? `/historian/${data?.data?._id}/demographics `
+            : ""
+        );
       }
     } catch (error) {
       console.log({ error: error.message });
@@ -139,10 +96,10 @@ export default function ProvidercodeModal(props) {
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Provider Key</label>
                 <input
-                  type="text"
-                  placeholder="Enter Asst Provider Code"
-                  name="assistant_providers_code"
-                  value={patientData.assistant_providers_code}
+                  type="password"
+                  placeholder="Providers Key"
+                  name="providers_key"
+                  value={patientData.providers_key}
                   onChange={handleChange}
                 />
               </div>
@@ -150,9 +107,12 @@ export default function ProvidercodeModal(props) {
           </div>
         </Modal.Body>
         <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-          <p>{success && <span>Patient Successfully Added</span>}</p>
-          <button type="submit" disabled={processing}>
-            {processing ? "Please Wait..." : "Continue"}
+          <button type="submit" disabled={processing || success}>
+            {processing
+              ? "Please Wait..."
+              : success
+              ? "...loading record"
+              : "Continue"}
           </button>
         </Modal.Footer>
       </form>
