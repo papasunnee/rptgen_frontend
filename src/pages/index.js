@@ -6,11 +6,15 @@ import { useAuth } from "@/context/AuthContext";
 import { mutate } from "swr";
 
 function Index(props) {
-  const { userSWR, isValidating, mutate } = useAuth();
+  const { userSWR, errorSWR, isValidating, mutate } = useAuth();
   const router = useRouter();
 
-  if (isValidating) {
+  if (!errorSWR && !userSWR) {
     return <Loading />;
+  }
+
+  if (!isValidating && !userSWR) {
+    return router.push("/");
   }
 
   if (!isValidating && typeof userSWR !== "undefined" && userSWR.isLoggedIn) {

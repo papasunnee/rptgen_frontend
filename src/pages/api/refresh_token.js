@@ -44,6 +44,6 @@ export default async function refresh_token(req, res) {
       return res.send({ ok: false, accessToken: "" });
     }
   } else {
-    res.status(500).send();
+    return res.status(500).send();
   }
 }

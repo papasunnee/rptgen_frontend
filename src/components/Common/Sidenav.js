@@ -22,10 +22,17 @@ function Sidenav() {
   const { logout } = useAuth();
   const router = useRouter();
   const id = router.query?.id;
+
   const handleLogout = async (event) => {
     event.preventDefault();
-    await logout();
-    router.push("/");
+    try {
+      let resp = await logout();
+      if (resp.success) {
+        return router.replace("/");
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
     return;
   };
 

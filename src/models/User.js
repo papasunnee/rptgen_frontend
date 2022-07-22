@@ -26,18 +26,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide your password."],
     },
-    trainingCategory: {
-      type: String,
-    },
-    payments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Payment",
-      },
-    ],
-    location: {
-      type: String,
-    },
     isAdmin: {
       type: Boolean,
       default: false,

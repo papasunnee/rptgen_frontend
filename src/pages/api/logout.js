@@ -10,8 +10,12 @@ export default (req, res) => {
         path: "/",
       })
     );
-    res.status(200).json({ message: "Successfuly logged out", success: true });
+    return res
+      .status(200)
+      .json({ message: "Successfuly logged out", success: true });
   } else {
-    res.status(500).json({ message: "Error Logging out", success: false });
+    return res
+      .status(500)
+      .json({ message: "Error Logging out", success: false });
   }
 };

@@ -14,8 +14,6 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [email, setEmail] = useState("admin@gmail.com");
-  // const [password, setPassword] = useState("sunday");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState([]);
   const [status, setStatus] = useState(null);

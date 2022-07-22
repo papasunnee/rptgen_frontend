@@ -1,4 +1,5 @@
 import bcryptjs from "bcryptjs";
+import cookie from "cookie";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
 import {
@@ -15,6 +16,9 @@ export default async (req, res) => {
       const user = await User.findOne({ email });
       if (!user) {
         throw new Error("Invalid login details");
+      }
+      if (!user.isAdmin) {
+        throw new Error("Contact Development team");
       }
 
       const passwordCompare = await bcryptjs.compare(password, user.password);
@@ -36,7 +40,17 @@ export default async (req, res) => {
         accessToken,
       });
     } catch (error) {
-      return res.status(401).json({ error: error.message });
+      return res
+        .setHeader(
+          "Set-Cookie",
+          cookie.serialize("refreshToken", null, {
+            httpOnly: true,
+            maxAge: 0,
+            path: "/",
+          })
+        )
+        .status(401)
+        .json({ error: error.message });
     }
   }
   return res.status(501).json({ message: "Invalid method" });
