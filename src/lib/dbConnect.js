@@ -11,8 +11,7 @@ const MONGO_DB = process.env.MONGO_DB;
 // }
 
 // const MONGODB_URI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.zc4np.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`;
-const MONGODB_URI = `mongodb+srv://admin:ZmLNglOVPL5S321v@cluster0.sk7hl1g.mongodb.net/rptgen_app?retryWrites=true&w=majority`;
-// const MONGODB_URI = `mongodb+srv://admin:ZmLNglOVPL5S321v@cluster0.sk7hl1g.mongodb.net/?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://admin:XeSVip0jQd9JafmW@cluster0.sk7hl1g.mongodb.net/rptgen_app?retryWrites=true&w=majority`;
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
