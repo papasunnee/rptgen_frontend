@@ -17,9 +17,10 @@ export default async (req, res) => {
       if (!user) {
         throw new Error("Invalid login details");
       }
-      if (!user.isAdmin) {
-        throw new Error("Contact Development team");
-      }
+
+      // if (!user.isAdmin) {
+      //   throw new Error("Contact Development team");
+      // }
 
       const passwordCompare = await bcryptjs.compare(password, user.password);
       if (!passwordCompare) {
