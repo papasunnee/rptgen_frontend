@@ -110,11 +110,11 @@ function FunctionalImprovemntList() {
                     <h4>Physical Activity</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name} col`}>
+                  <td className={`${frame44Styles.Name} col`} style={{ textAlign: "center" }}>
                     <h4>Self Care</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name} col`}>
+                  <td className={`${frame44Styles.Name} col`} style={{ paddingLeft: "40px" }}>
                     <h4>Sensory Function</h4>
                   </td>
 

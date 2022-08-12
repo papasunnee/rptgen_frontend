@@ -11,6 +11,7 @@ import functionalStyles from "../Functionalimprovement/Functionalimprovement.mod
 import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
+import PhysicalactivityTrigger from "../Modals/FunctionalImprovementformModals/PhysicalactivityTrigger";
 
 function FunctionalImprovementTrigger() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -144,7 +145,7 @@ function FunctionalImprovementModal(props) {
   return (
     <Modal
       {...props}
-      size="lg"
+      size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className={`${functionalStyles.Modal}`}
@@ -258,19 +259,21 @@ function FunctionalImprovementModal(props) {
             </div>
           </div>
 
-          <div className={`${functionalStyles.Adl_col}`}>
+          <div className={`${functionalStyles.Adl_col}`} style={{ width: "340px" }}>
             <h5>Activities of Daily Living (ADL)</h5>
 
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>Phyisical Activity</label>
-                <input
+                {/* <label>Phyisical Activity</label> */}
+
+                <PhysicalactivityTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="physical_activity"
                   value={form.physical_activity}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
@@ -330,7 +333,7 @@ function FunctionalImprovementModal(props) {
             </div>
           </div>
 
-          <div className={`${functionalStyles.Adl_col}`}>
+          <div className={`${functionalStyles.Adl_col}`} style={{ width: "340px" }}>
             <h5>Activities of Daily Living (ADL)</h5>
 
             <div className={`${functionalStyles.Inputlist}`}>

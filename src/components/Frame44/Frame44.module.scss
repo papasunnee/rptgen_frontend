@@ -203,6 +203,10 @@
             }
           }
 
+          .Paddtd {
+            border: 3px solid green;
+          }
+
           .Action_buttons {
             width: 50px;
 
@@ -258,13 +262,6 @@
   }
 }
 
-// @media (max-width: 1080px) {
-//   // .Heightadjust {
-//   //   // flex-wrap: nowrap;
-//   //   border: 3px solid red;
-//   // }
-// }
-
 @media (min-width: 1544px) {
   .Heightadjust {
     flex-wrap: nowrap;
@@ -307,5 +304,30 @@
       background: #336cfb;
       border-radius: 6px;
     }
+  }
+}
+
+.Selectinput {
+  border: none;
+  background: transparent;
+
+  width: 100%;
+  padding: 0;
+
+  text-align: left;
+
+  &:hover {
+    background: transparent;
+  }
+
+  &:active {
+    border: none;
+    background: transparent;
+  }
+
+  &:focus {
+    border: none;
+    box-shadow: none;
+    background: transparent;
   }
 }
