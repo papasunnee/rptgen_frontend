@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function AlcoholstatusTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -23,12 +23,13 @@ function SensoryfunctionTrigger() {
             >
                 <input
                     type="text"
-                    placeholder="Eg. your text here"
+                    placeholder="DRINKS ONCE OR MORE"
                     name="physical_activity"
+                    style={{ width: "65%" }}
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <AlcoholstatusModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +38,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default AlcoholstatusTrigger;
 
-function SensoryfunctionModal(props) {
+function AlcoholstatusModal(props) {
     return (
         <Modal
             {...props}
@@ -53,35 +54,31 @@ function SensoryfunctionModal(props) {
                     id="contained-modal-title-vcenter"
                     className={`${functionalStyles.Modal_title}`}
                 >
-                    Select Activity
+                    Select Alcohol Status
                 </Modal.Title>
             </Modal.Header>
             <form>
                 <Modal.Body className={`${functionalStyles.Modal_con}`}>
 
-                    <div className={`${functionalStyles.Selectitems_con}`}>
+                    <div className={`${functionalStyles.Selectitems_con}`} >
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Does not drink
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Drinks everyday
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
+                            Drinks once or more each week
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
+                            Drinks once or more each month
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Other
+                            Drinks rarely
                         </button>
                     </div>
 

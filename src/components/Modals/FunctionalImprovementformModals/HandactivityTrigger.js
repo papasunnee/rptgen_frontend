@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function HandactivityTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -28,7 +28,7 @@ function SensoryfunctionTrigger() {
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <HandactivityModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +37,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default HandactivityTrigger;
 
-function SensoryfunctionModal(props) {
+function HandactivityModal(props) {
     return (
         <Modal
             {...props}
@@ -61,23 +61,15 @@ function SensoryfunctionModal(props) {
 
                     <div className={`${functionalStyles.Selectitems_con}`}>
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Grasping
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Lifting
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
+                            Tactile description
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>

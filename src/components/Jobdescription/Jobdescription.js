@@ -63,7 +63,7 @@ function Jobdescription() {
 
                     <JobDescriptionTrigger />
 
-                    <div className={`${frame44Styles.Tab} col-md-3`}>
+                    {/* <div className={`${frame44Styles.Tab} col-md-3`}>
                       <div className={`${frame44Styles.Image}`}>
                         <Image src={newpatientsicon} alt="icon-img" />
                       </div>
@@ -71,7 +71,7 @@ function Jobdescription() {
                       <div className={`${frame44Styles.Content}`}>
                         <h4>Search</h4>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className={`${frame44Styles.Appointment_activity}`}>

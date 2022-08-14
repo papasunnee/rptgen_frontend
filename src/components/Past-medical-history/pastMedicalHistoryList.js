@@ -78,7 +78,7 @@ function PastMedicalHistoryList() {
     <div className={`${frame44Styles.Appointment_activity}`}>
       <div className={`${frame44Styles.Title}`}>
         <h3>
-          Past Medical History ({data?.data?.pastMedicalHistories?.length || 0})
+          Past Medooooooical History ({data?.data?.pastMedicalHistories?.length || 0})
         </h3>
       </div>
 

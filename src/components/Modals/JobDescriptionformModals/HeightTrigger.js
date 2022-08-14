@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function HeightTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -23,12 +23,13 @@ function SensoryfunctionTrigger() {
             >
                 <input
                     type="text"
-                    placeholder="Eg. your text here"
+                    placeholder="Tap to Select"
                     name="physical_activity"
+                    style={{ width: "90%" }}
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <HeightModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +38,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default HeightTrigger;
 
-function SensoryfunctionModal(props) {
+function HeightModal(props) {
     return (
         <Modal
             {...props}
@@ -53,7 +54,7 @@ function SensoryfunctionModal(props) {
                     id="contained-modal-title-vcenter"
                     className={`${functionalStyles.Modal_title}`}
                 >
-                    Select Activity
+                    Select Height
                 </Modal.Title>
             </Modal.Header>
             <form>
@@ -61,27 +62,15 @@ function SensoryfunctionModal(props) {
 
                     <div className={`${functionalStyles.Selectitems_con}`}>
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Floor
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Table
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Other
+                            Overhead
                         </button>
                     </div>
 

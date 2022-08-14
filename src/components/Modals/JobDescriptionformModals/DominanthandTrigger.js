@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function DominanthandTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -28,7 +28,7 @@ function SensoryfunctionTrigger() {
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <DominanthandModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +37,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default DominanthandTrigger;
 
-function SensoryfunctionModal(props) {
+function DominanthandModal(props) {
     return (
         <Modal
             {...props}
@@ -61,27 +61,11 @@ function SensoryfunctionModal(props) {
 
                     <div className={`${functionalStyles.Selectitems_con}`}>
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Right/Mano Derecha
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Other
+                            Left/Mano Izquierda
                         </button>
                     </div>
 

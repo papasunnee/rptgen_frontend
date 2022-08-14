@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function TypeofjobTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -28,7 +28,7 @@ function SensoryfunctionTrigger() {
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <TypeofjobModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +37,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default TypeofjobTrigger;
 
-function SensoryfunctionModal(props) {
+function TypeofjobModal(props) {
     return (
         <Modal
             {...props}
@@ -61,27 +61,15 @@ function SensoryfunctionModal(props) {
 
                     <div className={`${functionalStyles.Selectitems_con}`}>
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Usual and Customary
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Permanent Modified
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Other
+                            Permanent Alternative
                         </button>
                     </div>
 

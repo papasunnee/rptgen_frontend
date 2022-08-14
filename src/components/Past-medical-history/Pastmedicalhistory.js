@@ -1,4 +1,8 @@
 import React, { Fragment } from "react";
+
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+
 import Image from "next/image";
 
 import Modal from "react-bootstrap/Modal";
@@ -27,6 +31,8 @@ import SearchPatient from "../Patients-Database/searchPatient";
 import PatientInfo from "../Patient-Demographics/PatientInfo";
 import PastMedicalHistoryTrigger from "../Modals/PastMedicalHistoryTrigger";
 import PastMedicalHistoryList from "./pastMedicalHistoryList";
+import OtherMedicalHistoryList from "./otherMedicalHistory";
+import OtherMedicalHistoryTrigger from "../Modals/OtherMedicalHistory";
 
 function Pastmedicalhistory() {
   return (
@@ -62,7 +68,9 @@ function Pastmedicalhistory() {
 
                     <PastMedicalHistoryTrigger />
 
-                    <div className={`${frame44Styles.Tab} col-md-3`}>
+                    <OtherMedicalHistoryTrigger />
+
+                    {/* <div className={`${frame44Styles.Tab} col-md-3`}>
                       <div className={`${frame44Styles.Image}`}>
                         <Image src={newpatientsicon} alt="icon-img" />
                       </div>
@@ -70,36 +78,49 @@ function Pastmedicalhistory() {
                       <div className={`${frame44Styles.Content}`}>
                         <h4>Search</h4>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
 
-                  <div
-                    className={`${functionalStyles.Formtab_titles}`}
-                    style={{ marginTop: "6%" }}
-                  >
+                  <Tabs>
                     <div
-                      className={`${functionalStyles.Formtab_titles} col-md-10`}
-                      style={{ padding: 0 }}
+                      className={`${functionalStyles.Formtab_titles}`}
+                      style={{ marginTop: "6%" }}
                     >
-                      <div className={`${functionalStyles.Tab}`}>
-                        <h4>Past Medical History</h4>
-                      </div>
+                      <TabList
+                        className={`${functionalStyles.Formtab_titles} col-md-10`}
+                        style={{ padding: 0 }}
+                      >
+                        <Tab className={`${functionalStyles.Tab}`}>
+                          <h4>Past Medical History</h4>
+                        </Tab>
 
-                      <div className={`${functionalStyles.Tab}`}>
-                        <h4 style={{ color: "#336CFB" }}>
-                          Past Related Medical History
-                        </h4>
-                      </div>
+                        <Tab className={`${functionalStyles.Tab}`}>
+                          <h4 style={{ color: "#336CFB" }}>
+                            Past Related Medical History
+                          </h4>
+                        </Tab>
 
-                      <div className={`${functionalStyles.Tab}`}>
-                        <h4>Other Past Medical History</h4>
-                      </div>
+                        <Tab className={`${functionalStyles.Tab}`}>
+                          <h4>Other Past Medical History</h4>
+                        </Tab>
+                      </TabList>
                     </div>
-                  </div>
 
-                  <div className={`${frame44Styles.Appointment_activity}`}>
-                    <PastMedicalHistoryList />
-                  </div>
+                    <TabPanel className={`${frame44Styles.Appointment_activity}`}>
+                      <PastMedicalHistoryList />
+                    </TabPanel>
+
+                    <TabPanel className={`${frame44Styles.Appointment_activity}`}>
+                      <h1>Hello There!!!</h1>
+                    </TabPanel>
+
+                    <TabPanel className={`${frame44Styles.Appointment_activity}`}>
+
+                      <OtherMedicalHistoryList />
+
+                    </TabPanel>
+
+                  </Tabs>
                 </div>
               </div>
             </main>

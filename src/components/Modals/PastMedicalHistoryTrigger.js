@@ -11,6 +11,9 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
+import TypeofworkTrigger from "./MedicalhistoryformModals/TypeofworkTrigger";
+import BodypartTrigger from "./MedicalhistoryformModals/BodypartTrigger";
+import TypeoftreatmentTrigger from "./MedicalhistoryformModals/TypeoftreatmentTrigger";
 
 function PastMedicalHistoryTrigger() {
   const [modalShow, setModalShow] = useState(false);
@@ -148,30 +151,32 @@ function PastMedicalHistoryModal(props) {
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Type</label>
-                <input
+                <TypeofworkTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="type"
                   value={form.type}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Body Part</label>
-                <input
+                <BodypartTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="body_part"
                   value={form.body_part}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Date of Injury</label>
                 <input
-                  type="text"
+                  type="date"
                   placeholder="Eg. your text here"
                   name="injury_date"
                   value={form.injury_date}
@@ -181,13 +186,14 @@ function PastMedicalHistoryModal(props) {
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Type of Treatment</label>
-                <input
+                <TypeoftreatmentTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="treatment_type"
                   value={form.treatment_type}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function SelfcareTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -28,7 +28,7 @@ function SensoryfunctionTrigger() {
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <SelfcareModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +37,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default SelfcareTrigger;
 
-function SensoryfunctionModal(props) {
+function SelfcareModal(props) {
     return (
         <Modal
             {...props}
@@ -61,23 +61,31 @@ function SensoryfunctionModal(props) {
 
                     <div className={`${functionalStyles.Selectitems_con}`}>
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Bathing
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Brushing Teeth
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
+                            Combing Hair
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
+                            Defacating
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
+                            Dressing oneself
+                        </button>
+
+                        <button className={`${functionalStyles.Selectitems}`}>
+                            Eating
+                        </button>
+
+                        <button className={`${functionalStyles.Selectitems}`}>
+                            Urinating
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>

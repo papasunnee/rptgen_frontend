@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function SmokingstatusTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -23,12 +23,13 @@ function SensoryfunctionTrigger() {
             >
                 <input
                     type="text"
-                    placeholder="Eg. your text here"
+                    placeholder="USED TO SMOKE"
                     name="physical_activity"
+                    style={{ width: "65%" }}
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <SmokingstatusModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +38,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default SmokingstatusTrigger;
 
-function SensoryfunctionModal(props) {
+function SmokingstatusModal(props) {
     return (
         <Modal
             {...props}
@@ -53,35 +54,23 @@ function SensoryfunctionModal(props) {
                     id="contained-modal-title-vcenter"
                     className={`${functionalStyles.Modal_title}`}
                 >
-                    Select Activity
+                    Select Smoking Status
                 </Modal.Title>
             </Modal.Header>
             <form>
                 <Modal.Body className={`${functionalStyles.Modal_con}`}>
 
-                    <div className={`${functionalStyles.Selectitems_con}`}>
+                    <div className={`${functionalStyles.Selectitems_con}`} >
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Never Smoked
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Used to Smoke
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Other
+                            Currently Smoking
                         </button>
                     </div>
 

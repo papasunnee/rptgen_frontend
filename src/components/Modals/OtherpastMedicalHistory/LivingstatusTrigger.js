@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function LivingstatusTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -23,12 +23,13 @@ function SensoryfunctionTrigger() {
             >
                 <input
                     type="text"
-                    placeholder="Eg. your text here"
+                    placeholder="WITH FAMILY"
                     name="physical_activity"
+                    style={{ width: "65%" }}
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <LivingtatusModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +38,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default LivingstatusTrigger;
 
-function SensoryfunctionModal(props) {
+function LivingtatusModal(props) {
     return (
         <Modal
             {...props}
@@ -53,31 +54,23 @@ function SensoryfunctionModal(props) {
                     id="contained-modal-title-vcenter"
                     className={`${functionalStyles.Modal_title}`}
                 >
-                    Select Activity
+                    Select Living Status
                 </Modal.Title>
             </Modal.Header>
             <form>
                 <Modal.Body className={`${functionalStyles.Modal_con}`}>
 
-                    <div className={`${functionalStyles.Selectitems_con}`}>
+                    <div className={`${functionalStyles.Selectitems_con}`} >
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Alone
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            With Family
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
+                            With Parents
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>

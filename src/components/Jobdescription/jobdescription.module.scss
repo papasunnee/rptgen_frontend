@@ -56,6 +56,17 @@
         .Inputlist_con {
           padding-bottom: 15px;
 
+          .Label_checkbox_con {
+            display: flex;
+            align-items: center;
+
+            .Checkbox {
+              width: 20px;
+              margin-right: 5px;
+              margin-bottom: 3px;
+            }
+          }
+
           label {
             font-weight: 400;
             font-size: 16px;
@@ -139,12 +150,20 @@
   background: #f6f8fb;
 
   .Tab {
-    h4 {
-      font-size: 14px;
-      font-weight: 700;
-      color: #52575c;
+    list-style: none;
 
-      padding-right: 20px;
-    }
+    font-size: 14px;
+    font-weight: 700;
+    color: #52575c;
+
+    padding-right: 20px;
+
+    // h4 {
+    //   font-size: 14px;
+    //   font-weight: 700;
+    //   color: #52575c;
+
+    //   padding-right: 20px;
+    // }
   }
 }

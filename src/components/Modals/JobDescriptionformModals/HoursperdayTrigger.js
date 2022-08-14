@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function HoursperdayTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -28,7 +28,7 @@ function SensoryfunctionTrigger() {
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <HoursperdayModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +37,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default HoursperdayTrigger;
 
-function SensoryfunctionModal(props) {
+function HoursperdayModal(props) {
     return (
         <Modal
             {...props}
@@ -53,7 +53,7 @@ function SensoryfunctionModal(props) {
                     id="contained-modal-title-vcenter"
                     className={`${functionalStyles.Modal_title}`}
                 >
-                    Select Activity
+                    Select Activity per Hour
                 </Modal.Title>
             </Modal.Header>
             <form>
@@ -61,27 +61,19 @@ function SensoryfunctionModal(props) {
 
                     <div className={`${functionalStyles.Selectitems_con}`}>
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Never (0 hour)
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Occasionally (up to 3 hours)
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
+                            Frequently (3 to 6 hours)
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Other
+                            Constantly (6 to 8+ hours)
                         </button>
                     </div>
 

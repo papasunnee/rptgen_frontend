@@ -200,6 +200,14 @@ function Sidenav() {
                         </a>
                       </Link>
 
+                      <Link href={`/historian/${id}/specific-accident`}>
+                        <a
+                          className={`${frame34Styles.Navlink} dropdown-item px-0`}
+                        >
+                          <div className={`d-sm-inline`}>Specific Accident</div>
+                        </a>
+                      </Link>
+
                       <Link href={`/historian/${id}/cumulative-trauma`}>
                         <a
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}

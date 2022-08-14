@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function MaritalstatusTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -23,12 +23,13 @@ function SensoryfunctionTrigger() {
             >
                 <input
                     type="text"
-                    placeholder="Eg. your text here"
+                    placeholder="SINGLE"
                     name="physical_activity"
+                    style={{ width: "65%" }}
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <MaritalstatusModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +38,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default MaritalstatusTrigger;
 
-function SensoryfunctionModal(props) {
+function MaritalstatusModal(props) {
     return (
         <Modal
             {...props}
@@ -53,35 +54,27 @@ function SensoryfunctionModal(props) {
                     id="contained-modal-title-vcenter"
                     className={`${functionalStyles.Modal_title}`}
                 >
-                    Select Activity
+                    Select Marital Status
                 </Modal.Title>
             </Modal.Header>
             <form>
                 <Modal.Body className={`${functionalStyles.Modal_con}`}>
 
-                    <div className={`${functionalStyles.Selectitems_con}`}>
+                    <div className={`${functionalStyles.Selectitems_con}`} >
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Single
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Married
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
+                            Widowed
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Other
+                            Divorced
                         </button>
                     </div>
 

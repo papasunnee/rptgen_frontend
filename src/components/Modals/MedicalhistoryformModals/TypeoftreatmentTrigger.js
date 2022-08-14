@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function SensoryfunctionTrigger() {
+function TypeoftreatmentTrigger() {
     const [modalShow, setModalShow] = React.useState(false);
     return (
         <>
@@ -25,10 +25,11 @@ function SensoryfunctionTrigger() {
                     type="text"
                     placeholder="Eg. your text here"
                     name="physical_activity"
+                    style={{ width: "90%" }}
                 />
             </Button>
 
-            <SensoryfunctionModal
+            <TypeoftreatmentModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 setModalShow={setModalShow}
@@ -37,9 +38,9 @@ function SensoryfunctionTrigger() {
     );
 }
 
-export default SensoryfunctionTrigger;
+export default TypeoftreatmentTrigger;
 
-function SensoryfunctionModal(props) {
+function TypeoftreatmentModal(props) {
     return (
         <Modal
             {...props}
@@ -53,31 +54,35 @@ function SensoryfunctionModal(props) {
                     id="contained-modal-title-vcenter"
                     className={`${functionalStyles.Modal_title}`}
                 >
-                    Select Activity
+                    Select Type of Treatment
                 </Modal.Title>
             </Modal.Header>
             <form>
                 <Modal.Body className={`${functionalStyles.Modal_con}`}>
 
-                    <div className={`${functionalStyles.Selectitems_con}`}>
+                    <div className={`${functionalStyles.Selectitems_con}`} >
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Hearing
+                            Acupuncture
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Seeing
+                            Chiropractic Core
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Smelling
+                            Injections
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Tactile feeling
+                            Medication
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>
-                            Tasting
+                            Physical Therapy
+                        </button>
+
+                        <button className={`${functionalStyles.Selectitems}`}>
+                            Surgery
                         </button>
 
                         <button className={`${functionalStyles.Selectitems}`}>

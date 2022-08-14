@@ -12,6 +12,12 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 import PhysicalactivityTrigger from "../Modals/FunctionalImprovementformModals/PhysicalactivityTrigger";
+import SensoryfunctionTrigger from "./FunctionalImprovementformModals/SensoryfunctionTrigger";
+import HandactivityTrigger from "./FunctionalImprovementformModals/HandactivityTrigger";
+import TravelTrigger from "./FunctionalImprovementformModals/TravelTrigger";
+import SexualTrigger from "./FunctionalImprovementformModals/SexualTrigger";
+import SleepTrigger from "./FunctionalImprovementformModals/SleepTrigger";
+import SelfcareTrigger from "./FunctionalImprovementformModals/SelfcareTrigger";
 
 function FunctionalImprovementTrigger() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -278,57 +284,62 @@ function FunctionalImprovementModal(props) {
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Sensory Function</label>
-                <input
+                <SensoryfunctionTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="sensory_function"
                   value={form.sensory_function}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Non-specialized hand activities</label>
-                <input
+                <HandactivityTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="non_specialized_hand"
                   value={form.non_specialized_hand}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Travel</label>
-                <input
+                <TravelTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="travel"
                   value={form.travel}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Sexual Function</label>
-                <input
+                <SexualTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="sexual_function"
                   value={form.sexual_function}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Sleep</label>
-                <input
+                <SleepTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="sleep"
                   value={form.sleep}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -339,13 +350,14 @@ function FunctionalImprovementModal(props) {
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Self-care, personal hygiene</label>
-                <input
+                <SelfcareTrigger />
+                {/* <input
                   type="text"
                   placeholder="Eg. your text here"
                   name="self_care"
                   value={form.self_care}
                   onChange={handleChange}
-                />
+                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
