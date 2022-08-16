@@ -69,7 +69,12 @@ function Index() {
 
                                     </div>
 
-                                    <div className={`${frame44Styles.Appointmentlist_section}`}>
+                                    <div className={`${frame44Styles.Appointmentlist_sectionn}`}>
+
+                                        <div className={`${frame44Styles.Title_conn}`}>
+                                            <h3>Specific Accident</h3>
+                                        </div>
+
                                         <table className="table">
                                             <thead>
                                                 <tr className={`${frame44Styles.Appointmentlist_title}`}>

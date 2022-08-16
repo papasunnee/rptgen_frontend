@@ -19,3 +19,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.mpn-modal .modal-dialog-centered {
+  max-width: 1250px;
+}

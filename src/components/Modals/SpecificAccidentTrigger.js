@@ -14,6 +14,7 @@ import { UserContext } from "@/context/UserContext";
 import TypeofworkTrigger from "./MedicalhistoryformModals/TypeofworkTrigger";
 import BodypartTrigger from "./MedicalhistoryformModals/BodypartTrigger";
 import TypeoftreatmentTrigger from "./MedicalhistoryformModals/TypeoftreatmentTrigger";
+import BodypartTypeTrigger from "./SpecificAccidentFormModals/BodypartType";
 
 function SpecificAccidentTrigger() {
     const [modalShow, setModalShow] = useState(false);
@@ -30,7 +31,7 @@ function SpecificAccidentTrigger() {
                 </div>
 
                 <div className={`${frame44Styles.Content}`}>
-                    <h4>Add Medical History</h4>
+                    <h4>Add Specific Accident</h4>
                 </div>
             </Button>
 
@@ -51,7 +52,7 @@ function SpecificAccidentModal(props) {
     return (
         <Modal
             {...props}
-            size="lg"
+            size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             className={`${functionalStyles.Modal}`}
@@ -61,73 +62,49 @@ function SpecificAccidentModal(props) {
                     id="contained-modal-title-vcenter"
                     className={`${functionalStyles.Modal_title}`}
                 >
-                    Add Medical History
+                    Add Specific Accident
                 </Modal.Title>
             </Modal.Header>
             <form>
                 <div style={{ minHeight: "22px" }}>
                 </div>
                 <Modal.Body className={`${functionalStyles.Modal_body}`}>
-                    <div className={`${functionalStyles.Adl_col}`}>
+                    <div className={`${functionalStyles.Adl_col}`} style={{ border: "3px solid transparent", width: "50%" }}>
                         <div className={`${functionalStyles.Inputlist}`}>
-                            <div className={`${functionalStyles.Inputlist_con}`}>
-                                <label>Type</label>
-                                <TypeofworkTrigger />
-                            </div>
-
-                            <div className={`${functionalStyles.Inputlist_con}`}>
-                                <label>Body Part</label>
+                            <div className={`${functionalStyles.Inputlist_con}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                <label>Body Part:</label>
                                 <BodypartTrigger />
-                                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="body_part"
-                  value={form.body_part}
-                  onChange={handleChange}
-                /> */}
+                            </div>
+
+                            <div className={`${functionalStyles.Inputlist_con}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                <label>Date of Injury:</label>
+                                <input type="date" style={{ width: "75%" }} />
+                            </div>
+
+                            <div className={`${functionalStyles.Inputlist_con}`} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                <label>Body Part Type</label>
+                                <BodypartTypeTrigger />
                             </div>
 
                             <div className={`${functionalStyles.Inputlist_con}`}>
-                                <label>Date of Injury</label>
-                                <input
-                                    type="date"
+                                <label>Description of</label>
+                                <textarea
+                                    cols="20"
+                                    rows="15"
                                     placeholder="Eg. your text here"
-                                    name="injury_date"
+                                    name="injury_mechanism"
                                 />
-                            </div>
-
-                            <div className={`${functionalStyles.Inputlist_con}`}>
-                                <label>Type of Treatment</label>
-                                <TypeoftreatmentTrigger />
-                                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="treatment_type"
-                  value={form.treatment_type}
-                  onChange={handleChange}
-                /> */}
                             </div>
                         </div>
                     </div>
 
                     <div
                         className={`${functionalStyles.Adl_col}`}
-                        style={{ width: "370px" }}
-                    >
+                        style={{ border: "3px solid transparent", width: "50%" }}>
                         <div className={`${functionalStyles.Inputlist}`}>
-                            <div className={`${functionalStyles.Inputlist_con}`}>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="fully_recovered"
-                                        style={{ width: "20px" }}
-                                    />{" "}
-                                    Fully Recovered
-                                </label>
-                            </div>
 
                             <div className={`${functionalStyles.Inputlist_con}`}>
-                                <label>Mechanism of Injury</label>
+                                <label>Treatment History</label>
                                 <textarea
                                     cols="20"
                                     rows="15"

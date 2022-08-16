@@ -1134,6 +1134,6 @@ function JobDescriptionModal(props) {
 
 
             </form>
-        </Modal >
+        </Modal>
     );
 }
