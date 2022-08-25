@@ -181,10 +181,14 @@
       border-radius: 8px;
       text-align: left;
 
-      &:active {
-        color: #fff;
-        background: #336cfb;
-      }
+      // &:active {
+      //   color: #fff;
+      //   background: #336cfb;
+      // }
+    }
+    .activeSelection {
+      color: #fff !important;
+      background: #336cfb !important;
     }
   }
 }
