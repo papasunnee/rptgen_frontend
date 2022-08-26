@@ -14,23 +14,26 @@ import { UserContext } from "@/context/UserContext";
 
 function TypeofworkTrigger() {
   const [modalShow, setModalShow] = useState(false);
+  const [selectedWork, setSelectedWork] = useState(null);
   return (
     <>
-      <Button
-        variant="primary"
-        onClick={() => setModalShow(true)}
-        className={`${frame44Styles.Selectinput} col-md-3`}
-      >
+      <div className={`${frame44Styles.Selectinput} col-md-3`}>
         <input
           type="text"
+          onClick={() => setModalShow(true)}
+          readOnly
+          required
+          className="form-control"
+          value={selectedWork && selectedWork?.name}
           placeholder="Eg. your text here"
           name="physical_activity"
           style={{ width: "90%" }}
         />
-      </Button>
+      </div>
 
       <TypeofworkModal
         show={modalShow}
+        setSelectedWork={setSelectedWork}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
@@ -41,22 +44,21 @@ function TypeofworkTrigger() {
 export default TypeofworkTrigger;
 
 function TypeofworkModal(props) {
-  const [selectedWork, setSelectedWork] = useState([]);
+  const { setSelectedWork } = props;
   const handleClick = (item) => {
     const hasClass = document
       .getElementById(item.name)
       .classList.contains("Functionalimprovement_activeSelection___SGsl");
-    if (hasClass) {
-      document
-        .getElementById(item.name)
-        .classList.remove("Functionalimprovement_activeSelection___SGsl");
-      //   const filtered = selectedWork.filter((work) => item.name !== work.name);
-      //   setSelectedWork([...filtered]);
-    } else {
+    if (!hasClass) {
+      WorkType.forEach((work) =>
+        document
+          .getElementById(work.name)
+          .classList.remove("Functionalimprovement_activeSelection___SGsl")
+      );
       document
         .getElementById(item.name)
         .classList.add("Functionalimprovement_activeSelection___SGsl");
-      //   setSelectedWork([...selectedWork, item]);
+      setSelectedWork(item);
     }
   };
   return (
@@ -96,9 +98,9 @@ function TypeofworkModal(props) {
 }
 
 const WorkType = [
-  { name: "Auto" },
-  { name: "Home" },
-  { name: "Sports" },
-  { name: "Work" },
-  { name: "Others" },
+  { name: "Auto", active: "false" },
+  { name: "Home", active: "false" },
+  { name: "Sports", active: "false" },
+  { name: "Work", active: "false" },
+  { name: "Others", active: "false" },
 ];

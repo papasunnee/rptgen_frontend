@@ -152,25 +152,11 @@ function PastMedicalHistoryModal(props) {
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Type</label>
                 <TypeofworkTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="type"
-                  value={form.type}
-                  onChange={handleChange}
-                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Body Part</label>
                 <BodypartTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="body_part"
-                  value={form.body_part}
-                  onChange={handleChange}
-                /> */}
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
