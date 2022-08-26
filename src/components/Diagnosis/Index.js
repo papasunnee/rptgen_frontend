@@ -1,5 +1,9 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Image from "next/image";
+
+import Switch from "react-switch";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -28,166 +32,65 @@ import presentcomplainStyles from "../Present-Complaints/Complaints.module.scss"
 import SearchPatient from "../Patients-Database/searchPatient";
 import PatientInfo from "../Patient-Demographics/PatientInfo";
 
+import functionalStyles from "../Functionalimprovement/Functionalimprovement.module.scss";
+
 function MyVerticallyCenteredModal(props) {
+  const { selectedBodyPart, setSelectedBodyPart } = props;
+
+  const handleClick = (item) => {
+    const activeItem = selectedBodyPart.find(
+      (bodyPart) => bodyPart.name == item.name
+    );
+
+    const updateItem = { ...activeItem, isActive: !activeItem.isActive };
+    const arrayCopy = [...selectedBodyPart];
+    arrayCopy.splice(activeItem.id, 1, updateItem);
+    setSelectedBodyPart([...arrayCopy]);
+  };
   return (
     <Modal
       {...props}
       size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      className={`${presentcomplainStyles.Modal}`}
+      className={`${functionalStyles.Modal}`}
     >
-      <Modal.Header
-        className={`${presentcomplainStyles.Modal_header}`}
-        closeButton
-      >
+      <Modal.Header closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
-          className={`${presentcomplainStyles.Modal_title}`}
+          className={`${functionalStyles.Modal_title}`}
         >
-          Body Parts
+          Select Body Part
         </Modal.Title>
       </Modal.Header>
+      <form>
+        <Modal.Body className={`${functionalStyles.Modal_con}`}>
+          <div className={`row ${functionalStyles.Selectitems_con}`}>
+            {/* {selectedBodyPart.map((item, index) => (
+              <div className="col-md-6">
+                <div
+                  onClick={() => handleClick(item)}
+                  key={index}
+                  id={item.name}
+                  className={`${functionalStyles.Selectitems} ${item.isActive ? functionalStyles.activeSelection : ""
+                    }`}
+                >
+                  {item.name}
+                </div>
+              </div>
+            ))} */}
 
-      <Modal.Body className={`${presentcomplainStyles.Modal_body}`}>
-        <div className={`${presentcomplainStyles.Body_parts_col}`}>
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={appointmenticon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Cervical Spine</h4>
-            </div>
+            Hello
           </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={newpatientsicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Thoracic Spine</h4>
-            </div>
-          </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={operationicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Right Shoulder</h4>
-            </div>
-          </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={operationicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Right Wrist</h4>
-            </div>
-          </div>
-        </div>
-
-        <div className={`${presentcomplainStyles.Body_parts_col}`}>
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={appointmenticon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Left Shoulder</h4>
-            </div>
-          </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={newpatientsicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Right Elbow</h4>
-            </div>
-          </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={operationicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Left Elbow</h4>
-            </div>
-          </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={operationicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Left Wrist</h4>
-            </div>
-          </div>
-        </div>
-
-        <div className={`${presentcomplainStyles.Body_parts_col}`}>
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={appointmenticon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Right Hand</h4>
-            </div>
-          </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={newpatientsicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Left Hand</h4>
-            </div>
-          </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={operationicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Lumbar Spine</h4>
-            </div>
-          </div>
-
-          <div className={`${presentcomplainStyles.Body_parts_tab} col-md-2`}>
-            <div className={`${presentcomplainStyles.Image}`}>
-              <Image src={operationicon} alt="icon-img" />
-            </div>
-
-            <div className={`${presentcomplainStyles.Label}`}>
-              <h4>Right Hip</h4>
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-
-      <Modal.Footer className={`${presentcomplainStyles.Modal_footer}`}>
-        {/* <Button onClick={props.onHide}>Close</Button> */}
-
-        <button>Save</button>
-      </Modal.Footer>
+        </Modal.Body>
+      </form>
     </Modal>
   );
 }
 
 function Index() {
   const [modalShow, setModalShow] = React.useState(false);
+  const [selectedBodyPart, setSelectedBodyPart] = useState([...BodyParts]);
 
   return (
     <Fragment>
@@ -208,21 +111,28 @@ function Index() {
                       <SearchPatient />
                     </div>
 
-                    <PatientInfo />
                   </div>
 
                   <div
                     className={`${frame44Styles.Toptabs} row col-md-7`}
-                    style={{ padding: "30px 45px" }}
+                    style={{ padding: "30px 45px", marginTop: "2%" }}
                   >
-                    <div className={`${frame47Styles.Toptabs_title}`}>
+                    <div className={`${frame47Styles.Toptabs_title}`}
+                      style={{ marginBottom: "2%" }}
+                    >
                       <h3>Quick Tasks</h3>
                     </div>
 
                     <Button
-                      variant="primary"
-                      onClick={() => setModalShow(true)}
+                      // variant="primary"
+                      // onClick={() => setModalShow(true)}
+                      show={modalShow}
+                      selectedBodyPart={selectedBodyPart}
+                      setSelectedBodyPart={setSelectedBodyPart}
+                      onHide={() => setModalShow(false)}
+                      setModalShow={setModalShow}
                       className={`${frame44Styles.Tab} col-md-3`}
+                      style={{ background: "#fff", color: "#000" }}
                     >
                       <div className={`${frame44Styles.Image}`}>
                         <Image src={appointmenticon} alt="icon-img" />
@@ -238,37 +148,1064 @@ function Index() {
                       onHide={() => setModalShow(false)}
                     />
 
-                    <div className={`${frame44Styles.Tab} col-md-3`}>
-                      <div className={`${frame44Styles.Image}`}>
-                        <Image src={newpatientsicon} alt="icon-img" />
-                      </div>
-
-                      <div className={`${frame44Styles.Content}`}>
-                        <h4>Search</h4>
-                      </div>
-                    </div>
                   </div>
 
-                  <div className={`${diagnosisStyles.Formtab_titles}`}>
-                    <div
-                      className={`${diagnosisStyles.Formtab_titles} col-md-5`}
-                      style={{ padding: 0 }}
-                    >
-                      <div className={`${diagnosisStyles.Tab}`}>
-                        <a href="#cervicalspine">Cervical Spine</a>
-                      </div>
+                  <Tabs>
 
-                      <div className={`${diagnosisStyles.Tab}`}>
-                        <a href="#leftshoulder">Left Shoulder</a>
-                      </div>
+                    <div className={`${diagnosisStyles.Formtab_titles}`}>
+                      <TabList
+                        className={`${diagnosisStyles.Formtab_titles}`}
+                        style={{ padding: 0 }}
+                      >
+                        <Tab className={`${diagnosisStyles.Tab}`}>
+                          Cervical Spine
+                        </Tab>
 
-                      <div className={`${diagnosisStyles.Tab}`}>
-                        <a href="#leftshoulder">Right Shoulder</a>
-                      </div>
+                        <Tab className={`${diagnosisStyles.Tab}`}>
+                          Lumbar Spine
+                        </Tab>
+
+                        <Tab className={`${diagnosisStyles.Tab}`}>
+                          Thoracic Spine
+                        </Tab>
+
+                        <Tab className={`${diagnosisStyles.Tab}`}>
+                          Right Hip
+                        </Tab>
+
+                        <Tab className={`${diagnosisStyles.Tab}`}>
+                          Right Shoulder
+                        </Tab>
+
+                        <Tab className={`${diagnosisStyles.Tab}`}>
+                          Left Hip
+                        </Tab>
+
+                        <Tab className={`${diagnosisStyles.Tab}`}>
+                          Left Shoulder
+                        </Tab>
+
+                        <Tab className={`${diagnosisStyles.Tab}`}>
+                          Other Details
+                        </Tab>
+                      </TabList>
                     </div>
-                  </div>
 
-                  <form className={`${diagnosisStyles.Form}`}>
+                    <TabPanel>
+
+                      <form className={`${diagnosisStyles.Form}`}>
+                        <div
+                          className={`${diagnosisStyles.Toprow}`}
+                        >
+
+                          <div className={`${diagnosisStyles.Cardcon}`}>
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Herniated Nucleus Pulposis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Musculoligamentous Injury with Discopathy</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Musculoligamentous Injury without Discopathy</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myalgia</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myositis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Neural Foraminal with Stenosis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Radiculitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>
+                                Spondylosis <br /> without Myelopathy/ <br />
+                                Radiculopathy
+                              </h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sprain and Strain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div className={`${diagnosisStyles.Button}`}>
+                          <button>Save</button>
+                        </div>
+                      </form>
+
+                    </TabPanel>
+
+
+                    <TabPanel>
+                      <form className={`${diagnosisStyles.Form}`}>
+                        <div
+                          className={`${diagnosisStyles.Toprow}`}
+                        >
+
+                          <div className={`${diagnosisStyles.Cardcon}`}>
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Discogenic Low Back Pain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Facet Arthrosis/Syndrome</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Failed Back Syndrome (Post-Laminectomy Syndrome)</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Herniated Nucleus Pulposis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Musculoligamentous Injury with Discopathy</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Musculoligamentous Injury without Discopathy</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myalgia</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myositis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Neural Foraminal with Stenosis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Radiculitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sciatica</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Spondylolisthesis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>
+                                Spondylosis
+                              </h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sprain and Strain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div className={`${diagnosisStyles.Button}`}>
+                          <button>Save</button>
+                        </div>
+                      </form>
+                    </TabPanel>
+
+                    <TabPanel>
+
+                      <form className={`${diagnosisStyles.Form}`}>
+                        <div
+                          className={`${diagnosisStyles.Toprow}`}
+                        >
+
+                          <div className={`${diagnosisStyles.Cardcon}`}>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Musculoligamentous Injury with Discopathy</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Musculoligamentous Injury without Discopathy</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myalgia</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myositis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Radiculitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>
+                                Spondylosis <br /> without Myelopathy/ <br />
+                                Radiculopathy
+                              </h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sprain and Strain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div className={`${diagnosisStyles.Button}`}>
+                          <button>Save</button>
+                        </div>
+                      </form>
+
+                    </TabPanel>
+
+                    <TabPanel>
+
+                      <form className={`${diagnosisStyles.Form}`}>
+                        <div
+                          className={`${diagnosisStyles.Toprow}`}
+                        >
+
+                          <div className={`${diagnosisStyles.Cardcon}`}>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Contusion</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Fracture</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Giuteus Medius Tear</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Giuteus Medius Tendinosis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Greater Trochanteric Bursitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>
+                                Groin Strain/Adductor Strain
+                              </h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Meralgia Paresthetica</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Osteoarthritis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sacroilitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sprain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Strain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Strain: Hamstring/Hip Flexor</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div className={`${diagnosisStyles.Button}`}>
+                          <button>Save</button>
+                        </div>
+                      </form>
+
+                    </TabPanel>
+
+                    <TabPanel>
+
+                      <form className={`${diagnosisStyles.Form}`}>
+                        <div
+                          className={`${diagnosisStyles.Toprow}`}
+                        >
+
+                          <div className={`${diagnosisStyles.Cardcon}`}>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Acromioclavicular Arthrosis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Acromioclavicular Dislocation</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Acromioclavicular Sprain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Adhesive Capsulitis (Frozen Shoulder Syndrome)</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Bicipital Tendinitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>
+                                Dislocation
+                              </h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Fracture</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Fracture: Clavicie</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Fracture: Proximal Humerus</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Impingement Syndrome (Anterior)</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Impingement Syndrome (Posterior)</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Instability</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myalgia</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myofascial Pain Syndrome</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myositis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Rotator Cuff Tear</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Rotator Cuff Tendinitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sprain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Strain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Subacromial Bursitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Superior Labral Anterior Posterior Tear</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div className={`${diagnosisStyles.Button}`}>
+                          <button>Save</button>
+                        </div>
+                      </form>
+
+                    </TabPanel>
+
+                    <TabPanel>
+
+                      <form className={`${diagnosisStyles.Form}`}>
+                        <div
+                          className={`${diagnosisStyles.Toprow}`}
+                        >
+
+                          <div className={`${diagnosisStyles.Cardcon}`}>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Contusion</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Fracture</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Giuteus Medius Tear</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Giuteus Medius Tendinosis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Greater Trochanteric Bursitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>
+                                Groin Strain/Adductor Strain
+                              </h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Meralgia Paresthetica</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Osteoarthritis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sacroilitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sprain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Strain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Strain: Hamstring/Hip Flexor</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div className={`${diagnosisStyles.Button}`}>
+                          <button>Save</button>
+                        </div>
+                      </form>
+
+                    </TabPanel>
+
+                    <TabPanel>
+
+                      <form className={`${diagnosisStyles.Form}`}>
+                        <div
+                          className={`${diagnosisStyles.Toprow}`}
+                        >
+
+                          <div className={`${diagnosisStyles.Cardcon}`}>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Acromioclavicular Arthrosis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Acromioclavicular Dislocation</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Acromioclavicular Sprain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Adhesive Capsulitis (Frozen Shoulder Syndrome)</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Bicipital Tendinitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>
+                                Dislocation
+                              </h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Fracture</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Fracture: Clavicie</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Fracture: Proximal Humerus</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Impingement Syndrome (Anterior)</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Impingement Syndrome (Posterior)</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Instability</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myalgia</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myofascial Pain Syndrome</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Myositis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Rotator Cuff Tear</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Rotator Cuff Tendinitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Sprain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Strain</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Subacromial Bursitis</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Superior Labral Anterior Posterior Tear</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div className={`${diagnosisStyles.Button}`}>
+                          <button>Save</button>
+                        </div>
+                      </form>
+
+                    </TabPanel>
+                  </Tabs>
+
+
+                  <h5 class="text-center" style={{ marginTop: "18%" }}>Click on “Show body parts” to add</h5>
+
+                  {/* <form className={`${diagnosisStyles.Form}`}>
                     <div
                       id="cervicalspine"
                       className={`${diagnosisStyles.Toprow}`}
@@ -411,7 +1348,7 @@ function Index() {
                     <div className={`${diagnosisStyles.Button}`}>
                       <button>Save</button>
                     </div>
-                  </form>
+                  </form> */}
                 </div>
               </div>
             </main>
@@ -423,3 +1360,28 @@ function Index() {
 }
 
 export default Index;
+
+const BodyParts = [
+  { id: 0, name: "Cervical Spine", isActive: false },
+  { id: 1, name: "Thoracic Spine", isActive: false },
+  { id: 2, name: "Right Shoulder", isActive: false },
+  { id: 3, name: "Left Shoulder", isActive: false },
+  { id: 4, name: "Right Elbow", isActive: false },
+  { id: 5, name: "Left Elbow", isActive: false },
+  { id: 6, name: "Right Wrist", isActive: false },
+  { id: 7, name: "Left Wrist", isActive: false },
+  { id: 8, name: "Right Hand", isActive: false },
+  { id: 9, name: "Left Hand", isActive: false },
+  { id: 10, name: "Other", isActive: false },
+  { id: 11, name: "Lumbar Spine", isActive: false },
+  { id: 12, name: "Right Hip", isActive: false },
+  { id: 13, name: "Left Hip", isActive: false },
+  { id: 14, name: "Right Knee", isActive: false },
+  { id: 14, name: "Left Knee", isActive: false },
+  { id: 16, name: "Right Foot/Ankle", isActive: false },
+  { id: 17, name: "Left Foot/Ankle", isActive: false },
+  { id: 18, name: "Internal", isActive: false },
+  { id: 19, name: "Neuro", isActive: false },
+  { id: 20, name: "Psyche Questionaire", isActive: false },
+  { id: 21, name: "General Comment", isActive: false },
+];
