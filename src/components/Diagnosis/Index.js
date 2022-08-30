@@ -2,8 +2,8 @@ import React, { Fragment, useState } from "react";
 import Image from "next/image";
 
 import Switch from "react-switch";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -79,7 +79,6 @@ function MyVerticallyCenteredModal(props) {
                 </div>
               </div>
             ))} */}
-
             Hello
           </div>
         </Modal.Body>
@@ -110,14 +109,14 @@ function Index() {
 
                       <SearchPatient />
                     </div>
-
                   </div>
 
                   <div
                     className={`${frame44Styles.Toptabs} row col-md-7`}
                     style={{ padding: "30px 45px", marginTop: "2%" }}
                   >
-                    <div className={`${frame47Styles.Toptabs_title}`}
+                    <div
+                      className={`${frame47Styles.Toptabs_title}`}
                       style={{ marginBottom: "2%" }}
                     >
                       <h3>Quick Tasks</h3>
@@ -147,12 +146,11 @@ function Index() {
                       show={modalShow}
                       onHide={() => setModalShow(false)}
                     />
-
                   </div>
 
                   <Tabs>
-
-                    <div className={`${diagnosisStyles.Formtab_titles}`}
+                    <div
+                      className={`${diagnosisStyles.Formtab_titles}`}
                       style={{ paddingLeft: "10px", paddingRight: 0 }}
                     >
                       <TabList
@@ -179,9 +177,7 @@ function Index() {
                           Right Shoulder
                         </Tab>
 
-                        <Tab className={`${diagnosisStyles.Tab}`}>
-                          Left Hip
-                        </Tab>
+                        <Tab className={`${diagnosisStyles.Tab}`}>Left Hip</Tab>
 
                         <Tab className={`${diagnosisStyles.Tab}`}>
                           Left Shoulder
@@ -219,17 +215,13 @@ function Index() {
                           Left Wrist
                         </Tab>
 
-                        <Tab className={`${diagnosisStyles.Tab}`}>
-                          Mics
-                        </Tab>
+                        <Tab className={`${diagnosisStyles.Tab}`}>Mics</Tab>
 
                         <Tab className={`${diagnosisStyles.Tab}`}>
                           Right Hand
                         </Tab>
 
-                        <Tab className={`${diagnosisStyles.Tab}`}>
-                          Mics
-                        </Tab>
+                        <Tab className={`${diagnosisStyles.Tab}`}>Mics</Tab>
 
                         <Tab className={`${diagnosisStyles.Tab}`}>
                           Left Hand
@@ -238,12 +230,8 @@ function Index() {
                     </div>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Herniated Nucleus Pulposis</h4>
@@ -264,7 +252,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Musculoligamentous Injury without Discopathy</h4>
+                              <h4>
+                                Musculoligamentous Injury without Discopathy
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -329,23 +319,17 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
-
 
                     <TabPanel>
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Discogenic Low Back Pain</h4>
@@ -366,7 +350,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Failed Back Syndrome (Post-Laminectomy Syndrome)</h4>
+                              <h4>
+                                Failed Back Syndrome (Post-Laminectomy Syndrome)
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -393,7 +379,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Musculoligamentous Injury without Discopathy</h4>
+                              <h4>
+                                Musculoligamentous Injury without Discopathy
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -456,9 +444,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Spondylosis
-                              </h4>
+                              <h4>Spondylosis</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -475,7 +461,6 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
@@ -485,14 +470,9 @@ function Index() {
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Musculoligamentous Injury with Discopathy</h4>
 
@@ -503,7 +483,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Musculoligamentous Injury without Discopathy</h4>
+                              <h4>
+                                Musculoligamentous Injury without Discopathy
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -559,25 +541,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Contusion</h4>
 
@@ -624,9 +599,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Groin Strain/Adductor Strain
-                              </h4>
+                              <h4>Groin Strain/Adductor Strain</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -688,25 +661,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Acromioclavicular Arthrosis</h4>
 
@@ -735,7 +701,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Adhesive Capsulitis (Frozen Shoulder Syndrome)</h4>
+                              <h4>
+                                Adhesive Capsulitis (Frozen Shoulder Syndrome)
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -753,9 +721,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Dislocation
-                              </h4>
+                              <h4>Dislocation</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -898,25 +864,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Contusion</h4>
 
@@ -963,9 +922,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Groin Strain/Adductor Strain
-                              </h4>
+                              <h4>Groin Strain/Adductor Strain</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1027,25 +984,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Acromioclavicular Arthrosis</h4>
 
@@ -1074,7 +1024,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Adhesive Capsulitis (Frozen Shoulder Syndrome)</h4>
+                              <h4>
+                                Adhesive Capsulitis (Frozen Shoulder Syndrome)
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1092,9 +1044,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Dislocation
-                              </h4>
+                              <h4>Dislocation</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1237,25 +1187,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>ACL Insufficiency</h4>
 
@@ -1302,9 +1245,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Lateral Meniscus Tear
-                              </h4>
+                              <h4>Lateral Meniscus Tear</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1384,25 +1325,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Biceps Tendinosis</h4>
 
@@ -1449,9 +1383,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Dislocation: Ulnohumeral Joint
-                              </h4>
+                              <h4>Dislocation: Ulnohumeral Joint</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1496,7 +1428,10 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Lateral Epicondylagia (Lateral Epicondylitis or Tennis Elbow)</h4>
+                              <h4>
+                                Lateral Epicondylagia (Lateral Epicondylitis or
+                                Tennis Elbow)
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1505,7 +1440,10 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Medial Epicondylagia (Medial Epicondylitis or Golfer's Elbow)</h4>
+                              <h4>
+                                Medial Epicondylagia (Medial Epicondylitis or
+                                Golfer&rsquo;s Elbow)
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1568,7 +1506,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Ulnar Neuritis: Rule Out Cubital Tunnel Syndrome</h4>
+                              <h4>
+                                Ulnar Neuritis: Rule Out Cubital Tunnel Syndrome
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1576,25 +1516,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>ACL Insufficiency</h4>
 
@@ -1641,9 +1574,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Lateral Meniscus Tear
-                              </h4>
+                              <h4>Lateral Meniscus Tear</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1723,25 +1654,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Biceps Tendinosis</h4>
 
@@ -1788,9 +1712,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Dislocation: Ulnohumeral Joint
-                              </h4>
+                              <h4>Dislocation: Ulnohumeral Joint</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1835,7 +1757,10 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Lateral Epicondylagia (Lateral Epicondylitis or Tennis Elbow)</h4>
+                              <h4>
+                                Lateral Epicondylagia (Lateral Epicondylitis or
+                                Tennis Elbow)
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1844,7 +1769,10 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Medial Epicondylagia (Medial Epicondylitis or Golfer's Elbow)</h4>
+                              <h4>
+                                Medial Epicondylagia (Medial Epicondylitis or
+                                Golfer&rsquo;s Elbow)
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1907,7 +1835,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Ulnar Neuritis: Rule Out Cubital Tunnel Syndrome</h4>
+                              <h4>
+                                Ulnar Neuritis: Rule Out Cubital Tunnel Syndrome
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -1915,25 +1845,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Achilles Tendinitis</h4>
 
@@ -1980,9 +1903,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Derangement
-                              </h4>
+                              <h4>Derangement</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2098,25 +2019,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Carpal Tunnel Syndrome (CTS)</h4>
 
@@ -2163,9 +2077,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Ganglion Cyst
-                              </h4>
+                              <h4>Ganglion Cyst</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2183,7 +2095,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Median Neuritis: Rule out Carpal Tunnel Syndrome</h4>
+                              <h4>
+                                Median Neuritis: Rule out Carpal Tunnel Syndrome
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2219,7 +2133,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Overuse Syndrome/Cumulative Trauma Disorder</h4>
+                              <h4>
+                                Overuse Syndrome/Cumulative Trauma Disorder
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2273,7 +2189,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Triangular Fibrocartilage Complex (TFCC) Tears</h4>
+                              <h4>
+                                Triangular Fibrocartilage Complex (TFCC) Tears
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2291,7 +2209,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>de Quarvain's Tenosynovitis</h4>
+                              <h4>de Quarvain&rsquo;s Tenosynovitis</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2299,25 +2217,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Achilles Tendinitis</h4>
 
@@ -2364,9 +2275,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Derangement
-                              </h4>
+                              <h4>Derangement</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2482,25 +2391,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
-
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Carpal Tunnel Syndrome (CTS)</h4>
 
@@ -2547,9 +2449,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Ganglion Cyst
-                              </h4>
+                              <h4>Ganglion Cyst</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2567,7 +2467,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Median Neuritis: Rule out Carpal Tunnel Syndrome</h4>
+                              <h4>
+                                Median Neuritis: Rule out Carpal Tunnel Syndrome
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2603,7 +2505,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Overuse Syndrome/Cumulative Trauma Disorder</h4>
+                              <h4>
+                                Overuse Syndrome/Cumulative Trauma Disorder
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2657,7 +2561,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Triangular Fibrocartilage Complex (TFCC) Tears</h4>
+                              <h4>
+                                Triangular Fibrocartilage Complex (TFCC) Tears
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2675,7 +2581,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>de Quarvain's Tenosynovitis</h4>
+                              <h4>de Quarvain&rsquo;s Tenosynovitis</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2683,23 +2589,17 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>Abdominal Pain</h4>
@@ -2720,7 +2620,9 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>Autoimmune disorder/inflammatory Arthropathy</h4>
+                              <h4>
+                                Autoimmune disorder/inflammatory Arthropathy
+                              </h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2765,9 +2667,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Fibromyalgia
-                              </h4>
+                              <h4>Fibromyalgia</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2785,9 +2685,52 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Headaches/Cephalgia
-                              </h4>
+                              <h4>Headaches/Cephalgia</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Hernia: Abdominal</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Hernia: Inguinal</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Hernia: Umbilical</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Hypertension</h4>
+
+                              <Switch
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                              />
+                            </div>
+
+                            <div className={`${diagnosisStyles.Card} col-md-3`}>
+                              <h4>Insomnia</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2797,7 +2740,8 @@ function Index() {
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>
-                                Hernia: Abdominal
+                                Multiple factors contributing to orthopedic
+                                condition
                               </h4>
 
                               <Switch
@@ -2807,9 +2751,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Hernia: Inguinal
-                              </h4>
+                              <h4>Occipital Neuralgia</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2818,64 +2760,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Hernia: Umbilical
-                              </h4>
-
-                              <Switch
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                              />
-                            </div>
-
-                            <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Hypertension
-                              </h4>
-
-                              <Switch
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                              />
-                            </div>
-
-                            <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Insomnia
-                              </h4>
-
-                              <Switch
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                              />
-                            </div>
-
-                            <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Multiple factors contributing to orthopedic condition
-                              </h4>
-
-                              <Switch
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                              />
-                            </div>
-
-                            <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Occipital Neuralgia
-                              </h4>
-
-                              <Switch
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                              />
-                            </div>
-
-                            <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Peptic Ulcer
-                              </h4>
+                              <h4>Peptic Ulcer</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2895,9 +2780,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Reflex Sympathetic Dystrophy (RSD)
-                              </h4>
+                              <h4>Reflex Sympathetic Dystrophy (RSD)</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2906,9 +2789,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Shortness of breath
-                              </h4>
+                              <h4>Shortness of breath</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2917,9 +2798,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Sleep Disorder
-                              </h4>
+                              <h4>Sleep Disorder</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2928,9 +2807,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Stress
-                              </h4>
+                              <h4>Stress</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2939,9 +2816,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Weight Gain/Obesity
-                              </h4>
+                              <h4>Weight Gain/Obesity</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -2949,23 +2824,17 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>CMC/Basal Joint Arthrosis</h4>
@@ -3031,9 +2900,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Fracture: Distal Phalanx
-                              </h4>
+                              <h4>Fracture: Distal Phalanx</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3053,9 +2920,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Ganglion Cyst
-                              </h4>
+                              <h4>Ganglion Cyst</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3064,9 +2929,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Mallet Finger
-                              </h4>
+                              <h4>Mallet Finger</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3086,9 +2949,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Myalgia
-                              </h4>
+                              <h4>Myalgia</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3097,9 +2958,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Myositis
-                              </h4>
+                              <h4>Myositis</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3108,9 +2967,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Nalibed Unspecified Finger Deformity
-                              </h4>
+                              <h4>Nalibed Unspecified Finger Deformity</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3119,9 +2976,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Non-specific Hand Pain
-                              </h4>
+                              <h4>Non-specific Hand Pain</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3130,9 +2985,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Osteoarthritis
-                              </h4>
+                              <h4>Osteoarthritis</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3152,9 +3005,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Radial Nerve Entrapment
-                              </h4>
+                              <h4>Radial Nerve Entrapment</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3163,9 +3014,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Right Hand Sprain
-                              </h4>
+                              <h4>Right Hand Sprain</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3174,9 +3023,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Right Hand Strain
-                              </h4>
+                              <h4>Right Hand Strain</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3185,9 +3032,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Subungual Hematoma
-                              </h4>
+                              <h4>Subungual Hematoma</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3196,9 +3041,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Trigger Thumb
-                              </h4>
+                              <h4>Trigger Thumb</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3207,9 +3050,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Ulnar Nerve Entrapment
-                              </h4>
+                              <h4>Ulnar Nerve Entrapment</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3217,23 +3058,17 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
 
                     <TabPanel>
-
                       <form className={`${diagnosisStyles.Form}`}>
-                        <div
-                          className={`${diagnosisStyles.Toprow}`}
-                        >
-
+                        <div className={`${diagnosisStyles.Toprow}`}>
                           <div className={`${diagnosisStyles.Cardcon}`}>
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
                               <h4>CMC/Basal Joint Arthrosis</h4>
@@ -3299,9 +3134,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Fracture: Distal Phalanx
-                              </h4>
+                              <h4>Fracture: Distal Phalanx</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3321,9 +3154,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Ganglion Cyst
-                              </h4>
+                              <h4>Ganglion Cyst</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3332,9 +3163,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Mallet Finger
-                              </h4>
+                              <h4>Mallet Finger</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3354,9 +3183,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Myalgia
-                              </h4>
+                              <h4>Myalgia</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3365,9 +3192,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Myositis
-                              </h4>
+                              <h4>Myositis</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3376,9 +3201,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Nalibed Unspecified Finger Deformity
-                              </h4>
+                              <h4>Nalibed Unspecified Finger Deformity</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3387,9 +3210,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Non-specific Hand Pain
-                              </h4>
+                              <h4>Non-specific Hand Pain</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3398,9 +3219,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Osteoarthritis
-                              </h4>
+                              <h4>Osteoarthritis</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3420,9 +3239,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Radial Nerve Entrapment
-                              </h4>
+                              <h4>Radial Nerve Entrapment</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3431,9 +3248,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Right Hand Sprain
-                              </h4>
+                              <h4>Right Hand Sprain</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3442,9 +3257,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Right Hand Strain
-                              </h4>
+                              <h4>Right Hand Strain</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3453,9 +3266,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Subungual Hematoma
-                              </h4>
+                              <h4>Subungual Hematoma</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3464,9 +3275,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Trigger Thumb
-                              </h4>
+                              <h4>Trigger Thumb</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3475,9 +3284,7 @@ function Index() {
                             </div>
 
                             <div className={`${diagnosisStyles.Card} col-md-3`}>
-                              <h4>
-                                Ulnar Nerve Entrapment
-                              </h4>
+                              <h4>Ulnar Nerve Entrapment</h4>
 
                               <Switch
                                 uncheckedIcon={false}
@@ -3485,19 +3292,18 @@ function Index() {
                               />
                             </div>
                           </div>
-
                         </div>
 
                         <div className={`${diagnosisStyles.Button}`}>
                           <button>Save</button>
                         </div>
                       </form>
-
                     </TabPanel>
                   </Tabs>
 
-
-                  <h5 class="text-center" style={{ marginTop: "18%" }}>Click on “Show body parts” to add</h5>
+                  <h5 class="text-center" style={{ marginTop: "18%" }}>
+                    Click on “Show body parts” to add
+                  </h5>
 
                   {/* <form className={`${diagnosisStyles.Form}`}>
                     <div

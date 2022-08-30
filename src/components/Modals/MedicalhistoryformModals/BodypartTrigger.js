@@ -84,7 +84,7 @@ function BodypartModal(props) {
         <Modal.Body className={`${functionalStyles.Modal_con}`}>
           <div className={`row ${functionalStyles.Selectitems_con}`}>
             {selectedBodyPart.map((item, index) => (
-              <div className="col-md-6">
+              <div className="col-md-6" key={index}>
                 <div
                   onClick={() => handleClick(item)}
                   key={index}

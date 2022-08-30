@@ -86,7 +86,7 @@ function TypeoftreatmentModal(props) {
         <Modal.Body className={`${functionalStyles.Modal_con}`}>
           <div className={`${functionalStyles.Selectitems_con}`}>
             {selectedTreatmentTypes.map((item, index) => (
-              <div className="col-md-6">
+              <div className="col-md-6" key={index}>
                 <div
                   onClick={() => handleClick(item)}
                   key={index}
