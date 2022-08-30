@@ -75,7 +75,7 @@ const initialValues = {
 
 function JobDescriptionModal(props) {
   const [checked, setChecked] = useState(false);
-
+  const [otherHistory, setOtherHistory] = useState([...OtherHistory]);
   const data = useContext(UserContext);
   const { mutate } = useSWR(
     `/api/patient/jobdescription?patient_id=${data._id}`,
@@ -87,15 +87,21 @@ function JobDescriptionModal(props) {
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e, item) => {
     setError(null);
     setSuccessMessage(null);
-    const { name, value } = e.target;
 
-    setForm((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    const updateItem = { ...item, value: e.target.value };
+    const arrayCopy = [...otherHistory];
+    arrayCopy.splice(item.id, 1, updateItem);
+    setOtherHistory([...arrayCopy]);
+  };
+
+  const handleChecked = (item) => {
+    const updateItem = { ...item, checked: !item.checked };
+    const arrayCopy = [...otherHistory];
+    arrayCopy.splice(item.id, 1, updateItem);
+    setOtherHistory([...arrayCopy]);
   };
 
   const handleSubmit = async (e) => {
@@ -164,925 +170,85 @@ function JobDescriptionModal(props) {
           <div className={`${descriptionStyles.Modal_body}`}>
             <div className={`${descriptionStyles.Adl_col}`}>
               <div className={`${descriptionStyles.Inputlist}`}>
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Hypertension:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
+                {otherHistory.map((item, index) => {
+                  if (item.group == "a") {
+                    return (
+                      <div
+                        className={`${descriptionStyles.Inputlist_con}`}
+                        key={index}
+                      >
+                        <div
+                          className={`${descriptionStyles.Label_checkbox_con}`}
+                          style={{ justifyContent: "space-between" }}
+                        >
+                          <label>{item.label} : </label>
+                          <Switch
+                            uncheckedIcon={false}
+                            checkedIcon={false}
+                            onChange={() => handleChecked(item)}
+                            checked={item.checked}
+                          />
+                        </div>
 
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Heart Disease:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Stroke:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Diabetes:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Asthma:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Emphysema:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Peptics Ulcers(Stomach):</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Kidney Disease:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Hepatitis:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Thyroid:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Tumors/Cancer:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Arthritis:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Osteoporosis:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>High Cholesterol and Triglyceride:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
+                        {item.checked ? (
+                          <div>
+                            <input
+                              type="text"
+                              placeholder="If yes describe briefely..."
+                              name={item.name}
+                              value={item.value}
+                              onChange={(e) => handleChange(e, item)}
+                            />
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                      </div>
+                    );
+                  }
+                })}
               </div>
             </div>
 
             <div className={`${descriptionStyles.Adl_col}`}>
               <div className={`${descriptionStyles.Inputlist}`}>
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Hypertension:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
+                {otherHistory.map((item, index) => {
+                  if (item.group == "b") {
+                    return (
+                      <div
+                        className={`${descriptionStyles.Inputlist_con}`}
+                        key={index}
+                      >
+                        <div
+                          className={`${descriptionStyles.Label_checkbox_con}`}
+                          style={{ justifyContent: "space-between" }}
+                        >
+                          <label>{item.label} : </label>
+                          <Switch
+                            uncheckedIcon={false}
+                            checkedIcon={false}
+                            onChange={() => handleChecked(item)}
+                            checked={item.checked}
+                          />
+                        </div>
 
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Heart Disease:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Stroke:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Diabetes:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Asthma:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Emphysema:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Peptics Ulcers(Stomach):</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Kidney Disease:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Hepatitis:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Thyroid:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Tumors/Cancer:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Arthritis:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>Osteoporosis:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <label>High Cholesterol and Triglyceride:</label>
-                    <Switch
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
+                        {item.checked ? (
+                          <div>
+                            <input
+                              type="text"
+                              placeholder="If yes describe briefely..."
+                              name={item.name}
+                              value={item.value}
+                              onChange={(e) => handleChange(e, item)}
+                            />
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                      </div>
+                    );
+                  }
+                })}
               </div>
             </div>
 
@@ -1241,3 +407,230 @@ function JobDescriptionModal(props) {
     </Modal>
   );
 }
+
+const OtherHistory = [
+  {
+    id: 0,
+    label: "Hypertension",
+    name: "hypertension",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 1,
+    label: "Heart Disease",
+    name: "heart_disease",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 2,
+    label: "Stroke",
+    name: "stroke",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 3,
+    label: "Diabetes",
+    name: "diabetes",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 4,
+    label: "Asthma",
+    name: "asthma",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 5,
+    label: "Emphysema",
+    name: "emphysema",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 6,
+    label: "Peptics Ulcers(Stomach)",
+    name: "peptics_ulcers",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 7,
+    label: "Kidney Disease",
+    name: "kidney_disease",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 8,
+    label: "Hepatitis",
+    name: "hepatitis",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 9,
+    label: "Thyroid",
+    name: "thyroid",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 10,
+    label: "Tumors/Cancer",
+    name: "tumors_cancer",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 11,
+    label: "Arthritis",
+    name: "arthritis",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 12,
+    label: "Osteoporosis",
+    name: "osteoporosis",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 13,
+    label: "High Cholesterol and Triglyceride",
+    name: "high_cholesterol_and_triglyceride",
+    value: "",
+    checked: false,
+    group: "a",
+  },
+  {
+    id: 14,
+    label: "Hypertension",
+    name: "hypertension_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 15,
+    label: "Heart Disease",
+    name: "heart_disease_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 16,
+    label: "Stroke",
+    name: "stroke_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 17,
+    label: "Diabetes",
+    name: "diabetes_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 18,
+    label: "Asthma",
+    name: "asthma_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 19,
+    label: "Emphysema",
+    name: "emphysema_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 20,
+    label: "Peptics Ulcers(Stomach)",
+    name: "peptics_ulcers_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 21,
+    label: "Kidney Disease",
+    name: "kidney_disease_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 22,
+    label: "Hepatitis",
+    name: "hepatitis_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 23,
+    label: "Thyroid",
+    name: "thyroid_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 24,
+    label: "Tumors/Cancer",
+    name: "tumors_cancer_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 25,
+    label: "Arthritis",
+    name: "arthritis_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 26,
+    label: "Osteoporosis",
+    name: "osteoporosis_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+  {
+    id: 27,
+    label: "High Cholesterol and Triglyceride",
+    name: "high_cholesterol_and_triglyceride_b",
+    value: "",
+    checked: false,
+    group: "b",
+  },
+];
