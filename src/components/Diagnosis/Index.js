@@ -3301,7 +3301,7 @@ function Index() {
                     </TabPanel>
                   </Tabs>
 
-                  <h5 class="text-center" style={{ marginTop: "18%" }}>
+                  <h5 className="text-center" style={{ marginTop: "18%" }}>
                     Click on “Show body parts” to add
                   </h5>
 
