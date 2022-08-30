@@ -8,29 +8,28 @@ import appointmenticon from "@/images/appointment-icon.png";
 import frame44Styles from "../../Frame44/Frame44.module.scss";
 import functionalStyles from "../../Functionalimprovement/Functionalimprovement.module.scss";
 
-function BodypartTrigger() {
+function BodypartTrigger({ form, setForm }) {
   const [modalShow, setModalShow] = useState(false);
   const [selectedBodyPart, setSelectedBodyPart] = useState([...BodyParts]);
   return (
     <>
-      <div
-        className={`${frame44Styles.Selectinput} col-md-3`}
-        style={{ width: "75%" }}
-      >
+      <div className={`${frame44Styles.Selectinput} col-md-3`}>
         <input
           type="text"
           onClick={() => setModalShow(true)}
           readOnly
           required
+          value={form.body_parts.join()}
           className="form-control"
           placeholder="Eg. your text here"
-          name="physical_activity"
+          name="body_parts"
           style={{ width: "90%" }}
         />
       </div>
 
       <BodypartModal
         show={modalShow}
+        setForm={setForm}
         selectedBodyPart={selectedBodyPart}
         setSelectedBodyPart={setSelectedBodyPart}
         onHide={() => setModalShow(false)}
@@ -43,7 +42,7 @@ function BodypartTrigger() {
 export default BodypartTrigger;
 
 function BodypartModal(props) {
-  const { selectedBodyPart, setSelectedBodyPart } = props;
+  const { selectedBodyPart, setSelectedBodyPart, setForm } = props;
 
   const handleClick = (item) => {
     const activeItem = selectedBodyPart.find(
@@ -54,6 +53,16 @@ function BodypartModal(props) {
     const arrayCopy = [...selectedBodyPart];
     arrayCopy.splice(activeItem.id, 1, updateItem);
     setSelectedBodyPart([...arrayCopy]);
+    const formData = [];
+    arrayCopy.forEach((item) => {
+      if (item.isActive) {
+        return formData.push(item.name);
+      }
+    });
+    setForm((prev) => ({
+      ...prev,
+      body_parts: [...formData],
+    }));
   };
   return (
     <Modal

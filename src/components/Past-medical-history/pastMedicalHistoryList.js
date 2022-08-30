@@ -104,9 +104,9 @@ function PastMedicalHistoryList() {
                     <h4>Treatment Type</h4>
                   </td>
 
-                  <td className={`${frame44Styles.Name} col`}>
+                  {/* <td className={`${frame44Styles.Name} col`}>
                     <h4>Type</h4>
-                  </td>
+                  </td> */}
 
                   <td className={`${frame44Styles.Name} col`}>
                     <h4>&nbsp;</h4>
@@ -118,7 +118,7 @@ function PastMedicalHistoryList() {
                   (pastMedicalHistory, index) => (
                     <tr key={index} className={`${frame44Styles.Appointment}`}>
                       <td className={`${frame44Styles.Name} col`}>
-                        <h4>{pastMedicalHistory.body_part}</h4>
+                        <h4>{pastMedicalHistory.body_parts}</h4>
                       </td>
 
                       <td className={`${frame44Styles.Name} col`}>
@@ -130,7 +130,7 @@ function PastMedicalHistoryList() {
                       </td>
 
                       <td className={`${frame44Styles.Name} col`}>
-                        <h4>{pastMedicalHistory.treatment_type}</h4>
+                        <h4>{pastMedicalHistory.treatment_types}</h4>
                       </td>
 
                       <td className={`${frame44Styles.Name} col`}>

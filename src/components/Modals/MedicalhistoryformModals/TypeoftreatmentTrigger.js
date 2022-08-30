@@ -12,22 +12,25 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function TypeoftreatmentTrigger() {
-  const [modalShow, setModalShow] = React.useState(false);
+function TypeoftreatmentTrigger({ form, setForm }) {
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <div className={`${frame44Styles.Selectinput} col-md-3`}>
         <input
           type="text"
           onClick={() => setModalShow(true)}
+          readOnly
+          required
           placeholder="Eg. your text here"
-          name="physical_activity"
-          style={{ width: "90%" }}
+          name="tretment_types"
+          value={form.treatment_types.join()}
         />
       </div>
 
       <TypeoftreatmentModal
         show={modalShow}
+        setForm={setForm}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
@@ -38,6 +41,31 @@ function TypeoftreatmentTrigger() {
 export default TypeoftreatmentTrigger;
 
 function TypeoftreatmentModal(props) {
+  const { setForm } = props;
+  const [selectedTreatmentTypes, setSelectedTreatmentTypes] = useState([
+    ...TreatmentTypes,
+  ]);
+
+  const handleClick = (item) => {
+    const activeItem = selectedTreatmentTypes.find(
+      (treatmentType) => treatmentType.name == item.name
+    );
+
+    const updateItem = { ...activeItem, isActive: !activeItem.isActive };
+    const arrayCopy = [...selectedTreatmentTypes];
+    arrayCopy.splice(activeItem.id, 1, updateItem);
+    setSelectedTreatmentTypes([...arrayCopy]);
+    const formData = [];
+    arrayCopy.forEach((item) => {
+      if (item.isActive) {
+        return formData.push(item.name);
+      }
+    });
+    setForm((prev) => ({
+      ...prev,
+      treatment_types: [...formData],
+    }));
+  };
   return (
     <Modal
       {...props}
@@ -57,23 +85,20 @@ function TypeoftreatmentModal(props) {
       <form>
         <Modal.Body className={`${functionalStyles.Modal_con}`}>
           <div className={`${functionalStyles.Selectitems_con}`}>
-            <div className={`${functionalStyles.Selectitems}`}>Acupuncture</div>
-
-            <div className={`${functionalStyles.Selectitems}`}>
-              Chiropractic Core
-            </div>
-
-            <div className={`${functionalStyles.Selectitems}`}>Injections</div>
-
-            <div className={`${functionalStyles.Selectitems}`}>Medication</div>
-
-            <div className={`${functionalStyles.Selectitems}`}>
-              Physical Therapy
-            </div>
-
-            <div className={`${functionalStyles.Selectitems}`}>Surgery</div>
-
-            <div className={`${functionalStyles.Selectitems}`}>Other</div>
+            {selectedTreatmentTypes.map((item, index) => (
+              <div className="col-md-6">
+                <div
+                  onClick={() => handleClick(item)}
+                  key={index}
+                  id={item.name}
+                  className={`${functionalStyles.Selectitems} ${
+                    item.isActive ? functionalStyles.activeSelection : ""
+                  }`}
+                >
+                  {item.name}
+                </div>
+              </div>
+            ))}
           </div>
         </Modal.Body>
       </form>
@@ -82,11 +107,11 @@ function TypeoftreatmentModal(props) {
 }
 
 const TreatmentTypes = [
-  { name: "Acupuncture" },
-  { name: "Chiropractic Core" },
-  { name: "Injections" },
-  { name: "Medication" },
-  { name: "Physical Therapy" },
-  { name: "Surgery" },
-  { name: "Other" },
+  { id: 0, name: "Acupuncture", isActive: false },
+  { id: 1, name: "Chiropractic Core", isActive: false },
+  { id: 2, name: "Injections", isActive: false },
+  { id: 3, name: "Medication", isActive: false },
+  { id: 4, name: "Physical Therapy", isActive: false },
+  { id: 5, name: "Surgery", isActive: false },
+  { id: 6, name: "Other", isActive: false },
 ];

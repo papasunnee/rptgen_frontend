@@ -45,10 +45,10 @@ function PastMedicalHistoryTrigger() {
 export default PastMedicalHistoryTrigger;
 
 const initialValues = {
-  type: "",
-  body_part: "",
-  injury_date: "",
-  treatment_type: "",
+  work_type: "",
+  body_parts: [],
+  injury_date: new Date(),
+  treatment_types: [],
   injury_mechanism: "",
   fully_recovered: false,
 };
@@ -100,7 +100,7 @@ function PastMedicalHistoryModal(props) {
           body: JSON.stringify({ ...form, patient_id: data._id }),
         });
         const pastMedicalHistory = await response.json();
-
+        console.log(pastMedicalHistory);
         if (pastMedicalHistory.success) {
           setForm(initialValues);
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
@@ -151,12 +151,12 @@ function PastMedicalHistoryModal(props) {
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Type</label>
-                <TypeofworkTrigger />
+                <TypeofworkTrigger form={form} setForm={setForm} />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Body Part</label>
-                <BodypartTrigger />
+                <BodypartTrigger form={form} setForm={setForm} />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
@@ -172,7 +172,7 @@ function PastMedicalHistoryModal(props) {
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Type of Treatment</label>
-                <TypeoftreatmentTrigger />
+                <TypeoftreatmentTrigger form={form} setForm={setForm} />
                 {/* <input
                   type="text"
                   placeholder="Eg. your text here"

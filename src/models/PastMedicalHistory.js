@@ -8,13 +8,13 @@ const PastMedicalHistorySchema = new mongoose.Schema(
     type: {
       type: String,
     },
-    body_part: {
+    body_parts: {
       type: String,
     },
     injury_date: {
       type: String,
     },
-    treatment_type: {
+    treatment_types: {
       type: String,
     },
     injury_mechanism: {

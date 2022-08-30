@@ -12,9 +12,8 @@ import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
-function TypeofworkTrigger() {
+function TypeofworkTrigger({ form, setForm }) {
   const [modalShow, setModalShow] = useState(false);
-  const [selectedWork, setSelectedWork] = useState(null);
   return (
     <>
       <div className={`${frame44Styles.Selectinput} col-md-3`}>
@@ -24,16 +23,16 @@ function TypeofworkTrigger() {
           readOnly
           required
           className="form-control"
-          value={selectedWork && selectedWork?.name}
+          value={form.work_type}
           placeholder="Eg. your text here"
-          name="physical_activity"
+          name="work_type"
           style={{ width: "90%" }}
         />
       </div>
 
       <TypeofworkModal
         show={modalShow}
-        setSelectedWork={setSelectedWork}
+        setForm={setForm}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
@@ -44,7 +43,7 @@ function TypeofworkTrigger() {
 export default TypeofworkTrigger;
 
 function TypeofworkModal(props) {
-  const { setSelectedWork } = props;
+  const { setForm } = props;
   const handleClick = (item) => {
     const hasClass = document
       .getElementById(item.name)
@@ -58,7 +57,8 @@ function TypeofworkModal(props) {
       document
         .getElementById(item.name)
         .classList.add("Functionalimprovement_activeSelection___SGsl");
-      setSelectedWork(item);
+      // setSelectedWork(item);
+      setForm((prev) => ({ ...prev, work_type: item.name }));
     }
   };
   return (

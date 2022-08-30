@@ -67,6 +67,8 @@ export default async function handler(req, res) {
 
     case "POST":
       try {
+        req.body.body_parts = req.body.body_parts.join();
+        req.body.treatment_types = req.body.treatment_types.join();
         let pastmedicalhistory = await PastMedicalHistory.create({
           ...req.body,
         });
