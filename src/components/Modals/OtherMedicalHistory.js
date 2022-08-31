@@ -1,29 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import React, { useContext, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import Switch from "react-switch";
-
 import Image from "next/image";
+import useSWR from "swr";
 import { Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-
 import appointmenticon from "@/images/appointment-icon.png";
-
 import frame44Styles from "../Frame44/Frame44.module.scss";
 
 import descriptionStyles from "../Jobdescription/jobdescription.module.scss";
-import useSWR from "swr";
 import { fetcher } from "@/context/AuthContext";
-import AddPatientModal from "../Patients-Database/addPatientModal";
 import { UserContext } from "@/context/UserContext";
-import DominanthandTrigger from "./JobDescriptionformModals/DominanthandTrigger";
-import TypeofjobTrigger from "./JobDescriptionformModals/TypeofjobTrigger";
-import HoursperdayTrigger from "./JobDescriptionformModals/HoursperdayTrigger";
-import HoursperdayTrigger2 from "./JobDescriptionformModals/HoursperdayTrigger2";
-import LbsTrigger from "./JobDescriptionformModals/LbsTrigger";
-import HeightTrigger from "./JobDescriptionformModals/HeightTrigger";
-import FrequencyTrigger from "./JobDescriptionformModals/FrequencyTrigger";
 import MaritalstatusTrigger from "./OtherpastMedicalHistory/MaritalstatusTrigger";
 import LivingstatusTrigger from "./OtherpastMedicalHistory/LivingstatusTrigger";
 import SmokingstatusTrigger from "./OtherpastMedicalHistory/SmokingstatusTrigger";
@@ -36,6 +22,7 @@ function JobDescriptionTrigger() {
       <div
         onClick={() => setModalShow(true)}
         className={`${frame44Styles.Tab} col-md-3`}
+        style={{ cursor: "pointer" }}
       >
         <div className={`${frame44Styles.Image}`}>
           <Image src={appointmenticon} alt="icon-img" />
@@ -58,31 +45,26 @@ function JobDescriptionTrigger() {
 export default JobDescriptionTrigger;
 
 const initialValues = {
-  dominant_hand: "",
-  job_type: "",
-  employee_name: "",
-  site_address: "",
-  job_title: "",
-  wages: "",
-  hours_worked: "",
-  days_worked: "",
-  starting_date: "",
-  last_working_date: "",
-  reason: "",
-  description: "",
-  employment_status: "",
+  marital_status: "",
+  living_status: "",
+  children_no: "",
+  comments: "",
+  smoking: "",
+  cigarettes_per_day: "",
+  alcohol: "",
+  hospitalization_desc: "",
+  past_surgeries_desc: "",
+  current_medication_desc: "",
 };
 
 function JobDescriptionModal(props) {
-  const [checked, setChecked] = useState(false);
   const [otherHistory, setOtherHistory] = useState([...OtherHistory]);
   const data = useContext(UserContext);
   const { mutate } = useSWR(
-    `/api/patient/jobdescription?patient_id=${data._id}`,
+    `/api/patient/otherpastmedicalhistory?patient_id=${data._id}`,
     fetcher
   );
   const [error, setError] = useState(null);
-  const [patient, setPatient] = useState();
   const [form, setForm] = useState(initialValues);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -97,6 +79,14 @@ function JobDescriptionModal(props) {
     setOtherHistory([...arrayCopy]);
   };
 
+  const handleTextChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const handleChecked = (item) => {
     const updateItem = { ...item, checked: !item.checked };
     const arrayCopy = [...otherHistory];
@@ -107,17 +97,27 @@ function JobDescriptionModal(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     setError(null);
     const isEmpty = Object.values(form).every(
       (item) => item === null || item === ""
     );
     if (!isEmpty) {
+      const arrayCopy = [...otherHistory];
+      const historyObject = {};
+      arrayCopy.forEach((item) => {
+        historyObject[item.name] = item.value;
+      });
       try {
-        const response = await fetch("/api/patient/jobdescription", {
+        const response = await fetch("/api/patient/otherpastmedicalhistory", {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...form, patient_id: data._id }),
+          body: JSON.stringify({
+            ...form,
+            ...historyObject,
+            patient_id: data._id,
+          }),
         });
         const functionData = await response.json();
 
@@ -131,7 +131,7 @@ function JobDescriptionModal(props) {
             props.setModalShow(false);
           }, 1500);
         } else {
-          throw new Error("Cannot Create Job Description Data");
+          throw new Error("Cannot Create Other Past Medical History Data");
         }
       } catch (error) {
         console.log(error.message);
@@ -178,7 +178,7 @@ function JobDescriptionModal(props) {
                         key={index}
                       >
                         <div
-                          className={`${descriptionStyles.Label_checkbox_con}`}
+                          className={`${descriptionStyles.Label_checkbox_con} mb-1`}
                           style={{ justifyContent: "space-between" }}
                         >
                           <label>{item.label} : </label>
@@ -194,6 +194,7 @@ function JobDescriptionModal(props) {
                           <div>
                             <input
                               type="text"
+                              style={{ fontSize: "12px", height: "25px" }}
                               placeholder="If yes describe briefely..."
                               name={item.name}
                               value={item.value}
@@ -220,7 +221,7 @@ function JobDescriptionModal(props) {
                         key={index}
                       >
                         <div
-                          className={`${descriptionStyles.Label_checkbox_con}`}
+                          className={`${descriptionStyles.Label_checkbox_con} mb-1`}
                           style={{ justifyContent: "space-between" }}
                         >
                           <label>{item.label} : </label>
@@ -236,6 +237,7 @@ function JobDescriptionModal(props) {
                           <div>
                             <input
                               type="text"
+                              style={{ fontSize: "12px", height: "25px" }}
                               placeholder="If yes describe briefely..."
                               name={item.name}
                               value={item.value}
@@ -262,7 +264,7 @@ function JobDescriptionModal(props) {
                     <label style={{ fontSize: "15px", marginRight: "21px" }}>
                       Marital Status:
                     </label>
-                    <MaritalstatusTrigger />
+                    <MaritalstatusTrigger form={form} setForm={setForm} />
                   </div>
                 </div>
 
@@ -274,9 +276,9 @@ function JobDescriptionModal(props) {
                     <label style={{ fontSize: "15px" }}>No. of Children:</label>
                     <input
                       type="text"
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
+                      name="children_no"
+                      value={form.children_no}
+                      onChange={handleTextChange}
                     />
                   </div>
                 </div>
@@ -289,7 +291,7 @@ function JobDescriptionModal(props) {
                     <label style={{ fontSize: "15px", marginRight: "23px" }}>
                       Living:
                     </label>
-                    <LivingstatusTrigger />
+                    <LivingstatusTrigger form={form} setForm={setForm} />
                   </div>
                 </div>
 
@@ -301,9 +303,9 @@ function JobDescriptionModal(props) {
                     <label style={{ fontSize: "15px" }}>Comments:</label>
                     <input
                       type="text"
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
+                      name="comments"
+                      value={form.comments}
+                      onChange={handleTextChange}
                       style={{ width: "65%" }}
                     />
                   </div>
@@ -317,7 +319,7 @@ function JobDescriptionModal(props) {
                     <label style={{ fontSize: "15px", marginRight: "21px" }}>
                       Smoking:
                     </label>
-                    <SmokingstatusTrigger />
+                    <SmokingstatusTrigger form={form} setForm={setForm} />
                   </div>
                 </div>
 
@@ -331,9 +333,9 @@ function JobDescriptionModal(props) {
                     </label>
                     <input
                       type="text"
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
+                      name="cigarettes_per_day"
+                      value={form.cigarettes_per_day}
+                      onChange={handleTextChange}
                     />
                   </div>
                 </div>
@@ -346,7 +348,7 @@ function JobDescriptionModal(props) {
                     <label style={{ fontSize: "15px", marginRight: "21px" }}>
                       Alcohol:
                     </label>
-                    <AlcoholstatusTrigger />
+                    <AlcoholstatusTrigger form={form} setForm={setForm} />
                   </div>
                 </div>
 
@@ -356,17 +358,12 @@ function JobDescriptionModal(props) {
                     style={{ display: "block" }}
                   >
                     <label>Description of Hospitalization:</label>
-                    <textarea rows="10" cols="50" />
-                  </div>
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div
-                    className={`${descriptionStyles.Label_checkbox_con}`}
-                    style={{ display: "block" }}
-                  >
-                    <label>Description of Past Surgeries:</label>
-                    <textarea rows="10" cols="50" />
+                    <textarea
+                      rows="10"
+                      cols="50"
+                      name="hospitalization_desc"
+                      onChange={handleTextChange}
+                    />
                   </div>
                 </div>
               </div>
@@ -380,7 +377,12 @@ function JobDescriptionModal(props) {
                     style={{ display: "block" }}
                   >
                     <label>Description of Past Surgeries:</label>
-                    <textarea rows="10" cols="50" />
+                    <textarea
+                      rows="10"
+                      cols="50"
+                      name="past_surgeries_desc"
+                      onChange={handleTextChange}
+                    />
                   </div>
                 </div>
 
@@ -390,7 +392,12 @@ function JobDescriptionModal(props) {
                     style={{ display: "block" }}
                   >
                     <label>Description of Current Medication:</label>
-                    <textarea rows="10" cols="50" />
+                    <textarea
+                      rows="10"
+                      cols="50"
+                      name="current_medication_desc"
+                      onChange={handleTextChange}
+                    />
                   </div>
                 </div>
               </div>

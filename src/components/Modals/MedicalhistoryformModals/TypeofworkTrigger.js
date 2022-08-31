@@ -1,16 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import Select from "react-select";
-import Button from "react-bootstrap/Button";
-
-import appointmenticon from "@/images/appointment-icon.png";
-
 import frame44Styles from "../../Frame44/Frame44.module.scss";
 import functionalStyles from "../../Functionalimprovement/Functionalimprovement.module.scss";
-import useSWR from "swr";
-import { fetcher } from "@/context/AuthContext";
-import { UserContext } from "@/context/UserContext";
 
 function TypeofworkTrigger({ form, setForm }) {
   const [modalShow, setModalShow] = useState(false);

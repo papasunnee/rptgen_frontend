@@ -6,6 +6,7 @@ import PatientPreAuthorization from "./PatientPreAuthorization";
 import FunctionalImprovement from "./FunctionalImprovement";
 import JobDescription from "./JobDescription";
 import PastMedicalHistory from "./PastMedicalHistory";
+import OtherPastMedicalHistory from "./OtherPastMedicalHistory";
 import SuperBill from "./SuperBill";
 import BillReduction from "./BillReduction";
 
@@ -98,6 +99,12 @@ const PatientSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "PastMedicalHistory",
+      },
+    ],
+    other_past_medical_histories: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "OtherPastMedicalHistory",
       },
     ],
     super_bills: [
