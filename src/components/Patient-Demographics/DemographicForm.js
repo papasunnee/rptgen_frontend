@@ -1167,7 +1167,7 @@ const initialValues = {
   fully_recovered: false,
 };
 
-function AddressListModal(props) {
+export function AddressListModal(props) {
   const data = useContext(UserContext);
   const { mutate } = useSWR(
     `/api/patient/pastmedicalhistory?patient_id=${data._id}`,
@@ -1299,9 +1299,21 @@ function AddressListModal(props) {
   );
 }
 
-const AddressComponent = ({ data, setModalShow, setForm, type }) => {
+export const AddressComponent = ({ data, setModalShow, setForm, type }) => {
   const handleClick = (data) => {
     switch (type) {
+      case "q_insurance":
+        setForm((prev) => ({
+          ...prev,
+          questionnaire_insurance: data.add1,
+          questionnaire_address: data.add2,
+          questionnaire_city_state_zip: data.add3,
+          questionnaire_claim_adjuster: data.add6,
+          questionnaire_claim_number: data.add7,
+          questionnaire_telephone: data.add4,
+          questionnaire_fax: data.add5,
+        }));
+        break;
       case "insurance":
         setForm((prev) => ({
           ...prev,
@@ -1322,6 +1334,16 @@ const AddressComponent = ({ data, setModalShow, setForm, type }) => {
           employer_city_state: data.add3,
           employer_fax: data.add5,
           employer_phone: data.add4,
+        }));
+        break;
+      case "employer_pre":
+        setForm((prev) => ({
+          ...prev,
+          employer_name: data.add1,
+          employer_address: data.add2,
+          employer_city_state_zip: data.add3,
+          employer_fax: data.add5,
+          employer_telephone: data.add4,
         }));
         break;
       case "wcab":
@@ -1383,7 +1405,7 @@ const AddressComponent = ({ data, setModalShow, setForm, type }) => {
   );
 };
 
-const paginator = (items, current_page, per_page_items) => {
+export const paginator = (items, current_page, per_page_items) => {
   let page = current_page || 1,
     per_page = per_page_items || 10,
     offset = (page - 1) * per_page,
