@@ -530,8 +530,13 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="defence_name"
+                  onClick={() => {
+                    setModalType("defence");
+                    setModalShow(true);
+                  }}
                   value={form.defence_name}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -550,7 +555,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="defence_address"
                   value={form.defence_address}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -569,7 +575,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="defence_state_city"
                   value={form.defence_state_city}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -590,7 +597,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="defence_fax"
                   value={form.defence_fax}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -609,7 +617,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="defence_phone"
                   value={form.defence_phone}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -1333,6 +1342,16 @@ const AddressComponent = ({ data, setModalShow, setForm, type }) => {
           applicant_city_state: data.add3,
           applicant_fax: data.add5,
           applicant_telephone: data.add4,
+        }));
+        break;
+      case "defence":
+        setForm((prev) => ({
+          ...prev,
+          defence_name: data.add1,
+          defence_address: data.add2,
+          defence_state_city: data.add3,
+          defence_fax: data.add5,
+          defence_phone: data.add4,
         }));
         break;
       default:
