@@ -61,6 +61,7 @@ function DemographicForm() {
   const [modalShow, setModalShow] = useState(false);
   const data = useContext(UserContext);
   const [error, setError] = useState(null);
+  const [modalType, setModalType] = useState("insurance");
   const [patient, setPatient] = useState();
   const [form, setForm] = useState(initialFormValues);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -213,8 +214,11 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="insurance_company_name"
-                  onClick={() => setModalShow(true)}
-                  // value={form.insurance_company_name}
+                  onClick={() => {
+                    setModalType("insurance");
+                    setModalShow(true);
+                  }}
+                  value={form.insurance_company_name}
                   // onChange={handleChange}
                   readOnly
                 />
@@ -234,7 +238,7 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="insurance_address"
-                  // value={form.insurance_address}
+                  value={form.insurance_address}
                   // onChange={handleChange}
                   readOnly
                 />
@@ -254,7 +258,7 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="insurance_city_state"
-                  // value={form.insurance_city_state}
+                  value={form.insurance_city_state}
                   // onChange={handleChange}
                   readOnly
                 />
@@ -276,7 +280,7 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="insurance_claim_adjuster"
-                  // value={form.insurance_claim_adjuster}
+                  value={form.insurance_claim_adjuster}
                   // onChange={handleChange}
                   readOnly
                 />
@@ -296,7 +300,7 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="insurance_claim_number"
-                  // value={form.insurance_claim_number}
+                  value={form.insurance_claim_number}
                   // onChange={handleChange}
                   readOnly
                 />
@@ -316,7 +320,7 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="insurance_telephone"
-                  // value={form.insurance_telephone}
+                  value={form.insurance_telephone}
                   // onChange={handleChange}
                   readOnly
                 />
@@ -338,7 +342,7 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="insurance_fax"
-                  // value={form.insurance_fax}
+                  value={form.insurance_fax}
                   // onChange={handleChange}
                   readOnly
                 />
@@ -411,8 +415,13 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="applicant_name"
+                  onClick={() => {
+                    setModalType("applicant");
+                    setModalShow(true);
+                  }}
                   value={form.applicant_name}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -431,7 +440,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="applicant_address"
                   value={form.applicant_address}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -450,7 +460,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="applicant_city_state"
                   value={form.applicant_city_state}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -471,7 +482,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="applicant_fax"
                   value={form.applicant_fax}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -490,7 +502,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="applicant_telephone"
                   value={form.applicant_telephone}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -620,8 +633,13 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="wcab_name"
+                  onClick={() => {
+                    setModalType("wcab");
+                    setModalShow(true);
+                  }}
                   value={form.wcab_name}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -640,7 +658,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="wcab_address"
                   value={form.wcab_address}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -659,7 +678,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="wcab_city_state"
                   value={form.wcab_city_state}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -680,7 +700,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="wcab_fax"
                   value={form.wcab_fax}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -699,7 +720,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="wcab_phone"
                   value={form.wcab_phone}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -718,7 +740,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="wcab_eams_adjuster"
                   value={form.wcab_eams_adjuster}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -867,8 +890,13 @@ function DemographicForm() {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   name="employer_name"
+                  onClick={() => {
+                    setModalType("employer");
+                    setModalShow(true);
+                  }}
                   value={form.employer_name}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -887,7 +915,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="employer_address"
                   value={form.employer_address}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -906,7 +935,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="employer_city_state"
                   value={form.employer_city_state}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -927,7 +957,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="employer_fax"
                   value={form.employer_fax}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -946,7 +977,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="employer_phone"
                   value={form.employer_phone}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -965,7 +997,8 @@ function DemographicForm() {
                   aria-describedby="basic-addon1"
                   name="employer_eams_adjuster"
                   value={form.employer_eams_adjuster}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  readOnly
                 />
               </div>
             </div>
@@ -1104,7 +1137,9 @@ function DemographicForm() {
         </div>
       </form>
       <AddressListModal
+        type={modalType}
         show={modalShow}
+        setForm={setForm}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
@@ -1246,17 +1281,63 @@ function AddressListModal(props) {
           </div>
         </Modal.Body>
         <Modal.Footer className={`${functionalStyles.Modal_footer}`}>
-          <button type="submit" disabled={loading}>
+          {/* <button type="submit" disabled={loading}>
             {loading ? "Please Wait..." : "Save"}
-          </button>
+          </button> */}
         </Modal.Footer>
       </form>
     </Modal>
   );
 }
 
-const AddressComponent = ({ data, setModalShow }) => {
+const AddressComponent = ({ data, setModalShow, setForm, type }) => {
   const handleClick = (data) => {
+    switch (type) {
+      case "insurance":
+        setForm((prev) => ({
+          ...prev,
+          insurance_company_name: data.add1,
+          insurance_address: data.add2,
+          insurance_city_state: data.add3,
+          insurance_claim_adjuster: data.add6,
+          insurance_claim_number: data.add7,
+          insurance_telephone: data.add4,
+          insurance_fax: data.add5,
+        }));
+        break;
+      case "employer":
+        setForm((prev) => ({
+          ...prev,
+          employer_name: data.add1,
+          employer_address: data.add2,
+          employer_city_state: data.add3,
+          employer_fax: data.add5,
+          employer_phone: data.add4,
+        }));
+        break;
+      case "wcab":
+        setForm((prev) => ({
+          ...prev,
+          wcab_name: data.add1,
+          wcab_address: data.add2,
+          wcab_city_state: data.add3,
+          wcab_fax: data.add5,
+          wcab_phone: data.add4,
+        }));
+        break;
+      case "applicant":
+        setForm((prev) => ({
+          ...prev,
+          applicant_name: data.add1,
+          applicant_address: data.add2,
+          applicant_city_state: data.add3,
+          applicant_fax: data.add5,
+          applicant_telephone: data.add4,
+        }));
+        break;
+      default:
+        return;
+    }
     setModalShow(false);
   };
   return (
