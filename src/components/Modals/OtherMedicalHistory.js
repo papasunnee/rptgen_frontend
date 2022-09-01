@@ -123,8 +123,11 @@ function JobDescriptionModal(props) {
 
         if (functionData.success) {
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
-          setSuccessMessage("Patient Job Description Successfully Added");
+          setSuccessMessage(
+            "Patient Other Past Medical History Successfully Added"
+          );
           setForm(initialValues);
+          setOtherHistory([...OtherHistory]);
           mutate();
           setTimeout(() => {
             setSuccessMessage(null);
