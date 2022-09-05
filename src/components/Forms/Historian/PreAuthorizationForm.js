@@ -3,6 +3,8 @@ import { UserContext } from "@/context/UserContext";
 
 import demographicsStyles from "../../Patient-Demographics/Demographics.module.scss";
 import { AddressListModal } from "@/components/Patient-Demographics/DemographicForm";
+import PreAuthLetterTrigger from "@/components/Modals/PreAuthorizationFormModals/PreAuthLetterTrigger";
+import LanguageTrigger from "@/components/Modals/PreAuthorizationFormModals/LanguageTrigger";
 
 const initialFormValues = {
   interpreter_name: "",
@@ -32,6 +34,7 @@ const initialFormValues = {
   first_attempt_contact_name: "",
   first_attempt_title_position: "",
   first_attempt_result: "",
+  pre_auth_letter: "",
   patient_id: null,
 };
 function PreAuthorizationForm() {
@@ -141,16 +144,7 @@ function PreAuthorizationForm() {
               <div
                 className={`${demographicsStyles.Inputgroup} input-group mb-3`}
               >
-                <input
-                  type="text"
-                  className={`form-control`}
-                  placeholder="Eg. your text here"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                  name="interpreter_language"
-                  value={form.interpreter_language}
-                  onChange={handleChange}
-                />
+                <LanguageTrigger form={form} setForm={setForm} />
               </div>
             </div>
 
@@ -685,6 +679,23 @@ function PreAuthorizationForm() {
             </div>
           </div>
         </div>
+
+        <div className={`${demographicsStyles.Header_section}`}>
+          <h3>Fax Option</h3>
+
+          <div className={`${demographicsStyles.Inputflex}`}>
+            <div className={`${demographicsStyles.Input_cont}`}>
+              <label>Send to Pre-Auth Letter</label>
+
+              <div
+                className={`${demographicsStyles.Inputgroup} input-group mb-3`}
+              >
+                <PreAuthLetterTrigger form={form} setForm={setForm} />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className={`${demographicsStyles.Button}`}>
           <button disabled={loading}>
             {loading ? "...Please wait" : "Save"}

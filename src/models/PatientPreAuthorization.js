@@ -86,6 +86,9 @@ const PatientPreAuthorizationSchema = new mongoose.Schema(
     first_attempt_result: {
       type: String,
     },
+    pre_auth_letter: {
+      type: String,
+    },
     patient_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Patient",
