@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import { Modal } from "react-bootstrap";
-import Select from "react-select";
 import Button from "react-bootstrap/Button";
 
 import appointmenticon from "@/images/appointment-icon.png";
@@ -20,7 +19,7 @@ import SleepTrigger from "./FunctionalImprovementformModals/SleepTrigger";
 import SelfcareTrigger from "./FunctionalImprovementformModals/SelfcareTrigger";
 
 function FunctionalImprovementTrigger() {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <Button
@@ -39,7 +38,6 @@ function FunctionalImprovementTrigger() {
 
       <FunctionalImprovementModal
         show={modalShow}
-        onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
     </>
@@ -168,6 +166,10 @@ function FunctionalImprovementModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className={`${functionalStyles.Modal}`}
+      onHide={() => {
+        setForm(initialValues);
+        props.setModalShow(false);
+      }}
     >
       <Modal.Header closeButton>
         <Modal.Title
@@ -426,26 +428,12 @@ function FunctionalImprovementModal(props) {
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Sexual Function</label>
-                <SexualTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="sexual_function"
-                  value={form.sexual_function}
-                  onChange={handleChange}
-                /> */}
+                <SexualTrigger form={form} setForm={setForm} />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Sleep</label>
-                <SleepTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="sleep"
-                  value={form.sleep}
-                  onChange={handleChange}
-                /> */}
+                <SleepTrigger form={form} setForm={setForm} />
               </div>
             </div>
           </div>
@@ -459,21 +447,14 @@ function FunctionalImprovementModal(props) {
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Self-care, personal hygiene</label>
-                <SelfcareTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="self_care"
-                  value={form.self_care}
-                  onChange={handleChange}
-                /> */}
+                <SelfcareTrigger form={form} setForm={setForm} />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Communication</label>
                 <input
                   type="text"
-                  placeholder="Eg. your text here"
+                  placeholder="Please type communication type here"
                   name="communication"
                   value={form.communication}
                   onChange={handleChange}

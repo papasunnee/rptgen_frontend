@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import frame44Styles from "../../Frame44/Frame44.module.scss";
 import functionalStyles from "../../Functionalimprovement/Functionalimprovement.module.scss";
 
 function PhysicalactivityTrigger({ form, setForm }) {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([...OptionsList]);
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <div className={`${frame44Styles.Selectinput} col-md-3`}>
         <label>Phyisical Activity</label>
         <input
           type="text"
-          placeholder="Click and select physical activity"
+          placeholder="Click and select physical activities"
           name="physical_activity"
           className="form-control"
           value={form.physical_activity}
@@ -25,6 +25,8 @@ function PhysicalactivityTrigger({ form, setForm }) {
       <PhysicalactivityModal
         show={modalShow}
         setForm={setForm}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
@@ -35,23 +37,27 @@ function PhysicalactivityTrigger({ form, setForm }) {
 export default PhysicalactivityTrigger;
 
 function PhysicalactivityModal(props) {
-  const { setForm } = props;
+  const { selectedOptions, setSelectedOptions, setForm } = props;
+
   const handleClick = (item) => {
-    const hasClass = document
-      .getElementById(item.name)
-      .classList.contains("Functionalimprovement_activeSelection___SGsl");
-    if (!hasClass) {
-      PhysicalActivities.forEach((physicalActivity) =>
-        document
-          .getElementById(physicalActivity.name)
-          .classList.remove("Functionalimprovement_activeSelection___SGsl")
-      );
-      document
-        .getElementById(item.name)
-        .classList.add("Functionalimprovement_activeSelection___SGsl");
-      // setSelectedWork(item);
-      setForm((prev) => ({ ...prev, physical_activity: item.name }));
-    }
+    const activeItem = selectedOptions.find(
+      (bodyPart) => bodyPart.name == item.name
+    );
+
+    const updateItem = { ...activeItem, isActive: !activeItem.isActive };
+    const arrayCopy = [...selectedOptions];
+    arrayCopy.splice(activeItem.id, 1, updateItem);
+    setSelectedOptions([...arrayCopy]);
+    const formData = [];
+    arrayCopy.forEach((item) => {
+      if (item.isActive) {
+        return formData.push(item.name);
+      }
+    });
+    setForm((prev) => ({
+      ...prev,
+      physical_activity: formData.join(),
+    }));
   };
   return (
     <Modal
@@ -72,14 +78,18 @@ function PhysicalactivityModal(props) {
       <form>
         <Modal.Body className={`${functionalStyles.Modal_con}`}>
           <div className={`${functionalStyles.Selectitems_con}`}>
-            {PhysicalActivities.map((item, index) => (
-              <div
-                onClick={() => handleClick(item)}
-                key={index}
-                id={item.name}
-                className={`${functionalStyles.Selectitems}`}
-              >
-                {item.name}
+            {selectedOptions.map((item, index) => (
+              <div className="col-md-12" key={index}>
+                <div
+                  onClick={() => handleClick(item)}
+                  key={index}
+                  id={item.name}
+                  className={`${functionalStyles.Selectitems} ${
+                    item.isActive ? functionalStyles.activeSelection : ""
+                  }`}
+                >
+                  {item.name}
+                </div>
               </div>
             ))}
           </div>
@@ -89,11 +99,11 @@ function PhysicalactivityModal(props) {
   );
 }
 
-const PhysicalActivities = [
-  { name: "Climbing Stairs", active: "false" },
-  { name: "Reclining", active: "false" },
-  { name: "Standing", active: "false" },
-  { name: "Sitting", active: "false" },
-  { name: "Walking", active: "false" },
-  { name: "Others", active: "false" },
+const OptionsList = [
+  { id: 0, name: "Climbing Stairs", isActive: false },
+  { id: 1, name: "Reclining", isActive: false },
+  { id: 2, name: "Standing", isActive: false },
+  { id: 3, name: "Sitting", isActive: false },
+  { id: 4, name: "Walking", isActive: false },
+  { id: 5, name: "Others", isActive: false },
 ];

@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import { Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-
-import appointmenticon from "@/images/appointment-icon.png";
-
 import frame44Styles from "../../Frame44/Frame44.module.scss";
 import functionalStyles from "../../Functionalimprovement/Functionalimprovement.module.scss";
 
@@ -21,7 +16,7 @@ function BodypartTrigger({ form, setForm }) {
           required
           value={form.body_parts.join()}
           className="form-control"
-          placeholder="Eg. your text here"
+          placeholder="Click and select body parts"
           name="body_parts"
           style={{ width: "90%" }}
         />

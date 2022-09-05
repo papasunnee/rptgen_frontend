@@ -1,19 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import Select from "react-select";
-import Button from "react-bootstrap/Button";
-
-import appointmenticon from "@/images/appointment-icon.png";
-
 import frame44Styles from "../../Frame44/Frame44.module.scss";
 import functionalStyles from "../../Functionalimprovement/Functionalimprovement.module.scss";
-import useSWR from "swr";
-import { fetcher } from "@/context/AuthContext";
-import { UserContext } from "@/context/UserContext";
 
 function SensoryfunctionTrigger({ form, setForm }) {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([...OptionsList]);
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <div className={`${frame44Styles.Selectinput} col-md-3`}>
@@ -32,6 +24,8 @@ function SensoryfunctionTrigger({ form, setForm }) {
       <SensoryfunctionModal
         show={modalShow}
         setForm={setForm}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
@@ -42,23 +36,27 @@ function SensoryfunctionTrigger({ form, setForm }) {
 export default SensoryfunctionTrigger;
 
 function SensoryfunctionModal(props) {
-  const { setForm } = props;
+  const { selectedOptions, setSelectedOptions, setForm } = props;
+
   const handleClick = (item) => {
-    const hasClass = document
-      .getElementById(item.name)
-      .classList.contains("Functionalimprovement_activeSelection___SGsl");
-    if (!hasClass) {
-      SensoryFunctions.forEach((sensoryFunction) =>
-        document
-          .getElementById(sensoryFunction.name)
-          .classList.remove("Functionalimprovement_activeSelection___SGsl")
-      );
-      document
-        .getElementById(item.name)
-        .classList.add("Functionalimprovement_activeSelection___SGsl");
-      // setSelectedWork(item);
-      setForm((prev) => ({ ...prev, sensory_function: item.name }));
-    }
+    const activeItem = selectedOptions.find(
+      (bodyPart) => bodyPart.name == item.name
+    );
+
+    const updateItem = { ...activeItem, isActive: !activeItem.isActive };
+    const arrayCopy = [...selectedOptions];
+    arrayCopy.splice(activeItem.id, 1, updateItem);
+    setSelectedOptions([...arrayCopy]);
+    const formData = [];
+    arrayCopy.forEach((item) => {
+      if (item.isActive) {
+        return formData.push(item.name);
+      }
+    });
+    setForm((prev) => ({
+      ...prev,
+      sensory_function: formData.join(),
+    }));
   };
   return (
     <Modal
@@ -79,14 +77,18 @@ function SensoryfunctionModal(props) {
       <form>
         <Modal.Body className={`${functionalStyles.Modal_con}`}>
           <div className={`${functionalStyles.Selectitems_con}`}>
-            {SensoryFunctions.map((item, index) => (
-              <div
-                onClick={() => handleClick(item)}
-                key={index}
-                id={item.name}
-                className={`${functionalStyles.Selectitems}`}
-              >
-                {item.name}
+            {selectedOptions.map((item, index) => (
+              <div className="col-md-12" key={index}>
+                <div
+                  onClick={() => handleClick(item)}
+                  key={index}
+                  id={item.name}
+                  className={`${functionalStyles.Selectitems} ${
+                    item.isActive ? functionalStyles.activeSelection : ""
+                  }`}
+                >
+                  {item.name}
+                </div>
               </div>
             ))}
           </div>
@@ -96,11 +98,11 @@ function SensoryfunctionModal(props) {
   );
 }
 
-const SensoryFunctions = [
-  { name: "Hearing", active: "false" },
-  { name: "Seeing", active: "false" },
-  { name: "Smelling", active: "false" },
-  { name: "Tactile feeling", active: "false" },
-  { name: "Tasting", active: "false" },
-  { name: "Others", active: "false" },
+const OptionsList = [
+  { id: 0, name: "Hearing", isActive: false },
+  { id: 1, name: "Seeing", isActive: false },
+  { id: 2, name: "Smelling", isActive: false },
+  { id: 3, name: "Tactile feeling", isActive: false },
+  { id: 4, name: "Tasting", isActive: false },
+  { id: 5, name: "Others", isActive: false },
 ];

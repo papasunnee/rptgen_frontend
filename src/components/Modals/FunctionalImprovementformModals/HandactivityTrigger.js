@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import frame44Styles from "../../Frame44/Frame44.module.scss";
 import functionalStyles from "../../Functionalimprovement/Functionalimprovement.module.scss";
 
 function HandactivityTrigger({ form, setForm }) {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([...OptionsList]);
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <div className={`${frame44Styles.Selectinput} col-md-3`}>
@@ -24,6 +24,8 @@ function HandactivityTrigger({ form, setForm }) {
       <HandactivityModal
         show={modalShow}
         setForm={setForm}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
@@ -34,22 +36,27 @@ function HandactivityTrigger({ form, setForm }) {
 export default HandactivityTrigger;
 
 function HandactivityModal(props) {
-  const { setForm } = props;
+  const { selectedOptions, setSelectedOptions, setForm } = props;
+
   const handleClick = (item) => {
-    const hasClass = document
-      .getElementById(item.name)
-      .classList.contains("Functionalimprovement_activeSelection___SGsl");
-    if (!hasClass) {
-      NonSpecializedHandActivities.forEach((nonSpecializedHandActivity) =>
-        document
-          .getElementById(nonSpecializedHandActivity.name)
-          .classList.remove("Functionalimprovement_activeSelection___SGsl")
-      );
-      document
-        .getElementById(item.name)
-        .classList.add("Functionalimprovement_activeSelection___SGsl");
-      setForm((prev) => ({ ...prev, non_specialized_hand: item.name }));
-    }
+    const activeItem = selectedOptions.find(
+      (bodyPart) => bodyPart.name == item.name
+    );
+
+    const updateItem = { ...activeItem, isActive: !activeItem.isActive };
+    const arrayCopy = [...selectedOptions];
+    arrayCopy.splice(activeItem.id, 1, updateItem);
+    setSelectedOptions([...arrayCopy]);
+    const formData = [];
+    arrayCopy.forEach((item) => {
+      if (item.isActive) {
+        return formData.push(item.name);
+      }
+    });
+    setForm((prev) => ({
+      ...prev,
+      non_specialized_hand: formData.join(),
+    }));
   };
   return (
     <Modal
@@ -70,14 +77,18 @@ function HandactivityModal(props) {
       <form>
         <Modal.Body className={`${functionalStyles.Modal_con}`}>
           <div className={`${functionalStyles.Selectitems_con}`}>
-            {NonSpecializedHandActivities.map((item, index) => (
-              <div
-                onClick={() => handleClick(item)}
-                key={index}
-                id={item.name}
-                className={`${functionalStyles.Selectitems}`}
-              >
-                {item.name}
+            {selectedOptions.map((item, index) => (
+              <div className="col-md-12" key={index}>
+                <div
+                  onClick={() => handleClick(item)}
+                  key={index}
+                  id={item.name}
+                  className={`${functionalStyles.Selectitems} ${
+                    item.isActive ? functionalStyles.activeSelection : ""
+                  }`}
+                >
+                  {item.name}
+                </div>
               </div>
             ))}
           </div>
@@ -87,9 +98,9 @@ function HandactivityModal(props) {
   );
 }
 
-const NonSpecializedHandActivities = [
-  { name: "Grasping", active: "false" },
-  { name: "Lifting", active: "false" },
-  { name: "Tactile description", active: "false" },
-  { name: "Others", active: "false" },
+const OptionsList = [
+  { id: 0, name: "Grasping", isActive: false },
+  { id: 1, name: "Lifting", isActive: false },
+  { id: 2, name: "Tactile description", isActive: false },
+  { id: 3, name: "Others", isActive: false },
 ];
