@@ -64,7 +64,7 @@ function LanguageModal(props) {
           id="contained-modal-title-vcenter"
           className={`${functionalStyles.Modal_title}`}
         >
-          Select Option
+          Select Language
         </Modal.Title>
       </Modal.Header>
       <form>

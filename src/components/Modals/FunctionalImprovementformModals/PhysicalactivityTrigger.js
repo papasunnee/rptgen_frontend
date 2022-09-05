@@ -1,37 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
+import React from "react";
 import { Modal } from "react-bootstrap";
-import Select from "react-select";
 import Button from "react-bootstrap/Button";
-
-import appointmenticon from "@/images/appointment-icon.png";
-
 import frame44Styles from "../../Frame44/Frame44.module.scss";
 import functionalStyles from "../../Functionalimprovement/Functionalimprovement.module.scss";
-import useSWR from "swr";
-import { fetcher } from "@/context/AuthContext";
-import { UserContext } from "@/context/UserContext";
 
-function PhysicalactivityTrigger() {
+function PhysicalactivityTrigger({ form, setForm }) {
   const [modalShow, setModalShow] = React.useState(false);
   return (
     <>
-      <Button
-        variant="primary"
-        onClick={() => setModalShow(true)}
-        className={`${frame44Styles.Selectinput} col-md-3`}
-      >
-
+      <div className={`${frame44Styles.Selectinput} col-md-3`}>
         <label>Phyisical Activity</label>
         <input
           type="text"
-          placeholder="Eg. your text here"
+          placeholder="Click and select physical activity"
           name="physical_activity"
+          className="form-control"
+          value={form.physical_activity}
+          style={{ width: "90%" }}
+          readOnly
+          onClick={() => setModalShow(true)}
         />
-      </Button>
+      </div>
 
       <PhysicalactivityModal
         show={modalShow}
+        setForm={setForm}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
       />
@@ -42,6 +35,24 @@ function PhysicalactivityTrigger() {
 export default PhysicalactivityTrigger;
 
 function PhysicalactivityModal(props) {
+  const { setForm } = props;
+  const handleClick = (item) => {
+    const hasClass = document
+      .getElementById(item.name)
+      .classList.contains("Functionalimprovement_activeSelection___SGsl");
+    if (!hasClass) {
+      PhysicalActivities.forEach((physicalActivity) =>
+        document
+          .getElementById(physicalActivity.name)
+          .classList.remove("Functionalimprovement_activeSelection___SGsl")
+      );
+      document
+        .getElementById(item.name)
+        .classList.add("Functionalimprovement_activeSelection___SGsl");
+      // setSelectedWork(item);
+      setForm((prev) => ({ ...prev, physical_activity: item.name }));
+    }
+  };
   return (
     <Modal
       {...props}
@@ -60,35 +71,29 @@ function PhysicalactivityModal(props) {
       </Modal.Header>
       <form>
         <Modal.Body className={`${functionalStyles.Modal_con}`}>
-
           <div className={`${functionalStyles.Selectitems_con}`}>
-            <button className={`${functionalStyles.Selectitems}`}>
-              Climbing Stairs
-            </button>
-
-            <button className={`${functionalStyles.Selectitems}`}>
-              Reclining
-            </button>
-
-            <button className={`${functionalStyles.Selectitems}`}>
-              Standing
-            </button>
-
-            <button className={`${functionalStyles.Selectitems}`}>
-              Sitting
-            </button>
-
-            <button className={`${functionalStyles.Selectitems}`}>
-              Walking
-            </button>
-
-            <button className={`${functionalStyles.Selectitems}`}>
-              Others
-            </button>
+            {PhysicalActivities.map((item, index) => (
+              <div
+                onClick={() => handleClick(item)}
+                key={index}
+                id={item.name}
+                className={`${functionalStyles.Selectitems}`}
+              >
+                {item.name}
+              </div>
+            ))}
           </div>
-
         </Modal.Body>
       </form>
     </Modal>
   );
 }
+
+const PhysicalActivities = [
+  { name: "Climbing Stairs", active: "false" },
+  { name: "Reclining", active: "false" },
+  { name: "Standing", active: "false" },
+  { name: "Sitting", active: "false" },
+  { name: "Walking", active: "false" },
+  { name: "Others", active: "false" },
+];

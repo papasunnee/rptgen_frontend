@@ -9,29 +9,50 @@ const FunctionalImprovementSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    value_a_t: {
+      type: String,
+    },
     value_b: {
       type: Boolean,
       default: false,
+    },
+    value_b_t: {
+      type: String,
     },
     value_c: {
       type: Boolean,
       default: false,
     },
+    value_c_t: {
+      type: String,
+    },
     value_d: {
       type: Boolean,
       default: false,
+    },
+    value_d_t: {
+      type: String,
     },
     value_e: {
       type: Boolean,
       default: false,
     },
+    value_e_t: {
+      type: String,
+    },
     value_f: {
       type: Boolean,
       default: false,
     },
+    value_f_t: {
+      type: String,
+    },
     value_g: {
       type: Boolean,
       default: false,
+    },
+    value_g_t: {
+      type: String,
     },
     providers_code: {
       type: String,

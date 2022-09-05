@@ -12,10 +12,9 @@ function TypeofworkTrigger({ form, setForm }) {
           type="text"
           onClick={() => setModalShow(true)}
           readOnly
-          required
           className="form-control"
           value={form.work_type}
-          placeholder="Eg. your text here"
+          placeholder="Click and select work type"
           name="work_type"
           style={{ width: "90%" }}
         />

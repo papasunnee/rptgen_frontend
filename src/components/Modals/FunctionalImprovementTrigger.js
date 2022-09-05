@@ -58,6 +58,13 @@ const initialValues = {
   self_care: "",
   communication: "",
   description: "",
+  value_a_t: "",
+  value_b_t: "",
+  value_c_t: "",
+  value_d_t: "",
+  value_e_t: "",
+  value_f_t: "",
+  value_g_t: "",
 };
 
 const initialCheckBoxes = {
@@ -101,6 +108,12 @@ function FunctionalImprovementModal(props) {
       ...prevValues,
       [name]: checked,
     }));
+    if (!checked) {
+      setForm((prevValues) => ({
+        ...prevValues,
+        [name + "_t"]: "",
+      }));
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -176,8 +189,11 @@ function FunctionalImprovementModal(props) {
             <h5>Functional Improvement</h5>
 
             <div className={`${functionalStyles.Inputlist}`}>
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>
+              <div
+                className={`${functionalStyles.Inputlist_con}`}
+                style={{ flexDirection: "column", alignItems: "flex-start" }}
+              >
+                <label className="px-0">
                   <input
                     type="checkbox"
                     name="value_a"
@@ -189,10 +205,27 @@ function FunctionalImprovementModal(props) {
                     Are you using assisted ambulations or activity aids?
                   </span>
                 </label>
+                {checkboxes.value_a && (
+                  <input
+                    type="text"
+                    className="form-control d-block mt-1"
+                    name="value_a_t"
+                    value={form.value_a_t}
+                    onChange={handleChange}
+                    style={{
+                      outline: "none",
+                      boxShadow: "none",
+                      fontSize: "12px",
+                    }}
+                  />
+                )}
               </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>
+              <div
+                className={`${functionalStyles.Inputlist_con}`}
+                style={{ flexDirection: "column", alignItems: "flex-start" }}
+              >
+                <label className="px-0">
                   <input
                     type="checkbox"
                     name="value_b"
@@ -201,10 +234,27 @@ function FunctionalImprovementModal(props) {
                   />
                   <span> Do you require assistance at home or at work?</span>
                 </label>
+                {checkboxes.value_b && (
+                  <input
+                    type="text"
+                    className="form-control d-block mt-1"
+                    name="value_b_t"
+                    value={form.value_b_t}
+                    onChange={handleChange}
+                    style={{
+                      outline: "none",
+                      boxShadow: "none",
+                      fontSize: "12px",
+                    }}
+                  />
+                )}
               </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>
+              <div
+                className={`${functionalStyles.Inputlist_con}`}
+                style={{ flexDirection: "column", alignItems: "flex-start" }}
+              >
+                <label className="px-0">
                   <input
                     type="checkbox"
                     name="value_c"
@@ -213,10 +263,27 @@ function FunctionalImprovementModal(props) {
                   />
                   <span> Is your ongoing care stopped?</span>
                 </label>
+                {checkboxes.value_c && (
+                  <input
+                    type="text"
+                    className="form-control d-block mt-1"
+                    name="value_c_t"
+                    value={form.value_c_t}
+                    onChange={handleChange}
+                    style={{
+                      outline: "none",
+                      boxShadow: "none",
+                      fontSize: "12px",
+                    }}
+                  />
+                )}
               </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>
+              <div
+                className={`${functionalStyles.Inputlist_con}`}
+                style={{ flexDirection: "column", alignItems: "flex-start" }}
+              >
+                <label className="px-0">
                   <input
                     type="checkbox"
                     name="value_d"
@@ -225,10 +292,27 @@ function FunctionalImprovementModal(props) {
                   />
                   <span> Is there a re-injury</span>
                 </label>
+                {checkboxes.value_d && (
+                  <input
+                    type="text"
+                    className="form-control d-block mt-1"
+                    name="value_d_t"
+                    value={form.value_d_t}
+                    onChange={handleChange}
+                    style={{
+                      outline: "none",
+                      boxShadow: "none",
+                      fontSize: "12px",
+                    }}
+                  />
+                )}
               </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>
+              <div
+                className={`${functionalStyles.Inputlist_con}`}
+                style={{ flexDirection: "column", alignItems: "flex-start" }}
+              >
+                <label className="px-0">
                   <input
                     type="checkbox"
                     name="value_e"
@@ -237,10 +321,27 @@ function FunctionalImprovementModal(props) {
                   />
                   <span> Do you experience increase is symptoms?</span>
                 </label>
+                {checkboxes.value_e && (
+                  <input
+                    type="text"
+                    className="form-control d-block mt-1"
+                    name="value_e_t"
+                    value={form.value_e_t}
+                    onChange={handleChange}
+                    style={{
+                      outline: "none",
+                      boxShadow: "none",
+                      fontSize: "12px",
+                    }}
+                  />
+                )}
               </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>
+              <div
+                className={`${functionalStyles.Inputlist_con}`}
+                style={{ flexDirection: "column", alignItems: "flex-start" }}
+              >
+                <label className="px-0">
                   <input
                     type="checkbox"
                     name="value_f"
@@ -249,10 +350,27 @@ function FunctionalImprovementModal(props) {
                   />
                   <span> Sports</span>
                 </label>
+                {checkboxes.value_f && (
+                  <input
+                    type="text"
+                    className="form-control d-block mt-1"
+                    name="value_f_t"
+                    value={form.value_f_t}
+                    onChange={handleChange}
+                    style={{
+                      outline: "none",
+                      boxShadow: "none",
+                      fontSize: "12px",
+                    }}
+                  />
+                )}
               </div>
 
-              <div className={`${functionalStyles.Inputlist_con}`}>
-                <label>
+              <div
+                className={`${functionalStyles.Inputlist_con}`}
+                style={{ flexDirection: "column", alignItems: "flex-start" }}
+              >
+                <label className="px-0">
                   <input
                     type="checkbox"
                     name="value_g"
@@ -261,61 +379,49 @@ function FunctionalImprovementModal(props) {
                   />
                   <span> Are you taking medication?</span>
                 </label>
+                {checkboxes.value_g && (
+                  <input
+                    type="text"
+                    className="form-control d-block mt-1"
+                    name="value_g_t"
+                    value={form.value_g_t}
+                    onChange={handleChange}
+                    style={{
+                      outline: "none",
+                      boxShadow: "none",
+                      fontSize: "12px",
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>
 
-          <div className={`${functionalStyles.Adl_col}`} style={{ width: "340px" }}>
+          <div
+            className={`${functionalStyles.Adl_col}`}
+            style={{ width: "340px" }}
+          >
             <h5>Activities of Daily Living (ADL)</h5>
 
             <div className={`${functionalStyles.Inputlist}`}>
               <div className={`${functionalStyles.Inputlist_con}`}>
                 {/* <label>Phyisical Activity</label> */}
-
-                <PhysicalactivityTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="physical_activity"
-                  value={form.physical_activity}
-                  onChange={handleChange}
-                /> */}
+                <PhysicalactivityTrigger form={form} setForm={setForm} />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Sensory Function</label>
-                <SensoryfunctionTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="sensory_function"
-                  value={form.sensory_function}
-                  onChange={handleChange}
-                /> */}
+                <SensoryfunctionTrigger form={form} setForm={setForm} />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Non-specialized hand activities</label>
-                <HandactivityTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="non_specialized_hand"
-                  value={form.non_specialized_hand}
-                  onChange={handleChange}
-                /> */}
+                <HandactivityTrigger form={form} setForm={setForm} />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Travel</label>
-                <TravelTrigger />
-                {/* <input
-                  type="text"
-                  placeholder="Eg. your text here"
-                  name="travel"
-                  value={form.travel}
-                  onChange={handleChange}
-                /> */}
+                <TravelTrigger form={form} setForm={setForm} />
               </div>
 
               <div className={`${functionalStyles.Inputlist_con}`}>
@@ -344,7 +450,10 @@ function FunctionalImprovementModal(props) {
             </div>
           </div>
 
-          <div className={`${functionalStyles.Adl_col}`} style={{ width: "340px" }}>
+          <div
+            className={`${functionalStyles.Adl_col}`}
+            style={{ width: "340px" }}
+          >
             <h5>Activities of Daily Living (ADL)</h5>
 
             <div className={`${functionalStyles.Inputlist}`}>

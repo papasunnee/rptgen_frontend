@@ -77,7 +77,7 @@ function PreAuthLetterModal(props) {
           id="contained-modal-title-vcenter"
           className={`${functionalStyles.Modal_title}`}
         >
-          Select Option
+          Select Result
         </Modal.Title>
       </Modal.Header>
       <form>
