@@ -53,6 +53,12 @@ function JobDescriptionTrigger() {
 
 export default JobDescriptionTrigger;
 
+const textBoxStyle = {
+  outline: "none",
+  boxShadow: "none",
+  fontSize: "12px",
+  width: "80%",
+};
 const initialValues = {
   dominant_hand: "",
   job_type: "",
@@ -127,8 +133,37 @@ const initialValuesTab3 = {
   chest_to_overhead: "",
 };
 
+const initialValuesTab4 = {
+  value_a_t: "",
+  value_b_t: "",
+  value_c_t: "",
+  value_d_t: "",
+  value_e_t: "",
+  value_f_t: "",
+  value_g_t: "",
+  value_h_t: "",
+  value_i_t: "",
+  value_j_t: "",
+  value_k_t: "",
+};
+
+const initialCheckBoxes = {
+  value_a: false,
+  value_b: false,
+  value_c: false,
+  value_d: false,
+  value_e: false,
+  value_f: false,
+  value_g: false,
+  value_h: false,
+  value_i: false,
+  value_j: false,
+  value_k: false,
+};
+
 function JobDescriptionModal(props) {
   const [checked, setChecked] = useState(false);
+  const [checkboxes, setCheckBoxes] = useState(initialCheckBoxes);
   const data = useContext(UserContext);
   const { mutate } = useSWR(
     `/api/patient/jobdescription?patient_id=${data._id}`,
@@ -138,6 +173,7 @@ function JobDescriptionModal(props) {
   const [form, setForm] = useState(initialValues);
   const [form2, setForm2] = useState(initialValuesTab2);
   const [form3, setForm3] = useState(initialValuesTab3);
+  const [form4, setForm4] = useState(initialValuesTab4);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -150,6 +186,32 @@ function JobDescriptionModal(props) {
       ...prevValues,
       [name]: value,
     }));
+  };
+
+  const handleChangeTextBox = (e) => {
+    setError(null);
+    setSuccessMessage(null);
+    const { name, value } = e.target;
+
+    setForm4((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleCheckboxes = (e) => {
+    const name = e.target.name;
+    const checked = e.target.checked;
+    setCheckBoxes((prevValues) => ({
+      ...prevValues,
+      [name]: checked,
+    }));
+    if (!checked) {
+      setForm((prevValues) => ({
+        ...prevValues,
+        [name + "_t"]: "",
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -200,15 +262,12 @@ function JobDescriptionModal(props) {
     );
     if (!isEmpty) {
       try {
-        const response = await fetch(
-          "/api/patient/jobdescription/preinjuryliftingcapacity",
-          {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...form, patient_id: data._id }),
-          }
-        );
+        const response = await fetch("/api/patient/jobdescription/activity", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...form, patient_id: data._id }),
+        });
         const functionData = await response.json();
 
         if (functionData.success) {
@@ -242,25 +301,75 @@ function JobDescriptionModal(props) {
     );
     if (!isEmpty) {
       try {
-        const response = await fetch("/api/patient/jobdescription/activity", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...form, patient_id: data._id }),
-        });
+        const response = await fetch(
+          "/api/patient/jobdescription/preinjuryliftingcapacity",
+          {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...form, patient_id: data._id }),
+          }
+        );
         const functionData = await response.json();
 
         if (functionData.success) {
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
-          setSuccessMessage("Patient Job Description Successfully Added");
-          setForm2(initialValuesTab3);
+          setSuccessMessage(
+            "Patient Job Description Pre Injury Lifting Capacity Successfully Added"
+          );
+          setForm3(initialValuesTab3);
           mutate();
           setTimeout(() => {
             setSuccessMessage(null);
             props.setModalShow(false);
           }, 1500);
         } else {
-          throw new Error("Cannot Create Job Description Activity Data");
+          throw new Error(
+            "Cannot Create Job Description Pre Injury Capacity Data"
+          );
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else {
+      global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
+      setError("Please Fill at least one field");
+    }
+    setLoading(false);
+  };
+
+  const handleSubmitTab4 = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    const isEmpty = Object.values(form4).every(
+      (item) => item === null || item === ""
+    );
+    if (!isEmpty) {
+      try {
+        const response = await fetch(
+          "/api/patient/jobdescription/otherdetails",
+          {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...form, patient_id: data._id }),
+          }
+        );
+        const functionData = await response.json();
+
+        if (functionData.success) {
+          global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
+          setSuccessMessage("Patient Job Description Other Details Added");
+          setForm4(initialValuesTab4);
+          setCheckBoxes(initialCheckBoxes);
+          mutate();
+          setTimeout(() => {
+            setSuccessMessage(null);
+            props.setModalShow(false);
+          }, 1500);
+        } else {
+          throw new Error("Cannot Create Job Description Other Details");
         }
       } catch (error) {
         console.log(error.message);
@@ -846,8 +955,6 @@ function JobDescriptionModal(props) {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <div className={`${descriptionStyles.Inputlist}`}>
-                      {/* <h4>Lifting</h4> */}
-
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>0-10lbs</label>
                         <LbsTrigger
@@ -904,8 +1011,6 @@ function JobDescriptionModal(props) {
                     </div>
 
                     <div className={`${descriptionStyles.Inputlist}`}>
-                      {/* <h4>Lifting</h4> */}
-
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
                         <HeightTrigger
@@ -984,413 +1089,359 @@ function JobDescriptionModal(props) {
               </div>
             </TabPanel>
           </form>
-
-          <TabPanel className={`${descriptionStyles.Modal_body}`}>
-            <div
-              className={`${descriptionStyles.Adl_col}`}
-              style={{ width: "50%" }}
-            >
-              <div className={`${descriptionStyles.Inputlist}`}>
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>Driving</label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
+          <form onSubmit={handleSubmitTab4}>
+            <TabPanel>
+              <div className={`${descriptionStyles.Modal_body}`}>
+                <div
+                  className={`${descriptionStyles.Adl_col}`}
+                  style={{ width: "50%" }}
+                >
+                  <div className={`${descriptionStyles.Inputlist}`}>
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_a"
+                            checked={checkboxes.value_a}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span> Driving</span>
+                        </label>
+                      </div>
+                      {checkboxes.value_a && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_a_t"
+                          value={form.value_a_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
                     </div>
-                  ) : (
-                    <div></div>
-                  )}
 
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_b"
+                            checked={checkboxes.value_b}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span> Working around equipment and machinery?</span>
+                        </label>
+                      </div>
+                      {checkboxes.value_b && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_b_t"
+                          value={form.value_b_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
+                    </div>
+
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_c"
+                            checked={checkboxes.value_c}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span> Walking on uneven ground</span>
+                        </label>
+                      </div>
+                      {checkboxes.value_c && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_c_t"
+                          value={form.value_c_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
+                    </div>
+
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_d"
+                            checked={checkboxes.value_d}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span> Exposure to excessive noise?</span>
+                        </label>
+                      </div>
+                      {checkboxes.value_d && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_d_t"
+                          value={form.value_d_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
+                    </div>
+
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_e"
+                            checked={checkboxes.value_e}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span>
+                            {" "}
+                            Exposure to extreme temperature, humidity or wetness
+                          </span>
+                        </label>
+                      </div>
+                      {checkboxes.value_e && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_e_t"
+                          value={form.value_e_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
+                    </div>
+
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_f"
+                            checked={checkboxes.value_f}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span>
+                            {" "}
+                            Exposure to dust, gas, fumes, or chemicals?
+                          </span>
+                        </label>
+                      </div>
+                      {checkboxes.value_f && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_f_t"
+                          value={form.value_f_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
+                    </div>
+                  </div>
                 </div>
 
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>Working around equipment and machinery?</label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
+                <div
+                  className={`${descriptionStyles.Adl_col}`}
+                  style={{ width: "50%" }}
+                >
+                  <div className={`${descriptionStyles.Inputlist}`}>
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_g"
+                            checked={checkboxes.value_g}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span> Working at heights?</span>
+                        </label>
+                      </div>
+                      {checkboxes.value_g && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_g_t"
+                          value={form.value_g_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
                     </div>
-                  ) : (
-                    <div></div>
-                  )}
 
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>Walking on uneven ground</label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_h"
+                            checked={checkboxes.value_h}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span>
+                            {" "}
+                            Operation of foot controls or repetetive foot
+                            movement
+                          </span>
+                        </label>
+                      </div>
+                      {checkboxes.value_h && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_h_t"
+                          value={form.value_h_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
                     </div>
-                  ) : (
-                    <div></div>
-                  )}
 
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>Exposure to excessive noise?</label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_i"
+                            checked={checkboxes.value_i}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span>
+                            {" "}
+                            Use of protective equipment or assistive devices?
+                          </span>
+                        </label>
+                      </div>
+                      {checkboxes.value_i && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_i_t"
+                          value={form.value_i_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
                     </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>
-                      Exposure to extreme temperature, humidity or wetness
-                    </label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_j"
+                            checked={checkboxes.value_j}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span>
+                            {" "}
+                            Use of special visual or auditory protective
+                            equipment?
+                          </span>
+                        </label>
+                      </div>
+                      {checkboxes.value_j && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_j_t"
+                          value={form.value_j_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
                     </div>
-                  ) : (
-                    <div></div>
-                  )}
 
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>Exposure to dust, gas, fumes, or chemicals?</label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
+                    <div className={`${descriptionStyles.Inputlist_con}`}>
+                      <div
+                        className={`${descriptionStyles.Label_checkbox_con}`}
+                      >
+                        <label className="px-0">
+                          <input
+                            type="checkbox"
+                            className={`${descriptionStyles.Checkbox}`}
+                            name="value_k"
+                            checked={checkboxes.value_k}
+                            onChange={(e) => handleCheckboxes(e)}
+                          />
+                          <span>
+                            {" "}
+                            Working with bio-hazards such as blood borne
+                            pathogens, sewage, hospital waste, etc
+                          </span>
+                        </label>
+                      </div>
+                      {checkboxes.value_k && (
+                        <input
+                          type="text"
+                          placeholder="If yes describe briefely..."
+                          className="form-control d-block mt-1"
+                          name="value_k_t"
+                          value={form.value_k_t}
+                          onChange={handleChangeTextBox}
+                          style={textBoxStyle}
+                        />
+                      )}
                     </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={`${descriptionStyles.Adl_col}`}
-              style={{ width: "50%" }}
-            >
-              <div className={`${descriptionStyles.Inputlist}`}>
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>Working at heights?</label>
                   </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>
-                      Operation of foot controls or repetetive foot movement
-                    </label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>
-                      Use of protective equipment or assistive devices?
-                    </label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>
-                      Use of special visual or auditory protective equipment?
-                    </label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
-                </div>
-
-                <div className={`${descriptionStyles.Inputlist_con}`}>
-                  <div className={`${descriptionStyles.Label_checkbox_con}`}>
-                    <input
-                      className={`${descriptionStyles.Checkbox}`}
-                      type="checkbox"
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    />
-                    <label>
-                      Working with bio-hazards such as blood borne pathogens,
-                      sewage, hospital waste, etc
-                    </label>
-                  </div>
-
-                  {checked ? (
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="If yes describe briefely..."
-                        name="dominant_hand"
-                        value={form.dominant_hand}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* <input
-                      type="text"
-                      placeholder="If yes describe briefely..."
-                      name="dominant_hand"
-                      value={form.dominant_hand}
-                      onChange={handleChange}
-                    /> */}
                 </div>
               </div>
-            </div>
-          </TabPanel>
+              <div className={`${descriptionStyles.Modal_footer} text-center`}>
+                <button type="submit" disabled={loading}>
+                  {loading ? "Please Wait..." : "Save"}
+                </button>
+              </div>
+            </TabPanel>
+          </form>
         </Modal.Body>
-        {/* <Modal.Footer className={`${descriptionStyles.Modal_footer}`}>
-          <button type="submit" disabled={loading}>
-            {loading ? "Please Wait..." : "Save"}
-          </button>
-        </Modal.Footer> */}
       </Tabs>
     </Modal>
   );

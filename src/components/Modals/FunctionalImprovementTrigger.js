@@ -82,7 +82,6 @@ function FunctionalImprovementModal(props) {
     fetcher
   );
   const [error, setError] = useState(null);
-  const [patient, setPatient] = useState();
   const [form, setForm] = useState(initialValues);
   const [checkboxes, setCheckBoxes] = useState(initialCheckBoxes);
   const [successMessage, setSuccessMessage] = useState(null);
