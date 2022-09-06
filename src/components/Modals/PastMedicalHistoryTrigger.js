@@ -60,7 +60,6 @@ function PastMedicalHistoryModal(props) {
     fetcher
   );
   const [error, setError] = useState(null);
-  const [patient, setPatient] = useState();
   const [form, setForm] = useState(initialValues);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
