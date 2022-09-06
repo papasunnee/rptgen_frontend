@@ -98,6 +98,35 @@ const initialValuesTab2 = {
   keyboarding_power_grasping_left: "",
 };
 
+const initialValuesTab3 = {
+  lifting_pound_1: "",
+  lifting_pound_2: "",
+  lifting_pound_3: "",
+  lifting_pound_4: "",
+  lifting_pound_5: "",
+  lifting_pound_6: "",
+  lifting_height_1: "",
+  lifting_height_2: "",
+  lifting_height_3: "",
+  lifting_height_4: "",
+  lifting_height_5: "",
+  lifting_height_6: "",
+  carrying_pound_1: "",
+  carrying_pound_2: "",
+  carrying_pound_3: "",
+  carrying_pound_4: "",
+  carrying_pound_5: "",
+  carrying_pound_6: "",
+  carrying_height_1: "",
+  carrying_height_2: "",
+  carrying_height_3: "",
+  carrying_height_4: "",
+  carrying_height_5: "",
+  carrying_height_6: "",
+  ground_to_waist: "",
+  chest_to_overhead: "",
+};
+
 function JobDescriptionModal(props) {
   const [checked, setChecked] = useState(false);
   const data = useContext(UserContext);
@@ -108,6 +137,7 @@ function JobDescriptionModal(props) {
   const [error, setError] = useState(null);
   const [form, setForm] = useState(initialValues);
   const [form2, setForm2] = useState(initialValuesTab2);
+  const [form3, setForm3] = useState(initialValuesTab3);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -165,23 +195,26 @@ function JobDescriptionModal(props) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const isEmpty = Object.values(form).every(
+    const isEmpty = Object.values(form2).every(
       (item) => item === null || item === ""
     );
     if (!isEmpty) {
       try {
-        const response = await fetch("/api/patient/jobdescription/activity", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...form, patient_id: data._id }),
-        });
+        const response = await fetch(
+          "/api/patient/jobdescription/preinjuryliftingcapacity",
+          {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...form, patient_id: data._id }),
+          }
+        );
         const functionData = await response.json();
 
         if (functionData.success) {
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
           setSuccessMessage("Patient Job Description Successfully Added");
-          setForm2(initialValues);
+          setForm2(initialValuesTab2);
           mutate();
           setTimeout(() => {
             setSuccessMessage(null);
@@ -204,7 +237,7 @@ function JobDescriptionModal(props) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const isEmpty = Object.values(form).every(
+    const isEmpty = Object.values(form3).every(
       (item) => item === null || item === ""
     );
     if (!isEmpty) {
@@ -220,7 +253,7 @@ function JobDescriptionModal(props) {
         if (functionData.success) {
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
           setSuccessMessage("Patient Job Description Successfully Added");
-          setForm2(initialValues);
+          setForm2(initialValuesTab3);
           mutate();
           setTimeout(() => {
             setSuccessMessage(null);
@@ -674,32 +707,56 @@ function JobDescriptionModal(props) {
                     <div className={`${descriptionStyles.Inputlist}`}>
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>0-10lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_pound_1"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>11-25lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_pound_2"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>26-50lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_pound_3"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>51-75lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_pound_4"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>76-100lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_pound_5"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>100+ lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_pound_6"
+                        />
                       </div>
                     </div>
 
@@ -708,32 +765,56 @@ function JobDescriptionModal(props) {
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_height_1"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_height_2"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_height_3"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_height_4"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_height_5"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="lifting_height_6"
+                        />
                       </div>
                     </div>
                   </div>
@@ -744,7 +825,11 @@ function JobDescriptionModal(props) {
                         How many pounds can you lift from ground to waist level
                         before the injury
                       </label>
-                      <FrequencyTrigger />
+                      <FrequencyTrigger
+                        form={form3}
+                        setForm={setForm3}
+                        field="ground_to_waist"
+                      />
                     </div>
                   </div>
                 </div>
@@ -765,32 +850,56 @@ function JobDescriptionModal(props) {
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>0-10lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_pound_1"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>11-25lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_pound_2"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>26-50lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_pound_3"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>51-75lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_pound_4"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>76-100lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_pound_5"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>100+ lbs</label>
-                        <LbsTrigger />
+                        <LbsTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_pound_6"
+                        />
                       </div>
                     </div>
 
@@ -799,32 +908,56 @@ function JobDescriptionModal(props) {
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_height_1"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_height_2"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_height_3"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_height_4"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_height_5"
+                        />
                       </div>
 
                       <div className={`${descriptionStyles.Inputlist_con}`}>
                         <label>Height</label>
-                        <HeightTrigger />
+                        <HeightTrigger
+                          form={form3}
+                          setForm={setForm3}
+                          field="carrying_height_6"
+                        />
                       </div>
                     </div>
                   </div>
@@ -835,7 +968,11 @@ function JobDescriptionModal(props) {
                         How many pounds can you lift from chest to overhead
                         level before the injury
                       </label>
-                      <FrequencyTrigger />
+                      <FrequencyTrigger
+                        form={form3}
+                        setForm={setForm3}
+                        field="chest_to_overhead"
+                      />
                     </div>
                   </div>
                 </div>
