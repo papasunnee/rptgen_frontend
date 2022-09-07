@@ -213,7 +213,7 @@ function Sidenav() {
                           className={`${frame34Styles.Navlink} dropdown-item px-0`}
                         >
                           <div className={`d-sm-inline`}>
-                            Cummulative Trauma
+                            Cumulative Trauma
                           </div>
                         </a>
                       </Link>

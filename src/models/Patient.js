@@ -6,6 +6,7 @@ import PatientPreAuthorization from "./PatientPreAuthorization";
 import FunctionalImprovement from "./FunctionalImprovement";
 import JobDescription from "./JobDescription";
 import SpecificAccident from "./SpecificAccident";
+import CumulativeTrauma from "./CumulativeTrauma";
 import JobDescriptionOtherDetails from "./JobDescriptionOtherDetails";
 import JobDescriptionActivity from "./JobDescriptionActivity";
 import PreInjuryLiftingCapacity from "./PreInjuryLiftingCapacity";
@@ -97,6 +98,12 @@ const PatientSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "JobDescription",
+      },
+    ],
+    cumulative_traumas: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "CumulativeTrauma",
       },
     ],
     specific_accidents: [

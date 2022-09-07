@@ -1,139 +1,118 @@
-import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import Select from "react-select";
-import Button from "react-bootstrap/Button";
-
-import appointmenticon from "@/images/appointment-icon.png";
-
 import frame44Styles from "../../Frame44/Frame44.module.scss";
 import functionalStyles from "../../Functionalimprovement/Functionalimprovement.module.scss";
-import useSWR from "swr";
-import { fetcher } from "@/context/AuthContext";
-import { UserContext } from "@/context/UserContext";
 
-function JobactivitiesTrigger() {
-    const [modalShow, setModalShow] = React.useState(false);
-    return (
-        <>
-            <Button
-                variant="primary"
-                onClick={() => setModalShow(true)}
-                className={`${frame44Styles.Selectinput} col-md-3`}
-                style={{ width: "75%" }}
-            >
-                <input
-                    type="text"
-                    placeholder="Kneeling, Lifting, Pulling"
-                    name="physical_activity"
-                />
-            </Button>
+function JobactivitiesTrigger({ form, setForm }) {
+  const [selectedOptions, setSelectedOptions] = useState([...OptionsList]);
+  const [modalShow, setModalShow] = useState(false);
+  return (
+    <>
+      <div className={`${frame44Styles.Selectinput} col-md-3`}>
+        <input
+          type="text"
+          placeholder="Click and select Job Activities"
+          name="job_activities"
+          className="form-control"
+          value={form.job_activities}
+          style={{ width: "90%" }}
+          readOnly
+          onClick={() => setModalShow(true)}
+        />
+      </div>
 
-            <JobactivitiesModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                setModalShow={setModalShow}
-            />
-        </>
-    );
+      <JobactivitiesModal
+        show={modalShow}
+        setForm={setForm}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
+        onHide={() => setModalShow(false)}
+        setModalShow={setModalShow}
+      />
+    </>
+  );
 }
 
 export default JobactivitiesTrigger;
 
 function JobactivitiesModal(props) {
-    return (
-        <Modal
-            {...props}
-            size="xl"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            className={`${functionalStyles.Modal}`}
-        >
-            <Modal.Header closeButton>
-                <Modal.Title
-                    id="contained-modal-title-vcenter"
-                    className={`${functionalStyles.Modal_title}`}
-                >
-                    Select Job Activities
-                </Modal.Title>
-            </Modal.Header>
-            <form>
-                <Modal.Body className={`${functionalStyles.Modal_con}`} style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
+  const { selectedOptions, setSelectedOptions, setForm } = props;
 
-                    <div className={`${functionalStyles.Selectitems_con} col-md-5`} >
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Bending
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Climbing
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Grasping
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Kneeling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Looking Up
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Pushing
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Stooping
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Twisting
-                        </button>
-                    </div>
-
-                    <div className={`${functionalStyles.Selectitems_con} col-md-5`} >
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Carrying
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Crawling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Gripping
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Lifting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Pulling
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Squatting
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Turning
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Working on akward positions
-                        </button>
-
-                        <button className={`${functionalStyles.Selectitems}`}>
-                            Other
-                        </button>
-                    </div>
-
-                </Modal.Body>
-            </form>
-        </Modal>
+  const handleClick = (item) => {
+    const activeItem = selectedOptions.find(
+      (bodyPart) => bodyPart.name == item.name
     );
+
+    const updateItem = { ...activeItem, isActive: !activeItem.isActive };
+    const arrayCopy = [...selectedOptions];
+    arrayCopy.splice(activeItem.id, 1, updateItem);
+    setSelectedOptions([...arrayCopy]);
+    const formData = [];
+    arrayCopy.forEach((item) => {
+      if (item.isActive) {
+        return formData.push(item.name);
+      }
+    });
+    setForm((prev) => ({
+      ...prev,
+      job_activities: formData.join(),
+    }));
+  };
+  return (
+    <Modal
+      {...props}
+      size="xl"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      className={`${functionalStyles.Modal}`}
+    >
+      <Modal.Header closeButton>
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className={`${functionalStyles.Modal_title}`}
+        >
+          Select Job Activities
+        </Modal.Title>
+      </Modal.Header>
+      <form>
+        <Modal.Body className={`${functionalStyles.Modal_con}`}>
+          <div className={`${functionalStyles.Selectitems_con} row`}>
+            {selectedOptions.map((item, index) => (
+              <div className="col-md-6" key={index}>
+                <div
+                  onClick={() => handleClick(item)}
+                  key={index}
+                  id={item.name}
+                  className={`${functionalStyles.Selectitems} ${
+                    item.isActive ? functionalStyles.activeSelection : ""
+                  }`}
+                >
+                  {item.name}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Modal.Body>
+      </form>
+    </Modal>
+  );
 }
+
+const OptionsList = [
+  { id: 0, name: "Bending", isActive: false },
+  { id: 1, name: "Climbing", isActive: false },
+  { id: 2, name: "Grasping", isActive: false },
+  { id: 3, name: "Kneeling", isActive: false },
+  { id: 4, name: "Looking Up", isActive: false },
+  { id: 5, name: "Pushing", isActive: false },
+  { id: 6, name: "Stooping", isActive: false },
+  { id: 7, name: "Carrying", isActive: false },
+  { id: 8, name: "Crawling", isActive: false },
+  { id: 9, name: "Gripping", isActive: false },
+  { id: 10, name: "Lifting", isActive: false },
+  { id: 11, name: "Pulling", isActive: false },
+  { id: 12, name: "Squatting", isActive: false },
+  { id: 13, name: "Turning", isActive: false },
+  { id: 14, name: "Working on akward positions", isActive: false },
+  { id: 15, name: "Other", isActive: false },
+];

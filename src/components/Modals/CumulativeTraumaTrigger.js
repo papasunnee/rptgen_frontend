@@ -44,19 +44,25 @@ export default CumulativeTraumaTrigger;
 
 const initialValues = {
   body_parts: [],
+  job_activities: [],
   body_part_type: "",
+  symptom_noticed: "",
   date_of_injury: "",
+  pain_sitting: "",
+  pain_walking: "",
+  pain_standing: "",
   accident_description: "",
   treatment_history: "",
+  difficult_activity: "",
 };
 function CumulativeTraumaModal(props) {
   const data = useContext(UserContext);
   const { mutate } = useSWR(
-    `/api/patient/specificaccident?patient_id=${data._id}`,
+    `/api/patient/cumulativetrauma?patient_id=${data._id}`,
     fetcher
   );
   const [form, setForm] = useState(initialValues);
-  const [checked, setChecked] = useState(false);
+  const [work_overtime, setWorkOvertime] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -78,19 +84,23 @@ function CumulativeTraumaModal(props) {
     );
     if (!isEmpty) {
       try {
-        const response = await fetch("/api/patient/specificaccident", {
+        const response = await fetch("/api/patient/cumulativetrauma", {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...form, patient_id: data._id }),
+          body: JSON.stringify({
+            ...form,
+            work_overtime: work_overtime,
+            patient_id: data._id,
+          }),
         });
-        const specificAccident = await response.json();
-        console.log(specificAccident);
-        if (specificAccident.success) {
+        const cumulativeTrauma = await response.json();
+        console.log(cumulativeTrauma);
+        if (cumulativeTrauma.success) {
           setForm(initialValues);
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
           setSuccessMessage(
-            "Patient Specific Accident Data Successfully Added"
+            "Patient Cumulative Trauma Data Successfully Added"
           );
           mutate();
           setTimeout(() => {
@@ -98,7 +108,7 @@ function CumulativeTraumaModal(props) {
             props.setModalShow(false);
           }, 1500);
         } else {
-          throw new Error("Cannot Create Patient Specific Accident Data");
+          throw new Error("Cannot Create Patient Cumulative Trauma Data");
         }
       } catch (error) {
         console.log(error.message);
@@ -117,16 +127,20 @@ function CumulativeTraumaModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className={`${functionalStyles.Modal}`}
+      onHide={() => {
+        setForm(initialValues);
+        props.setModalShow(false);
+      }}
     >
       <Modal.Header closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
           className={`${functionalStyles.Modal_title}`}
         >
-          Add Cmmulative Trauma
+          Add Cumulative Trauma
         </Modal.Title>
       </Modal.Header>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div style={{ minHeight: "22px" }}></div>
         <Modal.Body className={`${functionalStyles.Modal_body}`}>
           <div
@@ -134,115 +148,78 @@ function CumulativeTraumaModal(props) {
             style={{ border: "3px solid transparent" }}
           >
             <div className={`${functionalStyles.Inputlist}`}>
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Date of Injury:</label>
-                <input type="date" style={{ width: "75%" }} />
+                <br />
+                <input
+                  type="date"
+                  name="date_of_injury"
+                  value={form.date_of_injury}
+                  onChange={handleChange}
+                  style={{ width: "90%" }}
+                />
               </div>
 
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Body Part:</label>
                 <BodypartTrigger form={form} setForm={setForm} />
               </div>
 
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Body Part Type:</label>
                 <BodypartTypeTrigger form={form} setForm={setForm} />
               </div>
 
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Did you work overtime?:</label>
                 <Switch
                   uncheckedIcon={false}
                   checkedIcon={false}
-                  onChange={() => setChecked(!checked)}
-                  checked={checked}
+                  onChange={() => setWorkOvertime(!work_overtime)}
+                  checked={work_overtime}
                 />
               </div>
 
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Symptoms Noticed:</label>
-                <SymptomsnoticedTrigger />
+                <SymptomsnoticedTrigger form={form} setForm={setForm} />
               </div>
 
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Job Activities:</label>
-                <JobactivitiesTrigger />
+                <br />
+                <JobactivitiesTrigger form={form} setForm={setForm} />
               </div>
 
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Pain when sitting, how long?</label>
-                <input type="text" style={{ width: "75%" }} />
+                <input
+                  type="text"
+                  name="pain_sitting"
+                  value={form.pain_sitting}
+                  onChange={handleChange}
+                  style={{ width: "90%" }}
+                />
               </div>
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Pain when walking, how long?</label>
-                <input type="text" style={{ width: "75%" }} />
+                <input
+                  type="text"
+                  name="pain_walking"
+                  value={form.pain_walking}
+                  onChange={handleChange}
+                  style={{ width: "90%" }}
+                />
               </div>
-              <div
-                className={`${functionalStyles.Inputlist_con}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={`${functionalStyles.Inputlist_con}`}>
                 <label>Pain when standing, how long?</label>
-                <input type="text" style={{ width: "75%" }} />
+                <input
+                  type="text"
+                  name="pain_standing"
+                  value={form.pain_standing}
+                  onChange={handleChange}
+                  style={{ width: "90%" }}
+                />
               </div>
             </div>
           </div>
@@ -258,7 +235,9 @@ function CumulativeTraumaModal(props) {
                   cols="20"
                   rows="8"
                   placeholder="Eg. your text here"
-                  name="injury_mechanism"
+                  name="difficult_activity"
+                  value={form.difficult_activity}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -266,9 +245,11 @@ function CumulativeTraumaModal(props) {
                 <label>Description of accident</label>
                 <textarea
                   cols="20"
-                  rows="15"
+                  rows="8"
                   placeholder="Eg. your text here"
-                  name="injury_mechanism"
+                  name="accident_description"
+                  value={form.accident_description}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -283,9 +264,11 @@ function CumulativeTraumaModal(props) {
                 <label>Treatment History</label>
                 <textarea
                   cols="20"
-                  rows="15"
+                  rows="8"
                   placeholder="Eg. your text here"
-                  name="injury_mechanism"
+                  name="treatment_history"
+                  value={form.treatment_history}
+                  onChange={handleChange}
                 />
               </div>
             </div>

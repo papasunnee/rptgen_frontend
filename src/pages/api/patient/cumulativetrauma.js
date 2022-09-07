@@ -3,14 +3,14 @@ import cookie from "cookie";
 import { verify } from "jsonwebtoken";
 import User from "@/models/User";
 import Patient from "@/models/Patient";
-import SpecificAccident from "@/models/SpecificAccident";
+import CumulativeTrauma from "@/models/CumulativeTrauma";
 import mongoose from "mongoose";
 
 export default async function handler(req, res) {
   const { method } = req;
   await dbConnect();
 
-  let specificAccidents;
+  let cumulativeTraumas;
   const id = req.query.patient_id;
   const patient_id = req.body.patient_id;
   const put_id = req.body._id;
@@ -47,18 +47,18 @@ export default async function handler(req, res) {
     case "GET":
       try {
         if (id && (id != "undefined" || id != null || id != "null")) {
-          specificAccidents = await SpecificAccident.find({
+          cumulativeTraumas = await CumulativeTrauma.find({
             patient_id: id,
           }).exec(); /* find all the data in our database */
         } else {
-          specificAccidents = await SpecificAccident.find(
+          cumulativeTraumas = await CumulativeTrauma.find(
             {}
           ).exec(); /* find all the data in our database */
         }
 
         return res.status(200).json({
           success: true,
-          data: { specificAccidents },
+          data: { cumulativeTraumas },
         });
       } catch (error) {
         console.log(error);
@@ -68,16 +68,17 @@ export default async function handler(req, res) {
     case "POST":
       try {
         req.body.body_parts = req.body.body_parts.join();
-        let specificaccident = await SpecificAccident.create({
+        req.body.job_activities = req.body.job_activities.join();
+        let cumulativetrauma = await CumulativeTrauma.create({
           ...req.body,
         });
         const patientRecord = await Patient.findOne({ _id: patient_id });
-        patientRecord.specific_accidents.push(specificaccident._id);
+        patientRecord.cumulative_traumas.push(cumulativetrauma._id);
         await patientRecord.save();
 
         return res.status(201).json({
           success: true,
-          data: { specificaccident, patientRecord },
+          data: { cumulativetrauma, patientRecord },
         });
       } catch (error) {
         return res.status(400).json({ success: false, error: error.message });
@@ -89,7 +90,7 @@ export default async function handler(req, res) {
           (put_id != "undefined" || put_id != null || put_id != "null")
         ) {
           delete req.body._id;
-          let updateSpecificAccident = await SpecificAccident.findOneAndUpdate(
+          let updateCumulativeTrauma = await CumulativeTrauma.findOneAndUpdate(
             { _id: put_id },
             req.body,
             {
@@ -99,7 +100,7 @@ export default async function handler(req, res) {
 
           return res
             .status(400)
-            .json({ success: true, data: { updateSpecificAccident } });
+            .json({ success: true, data: { updateCumulativeTrauma } });
         } else {
           return res
             .status(400)
@@ -114,19 +115,19 @@ export default async function handler(req, res) {
           delete_id &&
           (delete_id != "undefined" || delete_id != null || delete_id != "null")
         ) {
-          const specificAccident = await SpecificAccident.findOneAndDelete({
+          const cumulativeTrauma = await CumulativeTrauma.findOneAndDelete({
             _id: delete_id,
           });
 
-          if (specificAccident) {
+          if (cumulativeTrauma) {
             const patientRecord = await Patient.findOne({
-              _id: specificAccident.patient_id,
+              _id: cumulativeTrauma.patient_id,
             });
-            const itemToRemove = patientRecord.specific_accidents.findIndex(
-              (item) => item == specificAccident._id
+            const itemToRemove = patientRecord.cumulative_traumas.findIndex(
+              (item) => item == cumulativeTrauma._id
             );
             if (itemToRemove > -1) {
-              patientRecord.specific_accidents.splice(itemToRemove, 1);
+              patientRecord.cumulative_traumas.splice(itemToRemove, 1);
               await patientRecord.save();
             }
 
