@@ -101,10 +101,6 @@ function OtherMedicalHistoryList() {
                   <td className={`${frame44Styles.Name} col-md-4`}>
                     <h4>Conditions</h4>
                   </td>
-
-                  {/* <td className={`${frame44Styles.Name} col`}>
-                                        <h4>&nbsp;</h4>
-                                    </td> */}
                 </tr>
               </thead>
               <tbody>
