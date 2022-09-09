@@ -9,16 +9,20 @@
   background: #f6f8fb;
 
   .Tab {
+    list-style: none;
+
     h4 {
       font-size: 14px;
       font-weight: 700;
       color: #52575c;
+
+      padding: 8px;
     }
   }
 }
 
 .Form {
-  padding: 45px;
+  // padding: 45px;
 
   .Header_section {
     h3 {
@@ -74,13 +78,18 @@
 .Form {
   .Toprow {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-wrap: wrap;
+
+    margin-top: 3%;
+    // align-items: center;
+    // justify-content: space-between;
 
     .Paincard {
       background: #fff;
-      box-shadow: 0px 12px 26px rgba(0, 0, 0, 0.418);
-      border-radius: 8px;
+      // box-shadow: 0px 12px 26px rgba(0, 0, 0, 0.418);
+
+      border: 3px solid rgba(0, 0, 0, 0.199);
+      // border-radius: 8px;
 
       padding: 15px;
       margin-bottom: 3%;
@@ -117,10 +126,18 @@
       .Inputgroup {
         margin: 20px 0;
 
+        margin-bottom: 2%;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
         label {
           font-weight: 400;
           font-size: 15px;
           color: #6d6b80;
+
+          padding-bottom: 2%;
         }
 
         input {
@@ -128,7 +145,7 @@
 
           margin-top: 1%;
 
-          padding: 4px 10px;
+          padding: 6px 10px;
 
           background: #fcfcfd;
           border: 1px solid #cfd0d7;
