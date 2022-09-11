@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import useSWR from "swr";
 import { confirmAlert } from "react-confirm-alert";
+import moment from "moment";
 import { fetcher } from "@/context/AuthContext";
 import { UserContext } from "@/context/UserContext";
 
 import deleteicon from "@/images/delete.png";
 import editicon from "@/images/edit-icon.png";
 
+import EditPastMedicalHistoryModal from "../Modals/editPastMedicalHistoryModal";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import frame44Styles from "../Frame44/Frame44.module.scss";
-import EditPastMedicalHistoryModal from "../Modals/editPastMedicalHistoryModal";
-import moment from "moment";
 
 const initialValues = {
   type: "",
@@ -110,7 +110,6 @@ function OtherMedicalHistoryList() {
                       <td className={`${frame44Styles.Name} col`}>
                         <h4>{otherPastMedicalHistory.hospitalization_desc}</h4>
                       </td>
-
                       <td className={`${frame44Styles.Name} col`}>
                         <h4>
                           {moment(otherPastMedicalHistory.createdAt).format(

@@ -15,8 +15,8 @@ import LivingstatusTrigger from "./OtherpastMedicalHistory/LivingstatusTrigger";
 import SmokingstatusTrigger from "./OtherpastMedicalHistory/SmokingstatusTrigger";
 import AlcoholstatusTrigger from "./OtherpastMedicalHistory/AlcoholstatusTrigger";
 
-function JobDescriptionTrigger() {
-  const [modalShow, setModalShow] = React.useState(false);
+function OtherMedicalHistoryTrigger() {
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <div
@@ -42,7 +42,7 @@ function JobDescriptionTrigger() {
   );
 }
 
-export default JobDescriptionTrigger;
+export default OtherMedicalHistoryTrigger;
 
 const initialValues = {
   marital_status: "",

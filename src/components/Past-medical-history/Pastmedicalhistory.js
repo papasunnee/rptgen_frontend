@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 import Image from "next/image";
 
@@ -32,7 +32,7 @@ import PatientInfo from "../Patient-Demographics/PatientInfo";
 import PastMedicalHistoryTrigger from "../Modals/PastMedicalHistoryTrigger";
 import PastMedicalHistoryList from "./pastMedicalHistoryList";
 import OtherMedicalHistoryList from "./otherMedicalHistory";
-import OtherMedicalHistoryTrigger from "../Modals/OtherMedicalHistory";
+import OtherMedicalHistoryTrigger from "../Modals/OtherMedicalHistoryTrigger";
 
 function Pastmedicalhistory() {
   return (
@@ -106,20 +106,23 @@ function Pastmedicalhistory() {
                       </TabList>
                     </div>
 
-                    <TabPanel className={`${frame44Styles.Appointment_activity}`}>
+                    <TabPanel
+                      className={`${frame44Styles.Appointment_activity}`}
+                    >
                       <PastMedicalHistoryList />
                     </TabPanel>
 
-                    <TabPanel className={`${frame44Styles.Appointment_activity}`}>
+                    <TabPanel
+                      className={`${frame44Styles.Appointment_activity}`}
+                    >
                       <h1>Hello There!!!</h1>
                     </TabPanel>
 
-                    <TabPanel className={`${frame44Styles.Appointment_activity}`}>
-
+                    <TabPanel
+                      className={`${frame44Styles.Appointment_activity}`}
+                    >
                       <OtherMedicalHistoryList />
-
                     </TabPanel>
-
                   </Tabs>
                 </div>
               </div>
