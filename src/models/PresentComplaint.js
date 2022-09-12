@@ -103,6 +103,114 @@ const PresentComplaintSchema = new mongoose.Schema(
     form_number: {
       type: String,
     },
+    abdominal_pain: {
+      type: Boolean,
+      default: false,
+    },
+    chest_pain: {
+      type: Boolean,
+      default: false,
+    },
+    irregular_heartbeats: {
+      type: Boolean,
+      default: false,
+    },
+    diarrhea: {
+      type: Boolean,
+      default: false,
+    },
+    upset_stomach: {
+      type: Boolean,
+      default: false,
+    },
+    abdominal_bloating: {
+      type: Boolean,
+      default: false,
+    },
+    abdominal_gas: {
+      type: Boolean,
+      default: false,
+    },
+    shortness_of_breath: {
+      type: Boolean,
+      default: false,
+    },
+    hypertension: {
+      type: Boolean,
+      default: false,
+    },
+    waking_up_frequently_at_night: {
+      type: Boolean,
+      default: false,
+    },
+    palpitations: {
+      type: Boolean,
+      default: false,
+    },
+    sexual_problems: {
+      type: Boolean,
+      default: false,
+    },
+    trouble_falling_asleep: {
+      type: Boolean,
+      default: false,
+    },
+    diabetes: {
+      type: Boolean,
+      default: false,
+    },
+    excessive_pain: {
+      type: Boolean,
+      default: false,
+    },
+    headaches: {
+      type: Boolean,
+      default: false,
+    },
+    sudden_confusion: {
+      type: Boolean,
+      default: false,
+    },
+    forget_recent_conversation: {
+      type: Boolean,
+      default: false,
+    },
+    misplacing_items: {
+      type: Boolean,
+      default: false,
+    },
+    poor_judgement: {
+      type: Boolean,
+      default: false,
+    },
+    swallowing_problems: {
+      type: Boolean,
+      default: false,
+    },
+    dizziness_or_vertigo: {
+      type: Boolean,
+      default: false,
+    },
+    forgets_recent_events: {
+      type: Boolean,
+      default: false,
+    },
+    language_problem: {
+      type: Boolean,
+      default: false,
+    },
+    difficulty_in_reading: {
+      type: Boolean,
+      default: false,
+    },
+    difficulty_in_writing: {
+      type: Boolean,
+      default: false,
+    },
+    nausea: {
+      type: Boolean,
+      default: false,
+    },
     patient_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Patient",
