@@ -12,6 +12,7 @@ import frame44Styles from "../Frame44/Frame44.module.scss";
 import frame47Styles from "../Frame47/Frame47.module.scss";
 
 import SearchPatient from "../Patients-Database/searchPatient";
+import MPNList from "../Functionalimprovement/MPNList";
 
 function Index() {
   return (
@@ -50,108 +51,7 @@ function Index() {
                   </div>
 
                   <div className={`${frame44Styles.Appointment_activity}`}>
-                    <div className={`${frame44Styles.Title}`}>
-                      <h3>MPN</h3>
-                    </div>
-
-                    <div className={`${frame44Styles.Appointmentlist_section}`}>
-                      <div className={`${frame44Styles.Appointmentlist_title}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Name</h4>
-                        </div>
-
-                        <div
-                          className={`${frame44Styles.Name}`}
-                          style={{ marginLeft: "4%" }}
-                        >
-                          <h4>Date</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Doctor</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Action</h4>
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Lesile Alexander</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Dr. Jacob Jones</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Lesile Alexander</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Dr. Jacob Jones</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Lesile Alexander</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Dr. Jacob Jones</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-
-                      <div className={`${frame44Styles.Appointment}`}>
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Lesile Alexander</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>10/10/2020</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Name}`}>
-                          <h4>Dr. Jacob Jones</h4>
-                        </div>
-
-                        <div className={`${frame44Styles.Action_buttons}`}>
-                          <Image src={editicon} alt="edit-icon" />
-                          <Image src={deleteicon} alt="delete-icon" />
-                        </div>
-                      </div>
-                    </div>
+                    <MPNList />
                   </div>
                 </div>
               </div>

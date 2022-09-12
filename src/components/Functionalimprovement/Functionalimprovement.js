@@ -25,7 +25,7 @@ import PatientInfo from "../Patient-Demographics/PatientInfo";
 import FunctionalImprovementTrigger from "../Modals/FunctionalImprovementTrigger";
 
 import FunctionalImprovemntList from "./functionalImprovementList";
-function Functionalimprovement(props) {
+function Functionalimprovement() {
   return (
     <Fragment>
       <div
@@ -58,7 +58,6 @@ function Functionalimprovement(props) {
                     </div>
 
                     <FunctionalImprovementTrigger />
-
                   </div>
 
                   <div className={`${frame44Styles.Appointment_activity}`}>

@@ -56,27 +56,32 @@ const initialValues = {
   days_doctor_provided: "",
   days_doctor_provided_b: "",
   provide_doctor_after_boolean: false,
+  provide_doctor_after_text: "",
   provide_doctor_closer_boolean: false,
   provide_doctor_closer_text: "",
   days_emergency_doctor_provided: "",
+  days_emergency_doctor_provided_b: "",
   things_doctor_provided: "",
   increased_pain_when_driving_home_boolean: false,
+  increased_pain_when_driving_home_text: "",
   doctor_ignore_body_on_claim_form_boolean: false,
+  doctor_ignore_body_on_claim_form_text: "",
   prescribed_treatment_not_given_boolean: false,
-  type_of_treatment_not_given_: "",
+  prescribed_treatment_not_given_text: "",
+  type_of_treatment_not_given: "",
   prescribed_treatment_late_boolean: false,
+  prescribed_treatment_late_text: "",
   days_after_treatment_began: "",
+  days_after_treatment_began_b: "",
+  effective_treatment_boolean: false,
+  effective_treatment_text: "",
   dcotor_neglect_boolean: false,
+  dcotor_neglect_text: "",
 };
 
 function MPNModal(props) {
-  const [checked, setChecked] = useState(false);
-  const [otherHistory, setOtherHistory] = useState([...OtherHistory]);
   const data = useContext(UserContext);
-  const { mutate } = useSWR(
-    `/api/patient/otherpastmedicalhistory?patient_id=${data._id}`,
-    fetcher
-  );
+  const { mutate } = useSWR(`/api/patient/mpn?patient_id=${data._id}`, fetcher);
   const [error, setError] = useState(null);
   const [form, setForm] = useState(initialValues);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -87,14 +92,6 @@ function MPNModal(props) {
     setError(null);
     setSuccessMessage(null);
 
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleTextChange = (e) => {
-    const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
       [name]: value,
@@ -114,22 +111,16 @@ function MPNModal(props) {
 
     setError(null);
     const isEmpty = Object.values(form).every(
-      (item) => item === null || item === ""
+      (item) => item === null || item === "" || item === false
     );
     if (!isEmpty) {
-      const arrayCopy = [...otherHistory];
-      const historyObject = {};
-      arrayCopy.forEach((item) => {
-        historyObject[item.name] = item.value;
-      });
       try {
-        const response = await fetch("/api/patient/otherpastmedicalhistory", {
+        const response = await fetch("/api/patient/mpn", {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             ...form,
-            ...historyObject,
             patient_id: data._id,
           }),
         });
@@ -139,7 +130,6 @@ function MPNModal(props) {
           global.window.scrollTo({ top: 350, left: 0, behavior: "smooth" });
           setSuccessMessage("MPN Data Successfully Added");
           setForm(initialValues);
-          setOtherHistory([...OtherHistory]);
           mutate();
           setTimeout(() => {
             setSuccessMessage(null);
@@ -370,21 +360,23 @@ function MPNModal(props) {
                     <Switch
                       uncheckedIcon={false}
                       checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
+                      onChange={() =>
+                        handleChecked("provide_doctor_after_boolean")
+                      }
+                      checked={form.provide_doctor_after_boolean}
                     />
                   </div>
 
-                  {checked ? (
+                  {form.provide_doctor_after_boolean && (
                     <div>
                       <input
                         type="text"
                         placeholder="Comments"
-                        name="dominant_hand"
+                        name="provide_doctor_after_text"
+                        value={form.provide_doctor_after_text}
+                        onChange={handleChange}
                       />
                     </div>
-                  ) : (
-                    <div></div>
                   )}
                 </div>
 
@@ -396,13 +388,17 @@ function MPNModal(props) {
                   <input
                     type="text"
                     placeholder="Select No. of days"
-                    name="dominant_hand"
+                    name="days_emergency_doctor_provided"
+                    value={form.days_emergency_doctor_provided}
+                    onChange={handleChange}
                   />
 
                   <input
                     type="text"
                     placeholder="Days/week/months"
-                    name="dominant_hand"
+                    name="days_emergency_doctor_provided_b"
+                    value={form.days_emergency_doctor_provided_b}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -412,7 +408,12 @@ function MPNModal(props) {
                     miles from your home or workplace?
                   </label>
 
-                  <input type="text" name="dominant_hand" />
+                  <input
+                    type="text"
+                    name="things_doctor_provided"
+                    value={form.things_doctor_provided}
+                    onChange={handleChange}
+                  />
                 </div>
 
                 <div className={`${descriptionStyles.Inputlist_con}`}>
@@ -427,21 +428,25 @@ function MPNModal(props) {
                     <Switch
                       uncheckedIcon={false}
                       checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
+                      onChange={() =>
+                        handleChecked(
+                          "increased_pain_when_driving_home_boolean"
+                        )
+                      }
+                      checked={form.increased_pain_when_driving_home_boolean}
                     />
                   </div>
 
-                  {checked ? (
+                  {form.increased_pain_when_driving_home_boolean && (
                     <div>
                       <input
                         type="text"
                         placeholder="Comments"
-                        name="dominant_hand"
+                        name="increased_pain_when_driving_home_text"
+                        value={form.increased_pain_when_driving_home_text}
+                        onChange={handleChange}
                       />
                     </div>
-                  ) : (
-                    <div></div>
                   )}
                 </div>
 
@@ -458,21 +463,25 @@ function MPNModal(props) {
                     <Switch
                       uncheckedIcon={false}
                       checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
+                      onChange={() =>
+                        handleChecked(
+                          "doctor_ignore_body_on_claim_form_boolean"
+                        )
+                      }
+                      checked={form.doctor_ignore_body_on_claim_form_boolean}
                     />
                   </div>
 
-                  {checked ? (
+                  {form.doctor_ignore_body_on_claim_form_boolean && (
                     <div>
                       <input
                         type="text"
                         placeholder="Enter body parts here"
-                        name="dominant_hand"
+                        name="doctor_ignore_body_on_claim_form_text"
+                        value={form.doctor_ignore_body_on_claim_form_text}
+                        onChange={handleChange}
                       />
                     </div>
-                  ) : (
-                    <div></div>
                   )}
                 </div>
 
@@ -488,21 +497,23 @@ function MPNModal(props) {
                     <Switch
                       uncheckedIcon={false}
                       checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
+                      onChange={() =>
+                        handleChecked("prescribed_treatment_not_given_boolean")
+                      }
+                      checked={form.prescribed_treatment_not_given_boolean}
                     />
                   </div>
 
-                  {checked ? (
+                  {form.prescribed_treatment_not_given_boolean && (
                     <div>
                       <input
                         type="text"
                         placeholder="Enter body parts here"
-                        name="dominant_hand"
+                        name="prescribed_treatment_not_given_text"
+                        value={form.prescribed_treatment_not_given_text}
+                        onChange={handleChange}
                       />
                     </div>
-                  ) : (
-                    <div></div>
                   )}
                 </div>
               </div>
@@ -520,7 +531,9 @@ function MPNModal(props) {
                   <input
                     type="text"
                     placeholder="Select kind of treatment that was not given?"
-                    name="dominant_hand"
+                    name="type_of_treatment_not_given"
+                    value={form.type_of_treatment_not_given}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -536,21 +549,23 @@ function MPNModal(props) {
                     <Switch
                       uncheckedIcon={false}
                       checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
+                      onChange={() =>
+                        handleChecked("prescribed_treatment_late_boolean")
+                      }
+                      checked={form.prescribed_treatment_late_boolean}
                     />
                   </div>
 
-                  {checked ? (
+                  {form.prescribed_treatment_late_boolean && (
                     <div>
                       <input
                         type="text"
                         placeholder="Comments"
-                        name="dominant_hand"
+                        name="prescribed_treatment_late_text"
+                        value={form.prescribed_treatment_late_text}
+                        onChange={handleChange}
                       />
                     </div>
-                  ) : (
-                    <div></div>
                   )}
                 </div>
 
@@ -562,13 +577,17 @@ function MPNModal(props) {
                   <input
                     type="text"
                     placeholder="Select No. of days"
-                    name="dominant_hand"
+                    name="days_after_treatment_began"
+                    value={form.days_after_treatment_began}
+                    onChange={handleChange}
                   />
 
                   <input
                     type="text"
                     placeholder="Days/week/months"
-                    name="dominant_hand"
+                    name="days_after_treatment_began_b"
+                    value={form.days_after_treatment_began_b}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -577,25 +596,27 @@ function MPNModal(props) {
                     className={`${descriptionStyles.Label_checkbox_con}`}
                     style={{ justifyContent: "space-between" }}
                   >
-                    {/* <label>18&#41; Is the doctor's treatment effective?</label>
+                    <label>18&#41; Is the doctor's treatment effective?</label>
                     <Switch
                       uncheckedIcon={false}
                       checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
-                    /> */}
+                      onChange={() =>
+                        handleChecked("effective_treatment_boolean")
+                      }
+                      checked={form.effective_treatment_boolean}
+                    />
                   </div>
 
-                  {checked ? (
+                  {form.effective_treatment_boolean && (
                     <div>
                       <input
                         type="text"
                         placeholder="If NO please explain briefly"
-                        name="dominant_hand"
+                        name="effective_treatment_text"
+                        value={form.effective_treatment_text}
+                        onChange={handleChange}
                       />
                     </div>
-                  ) : (
-                    <div></div>
                   )}
                 </div>
 
@@ -611,21 +632,21 @@ function MPNModal(props) {
                     <Switch
                       uncheckedIcon={false}
                       checkedIcon={false}
-                      onChange={() => setChecked(!checked)}
-                      checked={checked}
+                      onChange={() => handleChecked("dcotor_neglect_boolean")}
+                      checked={form.dcotor_neglect_boolean}
                     />
                   </div>
 
-                  {checked ? (
+                  {form.dcotor_neglect_boolean && (
                     <div>
                       <input
                         type="text"
                         placeholder="If NO please explain briefly"
-                        name="dominant_hand"
+                        name="dcotor_neglect_text"
+                        value={form.dcotor_neglect_text}
+                        onChange={handleChange}
                       />
                     </div>
-                  ) : (
-                    <div></div>
                   )}
                 </div>
 
@@ -657,230 +678,3 @@ function MPNModal(props) {
     </Modal>
   );
 }
-
-const OtherHistory = [
-  {
-    id: 0,
-    label: "Hypertension",
-    name: "hypertension",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 1,
-    label: "Heart Disease",
-    name: "heart_disease",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 2,
-    label: "Stroke",
-    name: "stroke",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 3,
-    label: "Diabetes",
-    name: "diabetes",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 4,
-    label: "Asthma",
-    name: "asthma",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 5,
-    label: "Emphysema",
-    name: "emphysema",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 6,
-    label: "Peptics Ulcers(Stomach)",
-    name: "peptics_ulcers",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 7,
-    label: "Kidney Disease",
-    name: "kidney_disease",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 8,
-    label: "Hepatitis",
-    name: "hepatitis",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 9,
-    label: "Thyroid",
-    name: "thyroid",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 10,
-    label: "Tumors/Cancer",
-    name: "tumors_cancer",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 11,
-    label: "Arthritis",
-    name: "arthritis",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 12,
-    label: "Osteoporosis",
-    name: "osteoporosis",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 13,
-    label: "High Cholesterol and Triglyceride",
-    name: "high_cholesterol_and_triglyceride",
-    value: "",
-    checked: false,
-    group: "a",
-  },
-  {
-    id: 14,
-    label: "Hypertension",
-    name: "hypertension_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 15,
-    label: "Heart Disease",
-    name: "heart_disease_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 16,
-    label: "Stroke",
-    name: "stroke_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 17,
-    label: "Diabetes",
-    name: "diabetes_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 18,
-    label: "Asthma",
-    name: "asthma_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 19,
-    label: "Emphysema",
-    name: "emphysema_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 20,
-    label: "Peptics Ulcers(Stomach)",
-    name: "peptics_ulcers_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 21,
-    label: "Kidney Disease",
-    name: "kidney_disease_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 22,
-    label: "Hepatitis",
-    name: "hepatitis_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 23,
-    label: "Thyroid",
-    name: "thyroid_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 24,
-    label: "Tumors/Cancer",
-    name: "tumors_cancer_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 25,
-    label: "Arthritis",
-    name: "arthritis_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 26,
-    label: "Osteoporosis",
-    name: "osteoporosis_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-  {
-    id: 27,
-    label: "High Cholesterol and Triglyceride",
-    name: "high_cholesterol_and_triglyceride_b",
-    value: "",
-    checked: false,
-    group: "b",
-  },
-];

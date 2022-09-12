@@ -4,7 +4,9 @@ import Appointment from "./Appointment";
 import PatientDemographic from "./PatientDemographic";
 import PatientPreAuthorization from "./PatientPreAuthorization";
 import FunctionalImprovement from "./FunctionalImprovement";
+import MPN from "./MPN";
 import JobDescription from "./JobDescription";
+import PresentComplaint from "./PresentComplaint";
 import SpecificAccident from "./SpecificAccident";
 import CumulativeTrauma from "./CumulativeTrauma";
 import JobDescriptionOtherDetails from "./JobDescriptionOtherDetails";
@@ -98,6 +100,18 @@ const PatientSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "JobDescription",
+      },
+    ],
+    present_complaints: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PresentComplaint",
+      },
+    ],
+    mpns: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "MPN",
       },
     ],
     cumulative_traumas: [
