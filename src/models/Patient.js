@@ -7,6 +7,7 @@ import FunctionalImprovement from "./FunctionalImprovement";
 import MPN from "./MPN";
 import JobDescription from "./JobDescription";
 import PresentComplaint from "./PresentComplaint";
+import Diagnosis from "./Diagnosis";
 import SpecificAccident from "./SpecificAccident";
 import CumulativeTrauma from "./CumulativeTrauma";
 import JobDescriptionOtherDetails from "./JobDescriptionOtherDetails";
@@ -100,6 +101,12 @@ const PatientSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "JobDescription",
+      },
+    ],
+    diagnosis: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Diagnosis",
       },
     ],
     present_complaints: [
