@@ -93,6 +93,14 @@ const DiagnosisSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    value_w: {
+      type: Boolean,
+      default: false,
+    },
+    value_x: {
+      type: Boolean,
+      default: false,
+    },
     diagnose_type: {
       type: String,
     },
