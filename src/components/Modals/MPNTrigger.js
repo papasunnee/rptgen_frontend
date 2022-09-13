@@ -596,7 +596,7 @@ function MPNModal(props) {
                     className={`${descriptionStyles.Label_checkbox_con}`}
                     style={{ justifyContent: "space-between" }}
                   >
-                    <label>18&#41; Is the doctor's treatment effective?</label>
+                    <label>18&#41; Is the doctors treatment effective?</label>
                     <Switch
                       uncheckedIcon={false}
                       checkedIcon={false}
