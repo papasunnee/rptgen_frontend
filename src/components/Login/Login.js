@@ -30,7 +30,7 @@ function Login() {
     });
 
     if (data?.error) {
-      setErrors([...errors, data.error]);
+      setErrors([data.error]);
     }
     if (data.accessToken) {
       return router.replace("/option-select");
